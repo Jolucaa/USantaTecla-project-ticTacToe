@@ -98,7 +98,7 @@ class Board {
 	}
 
 	private List<Coordinate> getCoordinates(Token token) {
-		List<Coordinate> coordinates = new ArrayList<Coordinate>();
+		List<Coordinate> coordinates = new ArrayList<>();
 
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
 			for (int j = 0; j < Coordinate.DIMENSION; j++) {
