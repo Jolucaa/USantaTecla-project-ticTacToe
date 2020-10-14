@@ -1,23 +1,17 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.views.MessageView;
+import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.YesNoDialog;
 
-class ResumeView {
-	
-	private Logic logic;
-	
-	ResumeView (Logic logic){
-		this.logic = logic;
+class ResumeView extends SubView {
+
+	public ResumeView(Logic logic) {
+		super(logic);
 	}
 
 	boolean interact() {
-		boolean newGame = new YesNoDialog().read(MessageView.RESUME.getMessage());
-		if (newGame) {
-			this.logic.newGame();
-		}
-		return newGame;
+		return new YesNoDialog().read(Message.RESUME.toString());
 	}
 
 }
