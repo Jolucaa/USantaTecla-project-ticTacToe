@@ -20,7 +20,7 @@ public class PlayControllerTest {
     private Coordinate coordinate11;
     private Coordinate coordinate01;
 
-    public PlayControllerTest() {
+    /*public PlayControllerTest() {
         this.game = new Game();
         this.game.createPlayers(0);
         this.playController = new PlayController(this.game);
@@ -129,5 +129,5 @@ public class PlayControllerTest {
     @Test
     public void testGivenNewPlayControllerWhenNotPutAnyTokenThenIsEmptyToken() {
         assertTrue(this.playController.isEmptyToken(this.coordinate00));
-    }
+    }*/
 }
