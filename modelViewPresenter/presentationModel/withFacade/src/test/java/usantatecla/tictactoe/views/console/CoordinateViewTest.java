@@ -22,7 +22,7 @@ public class CoordinateViewTest {
     Console console;
 
     @InjectMocks
-    CoordinateView coordinateView = new CoordinateView(new Logic());
+    CoordinateView coordinateView = new CoordinateView();
 
     @Test
     public void testGivenNewCoordinateViewWhenReadCoordinateThenIsCorrect() {

@@ -6,7 +6,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     CoordinateViewTest.class,
-    MachinePlayerViewTest.class } )
+    //MachinePlayerViewTest.class
+} )
 public class AllViewTest {
     
 }
