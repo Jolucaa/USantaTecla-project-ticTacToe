@@ -1,0 +1,30 @@
+@startuml desarrollo_implementacion
+package "  "  as tictactoe {
+}
+package "  "  as utils {
+}
+package "  "  as java.io {
+}
+package "  "  as java.util {
+}
+
+[tictactoe.jar] as jar
+
+jar *--> tictactoe
+jar *--> utils
+jar *--> java.io
+jar *--> java.util
+@enduml
+
+@startuml despliegue_fisica
+node node #DDDDDD [
+<b>Personal Computer</b>
+----
+memory : xxx Mb
+cpu : xxx GHz
+]
+
+[ tictactoe.jar ] as component
+
+node *--> component
+@enduml
