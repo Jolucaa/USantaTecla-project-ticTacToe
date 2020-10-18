@@ -20,7 +20,7 @@ version 0.0.1
 
 |  |  |
 | :------- | :------: | 
-| -link: https://en.wikipedia.org/wiki/Tic-tac-toe[*Wiki*]  <br/>* _Funcionalidad: **Básica**_<br/>  * _Interfaz: **Texto**_<br/>  * _Distribución: **Stand Alone**_<br/>  * _Persistencia: **No**_<br/> | ![Texto alternativo](./docs/images/Dibujo.jpg) | 
+| [Wiki](https://en.wikipedia.org/wiki/Tic-tac-toe)  <br/>* _Funcionalidad: **Básica**_<br/>  * _Interfaz: **Texto**_<br/>  * _Distribución: **Stand Alone**_<br/>  * _Persistencia: **No**_<br/> | ![Texto alternativo](./docs/images/Dibujo.jpg) | 
 |  |  |
 
 ## Vista de Lógica/Diseño<a name="id2"></a>
