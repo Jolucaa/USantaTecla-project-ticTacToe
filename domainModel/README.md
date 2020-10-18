@@ -1,7 +1,7 @@
 # Master Mind. Solución 1.1. *domainModel*
 Universo Santa Tecla 
 
-[USantaTecla@gmail.com](USantaTecla@gmail.com)
+[USantaTecla@gmail.com](mailto:USantaTecla@gmail.com)
 
 version 0.0.1
 
