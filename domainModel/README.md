@@ -28,10 +28,10 @@ version 0.0.1
 - Aplicación del *Modelo del Dominio* mediante Estrategias de *Análisis Formal*, *Análisis Clásico*, *Experto del Dominio*, *Reparto de Responsabilidades*, ...
 
 ### Arquitectura<a name="id2.1"></a>
-![Texto alternativo](../docs/diagrams/out/__WorkspaceFolder__/domainModel/docs/diagrams/src/arquitectura/arquitectura.svg)
+![Texto alternativo](./docs/diagrams/out/arquitectura/arquitectura.svg)
 
 ### Paquete _tictactoe_<a name="id2.2"></a>
-![Texto alternativo](../docs/diagrams/out/__WorkspaceFolder__/domainModel/docs/diagrams/src/paquetes/tictactoe.svg)
+![Texto alternativo](./docs/diagrams/out/paquetes/tictactoe.svg)
 
 ## Calidad del Software<a name="id3"></a>
 ### Rediseño<a name="id3.1"></a>
@@ -47,10 +47,10 @@ version 0.0.1
     * **Open/Close**: hay que modificar los modelos que estaban funcionando previamente para incorporar nuevas funcionalidades_#
 
 ## Vista de Desarrollo/Implementación<a name="id4"></a>
-![Texto alternativo](../docs/diagrams/out/__WorkspaceFolder__/domainModel/docs/diagrams/src/vistas/desarrollo_implementacion.svg)
+![Texto alternativo](./docs/diagrams/out/vistas/desarrollo_implementacion.svg)
 
 ## Vista de Despliegue/Física<a name="id5"></a>
-![Texto alternativo](../docs/diagrams/out/__WorkspaceFolder__/domainModel/docs/diagrams/src/vistas/despliegue_fisica.svg)
+![Texto alternativo](./docs/diagrams/out/vistas/despliegue_fisica.svg)
 
 ## Vista de Procesos<a name="id6"></a>
 
