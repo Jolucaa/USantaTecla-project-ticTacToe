@@ -17,7 +17,7 @@ version 0.1.6
 5. [Vista de Despliegue/Física](#vista-de-desplieguefísica)
 6. [Vista de Procesos](#vista-de-procesos)
 
-# Requisitos 1. Básica
+# Requisitos 1. *Básica*
 
 | [Wiki](https://en.wikipedia.org/wiki/Tic-tac-toe) <br/> * _Funcionalidad: **Básica**_ <br/> * _Interfaz: **Texto**_ <br/> * _Distribución: **Standalone**_ <br/> * _Persistencia: **No**_  | ![Tictactoe](docs/images/tictactoe.jpg) |  
 | :------- | :------: |
