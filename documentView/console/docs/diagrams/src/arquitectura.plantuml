@@ -1,0 +1,16 @@
+@startuml arquitectura
+package tictactoe #DDDDDD { }
+package tictactoe.models #DDDDDD { }
+package tictactoe.views #DDDDDD { } 
+package java.util{ }
+tictactoe .down.> tictactoe.models
+tictactoe .down.> tictactoe.views
+tictactoe.models .down.> java.util
+tictactoe.models .down.> utils
+tictactoe.views .down.> utils
+tictactoe.views .down.> tictactoe.models
+
+package utils #DDDDDD { } 
+package java.io{ }
+utils .down.> java.io
+@enduml

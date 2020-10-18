@@ -1,0 +1,311 @@
+@startuml tictactoe
+class  tictactoe.TicTacToe{
+- game: Game
+- view: View
+~ TicTacToe()
+- play(): void
++ main(String[]): void
+}
+tictactoe.TicTacToe *-down-> tictactoe.models.Game
+tictactoe.TicTacToe *-down-> tictactoe.views.View
+@enduml
+
+@startuml tictactoe.views
+class  tictactoe.views.BoardView{
+~ board: Board
+~ BoardView(Board)
+~ write(): void
+- printRowBoard(int): void
+- printSquareValueBoard(int, int): void
+}
+
+class  tictactoe.views.CoordinateView{
+~ read(String): Coordinate
+}
+utils.WithConsoleView <|-down- tictactoe.views.CoordinateView
+tictactoe.views.CoordinateView ..> tictactoe.views.ErrorView
+
+class  tictactoe.views.ErrorView{
+- {static} MESSAGES: String[]
+- error: Error
+~ ErrorView(Error)
+~ read(String): Coordinate
+}
+utils.WithConsoleView <|-down- tictactoe.views.ErrorView
+
+class  tictactoe.views.MachinePlayerView{
+~ MachinePlayerView(Player)
+~ readCoordinateToPut(): Coordinate
+~ readCoordinatesToMove(): Coordinate[]
+}
+tictactoe.views.PlayerView <|-down- tictactoe.views.MachinePlayerView
+tictactoe.views.MachinePlayerView ..> tictactoe.views.ErrorView
+
+class  tictactoe.views.MessageView{
++ LINE_BREAK: MessageView
++ EMPTY: MessageView 
++ SEPARATOR: MessageView
++ VERTICAL_LINE_CENTERED: MessageView
++ VERTICAL_LINE_LEFT: MessageView
++	PLAYER_WIN: MessageView
++	START_GAME: MessageView
++	CHOOSE_PLAYER: MessageView
++ RESUME: MessageView
+- message: String
+- console: Console
+- MessageView(String)
+~ getMessage(): String
+~ write(): void
+~ writeln(): void
+}
+tictactoe.views.MessageView ..> utils.Console
+
+class  tictactoe.views.PlayerView{
+# player: Player
+~ PlayerView(Player)
+~ {abstract} readCoordinateToPut(): Coordinate
+~ {abstract} readCoordinatesToMove(): Coordinate[]
+~ getPutCoordinateError(Coordinate): Error
+~ getMoveOriginCoordinateError(Coordinate): Error
+~ getMoveTargetCoordinateError(Coordinate, Coordinate): Error
+}
+
+class  tictactoe.views.PlayView{
+~ game: Game
+~ PlayView(Game)
+~ interact(): boolean
+}
+tictactoe.views.PlayView ..> tictactoe.models.Game
+tictactoe.views.PlayView ..> tictactoe.views.PlayerView
+tictactoe.views.PlayView ..> tictactoe.views.ResultView
+tictactoe.views.PlayView ..> tictactoe.views.BoardView
+
+class tictactoe.views.ResultView{
+~ writeln(int): void
+}
+tictactoe.views.ResultView ..> tictactoe.views.TokenView
+tictactoe.views.ResultView ..> tictactoe.views.MessageView
+
+class  tictactoe.views.ResumeView{
+~ ResumeView()
+~ interact(Game): boolean
+}
+tictactoe.views.ResumeView ..> tictactoe.models.Game
+tictactoe.views.ResumeView ..> tictactoe.views.Message
+
+class tictactoe.views.StartView{
+~ game: Game
+~ StartView(Game)
+~ interact(): void
+}
+tictactoe.views.StartView ..> tictactoe.models.Game
+tictactoe.views.StartView ..> utils.PlayersDialog
+tictactoe.views.StartView ..> tictactoe.views.BoardView
+tictactoe.views.StartView ..> tictactoe.views.MessageView
+
+class tictactoe.views.TokenView{
+~ token: Token
+~ TokenView(Token)
+~ write(): void
+}
+utils.WithConsoleView <|-down- tictactoe.views.TokenView
+
+class  tictactoe.views.UserPlayerView{
+~ {static} ENTER_COORDINATE_TO_PUT: String
+~ {static} ENTER_COORDINATE_TO_REMOVE: String
+~ UserPlayerView(Player)
+~ readCoordinateToPut(): Coordinate
+~ readCoordinatesToMove(): Coordinate[]
+}
+tictactoe.views.PlayerView <|-down- tictactoe.views.UserPlayerView
+tictactoe.views.UserPlayerView ..> tictactoe.views.CoordinateView
+tictactoe.views.UserPlayerView ..> tictactoe.views.ErrorView
+
+class  tictactoe.views.View{
+# game: Game
+- startView: StartView
+- playView: PlayView
+- resumeView: ResumeView
++ View(Game)
++ interact(): void
+}
+tictactoe.views.View *-down-> tictactoe.models.Game
+tictactoe.views.View *-down-> tictactoe.views.StartView
+tictactoe.views.View *-down-> tictactoe.views.PlayView
+tictactoe.views.View *-down-> tictactoe.views.ResumeView
+@enduml
+
+@startuml tictactoe.models
+class  tictactoe.models.Board{
++ {static} EMPTY: char
+- coordinates: Coordinate[][]
++ Board()
++ getToken(Coordinate): Token
+~ move(Coordinate, Coordinate): void
+~ put(Coordinate, Token): void
+- remove(Coordinate): void
+~ isTicTacToe(Token): boolean
+- numberOfCoordinates(Coordinate[]): int
+~ isCompleted(): boolean
++ isEmpty(Coordinate): boolean
+~ isOccupied(Coordinate, Token): boolean
+- checkNumberOfCoordinates(Coordinate[]): boolean
+- checkDirectionOfFirstCoordinates(Coordinate[]): boolean
+- checkDirectionOfAllCoordinates(Coordinate[]): boolean
+}
+tictactoe.models.Board *-down-> tictactoe.models.Coordinate
+tictactoe.models.Board ..> tictactoe.models.Token
+tictactoe.models.Board ..> tictactoe.models.Turn
+tictactoe.models.Board ..> utils.Direction
+
+class  tictactoe.models.Coordinate{
++ {static} DIMENSION: char
++ Coordinate()
++ Coordinate(int, int)
+~ inDirection(Coordinate): boolean
+~ getDirection(Coordinate): Direction
+- inInverseDiagonal(): boolean
++ isValid(): boolean
++ random(): void
+}
+utils.Coordinate <|-down- tictactoe.models.Coordinate
+tictactoe.models.Coordinate ..> utils.Direction
+tictactoe.models.Coordinate ..> java.util.Random
+
+enum  tictactoe.models.Error{
+NOT_EMPTY
+NOT_OWNER
+SAME_COORDINATES
+}
+
+class  tictactoe.models.Game{
+- board: Board
+- players: Player[][]
+- turn: Turn
++ Game()
++ createPlayers(int): void
++ getBoard(): Board
++ isBoardComplete(): boolean
++ putTokenPlayerFromTurn(Coordinate): void
++ moveTokenPlayerFromTurn(Coordinate[]): void
++ getTokenPlayerFromTurn(int): Player
++ changeTurn(): void
++ isTicTacToe(): boolean
++ getValueFromTurn(): int
++ newGame(): void
+}
+tictactoe.models.Game *-down-> tictactoe.models.Board
+tictactoe.models.Game *-down-> tictactoe.models.Player
+tictactoe.models.Game *-down-> tictactoe.models.Turn
+tictactoe.models.Game ..> tictactoe.models.Token
+tictactoe.models.Game ..> tictactoe.models.PlayerType
+
+class  tictactoe.models.Player{
+- token: Token
+- board: Board
+- type: PlayerType
++ Player(Token, Board, PlayerType)
++ getType(): PlayerType
+~ getToken(): Token
+~ put(Coordinate): void
+~ move(Coordinate[]): void
++ getPutCoordinateError(Coordinate): Error
++ getMoveOriginCoordinateError(Coordinate): Error
++ getMoveTargetCoordinateError(Coordinate, Coordinate): Error
+}
+tictactoe.models.Player *-down-> tictactoe.models.Token
+tictactoe.models.Player *-down-> tictactoe.models.Board
+tictactoe.models.Player *-down-> tictactoe.models.PlayerType 
+tictactoe.models.Player ..> tictactoe.models.Coordinate
+tictactoe.models.Player ..> tictactoe.models.Error
+
+enum  tictactoe.models.PlayerType{
+USER_PLAYER
+MACHINE_PLAYER
+}
+
+enum  tictactoe.models.Token{
+TOKEN_X
+TOKEN_O
+- character: char
+~ Token(char)
++ getChar(): char
+}
+
+class  tictactoe.models.Turn{
++ {static} NUM_PLAYERS: int
+- value: int
+- players: Player[]
++ Turn(Player[])
+~ change(): void
+~ getPlayer(): Player
+~ getValue(): int
+- getOtherValue(): int
+~ getOtherPlayer(): Player
+}
+tictactoe.models.Turn *-down-> tictactoe.models.Player
+@enduml
+
+@startuml tictactoe.utils
+class  utils.Console{
+- bufferedReader: BufferedReader
++ Console()
++ write(char): void
++ write(String): void
++ readInt(String): int
++ readChar(String): char
++ readString(String): String
++ writeln(int): void
++ writeln(String): void
++ writeln(): void
++ writeError(String): void
+}
+utils.Console *-down-> java.io.BufferedReader
+
+class  utils.Coordinate{
+# row: int
+# column: int
+# Coordinate()
+# Coordinate(int, int)
+# getMainDirection(Coordinate): Direction
+- inMainDiagonal(): boolean
+- inVertical(Coordinate): boolean
+- inHorizontal(Coordinate): boolean
++ getRow(): int
++ getColumn(): int
++ hashCode(): int
++ equals(Object): boolean
+}
+utils.Coordinate ..> utils.Direction
+
+enum  utils.Direction{
+  VERTICAL
+  HORIZONTAL
+  MAIN_DIAGONAL
+  INVERSE_DIAGONAL
+}
+
+class  utils.PlayersDialog{
+- {static} USERS_ERROR: String
++ read(int): int
+}
+utils.WithConsoleView <|-down- utils.PlayersDialog
+
+class  utils.WithConsoleView{
+# console: Console
+# WithConsoleView()
+}
+utils.WithConsoleView *-down-> utils.Console
+
+class  mastermind.utils.YesNoDialog{
+- {static} AFIRMATIVE: char
+- {static} NEGATIVE: char
+- {static} QUESTION: String
+- {static} MESSAGE: String
++ YesNoDialog()
++ read(String): boolean
+- {static} isAfirmative(char): boolean
+- {static} isNegative(char): boolean
+}
+mastermind.utils.WithConsoleView <|-down- mastermind.utils.YesNoDialog
+@enduml
