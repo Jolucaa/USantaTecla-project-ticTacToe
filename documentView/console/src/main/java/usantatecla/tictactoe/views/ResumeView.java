@@ -5,7 +5,7 @@ import usantatecla.utils.YesNoDialog;
 
 class ResumeView extends SubView {
 
-	public ResumeView(Game game) {
+    ResumeView(Game game) {
 		super(game);
 	}
 

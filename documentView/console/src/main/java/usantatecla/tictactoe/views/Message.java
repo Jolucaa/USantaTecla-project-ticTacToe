@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views;
 import usantatecla.utils.Console;
 
 enum Message {
-	TITTLE("--- TIC TAC TOE ---"),
+	TITLE("--- TIC TAC TOE ---"),
 	NUMBER_PLAYERS("Number of user"), 
 	SEPARATOR("-------------"), 
 	VERTICAL_LINE_LEFT("| "), 
