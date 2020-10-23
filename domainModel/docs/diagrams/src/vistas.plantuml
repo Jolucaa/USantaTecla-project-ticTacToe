@@ -20,8 +20,7 @@ jar *--> java.util
 node node #DDDDDD [
 <b>Personal Computer</b>
 ----
-memory : xxx Mb
-cpu : xxx GHz
+
 ]
 
 [ tictactoe.jar ] as component

@@ -1,126 +1,126 @@
 @startuml tictactoe
 namespace usantatecla.tictactoe {
 class Board {
-	- Token[][] tokens
-	Board()
-	+ void reset() 
-	void write() 
-	- Token getToken(Coordinate coordinate)
-	boolean isCompleted()
-	void put(Coordinate coordinate, Token token) 
-	void move(Coordinate origin, Coordinate target) 
-	- void remove(Coordinate coordinate) 
-	boolean isOccupied(Coordinate coordinate, Token token) 
-	boolean isEmpty(Coordinate coordinate)
-	boolean isTicTacToe(Token token) 
-	- List<Coordinate> getCoordinates(Token token) 
+	- tokens: Token[][] 
+	~ Board()
+	+ reset() 
+	~ write() 
+	- getToken(Coordinate): Token 
+	~ isCompleted(): boolean 
+	~ put(Coordinate, Token) 
+	~ move(Coordinate, Coordinate) 
+	- remove(Coordinate) 
+	~ isOccupied(Coordinate, Token): boolean 
+	~ isEmpty(Coordinate): boolean
+	~ isTicTacToe(Token): boolean
+	- getCoordinates(Token): List<Coordinate> 
 }
 
 class Coordinate {
-	{static} final Coordinate NULL
-	{static} final int DIMENSION
-	{static} final ClosedInterval LIMITS
-	Coordinate()
-	Coordinate(int row, int column)
-	+ boolean isNull()
-	+ Direction getDirection(usantatecla.utils.Coordinate coordinate) 
-	+ boolean inInverseDiagonal()
-	+ void read(String message)
-	+ void random() 
-	+ boolean equals(Object obj)
+	~ NULL: {static} Coordinate
+	~ DIMENSION: {static} int 
+	~ LIMITS: {static} ClosedInterval 
+	~ Coordinate()
+	~ Coordinate(int, int)
+	+ isNull(): boolean 
+	+ getDirection(usantatecla.utils.Coordinate): Direction 
+	+ inInverseDiagonal(): boolean 
+	+ read(String)
+	+ random() 
+	+ equals(Object): boolean 
 }
 
 enum Error {
 
-	NOT_EMPTY
-	NOT_OWNER
-	SAME_COORDINATES
-	WRONG_COORDINATES
-	NULL
-	- String message
-	Error()
-	Error(String)
-	void writeln()
+	+ NOT_EMPTY
+	+ NOT_OWNER
+	+ SAME_COORDINATES
+	+ WRONG_COORDINATES
+	+ NULL
+	- message: String 
+	~ Error()
+	~ Error(String)
+	~ writeln()
 }
 
 class MachinePlayer {
-	MachinePlayer(Token, Board)
-	~ Coordinate getCoordinate(Message)
+	~ MachinePlayer(Token, Board)
+	~ getCoordinate(Message): Coordinate 
 }
 
 enum Message {
-	TITTLE
-	NUMBER_PLAYERS
-	SEPARATOR
-	VERTICAL_LINE_LEFT
-	VERTICAL_LINE_CENTERED
-	VERTICAL_LINE_RIGHT
-	ENTER_COORDINATE_TO_PUT
-	ENTER_COORDINATE_TO_REMOVE
-	COORDINATE_TO_PUT
-	COORDINATE_TO_REMOVE
-	COORDINATE_TO_MOVE
-	PLAYER_WIN
-	RESUME
-	- String message
+	+ TITTLE
+	+ NUMBER_PLAYERS
+	+ SEPARATOR
+	+ VERTICAL_LINE_LEFT
+	+ VERTICAL_LINE_CENTERED
+	+ VERTICAL_LINE_RIGHT
+	+ ENTER_COORDINATE_TO_PUT
+	+ ENTER_COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_PUT
+	+ COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_MOVE
+	+ PLAYER_WIN
+	+ RESUME
+	- message: String 
 	- Message(String)
-	void write()
-	void writeln()
-	+ String toString()
+	~ write()
+	~ writeln()
+	+ toString(): String 
 }
 
 
 abstract class Player {
-	~ Board board
-	~ Token token
-	Player(Token, Board)
-	void play()
-	- void put()
-	~ abstract Coordinate getCoordinate(Message)
-	~ Error checkPutCoordinateError(Coordinate)
-	- void move()
-	~ Error checkMoveOriginCoordinateError(Coordinate)
-	~ Error checkMoveTargetCoordinateError(Coordinate, Coordinate)
-	void writeWinner()
-	Token getToken()
+	~ board: Board 
+	~ token: Token 
+	~ Player(Token, Board)
+	~ play()
+	- put()
+	~ abstract getCoordinate(Message): Coordinate 
+	~ checkPutCoordinateError(Coordinate): Error 
+	- move()
+	~ checkMoveOriginCoordinateError(Coordinate): Error 
+	~ checkMoveTargetCoordinateError(Coordinate, Coordinate): Error 
+	~ writeWinner()
+	~ getToken(): Token 
 }
 
 class TicTacToe{
-    - Board board
-	- Turn turn
-    TicTacToe()
-	- void play()
-    - void playGame()
-	- boolean isResumedGame()
-	+ static void main(String[])
+    - board: Board 
+	- turn: Turn 
+    ~ TicTacToe()
+	- play()
+    - playGame()
+	- isResumedGame(): boolean
+	+ {static} main(String[])
 }
 
 enum Token {
-	X_TOKEN
-	Y_TOKEN
-	NULL
-    + boolean isNull()
-    void write()
-    {static} Token get(int)
+	+ X_TOKEN
+	+ Y_TOKEN
+	+ NULL
+    + isNull(): boolean 
+    ~ write()
+    ~ {static} get(int): Token 
 }
 
 class Turn {
-	{static} final int NUMBER_PLAYERS
-	- Player[] players
-	- int active
-	Turn(Board)
-	void play()
-	- Player getPlayer()
-	void writeWinner()
-	Token getToken()
+	~ NUMBER_PLAYERS: {static} int 
+	- players: Player[] 
+	- active: int 
+	~ Turn(Board)
+	~ play()
+	- getPlayer(): Player 
+	~ writeWinner()
+	~ getToken(): Token  
 }
 
 class UserPlayer extends Player {
-	UserPlayer(Token, Board)
-	~ Coordinate getCoordinate(Message message)
-	~ Error checkPutCoordinateError(Coordinate)
-	~ Error checkMoveOriginCoordinateError(Coordinate)
-	~ Error checkMoveTargetCoordinateError(Coordinate, Coordinate)
+	~ UserPlayer(Token, Board)
+	~ getCoordinate(Message message): Coordinate
+	~ checkPutCoordinateError(Coordinate): Error 
+	~ checkMoveOriginCoordinateError(Coordinate): Error
+	~ checkMoveTargetCoordinateError(Coordinate, Coordinate): Error
 }
 
 TicTacToe *-down-> Board
@@ -138,105 +138,6 @@ Board .down.> Message
 Player .down.> Message
 TicTacToe .down.> Message
 Turn .down.> Message
-
-}
-
-namespace usantatecla.utils {
-
-interface Coordinate {
-	boolean isNull();
-	Direction getDirection(Coordinate)
-	boolean inHorizontal(Coordinate)
-	boolean inVertical(Coordinate)
-	boolean inMainDiagonal()
-}
-
-class ConcreteCoordinate {
-	~ int row;
-	~ int column;
-	{static} {final} String ROW
-	{static} {final}  String COLUMN
-	~ ConcreteCoordinate()
-	~ ConcreteCoordinate(int, int)
-	+ boolean isNull()
-	+ Direction getDirection(Coordinate)
-	+ boolean inHorizontal(Coordinate)
-	+ boolean inVertical(Coordinate)
-	+ boolean inMainDiagonal()
-	~ void read(String)
-	+ int getRow()
-	+ int getColumn()
-	+ int hashCode()
-	+ boolean equals(Object)
-	+ String toString()
-}
-class NullCoordinate {
-	+ {static} NullCoordinate instance
-	+ {static} Coordinate instance()
-	+ boolean isNull()
-	+ Direction getDirection(Coordinate)
-	+ boolean inHorizontal(Coordinate)
-	+ boolean inVertical(Coordinate)
-	+ boolean inMainDiagonal()
-	+ int hashCode()
-	+ boolean equals(Object)
-	+ String toString()
-}
-
-enum Direction {
-	VERTICAL
-	HORIZONTAL
-	MAIN_DIAGONAL
-	INVERSE_DIAGONAL
-	NULL
-}
-
-class Console {
-	+ static Console console
-	+ static Console instance()
-	- BufferedReader bufferedReader
-	+ String readString(String)
-	+ String readString()
-	+ int readInt(String)
-	+ char readChar(String)
-	+ void writeln()
-	+ void write(String)
-	+ void write(int)
-	+ void writeln(String)
-	+ void writeln(int)
-	+ void write(char)
-	+ void writeError(String)
-}
-
-class ClosedInterval {
-	- int min;
-	- int max;
-	+ ClosedInterval(int, int)
-	+ boolean isIncluded(int)
-	+ String toString()
-}
-
-class YesNoDialog {
-	- static final char AFFIRMATIVE
-	- static final char NEGATIVE
-	- static final String SUFFIX
-	- static final String MESSAGE
-	- char answer;
-	+ boolean read(String message)
-	- boolean isAfirmative()
-	- char getAnswer()
-	- boolean isNegative()
-}
-
-class LimitedIntDialog {
-	- {final} ClosedInterval LIMITS
-	- {static} {final} String ERROR_MESSAGE
-	+ LimitedIntDialog(int, int)
-	+ int read(String)
-}
-
-Coordinate <|-down- ConcreteCoordinate
-Coordinate <|-down- NullCoordinate
 
 }
 
@@ -261,4 +162,106 @@ usantatecla.tictactoe.TicTacToe .down.> usantatecla.utils.YesNoDialog
 usantatecla.tictactoe.Board .down.> usantatecla.utils.Direction
 usantatecla.tictactoe.Coordinate .down.> usantatecla.utils.Direction
 usantatecla.utils.Coordinate .down.> usantatecla.utils.Direction
+@enduml
+
+
+@startuml utils
+namespace usantatecla.utils {
+
+interface Coordinate {
+	~ isNull(): boolean 
+	~ getDirection(Coordinate): Direction 
+	~ inHorizontal(Coordinate): boolean 
+	~ inVertical(Coordinate): boolean 
+	~ inMainDiagonal(): boolean 
+}
+
+class ConcreteCoordinate {
+	~ row: int 
+	~ column: int 
+	~ ROW: {static} String
+	~ COLUMN: {static} String
+	~ ConcreteCoordinate()
+	~ ConcreteCoordinate(int, int)
+	+ isNull(): boolean 
+	+ getDirection(Coordinate): Direction 
+	+ inHorizontal(Coordinate): boolean 
+	+ inVertical(Coordinate): boolean 
+	+ inMainDiagonal(): boolean 
+	~ read(String)
+	+ getRow(): int 
+	+ getColumn(): int
+	+ hashCode(): int
+	+ equals(Object): boolean 
+	+ toString(): String 
+}
+class NullCoordinate {
+	+ instance: {static} NullCoordinate 
+	+ {static} instance(): Coordinate 
+	+ isNull(): boolean 
+	+ getDirection(Coordinate): Direction 
+	+ inHorizontal(Coordinate): boolean 
+	+ inVertical(Coordinate): boolean
+	+ inMainDiagonal(): boolean
+	+ hashCode(): int 
+	+ equals(Object): boolean 
+	+ toString(): String 
+}
+
+enum Direction {
+	+ VERTICAL
+	+ HORIZONTAL
+	+ MAIN_DIAGONAL
+	+ INVERSE_DIAGONAL
+	+ NULL
+}
+
+class Console {
+	+ console: {static} Console 
+	- bufferedReader: BufferedReader 
+	+ instance(): {static} Console 
+	+ readString(String): String 
+	+ readString(): String 
+	+ readInt(String): int 
+	+ readChar(String): char 
+	+ writeln()
+	+ write(String)
+	+ write(int)
+	+ writeln(String)
+	+ writeln(int)
+	+ write(char)
+	+ writeError(String)
+}
+
+class ClosedInterval {
+	- min: int 
+	- max: int 
+	+ ClosedInterval(int, int)
+	+ isIncluded(int): boolean 
+	+ toString(): String 
+}
+
+class YesNoDialog {
+	- AFFIRMATIVE: {static} char 
+	- NEGATIVE: {static} char 
+	- SUFFIX: {static} String 
+	- MESSAGE: {static} String
+	- answer: char 
+	+ read(String): boolean 
+	- isAfirmative(): boolean 
+	- getAnswer(): char 
+	- isNegative(): boolean 
+}
+
+class LimitedIntDialog {
+	- LIMITS: ClosedInterval 
+	- ERROR_MESSAGE: {static} String 
+	+ LimitedIntDialog(int, int)
+	+ read(String): int 
+}
+
+Coordinate <|-down- ConcreteCoordinate
+Coordinate <|-down- NullCoordinate
+
+}
 @enduml
