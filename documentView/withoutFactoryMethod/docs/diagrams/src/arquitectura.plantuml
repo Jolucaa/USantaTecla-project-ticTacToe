@@ -1,0 +1,76 @@
+@startuml arquitectura
+package tictactoe #DDDDDD { }
+package tictactoe.models #DDDDDD { }
+package tictactoe.views #DDDDDD { }
+package tictactoe.views.console #DDDDDD { }
+package tictactoe.views.graphics #DDDDDD { }
+package java.util{ }
+package java.awt{ }
+package java.awt.event{ }
+package java.swing{ }
+tictactoe .down.> tictactoe.models
+tictactoe .down.> tictactoe.views.console
+tictactoe .down.> tictactoe.views.graphics
+tictactoe.views.console .down.> tictactoe.views
+tictactoe.views.graphics .down.> tictactoe.views
+tictactoe.views.graphics .down.> java.awt
+tictactoe.views.graphics .down.> java.awt.event
+tictactoe.views.graphics .down.> java.swing
+tictactoe.models .down.> java.util
+tictactoe.models .down.> utils
+tictactoe.views.console .down.> utils
+tictactoe.views .down.> tictactoe.models
+tictactoe.views.console .down.> tictactoe.models
+tictactoe.views.graphics .down.> tictactoe.models
+
+package utils #DDDDDD { }
+package java.io{ }
+utils .down.> java.io
+@enduml
+
+@startuml tictactoe.views
+class tictactoe.views.ErrorView {
+
+	+ {static} String[] MESSAGES
+	# Error error;
+
+	+ ErrorView(Error error)
+
+}
+
+enum tictactoe.views.Message {
+    + TITTLE
+	+ NUMBER_PLAYERS
+	+ SEPARATOR
+	+ VERTICAL_LINE_LEFT
+	+ VERTICAL_LINE_CENTERED
+	+ VERTICAL_LINE_RIGHT
+	+ ENTER_COORDINATE_TO_PUT
+	+ ENTER_COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_PUT
+	+ COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_MOVE
+	+ PLAYER_WIN
+	+ RESUME
+	- String message
+
+	- Message(String message)
+	+ String getMessage()
+	+ write()
+	+ writeln()
+	+ String toString()
+}
+
+class tictactoe.views.View {
+    ~ Game game;
+
+	+ View(Game game)
+	+ interact()
+	~ {abstract} start();
+	~ {abstract} play();
+	~ {abstract} boolean isNewGame();
+}
+class tictactoe.models.Game
+
+tictactoe.views.View *-down-> tictactoe.models.Game
+@enduml

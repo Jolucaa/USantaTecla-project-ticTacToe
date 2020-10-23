@@ -1,0 +1,32 @@
+@startuml tictactoe
+class tictactoe.ConsoleTicTacToe {
+
+	- Game game;
+	- View view;
+
+	ConsoleTicTacToe()
+	- play()
+	+ {static} main(String[] args)
+
+}
+
+class tictactoe.GraphicsTicTacToe {
+
+	- Game game;
+	- View view;
+
+	- GraphicsTicTacToe()
+	- play()
+	+ {static} main(String[] args)
+
+}
+
+class models.Game
+class views.console.View
+class views.graphics.View
+
+tictactoe.ConsoleTicTacToe *-down-> models.Game
+tictactoe.GraphicsTicTacToe *-down-> models.Game
+tictactoe.ConsoleTicTacToe *-down-> views.console.View
+tictactoe.GraphicsTicTacToe *-down-> views.graphics.View
+@enduml
