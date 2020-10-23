@@ -32,7 +32,8 @@ version 0.0.1
 ## Paquete _tictactoe_<a name="paquete-tictactoe"></a>
 ![Texto alternativo](./docs/diagrams/out/paquetes/tictactoe.svg)
 
-## Paquete _utilis_<a name="paquete-utils"></a>
+## Paquete _utils_<a name="paquete-utils"></a>
+![Texto alternativo](./docs/diagrams/out/paquetes/utils.svg)
 
 # Calidad del Software<a name="calidad-del-software"></a>
 
