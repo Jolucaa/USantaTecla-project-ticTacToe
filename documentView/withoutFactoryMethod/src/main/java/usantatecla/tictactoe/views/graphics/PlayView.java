@@ -35,6 +35,7 @@ class PlayView extends JFrame {
 		this.gameView.write();
 		this.setVisible(true);
 		this.coordinatePutView = new CoordinatePutView();
+		this.coordinateMoveView = new CoordinateMoveView();
 		this.getContentPane().add(this.coordinatePutView, new Constraints(0, 1, 3, 1));
 		this.gameView.removeAll();
 		this.setVisible(true);

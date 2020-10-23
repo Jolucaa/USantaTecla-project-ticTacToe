@@ -2,7 +2,7 @@ package usantatecla.tictactoe.models;
 
 public class Turn {
 
-	public static final int NUMBER_PLAYERS = 2;
+	private static final int NUMBER_PLAYERS = 2;
 	private Player[] players;
 	private Board board;
 	private int active;

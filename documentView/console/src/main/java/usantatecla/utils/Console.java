@@ -5,18 +5,18 @@ import java.io.InputStreamReader;
 
 public class Console {
 
-	public static Console console;
-	
+	private static Console console;
+
+	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
 	public static Console instance() {
 		if (Console.console == null) {
 			Console.console = new Console();
 		}
 		return Console.console;
 	}
-	
-	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public String readString(String title) {
+	private String readString(String title) {
 		String input = null;
 		this.write(title);
 		try {
@@ -45,7 +45,7 @@ public class Console {
 		return input;
 	}
 
-	public char readChar(String title) {
+	char readChar(String title) {
 		char charValue = ' ';
 		boolean ok = false;
 		do {
@@ -85,7 +85,7 @@ public class Console {
 		System.out.print(character);
 	}
 
-	public void writeError(String format) {
+	private void writeError(String format) {
 		System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
 	}
 

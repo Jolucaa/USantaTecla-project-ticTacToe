@@ -4,7 +4,7 @@ import usantatecla.tictactoe.models.Game;
 
 public class View {
 
-  private Game game;
+    private Game game;
 	private StartView startView;
 	private PlayView playView;
 	private ResumeView resumeView;

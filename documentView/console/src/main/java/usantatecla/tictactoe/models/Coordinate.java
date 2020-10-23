@@ -1,16 +1,16 @@
 package usantatecla.tictactoe.models;
 
-import java.util.Random;
-
 import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.ConcreteCoordinate;
 import usantatecla.utils.Direction;
 
+import java.util.Random;
+
 public class Coordinate extends ConcreteCoordinate {
 
-	static final Coordinate NULL_COORDINATE = new Coordinate(); 
+	private static final Coordinate NULL_COORDINATE = new Coordinate();
 	public static final int DIMENSION = 3;
-	static final ClosedInterval LIMITS = 
+	private static final ClosedInterval LIMITS =
 		new ClosedInterval(0, Coordinate.DIMENSION - 1);
 
 	public Coordinate() {
@@ -48,7 +48,7 @@ public class Coordinate extends ConcreteCoordinate {
 		return super.getDirection(coordinate);
 	}
 
-	boolean inInverseDiagonal() {
+	private boolean inInverseDiagonal() {
 		if (this.isNull()){
 			return false;
 		}
