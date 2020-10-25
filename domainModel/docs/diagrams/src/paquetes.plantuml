@@ -161,23 +161,16 @@ enum Direction as "usantatecla.utils.Direction"{
 	
 }
 
-interface Coordinate as "usantatecla.utils.Coordinate"{
-	
-}
-
 ConcreteCoordinate <|-down- usantatecla.tictactoe.Coordinate
 
 usantatecla.tictactoe.Coordinate .down.> ClosedInterval
 usantatecla.tictactoe.Token .down.> ClosedInterval
-LimitedIntDialog .down.> ClosedInterval
 
 
 usantatecla.tictactoe.Error .down.> Console
 usantatecla.tictactoe.Message .down.> Console
 usantatecla.tictactoe.Token .down.> Console
-ConcreteCoordinate .down.> Console
-LimitedIntDialog .down.> Console
-YesNoDialog .down.> Console
+
 
 
 usantatecla.tictactoe.Turn .down.> LimitedIntDialog
@@ -185,7 +178,7 @@ usantatecla.tictactoe.TicTacToe .down.> YesNoDialog
 
 usantatecla.tictactoe.Board .down.> Direction
 usantatecla.tictactoe.Coordinate .down.> Direction
-Coordinate .down.> Direction
+
 @enduml
 
 
@@ -287,7 +280,11 @@ class LimitedIntDialog {
 
 Coordinate <|-down- ConcreteCoordinate
 Coordinate <|-down- NullCoordinate
-
+Coordinate .down.> Direction
+ConcreteCoordinate .down.> Console
+LimitedIntDialog .down.> Console
+YesNoDialog .down.> Console
+LimitedIntDialog .down.> ClosedInterval
 }
 class BufferedReader as "java.io.BufferedReader"{
 	
