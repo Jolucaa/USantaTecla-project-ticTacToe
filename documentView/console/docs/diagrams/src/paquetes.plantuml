@@ -214,7 +214,7 @@ NULL
 tictactoe.models.Token ..> utils.ClosedInterval
 
 class  tictactoe.models.Turn{
-- {static} NUM_PLAYERS: int
++ {static} NUM_PLAYERS: int
 - players: Player[]
 - board: Board
 - active: int
