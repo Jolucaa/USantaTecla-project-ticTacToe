@@ -21,7 +21,7 @@ enum Error {
 
 	void writeln() {
 		if (this != Error.NULL){
-			Console.instance().writeln(this.message);
+			Console.getInstance().writeln(this.message);
 		}
 	}
 
