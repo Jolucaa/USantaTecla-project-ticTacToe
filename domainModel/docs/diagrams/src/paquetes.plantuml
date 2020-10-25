@@ -71,7 +71,6 @@ enum Message {
 
 
 abstract class Player {
-	~ board: Board 
 	~ Player(Token, Board)
 	~ play()
 	- put()
@@ -125,6 +124,7 @@ TicTacToe *-down-> Turn : turn
 Board .down.> Token
 Turn .down.> Token
 Player *-down-> Token : token
+Player *-down-> Board : board
 Turn *-down-> "2" Player : player
 Board *-down-> Coordinate 
 Player <|-down- MachinePlayer
@@ -242,7 +242,6 @@ enum Direction {
 
 class Console {
 	+ console: {static} Console 
-	- bufferedReader: BufferedReader 
 	+ instance(): {static} Console 
 	+ readString(String): String 
 	+ readString(): String 
@@ -286,6 +285,6 @@ class LimitedIntDialog {
 
 Coordinate <|-down- ConcreteCoordinate
 Coordinate <|-down- NullCoordinate
-
+Console *-down-> java.io.BufferedReader : bufferedReader
 }
 @enduml
