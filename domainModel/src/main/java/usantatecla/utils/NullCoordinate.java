@@ -19,20 +19,17 @@ public class NullCoordinate implements Coordinate {
 	@Override
 	public Direction getDirection(Coordinate coordinate) {
 		assert coordinate != null;
-
 		return Direction.NULL;
 	}
 	@Override
 	public boolean inHorizontal(Coordinate coordinate) {
 		assert coordinate != null;
-
 		return false;
 	}
 
 	@Override
 	public boolean inVertical(Coordinate coordinate) {
 		assert coordinate != null;
-
 		return false;
 	}
 

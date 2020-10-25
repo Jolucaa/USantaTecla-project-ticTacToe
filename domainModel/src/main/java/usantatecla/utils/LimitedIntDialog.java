@@ -11,7 +11,6 @@ public class LimitedIntDialog {
 
 	public int read(String message) {
 		assert message != null;
-		
 		boolean error;
 		int value;
 		do {

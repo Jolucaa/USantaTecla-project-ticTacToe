@@ -14,7 +14,6 @@ public class YesNoDialog {
 
 	public boolean read(String message) {
 		assert message != null;
-		
 		Console console = Console.instance();
 		boolean error;
 		do {
