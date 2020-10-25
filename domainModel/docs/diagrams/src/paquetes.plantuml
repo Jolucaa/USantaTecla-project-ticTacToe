@@ -283,8 +283,14 @@ class LimitedIntDialog {
 	+ read(String): int 
 }
 
+
+
 Coordinate <|-down- ConcreteCoordinate
 Coordinate <|-down- NullCoordinate
-Console *-down-> java.io.BufferedReader : bufferedReader
+
 }
+class BufferedReader as "java.io.BufferedReader"{
+	
+}
+usantatecla.utils.Console *-down-> BufferedReader : bufferedReader
 @enduml
