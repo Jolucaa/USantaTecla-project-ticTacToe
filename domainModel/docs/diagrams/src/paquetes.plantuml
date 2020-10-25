@@ -72,7 +72,6 @@ enum Message {
 
 abstract class Player {
 	~ board: Board 
-	~ token: Token 
 	~ Player(Token, Board)
 	~ play()
 	- put()
@@ -86,8 +85,6 @@ abstract class Player {
 }
 
 class TicTacToe{
-    - board: Board 
-	- turn: Turn 
     ~ TicTacToe()
 	- play()
     - playGame()
@@ -106,7 +103,6 @@ enum Token {
 
 class Turn {
 	~ NUMBER_PLAYERS: {static} int 
-	- players: Player[] 
 	- active: int 
 	~ Turn(Board)
 	~ play()
@@ -123,14 +119,14 @@ class UserPlayer extends Player {
 	~ checkMoveTargetCoordinateError(Coordinate, Coordinate): Error
 }
 
-TicTacToe *-down-> Board
-TicTacToe *-down-> Turn
+TicTacToe *-down-> Board : board
+TicTacToe *-down-> Turn : turn
 
 Board .down.> Token
 Turn .down.> Token
-Player *-down-> Token
-Turn *-down-> "2" Player
-Board *-down-> Coordinate
+Player *-down-> Token : token
+Turn *-down-> "2" Player : player
+Board *-down-> Coordinate 
 Player <|-down- MachinePlayer
 Coordinate .down.> Error
 Player .down.> Error
