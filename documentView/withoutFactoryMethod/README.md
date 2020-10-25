@@ -1,4 +1,4 @@
-## TicTacToe. Solucion 2.1. documentView
+## TicTacToe. Solucion 3.2. documentView.withoutFactoryMethod
 Santa Tecla  
 parqueNaturalSantaTecla@gmail.com  
 version 0.1.6  
