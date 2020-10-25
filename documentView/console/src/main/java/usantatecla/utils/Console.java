@@ -1,22 +1,18 @@
 package usantatecla.utils;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Console {
 
-	private static Console console;
+	private static Console console = new Console();
+
+	public static Console getInstance() {
+		return console;
+	}
 
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public static Console instance() {
-		if (Console.console == null) {
-			Console.console = new Console();
-		}
-		return Console.console;
-	}
-
-	private String readString(String title) {
+	public String readString(String title) {
 		String input = null;
 		this.write(title);
 		try {
@@ -45,7 +41,7 @@ public class Console {
 		return input;
 	}
 
-	char readChar(String title) {
+	public char readChar(String title) {
 		char charValue = ' ';
 		boolean ok = false;
 		do {
@@ -85,8 +81,9 @@ public class Console {
 		System.out.print(character);
 	}
 
-	private void writeError(String format) {
+	public void writeError(String format) {
 		System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
 	}
 
 }
+

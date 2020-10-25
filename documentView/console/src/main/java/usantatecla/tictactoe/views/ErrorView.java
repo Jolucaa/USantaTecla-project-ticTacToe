@@ -19,7 +19,7 @@ class ErrorView {
 	
 	void writeln() {
 		if (!error.isNull()){
-			Console.instance().writeln(ErrorView.MESSAGES[this.error.ordinal()]);
+			Console.getInstance().writeln(ErrorView.MESSAGES[this.error.ordinal()]);
 		}
 	}
 

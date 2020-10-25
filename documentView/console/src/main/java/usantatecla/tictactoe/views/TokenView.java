@@ -13,7 +13,7 @@ class TokenView {
 	}
 
 	void write() {
-		Console.instance().write(TokenView.SYMBOLS[token.ordinal()]);
+		Console.getInstance().write(TokenView.SYMBOLS[token.ordinal()]);
 	}
 
 }

@@ -24,16 +24,16 @@ enum Message {
 	}
 
 	void write() {
-		Console.instance().write(this.message);
+		Console.getInstance().write(this.message);
 	}
 
 	void writeln() {
-		Console.instance().writeln(this.message);
+		Console.getInstance().writeln(this.message);
 	}
 
 	void writeln(String player) {
 		assert this == Message.PLAYER_WIN;
-		Console.instance().writeln(this.message.replaceAll("#player", "" + player));
+		Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
 	}
 
 	@Override

@@ -11,14 +11,13 @@ public class LimitedIntDialog {
 
 	public int read(String message) {
 		assert message != null;
-		
 		boolean error;
 		int value;
 		do {
-			value = Console.instance().readInt(message + "? " + this.LIMITS + ": ");
+			value = Console.getInstance().readInt(message + "? " + this.LIMITS + ": ");
 			error = !this.LIMITS.isIncluded(value);
 			if (error) {
-				Console.instance().writeln(LimitedIntDialog.ERROR_MESSAGE);
+				Console.getInstance().writeln(LimitedIntDialog.ERROR_MESSAGE);
 			}
 		} while(error);
 		return value;

@@ -7,7 +7,7 @@ import usantatecla.utils.Console;
 public class CoordinateView {
 
     public Coordinate read(String title) {
-        Console console = Console.instance();
+        Console console = Console.getInstance();
         Coordinate coordinate;
         Error error;
         do {

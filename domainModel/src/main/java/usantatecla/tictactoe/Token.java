@@ -18,7 +18,7 @@ enum Token {
 		if (this == Token.NULL){
 			string = " ";
 		}
-		Console.instance().write(string);
+		Console.getInstance().write(string);
 	}
 
 	static Token get(int ordinal){
