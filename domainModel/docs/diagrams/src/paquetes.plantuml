@@ -161,11 +161,11 @@ class YesNoDialog as "usantatecla.utils.YesNoDialog"{
 	
 }
 
-class Direction as "usantatecla.utils.Direction"{
+enum Direction as "usantatecla.utils.Direction"{
 	
 }
 
-class Coordinate as "usantatecla.utils.Coordinate"{
+interface Coordinate as "usantatecla.utils.Coordinate"{
 	
 }
 
