@@ -17,7 +17,7 @@ version 0.0.1
 
 # Requisitos 1. *Básica*<a name="requisitos-1-básica"></a>
 
-| [Wiki](https://en.wikipedia.org/wiki/Tic-tac-toe)  <br/>* _Funcionalidad: **Básica**_<br/>  * _Interfaz: **Texto**_<br/>  * _Distribución: **Stand Alone**_<br/>  * _Persistencia: **No**_<br/> | ![Texto alternativo](./docs/images/tictactoe.png) | 
+| * _Funcionalidad: **Básica**_<br/>  * _Interfaz: **Texto**_<br/>  * _Distribución: **Standalone**_<br/>  * _Persistencia: **No**_<br/> | ![Texto alternativo](./docs/images/tictactoe.png) | 
 | :------- | :------: | 
 
 # Vista de Lógica/Diseño<a name="vista-de-lógicadiseño"></a>

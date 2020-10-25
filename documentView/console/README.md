@@ -20,7 +20,7 @@ version 0.1.6
 
 # Requisitos 1. *Básica*
 
-| [Wiki](https://en.wikipedia.org/wiki/Tic-tac-toe) <br/> * _Funcionalidad: **Básica**_ <br/> * _Interfaz: **Texto**_ <br/> * _Distribución: **Standalone**_ <br/> * _Persistencia: **No**_  | ![Tictactoe](docs/images/tictactoe.png) |  
+| * _Funcionalidad: **Básica**_ <br/> * _Interfaz: **Texto**_ <br/> * _Distribución: **Standalone**_ <br/> * _Persistencia: **No**_  | ![Tictactoe](docs/images/tictactoe.png) |  
 | :------- | :------: |
 
 # Vista de Lógica/Diseño
