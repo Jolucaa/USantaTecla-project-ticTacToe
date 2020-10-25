@@ -141,27 +141,55 @@ Turn .down.> Message
 
 }
 
-usantatecla.utils.ConcreteCoordinate <|-down- usantatecla.tictactoe.Coordinate
+class ConcreteCoordinate as "usantatecla.utils.ConcreteCoordinate"{
 
-usantatecla.tictactoe.Coordinate .down.> usantatecla.utils.ClosedInterval
-usantatecla.tictactoe.Token .down.> usantatecla.utils.ClosedInterval
-usantatecla.utils.LimitedIntDialog .down.> usantatecla.utils.ClosedInterval
+}
+
+class ClosedInterval as "usantatecla.utils.ClosedInterval"{
+	
+}
+
+class Console as "usantatecla.utils.Console"{
+	
+}
+
+class LimitedIntDialog as "usantatecla.utils.LimitedIntDialog"{
+	
+}
+
+class YesNoDialog as "usantatecla.utils.YesNoDialog"{
+	
+}
+
+class Direction as "usantatecla.utils.Direction"{
+	
+}
+
+class Coordinate as "usantatecla.utils.Coordinate"{
+	
+}
+
+ConcreteCoordinate <|-down- usantatecla.tictactoe.Coordinate
+
+usantatecla.tictactoe.Coordinate .down.> ClosedInterval
+usantatecla.tictactoe.Token .down.> ClosedInterval
+LimitedIntDialog .down.> ClosedInterval
 
 
-usantatecla.tictactoe.Error .down.> usantatecla.utils.Console
-usantatecla.tictactoe.Message .down.> usantatecla.utils.Console
-usantatecla.tictactoe.Token .down.> usantatecla.utils.Console
-usantatecla.utils.ConcreteCoordinate .down.> usantatecla.utils.Console
-usantatecla.utils.LimitedIntDialog .down.> usantatecla.utils.Console
-usantatecla.utils.YesNoDialog .down.> usantatecla.utils.Console
+usantatecla.tictactoe.Error .down.> Console
+usantatecla.tictactoe.Message .down.> Console
+usantatecla.tictactoe.Token .down.> Console
+ConcreteCoordinate .down.> Console
+LimitedIntDialog .down.> Console
+YesNoDialog .down.> Console
 
 
-usantatecla.tictactoe.Turn .down.> usantatecla.utils.LimitedIntDialog
-usantatecla.tictactoe.TicTacToe .down.> usantatecla.utils.YesNoDialog
+usantatecla.tictactoe.Turn .down.> LimitedIntDialog
+usantatecla.tictactoe.TicTacToe .down.> YesNoDialog
 
-usantatecla.tictactoe.Board .down.> usantatecla.utils.Direction
-usantatecla.tictactoe.Coordinate .down.> usantatecla.utils.Direction
-usantatecla.utils.Coordinate .down.> usantatecla.utils.Direction
+usantatecla.tictactoe.Board .down.> Direction
+usantatecla.tictactoe.Coordinate .down.> Direction
+Coordinate .down.> Direction
 @enduml
 
 

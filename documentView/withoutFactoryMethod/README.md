@@ -1,8 +1,9 @@
 ## TicTacToe. Solucion 2.1. documentView
 Santa Tecla  
-parqueNaturalSantaTecla@gmail.com  
+[parqueNaturalSantaTecla@gmail.com](mailto:parqueNaturalSantaTecla@gmail.com)  
 version 0.1.6  
-Índice  
+
+**Índice**
 1. [Requisitos 1. Básica](#requisitos-1-básica)  
 2. [Vista de Lógica/Diseño](#vista-de-lógicadiseño)  
 2.1. [Arquitectura](#arquitectura)  
