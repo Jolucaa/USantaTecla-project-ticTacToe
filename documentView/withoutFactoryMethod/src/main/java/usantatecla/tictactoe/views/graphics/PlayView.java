@@ -46,7 +46,6 @@ class PlayView extends JFrame {
 		this.gameView.write();
 		this.setVisible(true);
 		do {
-			this.game.next();
 			if (!this.game.isBoardComplete()) {
 				this.put();
 			} else {

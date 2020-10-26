@@ -1,60 +1,70 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.tictactoe.types.Token;
 
-public class Player {
+class Player {
 
 	private Token token;
+	Board board;
 
-	private Board board;
-
-	private PlayerType type;
-
-	public Player(Token token, Board board, PlayerType type) {
+	Player(Token token, Board board) {
 		this.token = token;
 		this.board = board;
-		this.type = type;
 	}
 
-	public PlayerType getType() {
-		return this.type;
-	}
+	Error put(Coordinate coordinate) {
+		assert coordinate != null && !coordinate.isNull();
 
-	void put(Coordinate coordinate) {
+		if (!this.board.isEmpty(coordinate)) {
+			return Error.NOT_EMPTY;
+		}
 		this.board.put(coordinate, this.token);
-	};
+		return Error.NULL;
+	}
 
-	void move(Coordinate[] coordinates) {
-		this.board.move(coordinates[0], coordinates[1]);
-	};
+	Error move(Coordinate origin, Coordinate target) {
+		assert origin != null && !origin.isNull();
+		assert target != null && !target.isNull();
+
+		if (!this.board.isOccupied(origin, this.token)) {
+			return Error.NOT_OWNER;
+		}
+		if (origin.equals(target)) {
+			return Error.SAME_COORDINATES;
+		} 
+		if (!this.board.isEmpty(target)) {
+			return Error.NOT_EMPTY;
+		}
+		this.board.move(origin, target);
+		return Error.NULL;
+	}
 
 	Token getToken() {
 		return this.token;
 	}
 
-	public Error getPutCoordinateError(Coordinate coordinate) {
-		if (!this.board.isEmpty(coordinate)) {
-			return Error.NOT_OWNER;
-		}
-		return null;
+	public Player copy(Board board) {
+		return new Player(this.token, board);
 	}
 
-	public Error getMoveOriginCoordinateError(Coordinate originCoordinate) {
-		if (!this.board.isOccupied(originCoordinate, this.token)) {
-			return Error.NOT_OWNER;
-		}
-		return null;
-	}
-
-	public Error getMoveTargetCoordinateError(Coordinate originCoordinate, Coordinate targetCoordinate) {
-		if (originCoordinate.equals(targetCoordinate)) {
-			return Error.SAME_COORDINATES;
-		} else if (!this.board.isEmpty(targetCoordinate)) {
-			return Error.NOT_EMPTY;
-		}
-		return null;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (board == null) {
+			if (other.board != null)
+				return false;
+		} else if (!board.equals(other.board))
+			return false;
+		if (token != other.token)
+			return false;
+		return true;
 	}
 
 }

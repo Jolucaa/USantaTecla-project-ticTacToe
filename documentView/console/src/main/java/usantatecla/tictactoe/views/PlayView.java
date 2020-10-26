@@ -12,7 +12,6 @@ class PlayView extends SubView {
 
     void interact() {
         do {
-            this.game.next();
             if (!this.game.isBoardComplete()) {
                 this.put();
             } else {

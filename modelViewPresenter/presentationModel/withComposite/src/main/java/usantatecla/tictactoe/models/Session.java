@@ -1,104 +1,95 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.tictactoe.types.StateValue;
 import usantatecla.tictactoe.types.Token;
 
 public class Session {
-    
-    private State state;
-	
-	private Game game;
-	
-    private Registry registry;
-    
-    public Session() {
-		this.state = new State();
-		this.game = new Game();
-		this.registry = new Registry(this.game);
-	}
 
-	public void next() {
-		this.state.next();		
+  private Game game;
+  private GameRegistry registry;
+  private State state;
+
+  public Session() {
+    this.state = new State();
+    this.game = new Game();
+  }
+
+  public StateValue getValueState() {
+    return this.state.getValueState();
+  }
+
+  public Token getToken(Coordinate coordinate) {
+    return this.game.getToken(coordinate);
+  }
+
+  public void next() {
+    this.state.next();
+  }
+
+  public void setUsers(int users) {
+    this.game.setUsers(users);
+    this.registry = new GameRegistry(this.game);
+  }
+
+  public int getMaxPlayers() {
+    return this.game.getMaxPlayers();
+  }
+
+  public void reset() {
+    this.game.reset();
+    this.state.reset();
+  }
+
+  public boolean isBoardComplete() {
+    return this.game.isBoardComplete();
+  }
+
+  public boolean isTicTacToe() {
+    return this.game.isTicTacToe();
+  }
+
+  public Token getToken() {
+    return this.game.getToken();
+  }
+
+  public boolean isUser() {
+    return this.game.isUser();
+  }
+
+  public Error put(Coordinate coordinate) {
+    Error error = this.game.put(coordinate);
+    if (error.isNull()){
+      this.registry.register();
     }
-    
-    public boolean undoable() {
-		return this.registry.undoable();
-	}
+    return error;
+  }
 
-	public boolean redoable() {
-		return this.registry.redoable();
-	}
-
-	public void undo() {
-		this.registry.undo(this.game);
-	}
-
-	public void redo() {
-		this.registry.redo(this.game);
+  public Error move(Coordinate origin, Coordinate target) {
+    Error error = this.game.move(origin, target);
+    if (error.isNull()){
+      this.registry.register();
     }
-    
-    public void createPlayers(int numberOfUsers) {
-        this.game.createPlayers(numberOfUsers);
-        this.registry.registry();
+    return error;
+  }
+
+  public void undo() {
+    this.registry.undo();
+    if (!this.game.isUser()){
+      this.registry.undo();
     }
+  }
 
-    public PlayerType getTypeOfTokenPlayerFromTurn() {
-		return this.game.getTypeOfTokenPlayerFromTurn();
-	}
+  public boolean undoable() {
+    return this.registry.isUndoable();
+  }
 
-	public Error getPutCoordinateError(Coordinate coordinate) {
-		return this.game.getPutCoordinateError(coordinate);
-	}
+  public void redo() {
+    this.registry.redo();
+  }
 
-	public Error getMoveOriginCoordinateError(Coordinate originCoordinate) {
-		return this.game.getMoveOriginCoordinateError(originCoordinate);
-	}
+  public boolean redoable() {
+    return this.registry.isRedoable();
+  }
 
-	public Error getMoveTargetCoordinateError(Coordinate originCoordinate, Coordinate targetCoordinate) {
-		return this.game.getMoveTargetCoordinateError(originCoordinate, targetCoordinate);
-	}
-
-    public boolean isBoardComplete() {
-        return this.game.isBoardComplete();
-    }
-
-    public void putTokenPlayerFromTurn(Coordinate coordinate) {
-        this.game.putTokenPlayerFromTurn(coordinate);
-        this.changeTurn();
-        this.registry.registry();
-    }
-
-    public void moveTokenPlayerFromTurn(Coordinate[] coordinates) {
-        this.game.moveTokenPlayerFromTurn(coordinates);
-        this.changeTurn();
-        this.registry.registry();
-    }
-
-    public void changeTurn() {
-        this.game.changeTurn();
-    }
-
-    public Token getToken(Coordinate coordinate) {
-		return this.game.getToken(coordinate);
-	}
-
-    public boolean isTicTacToe() {
-        return this.game.isTicTacToe();
-    }
-
-    public int getValueFromTurn() {
-        return this.game.getValueFromTurn();
-    }
-
-    public StateValue getValueState() {
-		return this.state.getValueState();
-    }
-    
-    public void newGame() {
-        this.game.newGame();
-        this.state.reset();	
-        this.registry.reset();	
-    }
 }

@@ -61,7 +61,7 @@ public class CoordinateMoveView extends CoordinateView {
             this.coordinates[0] = originCoordinate;
             this.coordinates[1] = targetCoordinate;
         } else {
-            JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[Error.WRONG_COORDINATES.ordinal()], "ERROR",
+            JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[Error.NOT_VALID.ordinal()], "ERROR",
                     JOptionPane.WARNING_MESSAGE);
         }
         this.textFieldRowToMove.setText("");

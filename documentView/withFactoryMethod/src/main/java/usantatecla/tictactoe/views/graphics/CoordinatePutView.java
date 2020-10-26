@@ -41,7 +41,7 @@ public class CoordinatePutView extends CoordinateView {
 		if (coordinateInserted.isValid().equals(Error.NULL)) {
 			this.coordinate = new Coordinate(coordinateInserted.getColumn(), coordinateInserted.getRow());
 		} else {
-			JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[Error.WRONG_COORDINATES.ordinal()], "ERROR",
+			JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[Error.NOT_VALID.ordinal()], "ERROR",
 					JOptionPane.WARNING_MESSAGE);
 		}
 		this.textFieldRow.setText("");
