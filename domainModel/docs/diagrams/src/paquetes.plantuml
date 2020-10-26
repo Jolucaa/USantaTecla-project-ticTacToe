@@ -112,20 +112,20 @@ class Turn {
 
 class UserPlayer extends Player {
 	~ UserPlayer(Token, Board)
-	~ getCoordinate(Message message): Coordinate
-	~ checkPutCoordinateError(Coordinate): Error 
-	~ checkMoveOriginCoordinateError(Coordinate): Error
-	~ checkMoveTargetCoordinateError(Coordinate, Coordinate): Error
+	~ getCoordinate(Message message)
+	~ checkPutCoordinateError(Coordinate) 
+	~ checkMoveOriginCoordinateError(Coordinate)
+	~ checkMoveTargetCoordinateError(Coordinate, Coordinate)
 }
 
-TicTacToe *-down-> Board : board
-TicTacToe *-down-> Turn : turn
+TicTacToe *-down-> Board 
+TicTacToe *-down-> Turn 
 
 Board .down.> Token
 Turn .down.> Token
-Player *-down-> Token : token
-Player *-down-> Board : board
-Turn *-down-> "2" Player : player
+Player *-down-> Token
+Player *-down-> Board 
+Turn *-down-> "2" Player 
 Board *-down-> Coordinate 
 Player <|-down- MachinePlayer
 Coordinate .down.> Error
@@ -289,5 +289,5 @@ LimitedIntDialog .down.> ClosedInterval
 class BufferedReader as "java.io.BufferedReader"{
 	
 }
-usantatecla.utils.Console *-down-> BufferedReader : bufferedReader
+usantatecla.utils.Console *-down-> BufferedReader 
 @enduml
