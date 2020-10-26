@@ -14,7 +14,6 @@ public enum Token {
 
 	public static Token get(int ordinal){
 		assert new ClosedInterval(0, Token.values().length-2).isIncluded(ordinal);
-		
 		return Token.values()[ordinal];
 	}
 

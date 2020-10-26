@@ -12,7 +12,6 @@ class Player {
 
 	Error put(Coordinate coordinate) {
 		assert coordinate != null && !coordinate.isNull();
-
 		if (!this.board.isEmpty(coordinate)) {
 			return Error.NOT_EMPTY;
 		}
@@ -23,7 +22,6 @@ class Player {
 	Error move(Coordinate origin, Coordinate target) {
 		assert origin != null && !origin.isNull();
 		assert target != null && !target.isNull();
-
 		if (!this.board.isOccupied(origin, this.token)) {
 			return Error.NOT_OWNER;
 		}

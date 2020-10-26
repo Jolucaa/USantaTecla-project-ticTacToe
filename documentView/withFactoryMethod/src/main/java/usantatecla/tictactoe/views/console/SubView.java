@@ -8,7 +8,6 @@ public class SubView {
 
 	SubView(Game game) {
 		assert game != null;
-		
 		this.game = game;
   }
   

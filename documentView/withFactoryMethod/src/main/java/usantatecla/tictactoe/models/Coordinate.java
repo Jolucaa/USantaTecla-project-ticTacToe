@@ -36,7 +36,6 @@ public class Coordinate extends ConcreteCoordinate {
 	@Override
 	public Direction getDirection(usantatecla.utils.Coordinate coordinate) {
 		assert coordinate != null;
-
 		if (coordinate.isNull()){
 			return Direction.NULL;
 		}
@@ -59,5 +58,4 @@ public class Coordinate extends ConcreteCoordinate {
 		this.column = random.nextInt(Coordinate.DIMENSION);
 		assert this.isValid() == Error.NULL;
 	}
-
 }
