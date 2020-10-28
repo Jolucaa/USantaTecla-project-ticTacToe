@@ -90,6 +90,4 @@ public class Turn {
 		return true;
 	}
 
-	
-
 }

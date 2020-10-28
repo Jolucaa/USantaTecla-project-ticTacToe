@@ -13,20 +13,25 @@ class Board {
 	Board() {
 		this.tokens = new Token[Coordinate.DIMENSION][Coordinate.DIMENSION];
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				this.tokens[i][j] = Token.NULL;
-			}
+			//for (int j = 0; j < Coordinate.DIMENSION; j++) {
+				//this.tokens[i][j] = Token.NULL;
+			this.tokens[0][i] = Token.NULL;
+			this.tokens[1][i] = Token.NULL;
+			this.tokens[2][i] = Token.NULL;
+			//}
 		}
 	}
 
 	private Board(Board board) {
 		this();
 		assert board != null;
-
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				this.tokens[i][j] = board.tokens[i][j];
-			}
+			//for (int j = 0; j < Coordinate.DIMENSION; j++) {
+				//this.tokens[i][j] = board.tokens[i][j];
+			this.tokens[0][i] = board.tokens[0][i];
+			this.tokens[1][i] = board.tokens[1][i];
+			this.tokens[2][i] = board.tokens[2][i];
+			//}
 		}
 	}
 
@@ -36,7 +41,6 @@ class Board {
 
 	Token getToken(Coordinate coordinate) {
 		assert coordinate != null && !coordinate.isNull();
-
 		return this.tokens[coordinate.getRow()][coordinate.getColumn()];
 	}
 
@@ -64,19 +68,16 @@ class Board {
 
 	boolean isOccupied(Coordinate coordinate, Token token) {
 		assert coordinate != null && !coordinate.isNull();
-
 		return this.getToken(coordinate) == token;
 	}
 
 	boolean isEmpty(Coordinate coordinate) {
 		assert coordinate != null && !coordinate.isNull();
-
 		return this.isOccupied(coordinate, Token.NULL);
 	}
 
 	boolean isTicTacToe(Token token) {
 		assert token != null && !token.isNull();
-
 		List<Coordinate> coordinates = this.getCoordinates(token);
 		if (coordinates.size() < Coordinate.DIMENSION) {
 			return false;
@@ -93,7 +94,6 @@ class Board {
 
 	private List<Coordinate> getCoordinates(Token token) {
 		assert token != null && !token.isNull();
-
 		List<Coordinate> coordinates = new ArrayList<Coordinate>();
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
 			for (int j = 0; j < Coordinate.DIMENSION; j++) {

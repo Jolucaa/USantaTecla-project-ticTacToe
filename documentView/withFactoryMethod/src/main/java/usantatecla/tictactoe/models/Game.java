@@ -28,18 +28,20 @@ public class Game {
 
     public Error put(Coordinate coordinate) {
         Error error = this.turn.put(coordinate);
-        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
-            this.turn.next(); 
-        }
+        next(error);
         return error;
     }
 
     public Error move(Coordinate origin, Coordinate target) {
         Error error = this.turn.move(origin, target);
+        next(error);
+        return error;
+    }
+
+    private void next(Error error){
         if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
             this.turn.next();
         }
-        return error;
     }
 
     public boolean isTicTacToe() {
@@ -79,7 +81,5 @@ public class Game {
             return false;
         return true;
     }
-    
-    
 
 }
