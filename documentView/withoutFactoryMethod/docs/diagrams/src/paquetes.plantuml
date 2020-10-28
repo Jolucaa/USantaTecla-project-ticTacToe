@@ -1,40 +1,40 @@
 @startuml tictactoe
-class tictactoe.ConsoleTicTacToe {
+class usantatecla.tictactoe.ConsoleTicTacToe {
 
 	ConsoleTicTacToe()
 	- play()
-	+ {static} main(String[] args)
+	+ {static} main(String[])
 
 }
 
-class tictactoe.GraphicsTicTacToe {
+class usantatecla.tictactoe.GraphicsTicTacToe {
 
 	- GraphicsTicTacToe()
 	- play()
-	+ {static} main(String[] args)
+	+ {static} main(String[])
 
 }
 
-class Game as "models.Game"
-class consoleView as "views.console.View"
-class graphicsView as "views.graphics.View"
+class Game as "usantatecla.models.Game"
+class consoleView as "usantatecla.tictactoe.views.console.View"
+class graphicsView as "usantatecla.tictactoe.views.graphics.View"
 
-tictactoe.ConsoleTicTacToe *-down-> Game
-tictactoe.GraphicsTicTacToe *-down-> Game
-tictactoe.ConsoleTicTacToe *-down-> consoleView
-tictactoe.GraphicsTicTacToe *-down-> graphicsView
+usantatecla.tictactoe.ConsoleTicTacToe *-down-> Game
+usantatecla.tictactoe.GraphicsTicTacToe *-down-> Game
+usantatecla.tictactoe.ConsoleTicTacToe *-down-> consoleView
+usantatecla.tictactoe.GraphicsTicTacToe *-down-> graphicsView
 @enduml
 
 @startuml tictactoe.views
-class tictactoe.views.ErrorView {
+class usantatecla.tictactoe.views.ErrorView {
 
 	+ {static} String[] MESSAGES
 
-	+ ErrorView(Error error)
+	+ ErrorView(Error)
 
 }
 
-enum tictactoe.views.Message {
+enum usantatecla.tictactoe.views.Message {
     + TITTLE
 	+ NUMBER_PLAYERS
 	+ SEPARATOR
@@ -50,7 +50,7 @@ enum tictactoe.views.Message {
 	+ RESUME
 	- String message;
 
-	- Message(String message)
+	- Message(String)
 	+ String getMessage()
 	+ write()
 	+ writeln()
@@ -58,9 +58,9 @@ enum tictactoe.views.Message {
 
 }
 
-class tictactoe.views.View {
+class usantatecla.tictactoe.views.View {
 
-	+ View(Game game)
+	+ View(Game)
 	+ interact()
 	# {abstract} start()
 	# {abstract} play()
@@ -68,68 +68,69 @@ class tictactoe.views.View {
 
 }
 
-class Game as "tictactoe.models.Game"
-class Console as "utils.Console"
-class Error as "tictactoe.models.Error"
+class Game as "usantatecla.tictactoe.models.Game"
+class Console as "usantatecla.utils.Console"
+class Error as "usantatecla.tictactoe.models.Error"
 
-tictactoe.views.ErrorView *--> Error
-tictactoe.views.View *--> Game
-tictactoe.views.Message ..> Console
+usantatecla.tictactoe.views.ErrorView *--> Error
+usantatecla.tictactoe.views.View *--> Game
+usantatecla.tictactoe.views.Message ..> Console
 @enduml
 
 @startuml tictactoe.views.console
-class tictactoe.views.console.CoordinateView {
+class usantatecla.tictactoe.views.console.CoordinateView {
 
-    + Coordinate read(String title)
+    + Coordinate read(String)
 
 }
 
-tictactoe.views.console.CoordinateView ..> tictactoe.views.console.ErrorView
+usantatecla.tictactoe.views.console.CoordinateView ..> usantatecla.tictactoe.views.console.ErrorView
 
-class Coordinate as "tictactoe.models.Coordinate"
-class Error as "tictactoe.models.Error"
-class Console as "utils.Console"
+class Coordinate as "usantatecla.tictactoe.models.Coordinate"
+class Error as "usantatecla.tictactoe.models.Error"
+class Console as "usantatecla.utils.Console"
 
-tictactoe.views.console.CoordinateView ..> Console
-tictactoe.views.console.CoordinateView ..> Error
-tictactoe.views.console.CoordinateView ..> Coordinate
+usantatecla.tictactoe.views.console.CoordinateView ..> Console
+usantatecla.tictactoe.views.console.CoordinateView ..> Error
+usantatecla.tictactoe.views.console.CoordinateView ..> Coordinate
 
-class tictactoe.views.console.ErrorView {
+class usantatecla.tictactoe.views.console.ErrorView {
 
-	ErrorView(Error error)
+	ErrorView(Error)
 	writeln()
 
 }
 
-class ErrorView as "tictactoe.views.ErrorView"
+class ErrorView as "usantatecla.tictactoe.views.ErrorView"
 
-ErrorView <|-- tictactoe.views.console.ErrorView
-tictactoe.views.console.ErrorView ..> Console
+ErrorView <|-- usantatecla.tictactoe.views.console.ErrorView
+usantatecla.tictactoe.views.console.ErrorView ..> Console
+usantatecla.tictactoe.views.console.ErrorView *--> Error
 
-class tictactoe.views.console.GameView {
+class usantatecla.tictactoe.views.console.GameView {
 
-    GameView(Game game)
+    GameView(Game)
 	write()
 
 }
 
-class Game as "tictactoe.models.Game"
-class Message as "tictactoe.views.Message"
+class Game as "usantatecla.tictactoe.models.Game"
+class Message as "usantatecla.tictactoe.views.Message"
 
-tictactoe.views.console.GameView *--> Game
-tictactoe.views.console.GameView ..> Coordinate
-tictactoe.views.console.GameView ..> Message
-tictactoe.views.console.GameView ..> tictactoe.views.console.TokenView
+usantatecla.tictactoe.views.console.GameView *--> Game
+usantatecla.tictactoe.views.console.GameView ..> Coordinate
+usantatecla.tictactoe.views.console.GameView ..> Message
+usantatecla.tictactoe.views.console.GameView ..> usantatecla.tictactoe.views.console.TokenView
 
-class tictactoe.views.console.SubView {
+class usantatecla.tictactoe.views.console.SubView {
 
-	SubView(Game game)
+	SubView(Game)
 
 }
 
-tictactoe.views.console.SubView *--> Game
+usantatecla.tictactoe.views.console.SubView *--> Game
 
-class tictactoe.views.console.PlayView {
+class usantatecla.tictactoe.views.console.PlayView {
 
     interact()
     - put()
@@ -137,66 +138,66 @@ class tictactoe.views.console.PlayView {
 
 }
 
-tictactoe.views.console.SubView <|-- tictactoe.views.console.PlayView
-tictactoe.views.console.PlayView ..> Coordinate
-tictactoe.views.console.PlayView ..> Message
-tictactoe.views.console.PlayView ..> Error
-tictactoe.views.console.PlayView ..> tictactoe.views.console.ErrorView
-tictactoe.views.console.PlayView ..> tictactoe.views.console.CoordinateView
-tictactoe.views.console.PlayView ..> tictactoe.views.console.GameView
-tictactoe.views.console.PlayView ..> tictactoe.views.console.TokenView
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.console.PlayView ..> Coordinate
+usantatecla.tictactoe.views.console.PlayView ..> Message
+usantatecla.tictactoe.views.console.PlayView ..> Error
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.ErrorView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.CoordinateView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.GameView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.TokenView
 
-class tictactoe.views.console.ResumeView {
+class usantatecla.tictactoe.views.console.ResumeView {
 
 	boolean interact()
 
 }
 
-class YesNoDialog as "utils.YesNoDialog"
+class YesNoDialog as "usantatecla.utils.YesNoDialog"
 
-tictactoe.views.console.SubView <|-- tictactoe.views.console.ResumeView
-tictactoe.views.console.PlayView ..> Message
-tictactoe.views.console.PlayView ..> YesNoDialog
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.console.ResumeView ..> Message
+usantatecla.tictactoe.views.console.ResumeView ..> YesNoDialog
 
-class tictactoe.views.console.StartView {
+class usantatecla.tictactoe.views.console.StartView {
 
 	interact()
 
 }
 
-class LimitedIntDialog as "utils.LimitedIntDialog"
+class LimitedIntDialog as "usantatecla.utils.LimitedIntDialog"
 
-tictactoe.views.console.SubView <|-- tictactoe.views.console.StartView
-tictactoe.views.console.StartView ..> Message
-tictactoe.views.console.StartView ..> LimitedIntDialog
-tictactoe.views.console.StartView ..> tictactoe.views.console.GameView
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.StartView
+usantatecla.tictactoe.views.console.StartView ..> Message
+usantatecla.tictactoe.views.console.StartView ..> LimitedIntDialog
+usantatecla.tictactoe.views.console.StartView ..> usantatecla.tictactoe.views.console.GameView
 
-class tictactoe.views.console.TokenView {
+class usantatecla.tictactoe.views.console.TokenView {
 
 	+ {static} char[] SYMBOLS
 
-	TokenView(Token token)
+	TokenView(Token)
 	write()
 
 }
 
-class Token as "tictactoe.models.Token"
+class Token as "usantatecla.tictactoe.models.Token"
 
-tictactoe.views.console.TokenView *--> Token
-tictactoe.views.console.TokenView ..> Console
+usantatecla.tictactoe.views.console.TokenView *--> Token
+usantatecla.tictactoe.views.console.TokenView ..> Console
 
-class tictactoe.views.console.View {
+class usantatecla.tictactoe.views.console.View {
 
-	+ View(Game game)
+	+ View(Game)
 
 }
 
-class View as "tictactoe.views.View"
+class View as "usantatecla.tictactoe.views.View"
 
-View <|-- tictactoe.views.console.View
-tictactoe.views.console.View *--> tictactoe.views.console.ResumeView
-tictactoe.views.console.View *--> tictactoe.views.console.PlayView
-tictactoe.views.console.View *--> tictactoe.views.console.StartView
+View <|-- usantatecla.tictactoe.views.console.View
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.StartView
 @enduml
 
 @startuml tictactoe.views.graphics
