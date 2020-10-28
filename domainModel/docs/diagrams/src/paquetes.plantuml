@@ -45,7 +45,7 @@ enum Error {
 
 class MachinePlayer {
 	~ MachinePlayer(Token, Board)
-	~ getCoordinate(Message): Coordinate 
+	# getCoordinate(Message): Coordinate 
 }
 
 enum Message {
@@ -74,11 +74,11 @@ abstract class Player {
 	~ Player(Token, Board)
 	~ play()
 	- put()
-	~ abstract getCoordinate(Message): Coordinate 
+	# {abstract} getCoordinate(Message): Coordinate 
 	~ checkPutCoordinateError(Coordinate): Error 
 	- move()
-	~ checkMoveOriginCoordinateError(Coordinate): Error 
-	~ checkMoveTargetCoordinateError(Coordinate, Coordinate): Error 
+	# checkMoveOriginCoordinateError(Coordinate): Error 
+	# checkMoveTargetCoordinateError(Coordinate, Coordinate): Error 
 	~ writeWinner()
 	~ getToken(): Token 
 }
@@ -112,10 +112,10 @@ class Turn {
 
 class UserPlayer extends Player {
 	~ UserPlayer(Token, Board)
-	~ getCoordinate(Message message)
-	~ checkPutCoordinateError(Coordinate) 
-	~ checkMoveOriginCoordinateError(Coordinate)
-	~ checkMoveTargetCoordinateError(Coordinate, Coordinate)
+	# getCoordinate(Message message)
+	# checkPutCoordinateError(Coordinate) 
+	# checkMoveOriginCoordinateError(Coordinate)
+	# checkMoveTargetCoordinateError(Coordinate, Coordinate)
 }
 
 TicTacToe *-down-> Board 
@@ -194,18 +194,18 @@ interface Coordinate {
 }
 
 class ConcreteCoordinate {
-	~ row: int 
-	~ column: int 
+	# row: int 
+	# column: int 
 	~ ROW: {static} String
 	~ COLUMN: {static} String
-	~ ConcreteCoordinate()
-	~ ConcreteCoordinate(int, int)
+	# ConcreteCoordinate()
+	# ConcreteCoordinate(int, int)
 	+ isNull(): boolean 
 	+ getDirection(Coordinate): Direction 
 	+ inHorizontal(Coordinate): boolean 
 	+ inVertical(Coordinate): boolean 
 	+ inMainDiagonal(): boolean 
-	~ read(String)
+	# read(String)
 	+ getRow(): int 
 	+ getColumn(): int
 	+ hashCode(): int
