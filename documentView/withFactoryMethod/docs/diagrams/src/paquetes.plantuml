@@ -1,0 +1,519 @@
+@startuml tictactoe
+class usantatecla.tictactoe.ConsoleTicTacToe {
+
+	ConsoleTicTacToe()
+	- play()
+	+ {static} main(String[])
+
+}
+
+class usantatecla.tictactoe.GraphicsTicTacToe {
+
+	- GraphicsTicTacToe()
+	- play()
+	+ {static} main(String[])
+
+}
+
+class  usantatecla.tictactoe.TicTacToe{
+- game: Game
+- view: View
+# TicTacToe()
+# {abstract} createView(Game): View
+# play(): void
+}
+
+usantatecla.tictactoe.TicTacToe <|-down- usantatecla.tictactoe.ConsoleTicTacToe
+usantatecla.tictactoe.TicTacToe <|-down- usantatecla.tictactoe.GraphicsTicTacToe
+
+class Game as "usantatecla.models.Game"
+class consoleView as "usantatecla.tictactoe.views.console.View"
+class graphicsView as "usantatecla.tictactoe.views.graphics.View"
+
+usantatecla.tictactoe.ConsoleTicTacToe *-down-> Game
+usantatecla.tictactoe.GraphicsTicTacToe *-down-> Game
+usantatecla.tictactoe.ConsoleTicTacToe *-down-> consoleView
+usantatecla.tictactoe.GraphicsTicTacToe *-down-> graphicsView
+@enduml
+
+@startuml tictactoe.views
+class usantatecla.tictactoe.views.ErrorView {
+
+	+ {static} String[] MESSAGES
+
+	+ ErrorView(Error)
+
+}
+
+enum usantatecla.tictactoe.views.Message {
+    + TITTLE
+	+ NUMBER_PLAYERS
+	+ SEPARATOR
+	+ VERTICAL_LINE_LEFT
+	+ VERTICAL_LINE_CENTERED
+	+ VERTICAL_LINE_RIGHT
+	+ ENTER_COORDINATE_TO_PUT
+	+ ENTER_COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_PUT
+	+ COORDINATE_TO_REMOVE
+	+ COORDINATE_TO_MOVE
+	+ PLAYER_WIN
+	+ RESUME
+	- String message;
+
+	- Message(String)
+	+ String getMessage()
+	+ write()
+	+ writeln()
+	+ String toString()
+
+}
+
+class usantatecla.tictactoe.views.View {
+
+	+ View(Game)
+	+ interact()
+	# {abstract} start()
+	# {abstract} play()
+	# {abstract} boolean isNewGame()
+
+}
+
+class Game as "usantatecla.tictactoe.models.Game"
+class Console as "usantatecla.utils.Console"
+class Error as "usantatecla.tictactoe.models.Error"
+
+usantatecla.tictactoe.views.ErrorView *--> Error
+usantatecla.tictactoe.views.View *--> Game
+usantatecla.tictactoe.views.Message ..> Console
+@enduml
+
+@startuml tictactoe.views.console
+class usantatecla.tictactoe.views.console.CoordinateView {
+
+    + Coordinate read(String)
+
+}
+
+usantatecla.tictactoe.views.console.CoordinateView ..> usantatecla.tictactoe.views.console.ErrorView
+
+class Coordinate as "usantatecla.tictactoe.models.Coordinate"
+class Error as "usantatecla.tictactoe.models.Error"
+class Console as "usantatecla.utils.Console"
+
+usantatecla.tictactoe.views.console.CoordinateView ..> Console
+usantatecla.tictactoe.views.console.CoordinateView ..> Error
+usantatecla.tictactoe.views.console.CoordinateView ..> Coordinate
+
+class usantatecla.tictactoe.views.console.ErrorView {
+
+	ErrorView(Error)
+	writeln()
+
+}
+
+class ErrorView as "usantatecla.tictactoe.views.ErrorView"
+
+ErrorView <|-- usantatecla.tictactoe.views.console.ErrorView
+usantatecla.tictactoe.views.console.ErrorView ..> Console
+usantatecla.tictactoe.views.console.ErrorView *--> Error
+
+class usantatecla.tictactoe.views.console.GameView {
+
+    GameView(Game)
+	write()
+
+}
+
+class Game as "usantatecla.tictactoe.models.Game"
+class Message as "usantatecla.tictactoe.views.Message"
+
+usantatecla.tictactoe.views.console.GameView *--> Game
+usantatecla.tictactoe.views.console.GameView ..> Coordinate
+usantatecla.tictactoe.views.console.GameView ..> Message
+usantatecla.tictactoe.views.console.GameView ..> usantatecla.tictactoe.views.console.TokenView
+
+class usantatecla.tictactoe.views.console.SubView {
+
+	SubView(Game)
+
+}
+
+usantatecla.tictactoe.views.console.SubView *--> Game
+
+class usantatecla.tictactoe.views.console.PlayView {
+
+    interact()
+    - put()
+    - move()
+
+}
+
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.console.PlayView ..> Coordinate
+usantatecla.tictactoe.views.console.PlayView ..> Message
+usantatecla.tictactoe.views.console.PlayView ..> Error
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.ErrorView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.CoordinateView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.GameView
+usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.console.TokenView
+
+class usantatecla.tictactoe.views.console.ResumeView {
+
+	boolean interact()
+
+}
+
+class YesNoDialog as "usantatecla.utils.YesNoDialog"
+
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.console.ResumeView ..> Message
+usantatecla.tictactoe.views.console.ResumeView ..> YesNoDialog
+
+class usantatecla.tictactoe.views.console.StartView {
+
+	interact()
+
+}
+
+class LimitedIntDialog as "usantatecla.utils.LimitedIntDialog"
+
+usantatecla.tictactoe.views.console.SubView <|-- usantatecla.tictactoe.views.console.StartView
+usantatecla.tictactoe.views.console.StartView ..> Message
+usantatecla.tictactoe.views.console.StartView ..> LimitedIntDialog
+usantatecla.tictactoe.views.console.StartView ..> usantatecla.tictactoe.views.console.GameView
+
+class usantatecla.tictactoe.views.console.TokenView {
+
+	+ {static} char[] SYMBOLS
+
+	TokenView(Token)
+	write()
+
+}
+
+class Token as "usantatecla.tictactoe.models.Token"
+
+usantatecla.tictactoe.views.console.TokenView *--> Token
+usantatecla.tictactoe.views.console.TokenView ..> Console
+
+class usantatecla.tictactoe.views.console.View {
+
+	+ View(Game)
+
+}
+
+class View as "usantatecla.tictactoe.views.View"
+
+View <|-- usantatecla.tictactoe.views.console.View
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.StartView
+@enduml
+
+@startuml tictactoe.views.graphics
+class tictactoe.views.graphics.ChoosePlayersView {
+
+	- {static} String ACCEPT
+	- String playersNumber
+
+	ChoosePlayersView(final JRootPane rootPane)
+	resetPlayersNumber()
+	String getPlayersNumber()
+	+ actionPerformed(final ActionEvent event)
+	+ keyTyped(KeyEvent e)
+	+ keyPressed(KeyEvent e)
+	+ keyReleased(KeyEvent e)
+
+}
+
+class ActionEvent as "java.awt.event.ActionEvent"
+class ActionListener as "java.awt.event.ActionListener"
+class KeyEvent as "java.awt.event.KeyEvent"
+class KeyListener as "java.awt.event.KeyListener"
+class JButton as "javax.swing.JButton"
+class JLabel as  "javax.swing.JLabel"
+class JOptionPane as "javax.swing.JOptionPane"
+class JPanel as "javax.swing.JPanel"
+class JTextField as "javax.swing.JTextField"
+class ErrorView as "tictactoe.views.ErrorView"
+class Coordinate as "tictactoe.models.Coordinate"
+
+JPanel <|-- tictactoe.views.graphics.ChoosePlayersView
+ActionListener <|.. tictactoe.views.graphics.ChoosePlayersView
+KeyListener <|.. tictactoe.views.graphics.ChoosePlayersView
+tictactoe.views.graphics.ChoosePlayersView *--> JLabel
+tictactoe.views.graphics.ChoosePlayersView *--> JTextField
+tictactoe.views.graphics.ChoosePlayersView *--> JButton
+tictactoe.views.graphics.ChoosePlayersView ..> tictactoe.views.graphics.Constraints
+tictactoe.views.graphics.ChoosePlayersView ..> ErrorView
+tictactoe.views.graphics.ChoosePlayersView ..> ActionEvent
+tictactoe.views.graphics.ChoosePlayersView ..> KeyEvent
+
+class tictactoe.views.graphics.Constraints {
+
+	Constraints(int gridX, int gridY, int gridWidth, int gridHeight)
+
+}
+
+class GridBagConstraints as "java.awt.GridBagConstraints"
+
+GridBagConstraints <|-- tictactoe.views.graphics.Constraints
+
+class tictactoe.views.graphics.CoordinateMoveView extends tictactoe.views.graphics.CoordinateView {
+
+    {static} String ENTER_COORDINATE_TO_REMOVE
+
+    CoordinateMoveView()
+    resetCoordinates()
+    Coordinate[] getCoordinates()
+    + actionPerformed(final ActionEvent event)
+
+}
+
+class JOptionPane as "javax.swing.JOptionPane"
+class Error as "tictactoe.models.Error"
+class ErrorView as "tictactoe.views.ErrorView"
+
+tictactoe.views.graphics.CoordinateMoveView *--> "3" JLabel
+tictactoe.views.graphics.CoordinateMoveView *--> "2" JTextField
+tictactoe.views.graphics.CoordinateMoveView ..> ActionEvent
+tictactoe.views.graphics.CoordinateMoveView ..> Error
+tictactoe.views.graphics.CoordinateMoveView ..> ErrorView
+tictactoe.views.graphics.CoordinateMoveView ..> JOptionPane
+tictactoe.views.graphics.CoordinateMoveView *--> "2" Coordinate
+
+class tictactoe.views.graphics.CoordinatePutView extends tictactoe.views.graphics.CoordinateView {
+
+	CoordinatePutView()
+	resetCoordinate()
+	Coordinate getCoordinate()
+	+ actionPerformed(final ActionEvent event)
+	+ keyTyped(KeyEvent e)
+	+ keyPressed(KeyEvent e)
+	+ keyReleased(KeyEvent e)
+
+}
+
+class Coordinate as "tictactoe.models.Coordinate"
+
+tictactoe.views.graphics.CoordinatePutView ..> ActionEvent
+tictactoe.views.graphics.CoordinatePutView ..> KeyEvent
+tictactoe.views.graphics.CoordinatePutView ..> ErrorView
+tictactoe.views.graphics.CoordinatePutView *--> Coordinate
+
+class tictactoe.views.graphics.CoordinateView extends JPanel implements ActionListener, KeyListener {
+
+	# {static} String ENTER_COORDINATE_TO_PUT
+	# {static} String ACCEPT
+
+	CoordinateView()
+	+ {abstract} actionPerformed(final ActionEvent event)
+	+ keyTyped(KeyEvent e)
+	+ keyPressed(KeyEvent e)
+	+ keyReleased(KeyEvent e)
+}
+
+tictactoe.views.graphics.CoordinateView ..> ActionEvent
+tictactoe.views.graphics.CoordinateView ..> KeyEvent
+tictactoe.views.graphics.CoordinateView ..> "3" JLabel
+tictactoe.views.graphics.CoordinateView ..> "2" JTextField
+tictactoe.views.graphics.CoordinateView ..> JButton
+
+class tictactoe.views.graphics.GameView extends JPanel {
+
+    GameView(Game game)
+    write()
+    - printRowBoard(int row)
+    - String getSquareBoardText(int row, int column)
+
+}
+
+class Game as "tictactoe.models.Game"
+class Token as "tictactoe.models.Token"
+class Message as "tictactoe.views.Message"
+class TokenView as "tictactoe.views.console.TokenView"
+
+tictactoe.views.graphics.GameView *--> Game
+tictactoe.views.graphics.GameView ..> Coordinate
+tictactoe.views.graphics.GameView ..> Token
+tictactoe.views.graphics.GameView ..> Message
+tictactoe.views.graphics.GameView ..> Token
+tictactoe.views.graphics.GameView ..> TokenView
+
+class tictactoe.views.graphics.PlayView extends JFrame {
+
+	{static final} String ENTER_COORDINATE_TO_PUT
+	{static final} String ENTER_COORDINATE_TO_REMOVE
+
+	PlayView(Game game)
+	interact()
+	- put()
+	- move()
+
+}
+
+tictactoe.views.graphics.PlayView ..> Coordinate
+tictactoe.views.graphics.PlayView *--> Game
+tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.GameView
+tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.CoordinateMoveView
+tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.CoordinatePutView
+tictactoe.views.graphics.PlayView *--> ErrorView
+tictactoe.views.graphics.PlayView *--> Message
+
+class tictactoe.views.graphics.ResumeView {
+
+	- boolean newGame;
+
+	ResumeView()
+	boolean isResumedGame()
+
+}
+
+tictactoe.views.graphics.ResumeView ..> JOptionPane
+tictactoe.views.graphics.ResumeView ..> Message
+
+class tictactoe.views.graphics.StartView extends JFrame {
+
+    StartView(Game game)
+    interact()
+
+}
+
+tictactoe.views.graphics.StartView *--> Game
+tictactoe.views.graphics.StartView ..> Message
+tictactoe.views.graphics.StartView ..> tictactoe.views.graphics.ChoosePlayersView
+tictactoe.views.graphics.StartView ..> tictactoe.views.graphics.GameView
+
+class tictactoe.views.graphics.View extends View {
+
+	+ View(Game game)
+
+}
+
+class View as "tictactoe.views.View"
+
+tictactoe.views.graphics.View *--> tictactoe.views.graphics.PlayView
+tictactoe.views.graphics.View *--> tictactoe.views.graphics.StartView
+tictactoe.views.graphics.View ..> tictactoe.views.graphics.ResumeView
+@enduml
+
+@startuml tictactoe.models
+class  tictactoe.models.Board{
+- Token[][] tokens
+~ Board()
+~ reset()
+~ Token getToken(Coordinate)
+~ boolean isCompleted()
+~ put(Coordinate, Token)
+~ move(Coordinate, Coordinate)
+- remove(Coordinate)
+~ boolean isOccupied(Coordinate, Token)
+~ boolean isEmpty(Coordinate)
+~ boolean isTicTacToe(Token)
+- List<Coordinate> getCoordinates(Token)
+}
+
+class ClosedInterval as "tictactoe.utils.ClosedInterval"
+class ConcreteCoordinate as "tictactoe.utils.ConcreteCoordinate"
+class Direction as "tictactoe.utils.Direction"
+
+tictactoe.models.Board *-down-> tictactoe.models.Coordinate
+tictactoe.models.Board ..> tictactoe.models.Token
+tictactoe.models.Board ..> tictactoe.models.Turn
+tictactoe.models.Board ..> Direction
+
+class  tictactoe.models.Coordinate{
+- {static} Coordinate NULL_COORDINATE
++ {static} int DIMENSION
+- {static} ClosedInterval LIMITS
++ Coordinate()
++ Coordinate(int, int)
++ boolean isNull()
++ Error isValid()
++ Direction getDirection(Coordinate)
+- boolean inInverseDiagonal()
++ random()
++ boolean equals(Object)
+}
+ConcreteCoordinate <|-down- tictactoe.models.Coordinate
+tictactoe.models.Coordinate ..> tictactoe.models.Error
+tictactoe.models.Coordinate ..> Direction
+tictactoe.models.Coordinate ..> ClosedInterval
+
+enum  tictactoe.models.Error{
+NOT_EMPTY
+NOT_OWNER
+SAME_COORDINATES
+WRONG_COORDINATES
+NULL_ERROR
++ boolean isNull()
+}
+
+class  tictactoe.models.Game{
+- Board board
+- Turn turn
++ Game()
++ setUsers(int)
++ boolean isBoardComplete()
++ boolean isUser()
++ Error put(Coordinate)
++ Error move(Coordinate, Coordinate)
++ next()
++ boolean isTicTacToe()
++ Token getToken(Coordinate)
++ Token getToken()
++ int getMaxPlayers()
++ reset()
+}
+tictactoe.models.Game *-down-> tictactoe.models.Board
+tictactoe.models.Game *-down-> tictactoe.models.Turn
+tictactoe.models.Game ..> tictactoe.models.Coordinate
+tictactoe.models.Game ..> tictactoe.models.Error
+
+class  tictactoe.models.Player{
+- Token token
+- Board board
+~ Player(Token, Board)
+~ Error put(Coordinate)
+~ Error move(Coordinate, Coordinate)
+~ Token getToken()
+}
+tictactoe.models.Player *-down-> tictactoe.models.Token
+tictactoe.models.Player *-down-> tictactoe.models.Board
+tictactoe.models.Player ..> tictactoe.models.Coordinate
+tictactoe.models.Player ..> tictactoe.models.Error
+
+enum  tictactoe.models.Token{
+X
+O
+NULL
++ boolean isNull()
+~ {static} Token get(int)
+}
+
+tictactoe.models.Token ..> ClosedInterval
+
+class  tictactoe.models.Turn{
+- {static} int NUM_PLAYERS
+- Player[] players
+- Board board
+- int active
+- int users
+~ Turn(Board)
+~ setUsers(int)
+~ next()
+~ boolean isUser()
+~ Error put(Coordinate)
+- Player getPlayer()
+~ Error move(Coordinate, Coordinate)
+~ Token getToken()
+}
+
+tictactoe.models.Turn *-down-> tictactoe.models.Player
+tictactoe.models.Turn ..down-> tictactoe.models.Board
+tictactoe.models.Turn ..down-> tictactoe.models.Token
+tictactoe.models.Turn ..down-> tictactoe.models.Coordinate
+tictactoe.models.Turn ..down-> tictactoe.models.Error
+
+@enduml
