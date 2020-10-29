@@ -1,20 +1,20 @@
 package usantatecla.tictactoe;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.graphics.View;
+import usantatecla.tictactoe.views.graphics.GraphicsView;
 
 public class GraphicsTicTacToe {
 
 	private Game game;
-	private View view;
+	private GraphicsView graphicsView;
 
 	private GraphicsTicTacToe() {
 		this.game = new Game();
-		this.view = new View(this.game);
+		this.graphicsView = new GraphicsView(this.game);
 	}
 
 	private void play() {
-		this.view.interact();
+		this.graphicsView.interact();
 	}
 
 	public static void main(String[] args) {

@@ -1,20 +1,20 @@
 package usantatecla.tictactoe;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.console.View;
+import usantatecla.tictactoe.views.console.ConsoleView;
 
 class ConsoleTicTacToe {
 
 	private Game game;
-	private View view;
+	private ConsoleView consoleView;
 
 	ConsoleTicTacToe() {
 		this.game = new Game();
-		this.view = new View(this.game);
+		this.consoleView = new ConsoleView(this.game);
 	}
 
 	private void play() {
-		this.view.interact();
+		this.consoleView.interact();
 	}
 
 	public static void main(String[] args) {

@@ -4,11 +4,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import usantatecla.tictactoe.models.AllModelTest;
-import usantatecla.tictactoe.views.console.AllViewTest;
+import usantatecla.tictactoe.views.console.AllConsoleViewTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
     AllModelTest.class, 
-    AllViewTest.class } )
+    AllConsoleViewTest.class } )
 public class AllTicTacToeTest {
 }

@@ -14,7 +14,7 @@ import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CoordinateViewTest {
+public class CoordinateConsoleViewTest {
     static final String ENTER_COORDINATE_TO_PUT = "Enter a coordinate to put a token:";
 
     @Mock

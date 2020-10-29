@@ -1,14 +1,15 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.views.View;
 
-public class View extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends View {
 
 	private StartView startView;
 	private PlayView playView;
 	private ResumeView resumeView;
 
-	public View(Game game) {
+	public ConsoleView(Game game) {
 		super(game);
 		this.startView = new StartView(this.game);
 		this.playView = new PlayView(this.game);

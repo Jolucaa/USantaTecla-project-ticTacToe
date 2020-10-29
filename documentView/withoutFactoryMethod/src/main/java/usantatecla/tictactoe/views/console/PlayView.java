@@ -1,9 +1,10 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.models.Error;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.utils.Console;
 
 class PlayView extends SubView {
 
@@ -22,7 +23,7 @@ class PlayView extends SubView {
             new GameView(this.game).write();
         } while (!this.game.isTicTacToe());
         new TokenView(this.game.getToken()).write();
-        Message.PLAYER_WIN.writeln();
+        Console.instance().writeln(Message.PLAYER_WIN.getMessage());
     }
 
     private void put() {
@@ -32,7 +33,7 @@ class PlayView extends SubView {
         do {
             if (isUser) {
                 coordinate = new CoordinateView()
-                    .read(Message.COORDINATE_TO_PUT.toString());
+                        .read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
                 coordinate = new Coordinate();
                 coordinate.random();
@@ -52,9 +53,9 @@ class PlayView extends SubView {
         do {
             if (isUser) {
                 origin = new CoordinateView()
-                .read(Message.COORDINATE_TO_REMOVE.toString());
+                        .read(Message.COORDINATE_TO_REMOVE.getMessage());
                 target = new CoordinateView()
-                .read(Message.COORDINATE_TO_MOVE.toString());
+                        .read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
                 origin = new Coordinate();
                 origin.random();

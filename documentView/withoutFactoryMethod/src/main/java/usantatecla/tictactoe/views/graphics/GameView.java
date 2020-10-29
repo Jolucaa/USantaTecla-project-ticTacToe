@@ -1,15 +1,12 @@
 package usantatecla.tictactoe.views.graphics;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Token;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.console.TokenView;
+
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class GameView extends JPanel {
@@ -46,10 +43,10 @@ public class GameView extends JPanel {
     private String getSquareBoardText(int row, int column) {
         String squareBoardToPresent = "";
         Token token = this.game.getToken(new Coordinate(row, column));
-        if (token == Token.NULL) {
+        if (token.isNull()) {
             squareBoardToPresent += "-";
         } else {
-            squareBoardToPresent += TokenView.SYMBOLS[token.ordinal()];
+            squareBoardToPresent += token.toString();
         }
         squareBoardToPresent += Message.VERTICAL_LINE_CENTERED.getMessage();
         return squareBoardToPresent;

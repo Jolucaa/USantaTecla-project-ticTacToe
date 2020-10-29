@@ -16,8 +16,8 @@ class usantatecla.tictactoe.GraphicsTicTacToe {
 }
 
 class Game as "usantatecla.models.Game"
-class consoleView as "usantatecla.tictactoe.views.console.View"
-class graphicsView as "usantatecla.tictactoe.views.graphics.View"
+class consoleView as "usantatecla.tictactoe.views.console.ConsoleView"
+class graphicsView as "usantatecla.tictactoe.views.graphics.GraphicsView"
 
 usantatecla.tictactoe.ConsoleTicTacToe *-down-> Game
 usantatecla.tictactoe.GraphicsTicTacToe *-down-> Game
@@ -186,7 +186,7 @@ class Token as "usantatecla.tictactoe.models.Token"
 usantatecla.tictactoe.views.console.TokenView *--> Token
 usantatecla.tictactoe.views.console.TokenView ..> Console
 
-class usantatecla.tictactoe.views.console.View {
+class usantatecla.tictactoe.views.console.ConsoleView {
 
 	+ View(Game)
 
@@ -194,10 +194,10 @@ class usantatecla.tictactoe.views.console.View {
 
 class View as "usantatecla.tictactoe.views.View"
 
-View <|-- usantatecla.tictactoe.views.console.View
-usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.ResumeView
-usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.PlayView
-usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.console.StartView
+View <|-- usantatecla.tictactoe.views.console.ConsoleView
+usantatecla.tictactoe.views.console.ConsoleView *--> usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.console.ConsoleView *--> usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.console.ConsoleView *--> usantatecla.tictactoe.views.console.StartView
 @enduml
 
 @startuml tictactoe.views.graphics
