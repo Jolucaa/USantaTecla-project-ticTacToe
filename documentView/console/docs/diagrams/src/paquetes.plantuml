@@ -1,62 +1,68 @@
 @startuml tictactoe
-class  tictactoe.TicTacToe{
+class  usantatecla.tictactoe.TicTacToe{
 - game: Game
 - view: View
 ~ TicTacToe()
 - play(): void
 + main(String[]): void
 }
-tictactoe.TicTacToe *-down-> tictactoe.models.Game
-tictactoe.TicTacToe *-down-> tictactoe.views.View
+usantatecla.tictactoe.TicTacToe *-down-> tictactoe.models.Game
+usantatecla.tictactoe.TicTacToe *-down-> tictactoe.views.View
 @enduml
 
 @startuml tictactoe.views
+class Console as "utils.Console"{}
+class Coordinate as "tictactoe.models.Coordinate" {}
+class Game as "tictactoe.models.Game"{}
+class LimitedIntDialog as " utils.LimitedIntDialog"{}
+class Token as "tictactoe.models.Token"{}
+class Error as "tictactoe.models.Error"{}
+
 class  tictactoe.views.CoordinateView{
 + read(String): Coordinate
 }
-utils.Console <..-down- tictactoe.views.CoordinateView
-tictactoe.models.Coordinate <..-down- tictactoe.views.CoordinateView
+Console <..-down- tictactoe.views.CoordinateView
+Coordinate <..-down- tictactoe.views.CoordinateView
 tictactoe.views.CoordinateView ..> tictactoe.views.ErrorView
 
 class  tictactoe.views.ErrorView{
 - {static} MESSAGES: String[]
-- error: Error
 ~ ErrorView(Error)
 ~ writeln()
 }
-utils.Console <..-down- tictactoe.views.ErrorView
+Console <..-down- tictactoe.views.ErrorView
+tictactoe.views.ErrorView *-down-> Error
 
 class  tictactoe.views.GameView{
-- game: Game
 ~ GameView(Game)
 ~ write()
 }
-utils.Message <..-down- tictactoe.views.GameView
-tictactoe.views.GameView ..> tictactoe.models.Game
-tictactoe.views.GameView ..> tictactoe.models.Coordinate
+tictactoe.views.GameView ..> tictactoe.views.Message
+tictactoe.views.GameView *-down-> Game
+tictactoe.views.GameView ..> Coordinate
 tictactoe.views.GameView ..> tictactoe.views.TokenView
 
 enum  tictactoe.views.Message{
-+ TITLE: Message
-+ NUMBER_PLAYERS: Message 
-+ SEPARATOR: Message
-+ VERTICAL_LINE_LEFT: Message
-+ VERTICAL_LINE_CENTERED: Message
-+ VERTICAL_LINE_RIGHT: Message
-+ ENTER_COORDINATE_TO_PUT: Message
-+ ENTER_COORDINATE_TO_REMOVE: Message
-+ COORDINATE_TO_PUT: Message
-+ COORDINATE_TO_REMOVE: Message
-+ COORDINATE_TO_MOVE: Message
-+	PLAYER_WIN: Message
-+ RESUME: Message
++ TITLE
++ NUMBER_PLAYERS
++ SEPARATOR
++ VERTICAL_LINE_LEFT
++ VERTICAL_LINE_CENTERED
++ VERTICAL_LINE_RIGHT
++ ENTER_COORDINATE_TO_PUT
++ ENTER_COORDINATE_TO_REMOVE
++ COORDINATE_TO_PUT
++ COORDINATE_TO_REMOVE
++ COORDINATE_TO_MOVE
++	PLAYER_WIN
++ RESUME
 - message: String
 - Message(String)
 ~ write(): void
 ~ writeln(): void
 + toString(): String
 }
-tictactoe.views.Message ..> utils.Console
+tictactoe.views.Message ..> Console
 
 class  tictactoe.views.PlayView{
 ~ PlayView(Game)
@@ -65,10 +71,10 @@ class  tictactoe.views.PlayView{
 - move()
 }
 tictactoe.views.SubView <|-down- tictactoe.views.PlayView
-tictactoe.views.PlayView ..> tictactoe.models.Game
+tictactoe.views.PlayView ..> Game
 tictactoe.views.PlayView ..> tictactoe.views.TokenView
 tictactoe.views.PlayView ..> tictactoe.views.Message
-tictactoe.views.PlayView ..> tictactoe.models.Coordinate
+tictactoe.views.PlayView ..> Coordinate
 tictactoe.views.PlayView ..> tictactoe.views.CoordinateView
 tictactoe.views.PlayView ..> tictactoe.views.ErrorView
 
@@ -78,7 +84,7 @@ class  tictactoe.views.ResumeView{
 
 }
 tictactoe.views.SubView <|-down- tictactoe.views.ResumeView
-tictactoe.views.ResumeView ..> tictactoe.models.Game
+tictactoe.views.ResumeView ..> Game
 tictactoe.views.ResumeView ..> tictactoe.views.Message
 
 class tictactoe.views.StartView{
@@ -86,44 +92,41 @@ class tictactoe.views.StartView{
 ~ interact()
 }
 tictactoe.views.SubView <|-down- tictactoe.views.StartView
-tictactoe.views.StartView ..> tictactoe.models.Game
+tictactoe.views.StartView ..> Game
 tictactoe.views.StartView ..> tictactoe.views.GameView
-tictactoe.views.StartView ..> utils.LimitedIntDialog
+tictactoe.views.StartView ..> LimitedIntDialog
 tictactoe.views.StartView ..> tictactoe.views.Message
 
 class tictactoe.views.SubView{
-# game: Game
 ~ SubView(Game)
 }
 
-tictactoe.views.SubView ..> tictactoe.models.Game
+tictactoe.views.SubView *--> Game
 
 class tictactoe.views.TokenView{
 - {static} SYMBOLS: char
-- token: Token
 ~ TokenView(Token)
 ~ write()
 }
-tictactoe.views.TokenView ..> tictactoe.models.Token
-tictactoe.views.TokenView ..> utils.Console
+tictactoe.views.TokenView *--> Token
+tictactoe.views.TokenView ..> Console
 
 class  tictactoe.views.View{
-- game: Game
-- startView: StartView
-- playView: PlayView
-- resumeView: ResumeView
 + View(Game)
 + interact()
 }
-tictactoe.views.View *-down-> tictactoe.models.Game
+tictactoe.views.View *-down-> Game
 tictactoe.views.View *-down-> tictactoe.views.StartView
 tictactoe.views.View *-down-> tictactoe.views.PlayView
 tictactoe.views.View *-down-> tictactoe.views.ResumeView
 @enduml
 
 @startuml tictactoe.models
+class Direction as "utils.Direction"{}
+class ConcreteCoordinate as "utils.ConcreteCoordinate"{}
+class ClosedInterval as "utils.ClosedInterval"{}
+
 class  tictactoe.models.Board{
-- tokens: Token[][]
 ~ Board()
 ~ reset()
 ~ getToken(Coordinate): Token
@@ -136,13 +139,12 @@ class  tictactoe.models.Board{
 ~ isTicTacToe(Token): boolean
 - getCoordinates(Token): List<Coordinate>
 }
-tictactoe.models.Board *-down-> tictactoe.models.Coordinate
-tictactoe.models.Board ..> tictactoe.models.Token
-tictactoe.models.Board ..> tictactoe.models.Turn
-tictactoe.models.Board ..> utils.Direction
+tictactoe.models.Board ..> tictactoe.models.Coordinate
+tictactoe.models.Board *-down-> "*" tictactoe.models.Token
+tictactoe.models.Board ..> Direction
 
 class  tictactoe.models.Coordinate{
-- {static} NULL_COORDINATE; Coordinate
+- {static} NULL_COORDINATE: Coordinate
 + {static} DIMENSION: int
 - {static} LIMITS: ClosedInterval
 + Coordinate()
@@ -154,24 +156,21 @@ class  tictactoe.models.Coordinate{
 + random()
 + equals(Object): boolean
 }
-utils.ConcreteCoordinate <|-down- tictactoe.models.Coordinate
+ConcreteCoordinate <|-down- tictactoe.models.Coordinate
 tictactoe.models.Coordinate ..> tictactoe.models.Error
-tictactoe.models.Coordinate ..> utils.Direction
-tictactoe.models.Coordinate ..> utils.ClosedInterval
-tictactoe.models.Coordinate ..> java.util.Random
+tictactoe.models.Coordinate ..> Direction
+tictactoe.models.Coordinate ..> ClosedInterval
 
 enum  tictactoe.models.Error{
-NOT_EMPTY
-NOT_OWNER
-SAME_COORDINATES
-WRONG_COORDINATES
-NULL_ERROR
++ NOT_EMPTY
++ NOT_OWNER
++ SAME_COORDINATES
++ WRONG_COORDINATES
++ NULL_ERROR
 + isNull(): boolean
 }
 
 class  tictactoe.models.Game{
-- board: Board
-- turn: Turn
 + Game()
 + setUsers(int)
 + isBoardComplete(): boolean
@@ -191,8 +190,6 @@ tictactoe.models.Game ..> tictactoe.models.Coordinate
 tictactoe.models.Game ..> tictactoe.models.Error
 
 class  tictactoe.models.Player{
-- token: Token
-- board: Board
 ~ Player(Token, Board)
 ~ put(Coordinate): Error
 ~ move(Coordinate, Coordinate): Error
@@ -204,19 +201,18 @@ tictactoe.models.Player ..> tictactoe.models.Coordinate
 tictactoe.models.Player ..> tictactoe.models.Error
 
 enum  tictactoe.models.Token{
-X
-O
-NULL
++ X
++ O
++ NULL
 + isNull(): boolean
-~ {static} get(int): Token
++ {static} get(int): Token
++ toString(): String
 }
 
-tictactoe.models.Token ..> utils.ClosedInterval
+tictactoe.models.Token ..> ClosedInterval
 
 class  tictactoe.models.Turn{
-~ {static} NUM_PLAYERS: int
-- players: Player[]
-- board: Board
+- {static} NUM_PLAYERS: int
 - active: int
 - users: int
 ~ Turn(Board)
@@ -229,8 +225,8 @@ class  tictactoe.models.Turn{
 ~ getToken(): Token
 }
 
-tictactoe.models.Turn *-down-> tictactoe.models.Player
-tictactoe.models.Turn ..down-> tictactoe.models.Board
+tictactoe.models.Turn *-down-> "*" tictactoe.models.Player
+tictactoe.models.Turn *-down-> tictactoe.models.Board
 tictactoe.models.Turn ..down-> tictactoe.models.Token
 tictactoe.models.Turn ..down-> tictactoe.models.Coordinate
 tictactoe.models.Turn ..down-> tictactoe.models.Error
@@ -238,7 +234,9 @@ tictactoe.models.Turn ..down-> tictactoe.models.Error
 @enduml
 
 @startuml tictactoe.utils
-class  utils.ClosedInterval{
+class BufferedReader as "java.io.BufferedReader"{}
+
+class  usantatecla.utils.ClosedInterval{
 - min: int
 - max: int
 + ClosedInterval(int,int)
@@ -246,7 +244,7 @@ class  utils.ClosedInterval{
 + toString(): String
 }
 
-class  utils.ConcreteCoordinate{
+class usantatecla.utils.ConcreteCoordinate{
 # row: int
 # column: int
 - {static} ROW: String
@@ -266,12 +264,13 @@ class  utils.ConcreteCoordinate{
 + toString(): String
 }
 
-utils.Coordinate <|..down- utils.ConcreteCoordinate
-utils.ConcreteCoordinate ..> utils.Direction
+usantatecla.utils.Coordinate <|..down- usantatecla.utils.ConcreteCoordinate
+usantatecla.utils.ConcreteCoordinate ..> usantatecla.utils.Direction
+usantatecla.utils.ConcreteCoordinate ..> usantatecla.utils.Console
 
-class  utils.Console{
+
+class usantatecla.utils.Console{
 - {static} console: Console
-- bufferedReader: BufferedReader
 + {static} instance(): Console
 - readString(String): String
 + readString(): String
@@ -285,18 +284,18 @@ class  utils.Console{
 + write(char)
 - writeError(String)
 }
-utils.Console *-down-> java.io.BufferedReader
+usantatecla.utils.Console *-down-> BufferedReader
 
-interface  utils.Coordinate{
+interface usantatecla.utils.Coordinate{
 ~ isNull(): boolean
 ~ getDirection(Coordinate): Direction
 ~ inHorizontal(Coordinate): boolean
 ~ inVertical(Coordinate): boolean
 ~ inMainDiagonal(): boolean
 }
-utils.Coordinate ..> utils.Direction
+usantatecla.utils.Coordinate ..> usantatecla.utils.Direction
 
-enum  utils.Direction{
+enum usantatecla.utils.Direction{
   VERTICAL
   HORIZONTAL
   MAIN_DIAGONAL
@@ -304,17 +303,17 @@ enum  utils.Direction{
   NULL
 }
 
-class  utils.LimitedIntDialog{
+class usantatecla.utils.LimitedIntDialog{
 - LIMITS: ClosedInterval
 - {static} ERROR_MESSAGE: String
 + LimitedIntDialog(int,int)
 + read(String): int
 }
 
-utils.LimitedIntDialog *-down-> utils.ClosedInterval
-utils.LimitedIntDialog ..> utils.Console
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
+usantatecla.utils.LimitedIntDialog ..> usantatecla.utils.Console
 
-class  utils.NullCoordinate{
+class usantatecla.utils.NullCoordinate{
 - {static} instance: NullCoordinate
 + {static} instance(): Coordinate
 + isNull(): boolean
@@ -326,10 +325,10 @@ class  utils.NullCoordinate{
 + equals(Object): boolean
 + toString(): String
 }
-utils.Coordinate <|..down- utils.NullCoordinate
-utils.NullCoordinate ..> utils.Direction
+usantatecla.utils.Coordinate <|..down- usantatecla.utils.NullCoordinate
+usantatecla.utils.NullCoordinate ..> usantatecla.utils.Direction
 
-class  utils.YesNoDialog{
+class usantatecla.utils.YesNoDialog{
 - {static} AFIRMATIVE: char
 - {static} NEGATIVE: char
 - {static} SUFFIX: String
@@ -340,5 +339,6 @@ class  utils.YesNoDialog{
 - getAnswer(): char
 - isNegative(): boolean
 }
+usantatecla.utils.YesNoDialog ..> usantatecla.utils.Console
 
 @enduml
