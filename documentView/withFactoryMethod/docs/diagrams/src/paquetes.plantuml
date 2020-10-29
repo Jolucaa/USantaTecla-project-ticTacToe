@@ -1,7 +1,7 @@
 @startuml tictactoe
 class usantatecla.tictactoe.ConsoleTicTacToe {
 
-	ConsoleTicTacToe()
+	~ ConsoleTicTacToe()
 	- play()
 	+ {static} main(String[])
 
@@ -107,8 +107,8 @@ usantatecla.tictactoe.views.console.CoordinateView ..> Coordinate
 
 class usantatecla.tictactoe.views.console.ErrorView {
 
-	ErrorView(Error)
-	writeln()
+	~ ErrorView(Error)
+	~ writeln()
 
 }
 
@@ -120,8 +120,8 @@ usantatecla.tictactoe.views.console.ErrorView *--> Error
 
 class usantatecla.tictactoe.views.console.GameView {
 
-    GameView(Game)
-	write()
+    ~ GameView(Game)
+	~ write()
 
 }
 
@@ -135,7 +135,7 @@ usantatecla.tictactoe.views.console.GameView ..> usantatecla.tictactoe.views.con
 
 class usantatecla.tictactoe.views.console.SubView {
 
-	SubView(Game)
+	~ SubView(Game)
 
 }
 
@@ -143,7 +143,7 @@ usantatecla.tictactoe.views.console.SubView *--> Game
 
 class usantatecla.tictactoe.views.console.PlayView {
 
-    interact()
+    ~ interact()
     - put()
     - move()
 
@@ -160,7 +160,7 @@ usantatecla.tictactoe.views.console.PlayView ..> usantatecla.tictactoe.views.con
 
 class usantatecla.tictactoe.views.console.ResumeView {
 
-	boolean interact()
+	~ boolean interact()
 
 }
 
@@ -172,7 +172,7 @@ usantatecla.tictactoe.views.console.ResumeView ..> YesNoDialog
 
 class usantatecla.tictactoe.views.console.StartView {
 
-	interact()
+	~ interact()
 
 }
 
@@ -187,8 +187,8 @@ class usantatecla.tictactoe.views.console.TokenView {
 
 	+ {static} char[] SYMBOLS
 
-	TokenView(Token)
-	write()
+	~ TokenView(Token)
+	~ write()
 
 }
 
@@ -214,16 +214,19 @@ usantatecla.tictactoe.views.console.View *--> usantatecla.tictactoe.views.consol
 @startuml tictactoe.views.graphics
 class usantatecla.tictactoe.views.graphics.ChoosePlayersView {
 
-	- {static} String ACCEPT
-	- String playersNumber
+	- {static} ACCEPT: String 
+	- label: JLabel
+	- textField: JTextField
+	- button: JButton
+	- playersNumber: String 
 
-	ChoosePlayersView(final JRootPane rootPane)
-	resetPlayersNumber()
-	String getPlayersNumber()
-	+ actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	~ ChoosePlayersView(JRootPane)
+	~ resetPlayersNumber()
+	~ getPlayersNumber(): String 
+	+ actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent)
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 
 }
 
@@ -238,19 +241,25 @@ usantatecla.tictactoe.views.graphics.ChoosePlayersView ..> ErrorView
 
 class usantatecla.tictactoe.views.graphics.Constraints {
 
-	Constraints(int gridX, int gridY, int gridWidth, int gridHeight)
+	~ Constraints(int, int, int, int)
 
 }
 
 
 class usantatecla.tictactoe.views.graphics.CoordinateMoveView extends usantatecla.tictactoe.views.graphics.CoordinateView {
 
-    {static} String ENTER_COORDINATE_TO_REMOVE
+    {static} ENTER_COORDINATE_TO_REMOVE: String 
+	- labelRowToMove: JLabel 
+    - labelColumnToMove: JLabel 
+    - titleLabelToMove: JLabel 
+    - textFieldRowToMove: JTextField
+    - textFieldColumnToMove: JTextField
+    - coordinates: Coordinate[] 
 
-    CoordinateMoveView()
-    resetCoordinates()
-    Coordinate[] getCoordinates()
-    + actionPerformed(final ActionEvent event)
+    ~ CoordinateMoveView()
+    ~ resetCoordinates()
+    ~ getCoordinates(): Coordinate[] 
+    + actionPerformed(ActionEvent)
 
 }
 
@@ -264,13 +273,13 @@ usantatecla.tictactoe.views.graphics.CoordinateMoveView *--> "2" Coordinate
 
 class usantatecla.tictactoe.views.graphics.CoordinatePutView extends usantatecla.tictactoe.views.graphics.CoordinateView {
 
-	CoordinatePutView()
-	resetCoordinate()
-	Coordinate getCoordinate()
-	+ actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	~ CoordinatePutView()
+	~ resetCoordinate()
+	~ Coordinate getCoordinate()
+	+ actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent)
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 
 }
 
@@ -283,21 +292,27 @@ class usantatecla.tictactoe.views.graphics.CoordinateView  {
 
 	# {static} String ENTER_COORDINATE_TO_PUT
 	# {static} String ACCEPT
+	# labelRow: JLabel 
+	# labelColumn: JLabel 
+	# titleLabel: JLabel 
+	# textFieldRow: JTextField 
+	# textFieldColumn: JTextField 
+	# button: JButton 
 
 	CoordinateView()
-	+ {abstract} actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	+ {abstract} actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent)
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 }
 
 
 class usantatecla.tictactoe.views.graphics.GameView  {
 
-    GameView(Game game)
-    write()
-    - printRowBoard(int row)
-    - String getSquareBoardText(int row, int column)
+    ~ GameView(Game)
+    ~ write()
+    - printRowBoard(int)
+    - getSquareBoardText(int, int): String 
 
 }
 
@@ -315,11 +330,11 @@ usantatecla.tictactoe.views.graphics.GameView ..> TokenView
 
 class usantatecla.tictactoe.views.graphics.PlayView {
 
-	{static final} String ENTER_COORDINATE_TO_PUT
-	{static final} String ENTER_COORDINATE_TO_REMOVE
+	~ {static} ENTER_COORDINATE_TO_PUT: String 
+	~ {static} ENTER_COORDINATE_TO_REMOVE: String 
 
-	PlayView(Game game)
-	interact()
+	~ PlayView(Game)
+	~ interact()
 	- put()
 	- move()
 
@@ -335,10 +350,10 @@ usantatecla.tictactoe.views.graphics.PlayView *--> Message
 
 class usantatecla.tictactoe.views.graphics.ResumeView {
 
-	- boolean newGame;
+	- newGame: boolean 
 
-	ResumeView()
-	boolean isResumedGame()
+	~ ResumeView()
+	~ isResumedGame(): boolean 
 
 }
 
@@ -346,8 +361,8 @@ usantatecla.tictactoe.views.graphics.ResumeView ..> Message
 
 class usantatecla.tictactoe.views.graphics.StartView  {
 
-    StartView(Game game)
-    interact()
+    ~ StartView(Game)
+    ~ interact()
 
 }
 
@@ -358,7 +373,7 @@ usantatecla.tictactoe.views.graphics.StartView ..> usantatecla.tictactoe.views.g
 
 class usantatecla.tictactoe.views.graphics.View extends View {
 
-	+ View(Game game)
+	+ View(GameView)
 
 }
 
@@ -371,18 +386,20 @@ usantatecla.tictactoe.views.graphics.View ..> usantatecla.tictactoe.views.graphi
 
 @startuml tictactoe.models
 class  usantatecla.tictactoe.models.Board{
-- Token[][] tokens
+- tokens: Token[][] 
 ~ Board()
-~ reset()
+- Board(Board)
+~ copy(): Board
 ~ Token getToken(Coordinate)
 ~ boolean isCompleted()
 ~ put(Coordinate, Token)
 ~ move(Coordinate, Coordinate)
-- remove(Coordinate)
-~ boolean isOccupied(Coordinate, Token)
-~ boolean isEmpty(Coordinate)
-~ boolean isTicTacToe(Token)
-- List<Coordinate> getCoordinates(Token)
+~ isCompleted(Coordinate, Token): boolean
+~ isOccupied(Coordinate, Token): boolean
+~ isEmpty(Coordinate): boolean
+~ isTicTacToe(Token): boolean
+- getCoordinates(Token): List<Coordinate> 
++ equals(Object): boolean
 }
 
 class ClosedInterval as "usantatecla.utils.ClosedInterval"
@@ -395,17 +412,16 @@ usantatecla.tictactoe.models.Board ..> usantatecla.tictactoe.models.Turn
 usantatecla.tictactoe.models.Board ..> Direction
 
 class  usantatecla.tictactoe.models.Coordinate{
-- {static} Coordinate NULL_COORDINATE
-+ {static} int DIMENSION
-- {static} ClosedInterval LIMITS
+- {static} NULL_COORDINATE: Coordinate 
++ {static} DIMENSION: int 
+- {static} LIMITS: ClosedInterval 
 + Coordinate()
 + Coordinate(int, int)
-+ boolean isNull()
-+ Error isValid()
-+ Direction getDirection(Coordinate)
-- boolean inInverseDiagonal()
++ isNull(): boolean 
++ isValid(): Error 
++ getDirection(Coordinate): Direction 
+- inInverseDiagonal(): boolean 
 + random()
-+ boolean equals(Object)
 }
 ConcreteCoordinate <|-down- usantatecla.tictactoe.models.Coordinate
 usantatecla.tictactoe.models.Coordinate ..> usantatecla.tictactoe.models.Error
@@ -413,29 +429,30 @@ usantatecla.tictactoe.models.Coordinate ..> Direction
 usantatecla.tictactoe.models.Coordinate ..> ClosedInterval
 
 enum  usantatecla.tictactoe.models.Error{
-NOT_EMPTY
-NOT_OWNER
-SAME_COORDINATES
-WRONG_COORDINATES
-NULL_ERROR
-+ boolean isNull()
++ NOT_EMPTY
++ NOT_OWNER
++ SAME_COORDINATES
++ WRONG_COORDINATES
++ NULL_ERROR
++ isNull(): boolean 
 }
 
 class  usantatecla.tictactoe.models.Game{
-- Board board
-- Turn turn
+- board: Board 
+- turn: Turn
 + Game()
-+ setUsers(int)
-+ boolean isBoardComplete()
-+ boolean isUser()
-+ Error put(Coordinate)
-+ Error move(Coordinate, Coordinate)
-+ next()
-+ boolean isTicTacToe()
-+ Token getToken(Coordinate)
-+ Token getToken()
-+ int getMaxPlayers()
 + reset()
++ setUsers(int)
++ isBoardComplete(): boolean 
++ isUser(): boolean 
++ put(Coordinate): Error 
++ move(Coordinate, Coordinate): Error 
+- next()
++ isTicTacToe(): boolean 
++ getToken(Coordinate): Token 
++ getToken(): Token 
++ getMaxPlayers(): int 
++ equals(Object)
 }
 usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Board
 usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Turn
@@ -443,12 +460,14 @@ usantatecla.tictactoe.models.Game ..> usantatecla.tictactoe.models.Coordinate
 usantatecla.tictactoe.models.Game ..> usantatecla.tictactoe.models.Error
 
 class  usantatecla.tictactoe.models.Player{
-- Token token
-- Board board
+- token: Token 
+- board: Board 
 ~ Player(Token, Board)
-~ Error put(Coordinate)
-~ Error move(Coordinate, Coordinate)
-~ Token getToken()
+~ put(Coordinate): Error 
+~ move(Coordinate, Coordinate): Error 
+~ getToken(): Token 
++ copy(Board): Player
++ equals(Object)
 }
 usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Token
 usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Board
@@ -456,29 +475,33 @@ usantatecla.tictactoe.models.Player ..> usantatecla.tictactoe.models.Coordinate
 usantatecla.tictactoe.models.Player ..> usantatecla.tictactoe.models.Error
 
 enum  usantatecla.tictactoe.models.Token{
-X
-O
-NULL
-+ boolean isNull()
-~ {static} Token get(int)
++ X
++ O
++ NULL
++ isNull(): boolean 
++ {static} get(int): Token 
++ toString(): String
 }
 
 usantatecla.tictactoe.models.Token ..> ClosedInterval
 
 class  usantatecla.tictactoe.models.Turn{
-- {static} int NUM_PLAYERS
-- Player[] players
-- Board board
-- int active
-- int users
++ {static} NUM_PLAYERS: int 
+- players: Player[] 
+- board: Board 
+- active: int 
+- users: int 
 ~ Turn(Board)
++ Turn(Turn, Board)
++ copy(Board): Turn
 ~ setUsers(int)
+~ set(int)
 ~ next()
-~ boolean isUser()
-~ Error put(Coordinate)
-- Player getPlayer()
-~ Error move(Coordinate, Coordinate)
-~ Token getToken()
+~ isUser(): boolean 
+~ put(Coordinate): Error 
+~ getPlayer(): Player 
+~ move(Coordinate, Coordinate): Error 
+~ getToken(): Token 
 }
 
 usantatecla.tictactoe.models.Turn *-down-> usantatecla.tictactoe.models.Player
@@ -502,7 +525,10 @@ class  usantatecla.utils.Console{
 + writeln(): void
 + writeError(String): void
 }
-usantatecla.utils.Console *-down-> java.io.BufferedReader
+
+class BufferedReader as "java.io.BufferedReader"
+
+usantatecla.utils.Console *-down-> BufferedReader
 
 class  usantatecla.utils.Coordinate{
 # row: int
