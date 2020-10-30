@@ -114,9 +114,7 @@ class Board {
 		if (getClass() != obj.getClass())
 			return false;
 		Board other = (Board) obj;
-		if (!Arrays.deepEquals(tokens, other.tokens))
-			return false;
-		return true;
+		return Arrays.deepEquals(tokens, other.tokens);
 	}	
 
 }
