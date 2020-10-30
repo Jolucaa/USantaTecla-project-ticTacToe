@@ -201,194 +201,174 @@ usantatecla.tictactoe.views.console.ConsoleView *--> usantatecla.tictactoe.views
 @enduml
 
 @startuml tictactoe.views.graphics
-class tictactoe.views.graphics.ChoosePlayersView {
+package javax.swing{}
+package java.awt{}
+
+class usantatecla.tictactoe.views.graphics.ChoosePlayersView {
 
 	- {static} String ACCEPT
 	- String playersNumber
 
-	ChoosePlayersView(final JRootPane rootPane)
-	resetPlayersNumber()
-	String getPlayersNumber()
-	+ actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	~ ChoosePlayersView(JRootPane)
+	~ resetPlayersNumber()
+	~ String getPlayersNumber()
+	+ actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent)
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 
 }
 
-class ActionEvent as "java.awt.event.ActionEvent"
-class ActionListener as "java.awt.event.ActionListener"
-class KeyEvent as "java.awt.event.KeyEvent"
-class KeyListener as "java.awt.event.KeyListener"
-class JButton as "javax.swing.JButton"
-class JLabel as  "javax.swing.JLabel"
-class JOptionPane as "javax.swing.JOptionPane"
-class JPanel as "javax.swing.JPanel"
-class JTextField as "javax.swing.JTextField"
-class ErrorView as "tictactoe.views.ErrorView"
-class Coordinate as "tictactoe.models.Coordinate"
+class ErrorView as "usantatecla.tictactoe.views.ErrorView"
+class Coordinate as "usantatecla.tictactoe.models.Coordinate"
 
-JPanel <|-- tictactoe.views.graphics.ChoosePlayersView
-ActionListener <|.. tictactoe.views.graphics.ChoosePlayersView
-KeyListener <|.. tictactoe.views.graphics.ChoosePlayersView
-tictactoe.views.graphics.ChoosePlayersView *--> JLabel
-tictactoe.views.graphics.ChoosePlayersView *--> JTextField
-tictactoe.views.graphics.ChoosePlayersView *--> JButton
-tictactoe.views.graphics.ChoosePlayersView ..> tictactoe.views.graphics.Constraints
-tictactoe.views.graphics.ChoosePlayersView ..> ErrorView
-tictactoe.views.graphics.ChoosePlayersView ..> ActionEvent
-tictactoe.views.graphics.ChoosePlayersView ..> KeyEvent
+usantatecla.tictactoe.views.graphics.ChoosePlayersView ..> usantatecla.tictactoe.views.graphics.Constraints
+usantatecla.tictactoe.views.graphics.ChoosePlayersView ..> ErrorView
+javax.swing <|-- usantatecla.tictactoe.views.graphics.ChoosePlayersView
+javax.swing <--* usantatecla.tictactoe.views.graphics.ChoosePlayersView
+java.awt <.. usantatecla.tictactoe.views.graphics.ChoosePlayersView
 
-class tictactoe.views.graphics.Constraints {
+class usantatecla.tictactoe.views.graphics.Constraints {
 
-	Constraints(int gridX, int gridY, int gridWidth, int gridHeight)
+	~ Constraints(int, int, int, int)
 
 }
 
-class GridBagConstraints as "java.awt.GridBagConstraints"
+java.awt <|-- usantatecla.tictactoe.views.graphics.Constraints
 
-GridBagConstraints <|-- tictactoe.views.graphics.Constraints
+class usantatecla.tictactoe.views.graphics.CoordinateMoveView extends usantatecla.tictactoe.views.graphics.CoordinateView {
 
-class tictactoe.views.graphics.CoordinateMoveView extends tictactoe.views.graphics.CoordinateView {
+    ~ {static} String ENTER_COORDINATE_TO_REMOVE
 
-    {static} String ENTER_COORDINATE_TO_REMOVE
-
-    CoordinateMoveView()
-    resetCoordinates()
-    Coordinate[] getCoordinates()
-    + actionPerformed(final ActionEvent event)
+    ~ CoordinateMoveView()
+    ~ resetCoordinates()
+    ~ Coordinate[] getCoordinates()
+    + actionPerformed(ActionEvent)
 
 }
 
-class JOptionPane as "javax.swing.JOptionPane"
-class Error as "tictactoe.models.Error"
-class ErrorView as "tictactoe.views.ErrorView"
+class Error as "usantatecla.tictactoe.models.Error"
+class ErrorView as "usantatecla.tictactoe.views.ErrorView"
 
-tictactoe.views.graphics.CoordinateMoveView *--> "3" JLabel
-tictactoe.views.graphics.CoordinateMoveView *--> "2" JTextField
-tictactoe.views.graphics.CoordinateMoveView ..> ActionEvent
-tictactoe.views.graphics.CoordinateMoveView ..> Error
-tictactoe.views.graphics.CoordinateMoveView ..> ErrorView
-tictactoe.views.graphics.CoordinateMoveView ..> JOptionPane
-tictactoe.views.graphics.CoordinateMoveView *--> "2" Coordinate
+usantatecla.tictactoe.views.graphics.CoordinateMoveView ..> Error
+usantatecla.tictactoe.views.graphics.CoordinateMoveView ..> ErrorView
+usantatecla.tictactoe.views.graphics.CoordinateMoveView *--> "2" Coordinate
 
-class tictactoe.views.graphics.CoordinatePutView extends tictactoe.views.graphics.CoordinateView {
+class usantatecla.tictactoe.views.graphics.CoordinatePutView extends usantatecla.tictactoe.views.graphics.CoordinateView {
 
-	CoordinatePutView()
-	resetCoordinate()
-	Coordinate getCoordinate()
-	+ actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	~ CoordinatePutView()
+	~ resetCoordinate()
+	~ Coordinate getCoordinate()
+	+ actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent )
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 
 }
 
-class Coordinate as "tictactoe.models.Coordinate"
+class Coordinate as "usantatecla.tictactoe.models.Coordinate"
 
-tictactoe.views.graphics.CoordinatePutView ..> ActionEvent
-tictactoe.views.graphics.CoordinatePutView ..> KeyEvent
-tictactoe.views.graphics.CoordinatePutView ..> ErrorView
-tictactoe.views.graphics.CoordinatePutView *--> Coordinate
+usantatecla.tictactoe.views.graphics.CoordinatePutView ..> ErrorView
+usantatecla.tictactoe.views.graphics.CoordinatePutView *--> Coordinate
 
-class tictactoe.views.graphics.CoordinateView extends JPanel implements ActionListener, KeyListener {
+class usantatecla.tictactoe.views.graphics.CoordinateView {
 
 	# {static} String ENTER_COORDINATE_TO_PUT
 	# {static} String ACCEPT
 
-	CoordinateView()
-	+ {abstract} actionPerformed(final ActionEvent event)
-	+ keyTyped(KeyEvent e)
-	+ keyPressed(KeyEvent e)
-	+ keyReleased(KeyEvent e)
+	~ CoordinateView()
+	+ {abstract} actionPerformed(ActionEvent)
+	+ keyTyped(KeyEvent)
+	+ keyPressed(KeyEvent)
+	+ keyReleased(KeyEvent)
 }
 
-tictactoe.views.graphics.CoordinateView ..> ActionEvent
-tictactoe.views.graphics.CoordinateView ..> KeyEvent
-tictactoe.views.graphics.CoordinateView ..> "3" JLabel
-tictactoe.views.graphics.CoordinateView ..> "2" JTextField
-tictactoe.views.graphics.CoordinateView ..> JButton
+javax.swing <|-- usantatecla.tictactoe.views.graphics.CoordinateView
+java.awt <|.. usantatecla.tictactoe.views.graphics.CoordinateView
+java.awt <.. usantatecla.tictactoe.views.graphics.CoordinateView
+javax.swing <|-- usantatecla.tictactoe.views.graphics.CoordinateView
+java.awt <|.. usantatecla.tictactoe.views.graphics.CoordinateView
 
-class tictactoe.views.graphics.GameView extends JPanel {
+class usantatecla.tictactoe.views.graphics.GameView {
 
-    GameView(Game game)
-    write()
-    - printRowBoard(int row)
-    - String getSquareBoardText(int row, int column)
+    ~ GameView(Game)
+    ~ write()
+    - printRowBoard(int)
+    - String getSquareBoardText(int, int)
 
 }
 
-class Game as "tictactoe.models.Game"
-class Token as "tictactoe.models.Token"
-class Message as "tictactoe.views.Message"
-class TokenView as "tictactoe.views.console.TokenView"
+class Game as "usantatecla.tictactoe.models.Game"
+class Token as "usantatecla.tictactoe.models.Token"
+class Message as "usantatecla.tictactoe.views.Message"
 
-tictactoe.views.graphics.GameView *--> Game
-tictactoe.views.graphics.GameView ..> Coordinate
-tictactoe.views.graphics.GameView ..> Token
-tictactoe.views.graphics.GameView ..> Message
-tictactoe.views.graphics.GameView ..> Token
-tictactoe.views.graphics.GameView ..> TokenView
+usantatecla.tictactoe.views.graphics.GameView *--> Game
+usantatecla.tictactoe.views.graphics.GameView ..> Coordinate
+usantatecla.tictactoe.views.graphics.GameView ..> Token
+usantatecla.tictactoe.views.graphics.GameView ..> Message
+usantatecla.tictactoe.views.graphics.GameView ..> Token
+javax.swing <--* usantatecla.tictactoe.views.graphics.GameView
+java.awt <.. usantatecla.tictactoe.views.graphics.GameView
 
-class tictactoe.views.graphics.PlayView extends JFrame {
+class usantatecla.tictactoe.views.graphics.PlayView {
 
-	{static final} String ENTER_COORDINATE_TO_PUT
-	{static final} String ENTER_COORDINATE_TO_REMOVE
+	~ {static final} String ENTER_COORDINATE_TO_PUT
+	~ {static final} String ENTER_COORDINATE_TO_REMOVE
 
-	PlayView(Game game)
-	interact()
+	~ PlayView(Game)
+	~ interact()
 	- put()
 	- move()
 
 }
 
-tictactoe.views.graphics.PlayView ..> Coordinate
-tictactoe.views.graphics.PlayView *--> Game
-tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.GameView
-tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.CoordinateMoveView
-tictactoe.views.graphics.PlayView *--> tictactoe.views.graphics.CoordinatePutView
-tictactoe.views.graphics.PlayView *--> ErrorView
-tictactoe.views.graphics.PlayView *--> Message
+usantatecla.tictactoe.views.graphics.PlayView ..> Coordinate
+usantatecla.tictactoe.views.graphics.PlayView ..> Message
+usantatecla.tictactoe.views.graphics.PlayView *--> usantatecla.tictactoe.views.graphics.GameView
+usantatecla.tictactoe.views.graphics.PlayView *--> usantatecla.tictactoe.views.graphics.CoordinateMoveView
+usantatecla.tictactoe.views.graphics.PlayView *--> usantatecla.tictactoe.views.graphics.CoordinatePutView
+usantatecla.tictactoe.views.graphics.PlayView ..> ErrorView
+javax.swing <|-- usantatecla.tictactoe.views.graphics.PlayView
 
-class tictactoe.views.graphics.ResumeView {
+
+class usantatecla.tictactoe.views.graphics.ResumeView {
 
 	- boolean newGame;
 
-	ResumeView()
-	boolean isResumedGame()
+	~ ResumeView()
+	~ boolean isResumedGame()
 
 }
 
-tictactoe.views.graphics.ResumeView ..> JOptionPane
-tictactoe.views.graphics.ResumeView ..> Message
+usantatecla.tictactoe.views.graphics.ResumeView ..> Message
 
-class tictactoe.views.graphics.StartView extends JFrame {
+class usantatecla.tictactoe.views.graphics.StartView {
 
-    StartView(Game game)
-    interact()
-
-}
-
-tictactoe.views.graphics.StartView *--> Game
-tictactoe.views.graphics.StartView ..> Message
-tictactoe.views.graphics.StartView ..> tictactoe.views.graphics.ChoosePlayersView
-tictactoe.views.graphics.StartView ..> tictactoe.views.graphics.GameView
-
-class tictactoe.views.graphics.View extends View {
-
-	+ View(Game game)
+    ~ StartView(Game)
+    ~ interact()
 
 }
 
-class View as "tictactoe.views.View"
+usantatecla.tictactoe.views.graphics.StartView ..> Message
+usantatecla.tictactoe.views.graphics.StartView ..> usantatecla.tictactoe.views.graphics.ChoosePlayersView
+usantatecla.tictactoe.views.graphics.StartView ..> usantatecla.tictactoe.views.graphics.GameView
+javax.swing <|-- usantatecla.tictactoe.views.graphics.StartView
 
-tictactoe.views.graphics.View *--> tictactoe.views.graphics.PlayView
-tictactoe.views.graphics.View *--> tictactoe.views.graphics.StartView
-tictactoe.views.graphics.View ..> tictactoe.views.graphics.ResumeView
+class View as "usantatecla.tictactoe.views.View"
+
+class usantatecla.tictactoe.views.graphics.GraphicsView extends View {
+
+	+ View(Game)
+
+}
+
+usantatecla.tictactoe.views.graphics.GraphicsView *--> usantatecla.tictactoe.views.graphics.PlayView
+usantatecla.tictactoe.views.graphics.GraphicsView *--> usantatecla.tictactoe.views.graphics.StartView
+usantatecla.tictactoe.views.graphics.GraphicsView ..> usantatecla.tictactoe.views.graphics.ResumeView
 @enduml
 
 @startuml tictactoe.models
-class  tictactoe.models.Board{
+class  usantatecla.tictactoe.models.Board{
 - Token[][] tokens
 ~ Board()
 ~ reset()
@@ -403,16 +383,15 @@ class  tictactoe.models.Board{
 - List<Coordinate> getCoordinates(Token)
 }
 
-class ClosedInterval as "tictactoe.utils.ClosedInterval"
-class ConcreteCoordinate as "tictactoe.utils.ConcreteCoordinate"
-class Direction as "tictactoe.utils.Direction"
+class ClosedInterval as "usantatecla.tictactoe.utils.ClosedInterval"
+class ConcreteCoordinate as "usantatecla.tictactoe.utils.ConcreteCoordinate"
+class Direction as "usantatecla.tictactoe.utils.Direction"
 
-tictactoe.models.Board *-down-> tictactoe.models.Coordinate
-tictactoe.models.Board ..> tictactoe.models.Token
-tictactoe.models.Board ..> tictactoe.models.Turn
-tictactoe.models.Board ..> Direction
+usantatecla.tictactoe.models.Board ..> usantatecla.tictactoe.models.Coordinate
+usantatecla.tictactoe.models.Board *-down-> "3x3" usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Board ..> Direction
 
-class  tictactoe.models.Coordinate{
+class  usantatecla.tictactoe.models.Coordinate{
 - {static} Coordinate NULL_COORDINATE
 + {static} int DIMENSION
 - {static} ClosedInterval LIMITS
@@ -425,12 +404,12 @@ class  tictactoe.models.Coordinate{
 + random()
 + boolean equals(Object)
 }
-ConcreteCoordinate <|-down- tictactoe.models.Coordinate
-tictactoe.models.Coordinate ..> tictactoe.models.Error
-tictactoe.models.Coordinate ..> Direction
-tictactoe.models.Coordinate ..> ClosedInterval
+ConcreteCoordinate <|-down- usantatecla.tictactoe.models.Coordinate
+usantatecla.tictactoe.models.Coordinate ..> usantatecla.tictactoe.models.Error
+usantatecla.tictactoe.models.Coordinate ..> Direction
+usantatecla.tictactoe.models.Coordinate ..> ClosedInterval
 
-enum  tictactoe.models.Error{
+enum  usantatecla.tictactoe.models.Error{
 NOT_EMPTY
 NOT_OWNER
 SAME_COORDINATES
@@ -439,7 +418,7 @@ NULL_ERROR
 + boolean isNull()
 }
 
-class  tictactoe.models.Game{
+class  usantatecla.tictactoe.models.Game{
 - Board board
 - Turn turn
 + Game()
@@ -455,12 +434,12 @@ class  tictactoe.models.Game{
 + int getMaxPlayers()
 + reset()
 }
-tictactoe.models.Game *-down-> tictactoe.models.Board
-tictactoe.models.Game *-down-> tictactoe.models.Turn
-tictactoe.models.Game ..> tictactoe.models.Coordinate
-tictactoe.models.Game ..> tictactoe.models.Error
+usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Board
+usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Turn
+usantatecla.tictactoe.models.Game ..> usantatecla.tictactoe.models.Coordinate
+usantatecla.tictactoe.models.Game ..> usantatecla.tictactoe.models.Error
 
-class  tictactoe.models.Player{
+class  usantatecla.tictactoe.models.Player{
 - Token token
 - Board board
 ~ Player(Token, Board)
@@ -468,12 +447,12 @@ class  tictactoe.models.Player{
 ~ Error move(Coordinate, Coordinate)
 ~ Token getToken()
 }
-tictactoe.models.Player *-down-> tictactoe.models.Token
-tictactoe.models.Player *-down-> tictactoe.models.Board
-tictactoe.models.Player ..> tictactoe.models.Coordinate
-tictactoe.models.Player ..> tictactoe.models.Error
+usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Board
+usantatecla.tictactoe.models.Player ..> usantatecla.tictactoe.models.Coordinate
+usantatecla.tictactoe.models.Player ..> usantatecla.tictactoe.models.Error
 
-enum  tictactoe.models.Token{
+enum  usantatecla.tictactoe.models.Token{
 X
 O
 NULL
@@ -481,9 +460,9 @@ NULL
 ~ {static} Token get(int)
 }
 
-tictactoe.models.Token ..> ClosedInterval
+usantatecla.tictactoe.models.Token ..> ClosedInterval
 
-class  tictactoe.models.Turn{
+class  usantatecla.tictactoe.models.Turn{
 - {static} int NUM_PLAYERS
 - Player[] players
 - Board board
@@ -499,10 +478,9 @@ class  tictactoe.models.Turn{
 ~ Token getToken()
 }
 
-tictactoe.models.Turn *-down-> tictactoe.models.Player
-tictactoe.models.Turn ..down-> tictactoe.models.Board
-tictactoe.models.Turn ..down-> tictactoe.models.Token
-tictactoe.models.Turn ..down-> tictactoe.models.Coordinate
-tictactoe.models.Turn ..down-> tictactoe.models.Error
-
+usantatecla.tictactoe.models.Turn *-down-> "2" usantatecla.tictactoe.models.Player
+usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Board
+usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Coordinate
+usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Error
 @enduml

@@ -1,7 +1,5 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.Console;
-
 public enum Message {
   TITTLE("--- TIC TAC TOE ---"),
 	NUMBER_PLAYERS("Number of user"), 
@@ -25,14 +23,6 @@ public enum Message {
 
 	public String getMessage() {
 		return this.message;
-	}
-
-	public void write() {
-		Console.instance().write(this.message);
-	}
-
-	public void writeln() {
-		Console.instance().writeln(this.message);
 	}
 
 	@Override
