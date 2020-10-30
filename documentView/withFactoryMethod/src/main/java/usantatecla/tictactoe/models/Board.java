@@ -13,12 +13,9 @@ class Board {
 	Board() {
 		this.tokens = new Token[Coordinate.DIMENSION][Coordinate.DIMENSION];
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			//for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				//this.tokens[i][j] = Token.NULL;
-			this.tokens[0][i] = Token.NULL;
-			this.tokens[1][i] = Token.NULL;
-			this.tokens[2][i] = Token.NULL;
-			//}
+			for (int j = 0; j < Coordinate.DIMENSION; j++) {
+				this.tokens[i][j] = Token.NULL;
+			}
 		}
 	}
 
@@ -26,12 +23,9 @@ class Board {
 		this();
 		assert board != null;
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			//for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				//this.tokens[i][j] = board.tokens[i][j];
-			this.tokens[0][i] = board.tokens[0][i];
-			this.tokens[1][i] = board.tokens[1][i];
-			this.tokens[2][i] = board.tokens[2][i];
-			//}
+			for (int j = 0; j < Coordinate.DIMENSION; j++) {
+				this.tokens[i][j] = board.tokens[i][j];
+			}
 		}
 	}
 
