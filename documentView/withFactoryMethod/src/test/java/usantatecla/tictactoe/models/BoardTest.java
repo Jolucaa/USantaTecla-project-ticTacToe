@@ -50,13 +50,6 @@ public class BoardTest {
         assertFalse(this.board.isOccupied(originCoordinate, token));
     }
 
-    @Test(expected = AssertionError.class)
-    public void testGivenNewBoardWhenMoveNewTokenTheOriginIsEmptyThenAssertionException() {
-        Coordinate originCoordinate = new Coordinate(0, 0);
-        Coordinate coordinateToMove = new Coordinate(0, 1);
-        this.board.move(originCoordinate, coordinateToMove);
-    }
-
     @Test
     public void testGivenNewBoardWhenPutThreeTokenAndIsTicTacToeThenIsTrue() {
         Token token = Token.values()[0];
