@@ -513,67 +513,110 @@ usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Error
 @enduml
 
 @startuml tictactoe.utils
-class  usantatecla.utils.Console{
-+ Console()
-+ write(char): void
-+ write(String): void
-+ readInt(String): int
-+ readChar(String): char
-+ readString(String): String
-+ writeln(int): void
-+ writeln(String): void
-+ writeln(): void
-+ writeError(String): void
+class BufferedReader as "java.io.BufferedReader"{}
+
+class  usantatecla.utils.ClosedInterval{
+- min: int
+- max: int
++ ClosedInterval(int,int)
++ isIncluded(int): boolean
++ toString(): String
 }
 
-class BufferedReader as "java.io.BufferedReader"
-
-usantatecla.utils.Console *-down-> BufferedReader
-
-class  usantatecla.utils.Coordinate{
+class usantatecla.utils.ConcreteCoordinate{
 # row: int
 # column: int
-# Coordinate()
-# Coordinate(int, int)
-# getMainDirection(Coordinate): Direction
-- inMainDiagonal(): boolean
-- inVertical(Coordinate): boolean
-- inHorizontal(Coordinate): boolean
+- {static} ROW: String
+- {static} COLUMN: String
+# ConcreteCoordinate()
+# ConcreteCoordinate(int,int)
++ isNull(): boolean
++ getDirection(Coordinate): Direction
++ inHorizontal(Coordinate): boolean
++ inVertical(Coordinate): boolean
++ inMainDiagonal(): boolean
+# read(String)
 + getRow(): int
 + getColumn(): int
 + hashCode(): int
 + equals(Object): boolean
++ toString(): String
+}
+
+usantatecla.utils.Coordinate <|..down- usantatecla.utils.ConcreteCoordinate
+usantatecla.utils.ConcreteCoordinate ..> usantatecla.utils.Direction
+usantatecla.utils.ConcreteCoordinate ..> usantatecla.utils.Console
+
+
+class usantatecla.utils.Console{
+- {static} console: Console
++ {static} instance(): Console
+- readString(String): String
++ readString(): String
++ readInt(String): int
+~ readChar(String): char
++ writeln()
++ write(String)
++ write(int)
++ writeln(String)
++ writeln(int)
++ write(char)
+- writeError(String)
+}
+usantatecla.utils.Console *-down-> BufferedReader
+
+interface usantatecla.utils.Coordinate{
+~ isNull(): boolean
+~ getDirection(Coordinate): Direction
+~ inHorizontal(Coordinate): boolean
+~ inVertical(Coordinate): boolean
+~ inMainDiagonal(): boolean
 }
 usantatecla.utils.Coordinate ..> usantatecla.utils.Direction
 
-enum  usantatecla.utils.Direction{
+enum usantatecla.utils.Direction{
   VERTICAL
   HORIZONTAL
   MAIN_DIAGONAL
   INVERSE_DIAGONAL
+  NULL
 }
 
-class  usantatecla.utils.PlayersDialog{
-- {static} USERS_ERROR: String
-+ read(int): int
+class usantatecla.utils.LimitedIntDialog{
+- LIMITS: ClosedInterval
+- {static} ERROR_MESSAGE: String
++ LimitedIntDialog(int,int)
++ read(String): int
 }
-usantatecla.utils.WithConsoleView <|-down- usantatecla.utils.PlayersDialog
 
-class  usantatecla.utils.WithConsoleView{
-# console: Console
-# WithConsoleView()
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
+usantatecla.utils.LimitedIntDialog ..> usantatecla.utils.Console
+
+class usantatecla.utils.NullCoordinate{
+- {static} instance: NullCoordinate
++ {static} instance(): Coordinate
++ isNull(): boolean
++ getDirection(Coordinate): Direction
++ inHorizontal(Coordinate): boolean
++ inVertical(Coordinate): boolean
++ inMainDiagonal(): boolean
++ hashCode(): int
++ equals(Object): boolean
++ toString(): String
 }
-usantatecla.utils.WithConsoleView *-down-> usantatecla.utils.Console
+usantatecla.utils.Coordinate <|..down- usantatecla.utils.NullCoordinate
+usantatecla.utils.NullCoordinate ..> usantatecla.utils.Direction
 
-class  usantatecla.utils.YesNoDialog{
+class usantatecla.utils.YesNoDialog{
 - {static} AFIRMATIVE: char
 - {static} NEGATIVE: char
-- {static} QUESTION: String
+- {static} SUFFIX: String
 - {static} MESSAGE: String
-+ YesNoDialog()
+- answer: char
 + read(String): boolean
-- {static} isNegative(char): boolean
-- {static} isAfirmative(char): boolean
+- isAffirmative(): boolean
+- getAnswer(): char
+- isNegative(): boolean
 }
-usantatecla.utils.WithConsoleView <|-down- usantatecla.utils.YesNoDialog
+usantatecla.utils.YesNoDialog ..> usantatecla.utils.Console
 @enduml
