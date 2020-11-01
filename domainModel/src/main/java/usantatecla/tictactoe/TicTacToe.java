@@ -5,7 +5,7 @@ import usantatecla.utils.YesNoDialog;
 class TicTacToe {
 
 	private Board board;
-	private Turn turn;
+	Turn turn;
 
 	TicTacToe(){
 		this.board = new Board();

@@ -68,6 +68,16 @@ public class BoardTest {
     }
 
     @Test
+    public void testGivenNewBoardWhenPutThreeTokenWithBadDirectionAndIsTicTacToeThenIsFalse() {
+        Token token = Token.O;
+        for(int i=0; i<Coordinate.DIMENSION - 1; i++){
+            this.board.put(new Coordinate(i,2), token);
+        }
+        this.board.put(new Coordinate(0,1), token);
+        assertFalse(this.board.isTicTacToe(token));
+    }
+
+    @Test
     public void testGivenNewBoardWhenPutSixTokensAndIsCompletedThenIsTrue() {
         Token tokenX = Token.values()[0];
         Token tokenO = Token.values()[1];
