@@ -236,7 +236,7 @@ tictactoe.models.Turn ..down-> tictactoe.models.Error
 @startuml tictactoe.utils
 class BufferedReader as "java.io.BufferedReader"{}
 
-class  usantatecla.utils.ClosedInterval{
+class  usantatecla.utils.ClosedIntervalTest{
 - min: int
 - max: int
 + ClosedInterval(int,int)
@@ -310,7 +310,7 @@ class usantatecla.utils.LimitedIntDialog{
 + read(String): int
 }
 
-usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedIntervalTest
 usantatecla.utils.LimitedIntDialog ..> usantatecla.utils.Console
 
 class usantatecla.utils.NullCoordinate{
