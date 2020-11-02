@@ -16,7 +16,7 @@ public class TurnTest {
    	final int NUMBER_PLAYER = 2;
    	    ticTacToe = new TicTacToe();
         //board = new Board();
-        this.turn = ticTacToe.turn;
+        //this.turn = ticTacToe.turn;
         /*this.players=new Player[NUMBER_PLAYER];
         this.players[0] = new UserPlayer(Token.O, this.board);
         this.players[1] = new UserPlayer(Token.X, this.board);*/

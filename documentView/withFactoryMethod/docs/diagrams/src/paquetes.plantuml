@@ -402,7 +402,7 @@ class  usantatecla.tictactoe.models.Board{
 + equals(Object): boolean
 }
 
-class ClosedInterval as "usantatecla.utils.ClosedIntervalTest"
+class ClosedInterval as "usantatecla.utils.ClosedInterval"
 class ConcreteCoordinate as "usantatecla.utils.ConcreteCoordinate"
 class Direction as "usantatecla.utils.Direction"
 
@@ -515,7 +515,7 @@ usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Error
 @startuml tictactoe.utils
 class BufferedReader as "java.io.BufferedReader"{}
 
-class  usantatecla.utils.ClosedIntervalTest{
+class  usantatecla.utils.ClosedInterval{
 - min: int
 - max: int
 + ClosedInterval(int,int)
@@ -589,7 +589,7 @@ class usantatecla.utils.LimitedIntDialog{
 + read(String): int
 }
 
-usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedIntervalTest
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
 usantatecla.utils.LimitedIntDialog ..> usantatecla.utils.Console
 
 class usantatecla.utils.NullCoordinate{

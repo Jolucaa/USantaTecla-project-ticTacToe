@@ -141,7 +141,7 @@ class ConcreteCoordinate as "usantatecla.utils.ConcreteCoordinate"{
 
 }
 
-class ClosedInterval as "usantatecla.utils.ClosedIntervalTest"{
+class ClosedInterval as "usantatecla.utils.ClosedInterval"{
 	
 }
 
