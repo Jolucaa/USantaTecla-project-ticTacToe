@@ -1,9 +1,9 @@
 package usantatecla.tictactoe;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoardTest {
 
@@ -15,8 +15,8 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenStartThenIsEmpty() {
-    	assertTrue(this.board.isEmpty(new Coordinate(0,0)));
-    	assertTrue(this.board.isEmpty(new Coordinate(2,2)));
+        assertTrue(this.board.isEmpty(new Coordinate(0, 0)));
+        assertTrue(this.board.isEmpty(new Coordinate(2, 2)));
     }
 
     @Test
@@ -52,8 +52,8 @@ public class BoardTest {
     @Test
     public void testGivenNewBoardWhenPutThreeTokenAndIsTicTacToeThenIsTrue() {
         Token token = Token.O;
-        for(int i=0; i<Coordinate.DIMENSION; i++){
-            this.board.put(new Coordinate(i,2), token);
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            this.board.put(new Coordinate(i, 2), token);
         }
         assertTrue(this.board.isTicTacToe(token));
     }
@@ -61,8 +61,8 @@ public class BoardTest {
     @Test
     public void testGivenNewBoardWhenPutTwoTokenAndIsTicTacToeThenIsFalse() {
         Token token = Token.O;
-        for(int i=0; i<Coordinate.DIMENSION - 1; i++){
-            this.board.put(new Coordinate(i,2), token);
+        for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
+            this.board.put(new Coordinate(i, 2), token);
         }
         assertFalse(this.board.isTicTacToe(token));
     }
@@ -70,10 +70,10 @@ public class BoardTest {
     @Test
     public void testGivenNewBoardWhenPutThreeTokenWithBadDirectionAndIsTicTacToeThenIsFalse() {
         Token token = Token.O;
-        for(int i=0; i<Coordinate.DIMENSION - 1; i++){
-            this.board.put(new Coordinate(i,2), token);
+        for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
+            this.board.put(new Coordinate(i, 2), token);
         }
-        this.board.put(new Coordinate(0,1), token);
+        this.board.put(new Coordinate(0, 1), token);
         assertFalse(this.board.isTicTacToe(token));
     }
 

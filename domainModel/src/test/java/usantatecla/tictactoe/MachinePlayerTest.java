@@ -1,15 +1,14 @@
 package usantatecla.tictactoe;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MachinePlayerTest {
     private MachinePlayer machinePlayer;
 
     public MachinePlayerTest() {
-        this.machinePlayer = new MachinePlayer(Token.X,new Board());
+        this.machinePlayer = new MachinePlayer(Token.X, new Board());
     }
 
     @Test

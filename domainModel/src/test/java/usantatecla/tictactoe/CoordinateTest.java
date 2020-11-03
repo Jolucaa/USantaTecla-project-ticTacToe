@@ -1,21 +1,13 @@
 package usantatecla.tictactoe;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import usantatecla.utils.Console;
 import usantatecla.utils.Direction;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CoordinateTest {
 
     private Coordinate coordinate00;
@@ -62,5 +54,5 @@ public class CoordinateTest {
     public void testGivenNewCoordinatesWhenCompareCoordinates00And12ThenDirectionIsNull() {
         assertEquals(Direction.NULL, this.coordinate00.getDirection(this.coordinate12));
     }
-    
+
 }

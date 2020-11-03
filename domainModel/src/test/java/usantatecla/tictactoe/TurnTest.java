@@ -1,41 +1,22 @@
 package usantatecla.tictactoe;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class TurnTest {
 
-    private TicTacToe ticTacToe;
     private Turn turn;
-    private Player[] players;
-    private Board board;
 
-    public TurnTest() {
-   	final int NUMBER_PLAYER = 2;
-   	    ticTacToe = new TicTacToe();
-        //board = new Board();
-        //this.turn = ticTacToe.turn;
-        /*this.players=new Player[NUMBER_PLAYER];
-        this.players[0] = new UserPlayer(Token.O, this.board);
-        this.players[1] = new UserPlayer(Token.X, this.board);*/
-    }
-
-    @Test
-    public void testGivenNewTurnWhenChangeTurnThenIsOtherTurn() {
-
+    @BeforeEach
+    void before() {
+        Board board = mock(Board.class);
+        this.turn = new Turn(board);
     }
 
     /*@Test
-    public void testGivenNewTurnWhenChangeTurnTwoTimesThenIsTheSameTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.change();
-        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.change();
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+    void testGetToken() {
+        assertEquals(Token.O, turn.getToken());
     }*/
 }
