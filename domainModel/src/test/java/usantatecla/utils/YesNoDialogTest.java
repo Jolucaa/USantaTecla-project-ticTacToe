@@ -1,10 +1,13 @@
 package usantatecla.utils;
 
+import org.junit.jupiter.api.BeforeEach;
+
 public class YesNoDialogTest {
 
     private YesNoDialog yesNoDialog;
 
-    public YesNoDialogTest() {
+    @BeforeEach
+    void before() {
         this.yesNoDialog = new YesNoDialog();
     }
 

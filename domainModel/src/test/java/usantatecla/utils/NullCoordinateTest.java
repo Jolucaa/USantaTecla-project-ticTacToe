@@ -1,5 +1,6 @@
 package usantatecla.utils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class NullCoordinateTest {
     private NullCoordinate nullCoordinate;
 
-    public NullCoordinateTest() {
+    @BeforeEach
+    void before() {
         this.nullCoordinate = new NullCoordinate();
     }
 

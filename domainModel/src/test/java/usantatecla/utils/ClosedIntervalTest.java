@@ -1,5 +1,6 @@
 package usantatecla.utils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +9,8 @@ public class ClosedIntervalTest {
 
     private ClosedInterval closedInterval;
 
-    public ClosedIntervalTest() {
+    @BeforeEach
+    void before() {
         this.closedInterval = new ClosedInterval(1, 1);
     }
 
