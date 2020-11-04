@@ -484,3 +484,113 @@ usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Token
 usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Coordinate
 usantatecla.tictactoe.models.Turn ..down-> usantatecla.tictactoe.models.Error
 @enduml
+
+@startuml tictactoe.utils
+namespace usantatecla.utils {
+
+interface Coordinate {
+	~ isNull(): boolean 
+	~ getDirection(Coordinate): Direction 
+	~ inHorizontal(Coordinate): boolean 
+	~ inVertical(Coordinate): boolean 
+	~ inMainDiagonal(): boolean 
+}
+
+class ConcreteCoordinate {
+	# row: int 
+	# column: int 
+	~ ROW: {static} String
+	~ COLUMN: {static} String
+	# ConcreteCoordinate()
+	# ConcreteCoordinate(int, int)
+	+ isNull(): boolean 
+	+ getDirection(Coordinate): Direction 
+	+ inHorizontal(Coordinate): boolean 
+	+ inVertical(Coordinate): boolean 
+	+ inMainDiagonal(): boolean 
+	# read(String)
+	+ getRow(): int 
+	+ getColumn(): int
+	+ hashCode(): int
+	+ equals(Object): boolean 
+	+ toString(): String 
+}
+class NullCoordinate {
+	+ instance: {static} NullCoordinate 
+	+ {static} instance(): Coordinate 
+	+ isNull(): boolean 
+	+ getDirection(Coordinate): Direction 
+	+ inHorizontal(Coordinate): boolean 
+	+ inVertical(Coordinate): boolean
+	+ inMainDiagonal(): boolean
+	+ hashCode(): int 
+	+ equals(Object): boolean 
+	+ toString(): String 
+}
+
+enum Direction {
+	+ VERTICAL
+	+ HORIZONTAL
+	+ MAIN_DIAGONAL
+	+ INVERSE_DIAGONAL
+	+ NULL
+}
+
+class Console {
+	+ console: {static} Console 
+	+ instance(): {static} Console 
+	+ readString(String): String 
+	+ readString(): String 
+	+ readInt(String): int 
+	+ readChar(String): char 
+	+ writeln()
+	+ write(String)
+	+ write(int)
+	+ writeln(String)
+	+ writeln(int)
+	+ write(char)
+	+ writeError(String)
+}
+
+class ClosedInterval {
+	- min: int 
+	- max: int 
+	+ ClosedInterval(int, int)
+	+ isIncluded(int): boolean 
+	+ toString(): String 
+}
+
+class YesNoDialog {
+	- AFFIRMATIVE: {static} char 
+	- NEGATIVE: {static} char 
+	- SUFFIX: {static} String 
+	- MESSAGE: {static} String
+	- answer: char 
+	+ read(String): boolean 
+	- isAfirmative(): boolean 
+	- getAnswer(): char 
+	- isNegative(): boolean 
+}
+
+class LimitedIntDialog {
+	- LIMITS: ClosedInterval 
+	- ERROR_MESSAGE: {static} String 
+	+ LimitedIntDialog(int, int)
+	+ read(String): int 
+}
+
+
+
+Coordinate <|-down- ConcreteCoordinate
+Coordinate <|-down- NullCoordinate
+Coordinate .down.> Direction
+ConcreteCoordinate .down.> Console
+LimitedIntDialog .down.> Console
+YesNoDialog .down.> Console
+LimitedIntDialog .down.> ClosedInterval
+}
+class BufferedReader as "java.io.BufferedReader"{
+	
+}
+usantatecla.utils.Console *-down-> BufferedReader 
+@enduml
