@@ -27,14 +27,6 @@ public enum Message {
 		return this.message;
 	}
 
-	public void write() {
-		Console.instance().write(this.message);
-	}
-
-	public void writeln() {
-		Console.instance().writeln(this.message);
-	}
-
 	@Override
 	public String toString() {
 		return this.message;
