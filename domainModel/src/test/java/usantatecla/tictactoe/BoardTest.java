@@ -1,20 +1,25 @@
 package usantatecla.tictactoe;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class BoardTest {
 
     private Board board;
 
-    public BoardTest() {
+    @BeforeEach
+    void before() {
         this.board = new Board();
     }
 
     @Test
     public void testGivenNewBoardWhenStartThenIsEmpty() {
+        //assertThat();
         assertTrue(this.board.isEmpty(new Coordinate(0, 0)));
         assertTrue(this.board.isEmpty(new Coordinate(2, 2)));
     }
