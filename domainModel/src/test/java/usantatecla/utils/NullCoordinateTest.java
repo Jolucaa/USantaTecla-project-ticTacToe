@@ -3,7 +3,8 @@ package usantatecla.utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class NullCoordinateTest {
     private NullCoordinate nullCoordinate;
@@ -15,41 +16,41 @@ public class NullCoordinateTest {
 
     @Test
     public void testGivenNewNullCoordinateWhenIsEqualsTrue() {
-        assertEquals(true, this.nullCoordinate.equals(new NullCoordinate()));
+        assertThat(this.nullCoordinate.equals(new NullCoordinate()), is(true));
     }
 
     @Test
-    public void testGivenNewNullCoordinateToString() {
-        assertEquals("NullCoordinate []", this.nullCoordinate.toString());
+    public void testGivenNewNullCoordinateWhenToString() {
+        assertThat(this.nullCoordinate.toString(), is("NullCoordinate []"));
     }
 
     @Test
-    public void testGivenNewNullCoordinateHashCode() {
-        assertEquals(0, this.nullCoordinate.hashCode());
+    public void testGivenNewNullCoordinateWhenHashCodeThen0() {
+        assertThat(this.nullCoordinate.hashCode(), is(0));
     }
 
     @Test
-    public void testGivenNewNullCoordinateInMainDiagonal() {
-        assertEquals(false, this.nullCoordinate.inMainDiagonal());
+    public void testGivenNewNullCoordinateWhenInMainDiagonalThenFalse() {
+        assertThat(this.nullCoordinate.inMainDiagonal(), is(false));
     }
 
     @Test
-    public void testGivenNewNullCoordinateInHorizontal() {
-        assertEquals(false, this.nullCoordinate.inHorizontal(new ConcreteCoordinate()));
+    public void testGivenNewNullCoordinateWhenInHorizontalThenFalse() {
+        assertThat(this.nullCoordinate.inHorizontal(new ConcreteCoordinate()), is(false));
     }
 
     @Test
-    public void testGivenNewNullCoordinateInVertical() {
-        assertEquals(false, this.nullCoordinate.inVertical(new ConcreteCoordinate()));
+    public void testGivenNewNullCoordinateWhenInVerticalThenFalse() {
+        assertThat(this.nullCoordinate.inVertical(new ConcreteCoordinate()), is(false));
     }
 
     @Test
-    public void testGivenNewNullCoordinateGetDirection() {
-        assertEquals(Direction.NULL, this.nullCoordinate.getDirection(new ConcreteCoordinate()));
+    public void testGivenNewNullCoordinateWhenGetDirectionThenNullDirection() {
+        assertThat(this.nullCoordinate.getDirection(new ConcreteCoordinate()), is(Direction.NULL));
     }
 
     @Test
     public void testGivenNewNullCoordinateIsNull() {
-        assertEquals(true, this.nullCoordinate.isNull());
+        assertThat(this.nullCoordinate.isNull(), is(true));
     }
 }

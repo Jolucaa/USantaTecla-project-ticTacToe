@@ -1,12 +1,10 @@
 package usantatecla.tictactoe;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import usantatecla.utils.Console;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import usantatecla.utils.Direction;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CoordinateTest {
 
@@ -16,13 +14,8 @@ public class CoordinateTest {
     private Coordinate coordinate02;
     private Coordinate coordinate12;
 
-    @Mock
-    private Console console;
-
-    @InjectMocks
-    private Coordinate coordinate = new Coordinate();
-
-    public CoordinateTest() {
+    @BeforeEach
+    void before() {
         this.coordinate00 = new Coordinate(0, 0);
         this.coordinate01 = new Coordinate(0, 1);
         this.coordinate11 = new Coordinate(1, 1);
@@ -32,27 +25,27 @@ public class CoordinateTest {
 
     @Test
     public void testGivenNewCoordinatesWhenCompareCoordinates00And01ThenIsHorizontal() {
-        assertEquals(Direction.HORIZONTAL, this.coordinate00.getDirection(this.coordinate01));
+        assertThat(this.coordinate00.getDirection(this.coordinate01), is(Direction.HORIZONTAL));
     }
 
     @Test
     public void testGivenNewCoordinatesWhenCompareCoordinates01And11ThenIsVertical() {
-        assertEquals(Direction.VERTICAL, this.coordinate01.getDirection(this.coordinate11));
+        assertThat(this.coordinate01.getDirection(this.coordinate11), is(Direction.VERTICAL));
     }
 
     @Test
     public void testGivenNewCoordinatesWhenCompareCoordinates00And11ThenIsMainDiagonal() {
-        assertEquals(Direction.MAIN_DIAGONAL, this.coordinate00.getDirection(this.coordinate11));
+        assertThat(this.coordinate00.getDirection(this.coordinate11), is(Direction.MAIN_DIAGONAL));
     }
 
     @Test
     public void testGivenNewCoordinatesWhenCompareCoordinates02And11ThenIsInverseDiagonal() {
-        assertEquals(Direction.INVERSE_DIAGONAL, this.coordinate02.getDirection(this.coordinate11));
+        assertThat(this.coordinate02.getDirection(this.coordinate11), is(Direction.INVERSE_DIAGONAL));
     }
 
     @Test
     public void testGivenNewCoordinatesWhenCompareCoordinates00And12ThenDirectionIsNull() {
-        assertEquals(Direction.NULL, this.coordinate00.getDirection(this.coordinate12));
+        assertThat(this.coordinate00.getDirection(this.coordinate12), is(Direction.NULL));
     }
 
 }

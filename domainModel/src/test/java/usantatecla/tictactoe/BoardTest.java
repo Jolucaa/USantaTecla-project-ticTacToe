@@ -3,10 +3,7 @@ package usantatecla.tictactoe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.hamcrest.Matchers.is;
 
 public class BoardTest {
 
@@ -19,15 +16,14 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenStartThenIsEmpty() {
-        //assertThat();
-        assertTrue(this.board.isEmpty(new Coordinate(0, 0)));
-        assertTrue(this.board.isEmpty(new Coordinate(2, 2)));
+        assertThat(this.board.isEmpty(new Coordinate(0, 0)),is(true));
+        assertThat(this.board.isEmpty(new Coordinate(2, 2)),is(true));
     }
 
     @Test
     public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsFalse() {
-        assertFalse(this.board.isOccupied(new Coordinate(0, 0), Token.X));
-        assertFalse(this.board.isOccupied(new Coordinate(0, 0), Token.O));
+        assertThat(this.board.isOccupied(new Coordinate(0, 0), Token.X), is(false));
+        assertThat(this.board.isOccupied(new Coordinate(0, 0), Token.O), is(false));
     }
 
     @Test
@@ -35,7 +31,7 @@ public class BoardTest {
         Token token = Token.O;
         Coordinate coordinate = new Coordinate(0, 2);
         this.board.put(coordinate, token);
-        assertTrue(this.board.isOccupied(coordinate, token));
+        assertThat(this.board.isOccupied(coordinate, token), is(true));
     }
 
     @Test
@@ -45,13 +41,13 @@ public class BoardTest {
         this.board.put(origin, token);
         Coordinate target = new Coordinate(0, 1);
         this.board.move(origin, target);
-        assertTrue(this.board.isEmpty(origin));
-        assertTrue(this.board.isOccupied(target, token));
+        assertThat(this.board.isEmpty(origin), is(true));
+        assertThat(this.board.isOccupied(target, token), is(true));
     }
 
     @Test
     public void testGivenNewBoardWhenNotPutTokensAndIsTicTacToeThenIsFalse() {
-        assertFalse(this.board.isTicTacToe(Token.O));
+        assertThat(this.board.isTicTacToe(Token.O), is(false));
     }
 
     @Test
@@ -60,7 +56,7 @@ public class BoardTest {
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             this.board.put(new Coordinate(i, 2), token);
         }
-        assertTrue(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(true));
     }
 
     @Test
@@ -69,7 +65,7 @@ public class BoardTest {
         for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
             this.board.put(new Coordinate(i, 2), token);
         }
-        assertFalse(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(false));
     }
 
     @Test
@@ -79,7 +75,7 @@ public class BoardTest {
             this.board.put(new Coordinate(i, 2), token);
         }
         this.board.put(new Coordinate(0, 1), token);
-        assertFalse(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(false));
     }
 
     @Test
@@ -98,7 +94,7 @@ public class BoardTest {
         this.board.put(coordinate22, tokenO);
         this.board.put(coordinate23, tokenX);
         this.board.put(coordinate33, tokenO);
-        assertTrue(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(true));
     }
 
     @Test
@@ -115,11 +111,11 @@ public class BoardTest {
         this.board.put(coordinate12, tokenX);
         this.board.put(coordinate22, tokenO);
         this.board.put(coordinate23, tokenX);
-        assertFalse(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(false));
     }
 
     @Test
     public void testGivenNewBoardWhenNotPutTokensAndIsCompletedThenIsFalse() {
-        assertFalse(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(false));
     }
 }

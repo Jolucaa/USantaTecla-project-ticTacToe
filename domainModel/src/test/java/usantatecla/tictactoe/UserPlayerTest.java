@@ -2,9 +2,8 @@ package usantatecla.tictactoe;
 
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class UserPlayerTest {
     private Board board;
@@ -22,43 +21,43 @@ public class UserPlayerTest {
     @Test
     public void testGivenNewUserPlayerWhenPutNewTokenThenReturnErrorNotEmpty() {
         this.board.put(this.coordinate00, Token.O);
-        assertEquals(Error.NOT_EMPTY, this.player.checkPutCoordinateError(this.coordinate00));
+        assertThat(this.player.checkPutCoordinateError(this.coordinate00), is(Error.NOT_EMPTY));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenPutNewTokenThenNotReturnErrorNull() {
         this.board.put(this.coordinate00, Token.O);
-        assertEquals(true, this.player.checkPutCoordinateError(new Coordinate(0, 2)) == Error.NULL);
+        assertThat(this.player.checkPutCoordinateError(new Coordinate(0, 2)) == Error.NULL, is(true));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenRemoveTokenThenReturnErrorNotOwner() {
         this.board.put(this.coordinate00, Token.O);
-        assertEquals(Error.NOT_OWNER, this.player.checkMoveOriginCoordinateError(this.coordinate01));
+        assertThat(this.player.checkMoveOriginCoordinateError(this.coordinate01), is(Error.NOT_OWNER));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenRemoveTokenThenNotReturnErrorNull() {
         this.board.put(this.coordinate00, Token.O);
-        assertTrue(this.player.checkMoveOriginCoordinateError(this.coordinate00) == Error.NULL);
+        assertThat(this.player.checkMoveOriginCoordinateError(this.coordinate00) == Error.NULL, is(true));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenMoveTokenThenReturnErrorSameCoordinates() {
         this.board.put(this.coordinate00, Token.O);
-        assertEquals(Error.SAME_COORDINATES, this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate00));
+        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate00), is(Error.SAME_COORDINATES));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenMoveTokenThenReturnErrorNotEmpty() {
         this.board.put(this.coordinate00, Token.O);
         this.board.put(this.coordinate01, Token.O);
-        assertEquals(Error.NOT_EMPTY, this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01));
+        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01), is(Error.NOT_EMPTY));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenMoveTokenThenNotReturnErrorNull() {
         this.board.put(this.coordinate00, Token.O);
-        assertTrue(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01) == Error.NULL);
+        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01) == Error.NULL, is(true));
     }
 }

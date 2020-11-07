@@ -3,7 +3,8 @@ package usantatecla.utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class ClosedIntervalTest {
 
@@ -15,7 +16,7 @@ public class ClosedIntervalTest {
     }
 
     @Test
-    public void testGivenNewNullCoordinateToString() {
-        assertEquals("[1, 1]", this.closedInterval.toString());
+    public void testGivenNewNullCoordinateWhenToString() {
+        assertThat(this.closedInterval.toString(), is("[1, 1]"));
     }
 }
