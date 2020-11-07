@@ -64,4 +64,9 @@ public class PlayerTest {
         this.board.put(this.coordinate00, Token.O);
         assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01) == Error.NULL, is(true));
     }
+
+    @Test
+    public void testGivenNewPlayerWhenGetTokenThenReturnTheToken() {
+        assertThat(this.player.getToken(), is(Token.O));
+    }
 }
