@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usantatecla.utils.Direction;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 
 public class CoordinateTest {
@@ -18,42 +18,40 @@ public class CoordinateTest {
     }
 
     @Test
-    void testIsNull() {
-        assertFalse(this.coordinate.isNull());
+    void testGivenNewCoordinateWhenIsNullThenIsFalse() {
+        assertThat(this.coordinate.isNull(), is(false));
     }
 
     @Test
-    void testIsNotValid() {
+    void testGivenNotValidCoordinateWhenIsValidThenIsErrorNotValid() {
         Coordinate coordinate = new Coordinate(3, 3);
-        assertEquals(Error.NOT_VALID, coordinate.isValid());
+        assertThat(coordinate.isValid(), is(Error.NOT_VALID));
     }
 
     @Test
-    void testIsValid() {
-        assertEquals(Error.NULL, this.coordinate.isValid());
+    void testGivenValidCoordinateWhenIsValidThenIsErrorNull() {
+        assertThat(this.coordinate.isValid(), is(Error.NULL));
     }
 
     @Test
-    void testGetDirectionNull() {
-        assertEquals(Direction.NULL, this.coordinate.getDirection(Coordinate.NULL_COORDINATE));
+    void testGivenCoordinateAndNullCoordinateWhenNullCoordinateGetDirectionThenIsDirectionNull() {
+        assertThat(this.coordinate.getDirection(Coordinate.NULL_COORDINATE), is(Direction.NULL));
     }
 
     @Test
-    void testGetDirectionInverseDiagonal() {
-        Coordinate coordinateInversalDiagonal = new Coordinate(0, 2);
-        assertEquals(Direction.INVERSE_DIAGONAL, this.coordinate.getDirection(coordinateInversalDiagonal));
+    void testGivenCoordinateAndInverseDiagonalCoordinateWhenInverseDiagonalCoordinateGetDirectionThenIsCoordinateInverseDiagonal() {
+        assertThat(this.coordinate.getDirection(new Coordinate(0, 2)), is(Direction.INVERSE_DIAGONAL));
     }
 
     @Test
-    void testGetDirectionMainDiagonal() {
-        Coordinate coordinateMainDiagonal = new Coordinate(0, 0);
-        assertEquals(Direction.MAIN_DIAGONAL, this.coordinate.getDirection(coordinateMainDiagonal));
+    void testGivenCoordinateAndMainDiagonalCoordinateWhenMainDiagonalCoordinateGetDirectionThenIsCoordinateMainDiagonal() {
+        assertThat(this.coordinate.getDirection(new Coordinate(0, 0)), is(Direction.MAIN_DIAGONAL));
     }
 
     @Test
-    void testRandom() {
+    void testGivenCoordinateWhenRandomThenIsErrorNull() {
         this.coordinate.random();
-        assertEquals(Error.NULL, this.coordinate.isValid());
+        assertThat(this.coordinate.isValid(), is(Error.NULL));
     }
 
 }
