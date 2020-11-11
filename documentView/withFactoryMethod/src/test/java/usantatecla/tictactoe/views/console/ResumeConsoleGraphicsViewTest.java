@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,24 +16,35 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CoordinateViewTest {
+public class ResumeConsoleGraphicsViewTest {
+    @Mock
+    Game game;
 
     @Mock
-    private Console console;
-    private CoordinateView coordinateView;
+    Console console;
+
+    ResumeView resumeView;
 
     @BeforeEach
     void before() {
-        this.coordinateView = new CoordinateView();
+        resumeView = new ResumeView(game);
     }
 
     @Test
-    void testGivenNewCoordinateViewWhenReadThenIsValidCoordinate() {
-        when(this.console.readInt(anyString())).thenReturn(1);
+    void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
+        when(this.console.readChar(anyString())).thenReturn('n');
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            assertThat(this.coordinateView.read(""), is(new Coordinate(0, 0)));
+            assertThat(this.resumeView.interact(), is(false));
         }
     }
 
+    @Test
+    void testGivenNewGameIsTrueWhenInteractThenIsTrue() {
+        when(this.console.readChar(anyString())).thenReturn('y');
+        try (MockedStatic console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            assertThat(this.resumeView.interact(), is(true));
+        }
+    }
 }

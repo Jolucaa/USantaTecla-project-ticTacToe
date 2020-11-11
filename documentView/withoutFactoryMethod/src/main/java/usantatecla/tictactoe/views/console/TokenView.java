@@ -12,7 +12,7 @@ public class TokenView {
     }
 
     void write() {
-        Console.instance().write(token.toString());
+        Console.getInstance().write(token.toString());
     }
 
 }

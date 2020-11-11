@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,26 +16,26 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ConsoleViewTest {
+public class ResumeViewTest {
     @Mock
     Game game;
 
     @Mock
     Console console;
 
-    ConsoleView consoleView;
+    ResumeView resumeView;
 
     @BeforeEach
     void before() {
-        consoleView = new ConsoleView(game);
+        resumeView = new ResumeView(game);
     }
 
     @Test
-    void testGivenConsoleWhenIsNewGameThenIsFalse() {
+    void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
         when(this.console.readChar(anyString())).thenReturn('n');
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            assertThat(this.consoleView.isNewGame(), is(false));
+            assertThat(this.resumeView.interact(), is(false));
         }
     }
 
@@ -44,7 +44,7 @@ public class ConsoleViewTest {
         when(this.console.readChar(anyString())).thenReturn('y');
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            assertThat(this.consoleView.isNewGame(), is(true));
+            assertThat(this.resumeView.interact(), is(true));
         }
     }
 }

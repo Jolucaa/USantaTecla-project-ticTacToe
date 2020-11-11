@@ -34,7 +34,7 @@ public class ResumeViewTest {
     void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
         when(this.console.readChar(anyString())).thenReturn('n');
         try (MockedStatic console = mockStatic(Console.class)) {
-            console.when(Console::instance).thenReturn(this.console);
+            console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.resumeView.interact(), is(false));
         }
     }
@@ -43,7 +43,7 @@ public class ResumeViewTest {
     void testGivenNewGameIsTrueWhenInteractThenIsTrue() {
         when(this.console.readChar(anyString())).thenReturn('y');
         try (MockedStatic console = mockStatic(Console.class)) {
-            console.when(Console::instance).thenReturn(this.console);
+            console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.resumeView.interact(), is(true));
         }
     }

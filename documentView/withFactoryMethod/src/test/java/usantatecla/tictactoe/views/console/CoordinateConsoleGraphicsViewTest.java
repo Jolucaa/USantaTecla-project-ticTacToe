@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CoordinateViewTest {
+public class CoordinateConsoleGraphicsViewTest {
 
     @Mock
     private Console console;

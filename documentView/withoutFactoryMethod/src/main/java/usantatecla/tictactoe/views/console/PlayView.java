@@ -23,7 +23,7 @@ class PlayView extends SubView {
             new GameView(this.game).write();
         } while (!this.game.isTicTacToe());
         new TokenView(this.game.getToken()).write();
-        Console.instance().writeln(Message.PLAYER_WIN.getMessage());
+        Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
     }
 
     private void put() {
