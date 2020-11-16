@@ -3,17 +3,18 @@ package usantatecla.tictactoe.views.console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.*;
+import usantatecla.tictactoe.models.Error;
 import usantatecla.utils.Console;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ConsoleViewTest {
@@ -22,6 +23,9 @@ public class ConsoleViewTest {
 
     @Mock
     Console console;
+
+    @Captor
+    ArgumentCaptor<String> captor;
 
     ConsoleView consoleView;
 
@@ -46,5 +50,37 @@ public class ConsoleViewTest {
             console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.consoleView.isNewGame(), is(true));
         }
+    }
+
+    @Test
+    void testGivenNewGameThenStart() {
+        try (MockedStatic console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.NULL);
+            consoleView.start();
+            Mockito.verify(this.console, times(21)).getInstance().write(captor.capture());
+            List<String> captorValue = captor.getAllValues();
+            String emptyBoard = "[| , .,  | , .,  | , .,  | , | , .,  | , .,  | , .,  | , | , .,  | , .,  | , .,  | ]";
+            assertThat(captorValue.toString(), is(emptyBoard));
+        }
+        //TODO no coge el título en el capture
+    }
+    @Test
+    void testGivenNewGameThenPlay() {
+        try (MockedStatic console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.game.isUser()).thenReturn(false);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.isTicTacToe()).thenReturn(true);
+            when(this.game.isBoardComplete()).thenReturn(true);
+            when(this.game.getToken()).thenReturn(Token.X);
+            consoleView.play();
+            Mockito.verify(this.console, times(22)).getInstance().write(captor.capture());
+            List<String> captorValue = captor.getAllValues();
+            String emptyBoard = "[| , X,  | , X,  | , X,  | , | , X,  | , X,  | , X,  | , | , X,  | , X,  | , X,  | , X]";
+            assertThat(captorValue.toString(), is(emptyBoard));
+        }
+        //TODO no tiene sentido esta prueba (darle unas cuantas vueltas); además no llama al método put
     }
 }
