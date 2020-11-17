@@ -66,11 +66,11 @@ public class ConsoleViewTest {
         //TODO no coge el título en el capture
     }
     @Test
-    void testGivenNewGameThenPlay() {
+    void testGivenNewGameWhenPlayThenIsTicTacToe() {
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.game.isUser()).thenReturn(false);
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X, Token.X, Token.X, Token.NULL, Token.O, Token.O, Token.O, Token.NULL, Token.NULL);
             when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.game.isTicTacToe()).thenReturn(true);
             when(this.game.isBoardComplete()).thenReturn(true);
@@ -78,9 +78,8 @@ public class ConsoleViewTest {
             consoleView.play();
             Mockito.verify(this.console, times(22)).getInstance().write(captor.capture());
             List<String> captorValue = captor.getAllValues();
-            String emptyBoard = "[| , X,  | , X,  | , X,  | , | , X,  | , X,  | , X,  | , | , X,  | , X,  | , X,  | , X]";
-            assertThat(captorValue.toString(), is(emptyBoard));
+            String emptyBoard = "X";
+            assertThat(captorValue.get(21), is(emptyBoard));
         }
-        //TODO no tiene sentido esta prueba (darle unas cuantas vueltas); además no llama al método put
     }
 }
