@@ -35,8 +35,7 @@ class PlayView extends SubView {
                 coordinate = new CoordinateView()
                         .read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
-                coordinate = new Coordinate();
-                coordinate.random();
+                coordinate = createRandomCoordinate();
             }
             error = this.game.put(coordinate);
             if (isUser) {
@@ -57,16 +56,20 @@ class PlayView extends SubView {
                 target = new CoordinateView()
                         .read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
-                origin = new Coordinate();
-                origin.random();
-                target = new Coordinate();
-                target.random();
+                origin = createRandomCoordinate();
+                target = createRandomCoordinate();
             }
             error = this.game.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
         } while (!error.isNull());
+    }
+
+    Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
     }
 
 }
