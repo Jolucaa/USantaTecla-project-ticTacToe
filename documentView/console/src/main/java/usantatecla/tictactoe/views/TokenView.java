@@ -5,7 +5,6 @@ import usantatecla.utils.Console;
 
 class TokenView {
 
-	private static final char[] SYMBOLS = {'X', 'O', ' ' };
 	private Token token;
 
 	TokenView(Token token){
@@ -13,7 +12,7 @@ class TokenView {
 	}
 
 	void write() {
-		Console.getInstance().write(TokenView.SYMBOLS[token.ordinal()]);
+		Console.getInstance().write(token.toString());
 	}
 
 }

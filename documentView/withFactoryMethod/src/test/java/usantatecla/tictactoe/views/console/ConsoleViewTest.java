@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.*;
+import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Token;
 import usantatecla.utils.Console;
 
 import java.util.List;
@@ -59,9 +61,9 @@ public class ConsoleViewTest {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.NULL);
             consoleView.start();
-            Mockito.verify(this.console, times(12)).getInstance().write(captor.capture());
+            Mockito.verify(this.console, times(21)).getInstance().write(captor.capture());
             List<String> captorValue = captor.getAllValues();
-            String emptyBoard = "[| ,  | ,  | ,  | , | ,  | ,  | ,  | , | ,  | ,  | ,  | ]";
+            String emptyBoard = "[| , .,  | , .,  | , .,  | , | , .,  | , .,  | , .,  | , | , .,  | , .,  | , .,  | ]";
             assertThat(captorValue.toString(), is(emptyBoard));
         }
         //TODO no coge el título en el capture
