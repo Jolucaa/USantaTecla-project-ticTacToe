@@ -36,7 +36,7 @@ public class PlayViewTest {
     }
 
     @Test
-    void givenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
+    void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
         when(this.game.isBoardComplete()).thenReturn(false);
         when(this.game.isUser()).thenReturn(true);
         when(this.console.readInt(anyString())).thenReturn(1);
@@ -52,7 +52,7 @@ public class PlayViewTest {
     }
 
     @Test
-    void givenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
+    void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
         Coordinate coordinate = new Coordinate(0, 0);
         when(this.game.isBoardComplete()).thenReturn(false);
         when(this.game.isUser()).thenReturn(false);
@@ -63,6 +63,37 @@ public class PlayViewTest {
         when(this.game.getToken()).thenReturn(Token.X);
         this.playView.interact();
         verify(this.game).put(coordinate);
+    }
+
+    @Test
+    void testGivenNewPlayViewWhenUserPlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
+        when(this.game.isBoardComplete()).thenReturn(true);
+        when(this.game.isUser()).thenReturn(true);
+        when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
+        when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+        when(this.game.isTicTacToe()).thenReturn(true);
+        when(this.game.getToken()).thenReturn(Token.X);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playView.interact();
+            verify(this.game).move(new Coordinate(0, 0), new Coordinate(1, 1));
+        }
+    }
+
+    @Test
+    void testGivenNewPlayViewWhenMachinePlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate target = new Coordinate(0, 0);
+        when(this.game.isBoardComplete()).thenReturn(true);
+        when(this.game.isUser()).thenReturn(false);
+        when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
+        when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+        when(this.game.isTicTacToe()).thenReturn(true);
+        when(this.game.getToken()).thenReturn(Token.X);
+        this.playView.interact();
+        verify(this.game).move(origin, target);
     }
 
 }

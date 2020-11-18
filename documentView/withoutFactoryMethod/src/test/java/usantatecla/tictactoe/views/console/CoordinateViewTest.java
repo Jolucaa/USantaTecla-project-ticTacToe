@@ -12,14 +12,14 @@ import usantatecla.utils.Console;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CoordinateViewTest {
 
     @Mock
     private Console console;
+
     private CoordinateView coordinateView;
 
     @BeforeEach
@@ -28,12 +28,24 @@ public class CoordinateViewTest {
     }
 
     @Test
-    void testGivenNewCoordinateViewWhenReadThenIsValidCoordinate() {
+    void testGivenNewCoordinateViewWhenReadCoordinateThenReturnCoordinate() {
         when(this.console.readInt(anyString())).thenReturn(1);
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.coordinateView.read(""), is(new Coordinate(0, 0)));
         }
     }
+
+    @Test
+    void testGivenNewCoordinateViewWhenReadInvalidCoordinateThenReadValidCoordinateAndReturnValidCoordinate() {
+        when(this.console.readInt(anyString())).thenReturn(4, 1);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Coordinate coordinate = this.coordinateView.read("");
+            verify(this.console, times(4)).readInt(anyString());
+            assertThat(coordinate, is(new Coordinate(0, 0)));
+        }
+    }
+
 
 }
