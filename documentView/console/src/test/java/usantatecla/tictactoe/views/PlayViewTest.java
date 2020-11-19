@@ -21,13 +21,13 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class PlayViewTest {
 
     @Mock
-    Game game;
+    private Game game;
 
     @InjectMocks
-    PlayView playView;
+    private PlayView playView;
 
     @Mock
-    Console console;
+    private Console console;
 
     @BeforeEach
     void before() {
@@ -37,63 +37,73 @@ public class PlayViewTest {
 
     @Test
     void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
-        when(this.game.isBoardComplete()).thenReturn(false);
-        when(this.game.isUser()).thenReturn(true);
-        when(this.console.readInt(anyString())).thenReturn(1);
-        when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
-        when(this.game.isTicTacToe()).thenReturn(true);
-        when(this.game.getToken()).thenReturn(Token.X);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.game.isBoardComplete()).thenReturn(false);
+            when(this.game.isUser()).thenReturn(true);
+            when(this.console.readInt(anyString())).thenReturn(1);
+            when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.isTicTacToe()).thenReturn(true);
+            when(this.game.getToken()).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
             verify(this.game).put(new Coordinate(0, 0));
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
         }
     }
 
     @Test
     void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
-        Coordinate coordinate = new Coordinate(0, 0);
-        when(this.game.isBoardComplete()).thenReturn(false);
-        when(this.game.isUser()).thenReturn(false);
-        when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
-        when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
-        when(this.game.isTicTacToe()).thenReturn(true);
-        when(this.game.getToken()).thenReturn(Token.X);
-        this.playView.interact();
-        verify(this.game).put(coordinate);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            Coordinate coordinate = new Coordinate(0, 0);
+            when(this.game.isBoardComplete()).thenReturn(false);
+            when(this.game.isUser()).thenReturn(false);
+            when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
+            when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.isTicTacToe()).thenReturn(true);
+            when(this.game.getToken()).thenReturn(Token.X);
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playView.interact();
+            verify(this.game).put(coordinate);
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+        }
     }
 
     @Test
     void testGivenNewPlayViewWhenUserPlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
-        when(this.game.isBoardComplete()).thenReturn(true);
-        when(this.game.isUser()).thenReturn(true);
-        when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
-        when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
-        when(this.game.isTicTacToe()).thenReturn(true);
-        when(this.game.getToken()).thenReturn(Token.X);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.game.isBoardComplete()).thenReturn(true);
+            when(this.game.isUser()).thenReturn(true);
+            when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
+            when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.isTicTacToe()).thenReturn(true);
+            when(this.game.getToken()).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
             verify(this.game).move(new Coordinate(0, 0), new Coordinate(1, 1));
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
         }
     }
 
     @Test
     void testGivenNewPlayViewWhenMachinePlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
-        Coordinate origin = new Coordinate(0, 0);
-        Coordinate target = new Coordinate(0, 0);
-        when(this.game.isBoardComplete()).thenReturn(true);
-        when(this.game.isUser()).thenReturn(false);
-        when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
-        when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
-        when(this.game.isTicTacToe()).thenReturn(true);
-        when(this.game.getToken()).thenReturn(Token.X);
-        this.playView.interact();
-        verify(this.game).move(origin, target);
+        try (MockedStatic console = mockStatic(Console.class)) {
+            Coordinate origin = new Coordinate(0, 0);
+            Coordinate target = new Coordinate(0, 0);
+            when(this.game.isBoardComplete()).thenReturn(true);
+            when(this.game.isUser()).thenReturn(false);
+            when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
+            when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.isTicTacToe()).thenReturn(true);
+            when(this.game.getToken()).thenReturn(Token.X);
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playView.interact();
+            verify(this.game).move(origin, target);
+            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+        }
     }
 
 }

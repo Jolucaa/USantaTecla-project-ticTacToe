@@ -8,46 +8,41 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Error;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Token;
 import usantatecla.utils.Console;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class StartViewTest {
 
     @Mock
-    Game game;
+    private Game game;
 
     @InjectMocks
-    StartView startView;
+    private StartView startView;
 
     @Mock
-    Console console;
-
-    @Mock
-    View view;
+    private Console console;
 
     @BeforeEach
     void before() {
         openMocks(this);
-        this.startView = spy(this.startView);
     }
 
     @Test
-    void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
-
-        /*when(this.console.readInt(anyString())).thenReturn(1);
+    void testGivenNewStartViewWhenReadNumberOfUsersThenGameSetNumberOfUsers() {
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readInt(anyString())).thenReturn(1);
+            when(this.game.getMaxPlayers()).thenReturn(2);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
-            this.view.interact();
-            verify(this.startView).interact();
-        }*/
+            this.startView.interact();
+            verify(this.console).writeln(Message.TITLE.toString());
+            verify(this.game).setUsers(1);
+        }
     }
 }

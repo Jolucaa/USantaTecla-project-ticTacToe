@@ -21,13 +21,13 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class ResumeViewTest {
 
     @Mock
-    Game game;
+    private Game game;
 
     @Mock
-    Console console;
+    private Console console;
 
     @InjectMocks
-    ResumeView resumeView;
+    private ResumeView resumeView;
 
     @BeforeEach
     void before() {
@@ -36,8 +36,8 @@ public class ResumeViewTest {
 
     @Test
     void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
-        when(this.console.readChar(anyString())).thenReturn('n');
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readChar(anyString())).thenReturn('n');
             console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.resumeView.interact(), is(false));
         }
@@ -45,8 +45,8 @@ public class ResumeViewTest {
 
     @Test
     void testGivenNewGameIsTrueWhenInteractThenIsTrue() {
-        when(this.console.readChar(anyString())).thenReturn('y');
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readChar(anyString())).thenReturn('y');
             console.when(Console::getInstance).thenReturn(this.console);
             assertThat(this.resumeView.interact(), is(true));
         }

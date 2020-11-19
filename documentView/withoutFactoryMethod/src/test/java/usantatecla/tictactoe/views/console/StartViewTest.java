@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -20,13 +21,13 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class StartViewTest {
 
     @Mock
-    Game game;
+    private Game game;
 
     @InjectMocks
-    StartView startView;
+    private StartView startView;
 
     @Mock
-    Console console;
+    private Console console;
 
     @BeforeEach
     void before() {
@@ -35,14 +36,14 @@ public class StartViewTest {
 
     @Test
     void testGivenNewStartViewWhenReadNumberOfUsersThenGameSetNumberOfUsers() {
-        when(this.game.getMaxPlayers()).thenReturn(2);
-        when(this.console.readInt(anyString())).thenReturn(2);
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readInt(anyString())).thenReturn(1);
+            when(this.game.getMaxPlayers()).thenReturn(2);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.startView.interact();
-            verify(this.game).setUsers(2);
+            verify(this.console).writeln(Message.TITTLE.toString());
+            verify(this.game).setUsers(1);
         }
     }
-
 }

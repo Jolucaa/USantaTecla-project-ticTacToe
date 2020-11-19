@@ -20,16 +20,16 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class GameViewTest {
 
     @Mock
-    Game game;
+    private Game game;
 
     @InjectMocks
-    GameView gameView;
+    private GameView gameView;
 
     @Mock
-    Console console;
+    private Console console;
 
     @Captor
-    ArgumentCaptor<String> captor;
+    private ArgumentCaptor<String> captor;
 
     @BeforeEach
     void before() {
@@ -38,10 +38,14 @@ public class GameViewTest {
 
     @Test
     void testGivenNewGameViewWhenWriteThenPrintBoard() {
-        when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.gameView.write();
+            verify(this.console, times(2)).writeln(Message.SEPARATOR.toString());
+            verify(this.console, times(3)).write(Message.VERTICAL_LINE_LEFT.toString());
+            verify(this.console, times(9)).write(Message.VERTICAL_LINE_CENTERED.toString());
+            verify(this.console, times(3)).writeln(Message.VERTICAL_LINE_RIGHT.toString());
             verify(this.console, times(21)).write(captor.capture());
             assertThat(captor.getAllValues().toString(), is("[| , X,  | , X,  | , X,  | , " +
                                                                    "| , X,  | , X,  | , X,  | , " +

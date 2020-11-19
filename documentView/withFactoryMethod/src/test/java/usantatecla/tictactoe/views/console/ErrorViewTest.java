@@ -17,16 +17,16 @@ import static org.mockito.MockitoAnnotations.openMocks;
 public class ErrorViewTest {
 
     @Mock
-    Error error;
+    private Error error;
 
     @InjectMocks
-    ErrorView errorView;
+    private ErrorView errorView;
 
     @Mock
-    Console console;
+    private Console console;
 
     @Captor
-    ArgumentCaptor<String> captor;
+    private ArgumentCaptor<String> captor;
 
     @BeforeEach
     void before() {
@@ -35,8 +35,8 @@ public class ErrorViewTest {
 
     @Test
     void testGivenNewGameViewWhenWriteNullErrorThenNeverPrint() {
-        when(this.error.isNull()).thenReturn(true);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.error.isNull()).thenReturn(true);
             console.when(Console::getInstance).thenReturn(this.console);
             this.errorView.writeln();
             verify(this.console, never()).writeln(anyString());
@@ -45,9 +45,9 @@ public class ErrorViewTest {
 
     @Test
     void testGivenNewGameViewWhenWriteNotNullErrorThenPrintErrorMessage() {
-        when(this.error.isNull()).thenReturn(false);
-        when(this.error.ordinal()).thenReturn(0);
         try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.error.isNull()).thenReturn(false);
+            when(this.error.ordinal()).thenReturn(0);
             console.when(Console::getInstance).thenReturn(this.console);
             this.errorView.writeln();
             verify(this.console).writeln(captor.capture());

@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
