@@ -32,7 +32,6 @@ public class PlayViewTest {
 
     @BeforeEach
     void before() {
-        openMocks(this);
         this.playView = spy(this.playView);
     }
 
