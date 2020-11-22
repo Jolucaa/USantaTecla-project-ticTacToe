@@ -1,0 +1,117 @@
+@startuml arquitectura
+package tictactoe #DDDDDD { }
+tictactoe .down.> tictactoe.models
+tictactoe .down.> tictactoe.views.console
+tictactoe .down.> tictactoe.controllers
+tictactoe .down.> tictactoe.views
+
+package tictactoe.controllers #DDDDDD { }
+tictactoe.controllers .down.> tictactoe.models
+
+package tictactoe.models #DDDDDD { }
+package java.util{ }
+tictactoe.models .down.> java.util
+
+package utils #DDDDDD { }
+package java.io{ }
+utils .down.> java.io
+
+package tictactoe.views #DDDDDD { }
+tictactoe.views .down.> tictactoe.controllers
+
+package tictactoe.views.console #DDDDDD { }
+tictactoe.views.console .down.> tictactoe.views
+tictactoe.views.console .down.> tictactoe.controllers
+tictactoe.views.console .down.> utils
+
+@enduml
+
+@startuml paqueteTicTacToe
+class View as "tictactoe.views.View" {}
+class Game as "tictactoe.models.Game" {}
+class StartController as "tictactoe.controllers.StartController" {}
+class PlayController as "tictactoe.controllers.PlayController" {}
+class ResumeController as "tictactoe.controllers.ResumeController" {}
+
+class  tictactoe.ConsoleTicTacToe{
++ {static} main(String[])
+# createView(StartController, PlayController, ResumeController): View
+}
+tictactoe.TicTacToe <|-down- tictactoe.ConsoleTicTacToe
+
+class  tictactoe.TicTacToe{
+- game: Game
+- startController: StartController
+- playController: PlayController
+- resumeController: ResumeController
+- view: View
+# TicTacToe()
+# {abstract} createView(StartController, PlayController, ResumeController): View
+# play()
+}
+tictactoe.TicTacToe --> View
+tictactoe.TicTacToe --> Game
+tictactoe.TicTacToe --> StartController
+tictactoe.TicTacToe --> PlayController
+tictactoe.TicTacToe --> ResumeController
+@enduml
+
+@startuml paqueteTicTactoeViews
+class Error as "tictactoe.models.Error" {}
+class Console as "usantatecla.utils.Console" {}
+
+class  tictactoe.views.ErrorView{
++ {static} MESSAGES: String[]
+# error: Error
++ ErrorView(Error)
+}
+tictactoe.views.ErrorView .down.> Error
+
+enum  tictactoe.views.Message{
++ EMPTY
++ NUMBER_PLAYERS
++ SEPARATOR
++ VERTICAL_LINE_LEFT
++ VERTICAL_LINE_CENTERED
++ VERTICAL_LINE_RIGHT
++ ENTER_COORDINATE_TO_PUT
++ ENTER_COORDINATE_TO_REMOVE
++ COORDINATE_TO_PUT
++ COORDINATE_TO_REMOVE
++ COORDINATE_TO_MOVE
++ PLAYER_WIN
++ RESUME
+- message: String
+- Message(String)
++ getMessage(): String
++ write()
++ writeln()
++ toString(): String
+}
+
+tictactoe.views.Message .down.> Console
+
+abstract class tictactoe.views.View{
++ interact()
+# {abstract} start()
+# {abstract} play()
+# {abstract} isResumed(): boolean
+}
+
+@enduml
+
+@startuml paqueteTicTactoeViewsConsole
+
+@enduml
+
+@startuml paqueteTicTactoeModels
+
+@enduml
+
+@startuml paqueteTicTactoeControllers
+
+@enduml
+
+@startuml paqueteUtils
+
+@enduml

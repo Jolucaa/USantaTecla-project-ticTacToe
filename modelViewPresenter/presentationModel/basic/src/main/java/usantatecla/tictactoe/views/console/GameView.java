@@ -6,10 +6,10 @@ import usantatecla.tictactoe.views.Message;
 
 class GameView {
     
-  private Controller contoller;
+  private Controller controller;
 
-  GameView(Controller contoller) {
-    this.contoller = contoller;
+  GameView(Controller controller) {
+    this.controller = controller;
   }
 
 	void write() {
@@ -17,7 +17,7 @@ class GameView {
 		for (int i = 0; i<Coordinate.DIMENSION; i++) {
 			Message.VERTICAL_LINE_LEFT.write();
 			for (int j = 0; j<Coordinate.DIMENSION; j++) {
-				new TokenView(this.contoller.getToken(new Coordinate(i, j))).write();;
+				new TokenView(this.controller.getToken(new Coordinate(i, j))).write();;
 				Message.VERTICAL_LINE_CENTERED.write();
 			}
 			Message.VERTICAL_LINE_RIGHT.writeln();

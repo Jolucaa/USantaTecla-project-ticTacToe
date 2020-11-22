@@ -15,7 +15,7 @@ public class PlayersDialogTest {
 
     @Mock
     private Console console;
-
+/*
     @InjectMocks
     private PlayersDialog playersDialog = new PlayersDialog();
 
@@ -46,5 +46,5 @@ public class PlayersDialogTest {
         assertEquals(3, this.playersDialog.read(2));
         verify(this.console).readInt("Number of users [0-" + 2 + "] ");
     }
-    
+ */
 }
