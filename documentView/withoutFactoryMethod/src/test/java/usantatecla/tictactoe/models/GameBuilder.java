@@ -5,15 +5,21 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class GameBuilder {
-    private List<String> strings;
+
     private Integer users;
+    private List<String> strings;
+    private List<Coordinate> xCoordinates;
+    private List<Coordinate> oCoordinates;
 
     public GameBuilder() {
-        this.strings = new ArrayList<String>();
+        this.users = 0;
+        this.strings = new ArrayList<>();
+        this.xCoordinates = new ArrayList<>();
+        this.oCoordinates = new ArrayList<>();
     }
 
-    public GameBuilder numberUsers(int users){
-        assert users<=Turn.NUMBER_PLAYERS && users>=0;
+    public GameBuilder users(int users) {
+        assert users <= Turn.NUMBER_PLAYERS && users >= 0;
         this.users = users;
         return this;
     }
@@ -27,21 +33,42 @@ public class GameBuilder {
         return this;
     }
 
-    public Game build(){
+    public Game build() {
         Game game = new Game();
-        if(this.users==null){
-            game.setUsers(0);
-        }
-        if(this.strings.size()!=0){
-            for(int i=0;i<this.strings.size();i++){
-                //this.setRow(i, game);
-            }
+        game.setUsers(this.users);
+        if (this.strings.size() != 0) {
+            readRows();
+            putCoordinates(game);
         }
         return game;
     }
 
-    /*private void setRow(int row,Game game){
-        if(game.getToken())
-    } */
+    private void readRows() {
+        for (int i = 0; i < strings.size(); i++) {
+            for (int j = 0; j < strings.get(i).length(); j++) {
+                setCoordinate(strings.get(i).charAt(j), i, j);
+            }
+        }
+    }
+
+    private void setCoordinate(char token, int row, int column) {
+        if (token == 'X') {
+            this.xCoordinates.add(new Coordinate(row, column));
+        } else if (token == 'O') {
+            this.oCoordinates.add(new Coordinate(row, column));
+        }
+    }
+
+    private void putCoordinates(Game game) {
+        assert this.xCoordinates.size() <= this.oCoordinates.size() + 1 &&
+                this.oCoordinates.size() <= this.xCoordinates.size();
+
+        for (int i = 0; i < xCoordinates.size(); i++) {
+            game.put(xCoordinates.get(i));
+            if (i < oCoordinates.size()) {
+                game.put(oCoordinates.get(i));
+            }
+        }
+    }
 
 }
