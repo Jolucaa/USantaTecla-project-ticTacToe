@@ -22,19 +22,88 @@ public class GameTestWithoutBuilder {
     }
 
     @Test
-    void testGivenTwoPlayersGameWhenIsUserThenIsTrue() {
+    void testGivenCompleteBoardGameWhenIsBoardCompleteThenIsTrue() {
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(0, 2));
+        this.game.put(new Coordinate(1, 0));
+        this.game.put(new Coordinate(1, 1));
+        this.game.put(new Coordinate(1, 2));
+        assertThat(this.game.isBoardComplete(), is(true));
+    }
+
+    @Test
+    void testGivenZeroUsersGameWhenIsUserThenIsFalse() {
+        this.game.setUsers(0);
+        assertThat(this.game.isUser(), is(false));
+    }
+
+    @Test
+    void testGivenOneUserGameWhenIsUserThenIsTrue() {
+        this.game.setUsers(1);
+        assertThat(this.game.isUser(), is(true));
+    }
+
+    @Test
+    void testGivenOneUserGameAndFirstPlayerPlayWhenIsUserThenIsFalse() {
+        this.game.setUsers(1);
+        this.game.put(new Coordinate(0, 0));
+        assertThat(this.game.isUser(), is(false));
+    }
+
+    @Test
+    void testGivenTwoUsersGameWhenIsUserThenIsTrue() {
         this.game.setUsers(2);
         assertThat(this.game.isUser(), is(true));
     }
 
     @Test
-    void testGivenNewGameWhenPutCoordinateThenIsErrorNull() {
+    void testGivenNewGameWhenPutCoordinateThenIsNullError() {
         assertThat(this.game.put(new Coordinate(0, 0)), is(Error.NULL));
     }
 
     @Test
-    void testGivenNewGameWhenMoveOriginToTargetThenIsErrorNotOwner() {
+    void testGivenGameWithXTokenInBoardWhenPutCoordinateInXTokenCoordinateThenIsNotEmptyError() {
+        Coordinate coordinate = new Coordinate(0, 0);
+        this.game.put(coordinate);
+        assertThat(this.game.put(coordinate), is(Error.NOT_EMPTY));
+    }
+
+    @Test
+    void testGivenNewGameWhenMoveOriginToTargetThenIsNotOwnerError() {
         assertThat(this.game.move(new Coordinate(0, 0), new Coordinate(0, 1)), is(Error.NOT_OWNER));
+    }
+
+    @Test
+    void testGivenGameWithTokenInBoardWhenMoveNotOwnTokenThenIsNotOwnerError() {
+        Coordinate origin = new Coordinate(0, 0);
+        this.game.put(origin);
+        assertThat(game.move(origin, new Coordinate(0, 1)), is(Error.NOT_OWNER));
+    }
+
+    @Test
+    void testGivenGameWithTokenInBoardWhenMoveOwnTokenThenIsNullError() {
+        Coordinate origin = new Coordinate(0, 0);
+        this.game.put(origin);
+        this.game.put(new Coordinate(1, 0));
+        assertThat(this.game.move(origin, new Coordinate(0, 1)), is(Error.NULL));
+    }
+
+    @Test
+    void testGivenGameWithTokenInBoardWhenMoveOwnTokenToOccupiedCoordinateThenIsNotEmptyError() {
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate target = new Coordinate(0, 1);
+        this.game.put(origin);
+        this.game.put(target);
+        assertThat(this.game.move(origin, target), is(Error.NOT_EMPTY));
+    }
+
+    @Test
+    void testGivenGameWithTokenInBoardWhenMoveOwnTokenToSameCoordinateThenIsSameCoordinateError() {
+        Coordinate coordinate = new Coordinate(0, 0);
+        this.game.put(coordinate);
+        this.game.put(new Coordinate(1, 0));
+        assertThat(this.game.move(coordinate, coordinate), is(Error.SAME_COORDINATES));
     }
 
     @Test
@@ -43,8 +112,54 @@ public class GameTestWithoutBuilder {
     }
 
     @Test
+    void testGivenTicTacToeGameWhenIsTicTacToeThenIsTrue() {
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(1, 0));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(1, 1));
+        this.game.put(new Coordinate(0, 2));
+        assertThat(this.game.isTicTacToe(), is(true));
+    }
+
+    @Test
+    void testGivenVerticalTicTacToeGameWhenIsTicTacToeThenIsTrue() {
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(1, 0));
+        this.game.put(new Coordinate(1, 1));
+        this.game.put(new Coordinate(2, 0));
+        assertThat(this.game.isTicTacToe(), is(true));
+    }
+
+    @Test
+    void testGivenDiagonalTicTacToeGameWhenIsHorizontalTicTacToeThenIsTrue() {
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(1, 0));
+        this.game.put(new Coordinate(1, 1));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(2, 2));
+        assertThat(this.game.isTicTacToe(), is(true));
+    }
+
+    @Test
+    void testGivenInvertedDiagonalTicTacToeGameWhenIsHorizontalTicTacToeThenIsTrue() {
+        this.game.put(new Coordinate(0, 2));
+        this.game.put(new Coordinate(1, 0));
+        this.game.put(new Coordinate(1, 1));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(2, 0));
+        assertThat(this.game.isTicTacToe(), is(true));
+    }
+
+    @Test
     void testGivenNewGameWhenGetTokenThenIsXToken() {
         assertThat(this.game.getToken(), is(Token.X));
+    }
+
+    @Test
+    void testGivenGameWithXTokenWhenGetTokenThenIsOToken() {
+        this.game.put(new Coordinate(0, 0));
+        assertThat(this.game.getToken(), is(Token.O));
     }
 
     @Test
@@ -53,13 +168,30 @@ public class GameTestWithoutBuilder {
     }
 
     @Test
+    void testGivenGameWithXTokenWhenGetTokenCoordinateThenIsXToken() {
+        this.game.put(new Coordinate(0, 0));
+        assertThat(this.game.getToken(new Coordinate(0, 0)), is(Token.X));
+    }
+
+    @Test
+    void testGivenGameWithOTokenWhenGetTokenCoordinateThenIsOToken() {
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(0, 1));
+        assertThat(this.game.getToken(new Coordinate(0, 1)), is(Token.O));
+    }
+
+    @Test
     void testGivenNewGameWhenGetMaxPlayersThenIsTwo() {
-        assertThat(this.game.getMaxPlayers(), is(2));
+        assertThat(game.getMaxPlayers(), is(2));
     }
 
     @Test
     void testGivenNewGameWhenEqualsThenIsTrue() {
-        assertThat(this.game.equals(this.game), is(true));
+        this.game.setUsers(2);
+        this.game.put(new Coordinate(0, 0));
+        this.game.put(new Coordinate(0, 1));
+        this.game.put(new Coordinate(1, 1));
+        assertThat(game.equals(game), is(true));
     }
 
 }
