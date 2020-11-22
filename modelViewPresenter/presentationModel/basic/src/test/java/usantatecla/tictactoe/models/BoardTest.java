@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import usantatecla.tictactoe.types.Token;
+//import usantatecla.tictactoe.types.Token;
 
 public class BoardTest {
 

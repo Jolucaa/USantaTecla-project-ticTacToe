@@ -11,7 +11,7 @@ import usantatecla.tictactoe.models.Game;
 public class MachinePlayerViewTest {
 
     private Game game;
-
+/*
     private MachinePlayerView machinePlayerView;
 
     public MachinePlayerViewTest() {
@@ -36,5 +36,5 @@ public class MachinePlayerViewTest {
         assertNotNull(coordinates[0]);
         assertNotNull(coordinates[1]);
     }
-    
+    */
 }

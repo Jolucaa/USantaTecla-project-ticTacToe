@@ -30,7 +30,7 @@ public class Coordinate extends ConcreteCoordinate {
 
 	public Error isValid() {
 		if (!LIMITS.isIncluded(this.row) || !LIMITS.isIncluded(this.column)){
-			return Error.WRONG_COORDINATES;
+			return Error.NOT_VALID;
 		}
 		return Error.NULL;
 	}
