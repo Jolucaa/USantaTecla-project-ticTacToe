@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views;
 import usantatecla.utils.Console;
 
 public enum Message {
-  TITTLE("--- TIC TAC TOE ---"),
+  	TITTLE("--- TIC TAC TOE ---"),
 	NUMBER_PLAYERS("Number of user"), 
 	SEPARATOR("-------------"), 
 	VERTICAL_LINE_LEFT("| "), 
@@ -19,7 +19,7 @@ public enum Message {
 
 	private String message;
 
-	private Message(String message) {
+	Message(String message) {
 		this.message = message;
 	}
 

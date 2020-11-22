@@ -12,7 +12,7 @@ public class StartController extends Controller {
     this.game.setUsers(users);
   }
 
-public int getMaxPlayers() {
+  public int getMaxPlayers() {
 	return this.game.getMaxPlayers();
 }
 
