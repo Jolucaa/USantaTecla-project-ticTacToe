@@ -4,7 +4,7 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 
-public class View extends usantatecla.tictactoe.views.View {
+public class View{
 
 	private StartView startView;
 	private PlayView playView;
@@ -16,17 +16,21 @@ public class View extends usantatecla.tictactoe.views.View {
 		this.resumeView = new ResumeView(resumeController);
 	}
 
-	@Override
+	public void interact() {
+		do {
+			this.start();
+			this.play();
+		} while (this.isResumed());
+	}
+
 	protected void start(){
 		this.startView.interact();
 	}
 
-	@Override
 	protected void play(){
 		this.playView.interact();
 	}
 
-	@Override
 	protected boolean isResumed(){
 		return this.resumeView.interact();
 	}

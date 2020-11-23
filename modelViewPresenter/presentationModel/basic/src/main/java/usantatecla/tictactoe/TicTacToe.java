@@ -4,7 +4,7 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.View;
+import usantatecla.tictactoe.views.console.View;
 
 public abstract class TicTacToe {
 
