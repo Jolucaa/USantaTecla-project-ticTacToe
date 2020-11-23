@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class GameBuilder {
 
-    private int users;
+    private Integer users;
     private List<String> strings;
     private List<Coordinate> xCoordinates;
     private List<Coordinate> oCoordinates;

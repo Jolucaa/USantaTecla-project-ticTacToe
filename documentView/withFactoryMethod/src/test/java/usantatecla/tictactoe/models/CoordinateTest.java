@@ -18,6 +18,11 @@ public class CoordinateTest {
     }
 
     @Test
+    void testGivenNewCoordinateWhenIsNullThenIsFalse() {
+        assertThat(this.coordinate.isNull(), is(false));
+    }
+
+    @Test
     void testGivenNotValidCoordinateWhenIsValidThenIsErrorNotValid() {
         Coordinate coordinate = new Coordinate(3, 3);
         assertThat(coordinate.isValid(), is(Error.NOT_VALID));
