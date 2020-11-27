@@ -38,15 +38,15 @@ Universo Santa Tecla
 
 ### Paquete *tictactoe.views*
 
-![Paquete_tictactoe.views](./docs/diagrams/out/paquetes/paqueteTicTactoeViews.svg)
+![Paquete_tictactoe.views](./docs/diagrams/out/paquetes/paqueteTicTacToeViews.svg)
 
 ### Paquete *tictactoe.views.console*  
 
-![Paquete_tictactoe.views.console](./docs/diagrams/out/paquetes/paqueteTicTactoeViewsConsole.svg)
+![Paquete_tictactoe.views.console](./docs/diagrams/out/paquetes/paqueteTicTacToeViewsConsole.svg)
 
 ### Paquete *tictactoe.models*
 
-![Paquete_tictactoe.models](./docs/diagrams/out/paquetes/paqueteTicTactoeModels.svg)
+![Paquete_tictactoe.models](./docs/diagrams/out/paquetes/paqueteTicTacToeModels.svg)
 
 ### Paquete *tictactoe.types*
 
@@ -54,7 +54,7 @@ Universo Santa Tecla
 
 ### Paquete *tictactoe.controllers*  
 
-![Paquete_tictactoe.controllers](./docs/diagrams/out/paquetes/paqueteTicTactoeControllers.svg)
+![Paquete_tictactoe.controllers](./docs/diagrams/out/paquetes/paqueteTicTacToeControllers.svg)
 
 ### Paquete *tictactoe.utils*
 
