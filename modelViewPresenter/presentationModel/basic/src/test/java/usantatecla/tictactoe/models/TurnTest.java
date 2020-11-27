@@ -19,11 +19,6 @@ public class TurnTest {
     }
 
     @Test
-    void testGivenNewTurnWhenCopyTurnThenIsSameTurn() {
-        assertThat(this.turn.copy(this.board), is(this.turn));
-    }
-
-    @Test
     void testGivenTwoUsersTurnWhenIsUserThenIsTrue() {
         this.turn.setUsers(2);
         assertThat(this.turn.isUser(), is(true));
@@ -36,7 +31,7 @@ public class TurnTest {
 
     @Test
     void testGivenNewTurnWhenGetPlayerThenPlayerTokenIsX() {
-        assertThat(this.turn.getPlayer().getToken(), is(Token.X));
+        assertThat(this.turn.getToken(), is(Token.X));
     }
 
     @Test
@@ -49,9 +44,5 @@ public class TurnTest {
         assertThat(this.turn.getToken(), is(Token.X));
     }
 
-    @Test
-    void testGivenNewTurnAndCopyTurnWhenEqualsThenIsTrue() {
-        assertThat(this.turn.equals(this.turn.copy(this.board)), is(true));
-    }
 
 }

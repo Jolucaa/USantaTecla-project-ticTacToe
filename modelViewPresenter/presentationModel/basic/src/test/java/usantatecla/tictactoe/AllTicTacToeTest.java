@@ -1,5 +1,5 @@
 package usantatecla.tictactoe;
-
+/*
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -13,4 +13,4 @@ import usantatecla.tictactoe.views.console.AllViewTest;
     AllModelTest.class, 
     AllViewTest.class } )
 public class AllTicTacToeTest {
-}
+}*/

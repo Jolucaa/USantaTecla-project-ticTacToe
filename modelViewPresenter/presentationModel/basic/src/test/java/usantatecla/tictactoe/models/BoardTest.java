@@ -16,11 +16,6 @@ public class BoardTest {
     }
 
     @Test
-    void testGivenNewBoardWhenCopyBoardThenIsSameBoard() {
-        assertThat(this.board.copy(), is(this.board));
-    }
-
-    @Test
     void testGivenNewBoardWhenGetCoordinateTokenThenIsNullToken() {
         assertThat(this.board.getToken(new Coordinate(0, 0)), is(Token.NULL));
     }
@@ -91,11 +86,6 @@ public class BoardTest {
         this.board.put(new Coordinate(0, 1), Token.X);
         this.board.put(new Coordinate(0, 2), Token.X);
         assertThat(this.board.isTicTacToe(Token.X), is(true));
-    }
-
-    @Test
-    void testGivenNewBoardAndCopyBoardWhenEqualsThenIsTrue() {
-        assertThat(this.board.equals(this.board.copy()), is(true));
     }
 
 }

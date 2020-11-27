@@ -15,7 +15,7 @@ class PlayView {
 
     void interact() {
         do {
-            this.playController.next();
+            //this.playController.next();
             if (!this.playController.isBoardComplete()) {
                 this.put();
             } else {

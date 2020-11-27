@@ -19,8 +19,6 @@ public class Coordinate extends ConcreteCoordinate {
 
 	public Coordinate(int row, int column) {
 		super(row, column);
-		assert Coordinate.LIMITS.isIncluded(row);
-		assert Coordinate.LIMITS.isIncluded(column);
 	}
 
 	@Override

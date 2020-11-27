@@ -11,10 +11,6 @@ public class PlayController extends Controller {
 		super(game);
 	}
 
-	public void next() {
-    this.game.next();
-	}
-
 	public boolean isBoardComplete() {
 		return this.game.isBoardComplete();
 	}

@@ -1,5 +1,6 @@
-package usantatecla.utils;
 
+package usantatecla.utils;
+/*
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -51,4 +52,4 @@ public class ConsoleTest {
         assertEquals(1, this.console.readChar(""));
     }
 
-} 
+} */

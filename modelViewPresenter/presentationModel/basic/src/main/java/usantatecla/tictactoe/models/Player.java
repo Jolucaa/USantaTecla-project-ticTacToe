@@ -15,7 +15,7 @@ class Player {
 
 	Error put(Coordinate coordinate) {
 		if (!this.board.isEmpty(coordinate)) {
-			return Error.NOT_OWNER;
+			return Error.NOT_EMPTY;
 		}
 		this.board.put(coordinate, this.token);
 		return Error.NULL;
@@ -25,10 +25,12 @@ class Player {
 		if (!this.board.isOccupied(origin, this.token)) {
 			return Error.NOT_OWNER;
 		}
-		if (!this.board.isEmpty(target)) {
-			return Error.NOT_EMPTY;
-		} else if (origin.equals(target)) {
+		if (origin.equals(target)) {
 			return Error.SAME_COORDINATES;
+		}
+
+		else if (!this.board.isEmpty(target)) {
+			return Error.NOT_EMPTY;
 		}
 		this.board.move(origin, target);
 		return Error.NULL;

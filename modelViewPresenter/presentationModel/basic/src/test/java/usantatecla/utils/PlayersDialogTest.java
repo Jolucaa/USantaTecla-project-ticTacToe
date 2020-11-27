@@ -1,5 +1,5 @@
 package usantatecla.utils;
-
+/*
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -46,5 +46,5 @@ public class PlayersDialogTest {
         assertEquals(3, this.playersDialog.read(2));
         verify(this.console).readInt("Number of users [0-" + 2 + "] ");
     }
- */
-}
+
+}*/

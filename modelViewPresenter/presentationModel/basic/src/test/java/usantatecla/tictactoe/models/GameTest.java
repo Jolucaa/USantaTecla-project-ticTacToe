@@ -168,10 +168,12 @@ public class GameTest {
 
     @Test
     void testGivenGameWithOTokenWhenGetTokenCoordinateThenIsOToken() {
-        Game game = new GameBuilder().rows("XO ",
-                                           "   ",
+        Game game = new GameBuilder().rows("X O",
+                                           "X O",
                                            "   ").build();
-        assertThat(game.getToken(new Coordinate(0, 1)), is(Token.O));
+        System.out.println(game.getToken(new Coordinate(0,0)));
+        System.out.println(game.getToken(new Coordinate(1,2)));
+        assertThat(game.getToken(new Coordinate(1, 2)), is(Token.O));
     }
 
     @Test

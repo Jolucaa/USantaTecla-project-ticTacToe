@@ -33,7 +33,7 @@ public class GameBuilder {
         return this;
     }
 
-    public Game build() {
+    Game build() {
         Game game = new Game();
         game.setUsers(this.users);
         if (this.strings.size() != 0) {
@@ -52,6 +52,7 @@ public class GameBuilder {
     }
 
     private void setCoordinate(char token, int row, int column) {
+
         if (token == 'X') {
             this.xCoordinates.add(new Coordinate(row, column));
         } else if (token == 'O') {

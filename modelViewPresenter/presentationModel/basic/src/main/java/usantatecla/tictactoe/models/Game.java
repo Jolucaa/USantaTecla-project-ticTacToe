@@ -27,15 +27,21 @@ public class Game {
 	}
 
     public Error put(Coordinate coordinate) {
-        return this.turn.put(coordinate);
+        Error error =  this.turn.put(coordinate);
+        next(error);
+        return error;
     }
 
     public Error move(Coordinate origin, Coordinate target) {
-        return this.turn.move(origin, target);
+        Error error = this.turn.move(origin, target);
+        next(error);
+        return error;
     }
 
-    public void next() {
-        this.turn.next();
+    public void next(Error error) {
+        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())) {
+            this.turn.next();
+        }
     }
 
     public boolean isTicTacToe() {

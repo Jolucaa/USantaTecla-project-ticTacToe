@@ -62,14 +62,4 @@ public class PlayerTest {
         assertThat(this.player.getToken(), is(Token.X));
     }
 
-    @Test
-    void testGivenNewPlayerWhenCopyPlayerThenIsSamePlayer() {
-        assertThat(this.player.copy(this.board), is(this.player));
-    }
-
-    @Test
-    void testGivenNewPlayerAndCopyPlayerWhenEqualsThenIsTrue() {
-        assertThat(this.player.equals(this.player.copy(this.board)), is(true));
-    }
-
 }
