@@ -2,13 +2,13 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
 
-public class View extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends usantatecla.tictactoe.views.View {
 
 	private StartView startView;
 	private PlayView playView;
 	private ResumeView resumeView;
 
-	public View(Logic logic) {
+	public ConsoleView(Logic logic) {
 		this.startView = new StartView(logic);
 		this.playView = new PlayView(logic);
 		this.resumeView = new ResumeView(logic);
