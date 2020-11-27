@@ -1,12 +1,5 @@
 package usantatecla.tictactoe.models;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
-import usantatecla.tictactoe.models.Player;
-import usantatecla.tictactoe.models.Token;
-
 public class TurnTest {
 
     private Turn turn;

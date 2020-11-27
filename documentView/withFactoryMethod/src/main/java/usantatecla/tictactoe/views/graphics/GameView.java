@@ -49,7 +49,7 @@ public class GameView extends JPanel {
         if (token == Token.NULL) {
             squareBoardToPresent += "-";
         } else {
-            squareBoardToPresent += TokenView.SYMBOLS[token.ordinal()];
+            squareBoardToPresent += token.toString();
         }
         squareBoardToPresent += Message.VERTICAL_LINE_CENTERED.getMessage();
         return squareBoardToPresent;

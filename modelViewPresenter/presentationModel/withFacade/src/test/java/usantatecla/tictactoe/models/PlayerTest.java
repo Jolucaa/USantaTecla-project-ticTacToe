@@ -1,14 +1,5 @@
 package usantatecla.tictactoe.models;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
-import usantatecla.tictactoe.models.Error;
-import usantatecla.tictactoe.models.Player;
-import usantatecla.tictactoe.models.Token;
-
 public class PlayerTest {
     
     private Board board;
