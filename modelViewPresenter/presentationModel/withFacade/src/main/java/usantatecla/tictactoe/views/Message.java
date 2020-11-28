@@ -28,11 +28,11 @@ public enum Message {
 	}
 
 	public void write() {
-		Console.instance().write(this.message);
+		Console.getInstance().write(this.message);
 	}
 
 	public void writeln() {
-		Console.instance().writeln(this.message);
+		Console.getInstance().writeln(this.message);
 	}
 
 	@Override
