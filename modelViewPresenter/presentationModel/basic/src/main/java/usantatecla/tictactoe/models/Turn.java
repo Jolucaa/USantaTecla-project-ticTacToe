@@ -1,5 +1,7 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Error;
+
 public class Turn {
 
 	public static final int NUMBER_PLAYERS = 2;

@@ -1,74 +1,57 @@
 package usantatecla.tictactoe.views.console;
-/*
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
-import usantatecla.tictactoe.controllers.PlayController;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.Console;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.openMocks;
+
+@ExtendWith(MockitoExtension.class)
 public class CoordinateViewTest {
-    static final String ENTER_COORDINATE_TO_PUT = "Enter a coordinate to put a token:";
 
     @Mock
-    Console console;
+    private Console console;
 
     @InjectMocks
-    CoordinateView coordinateView = new CoordinateView();
+    private CoordinateView coordinateView;
 
-    @Test
-    public void testGivenNewCoordinateViewWhenReadCoordinateThenIsCorrect() {
-        when(this.console.readInt("Row: ")).thenReturn(1);
-        when(this.console.readInt("Column: ")).thenReturn(1);
-        Coordinate coordinateRead = this.coordinateView.read(ENTER_COORDINATE_TO_PUT);
-        Coordinate coordinateExpected = new Coordinate(0, 0);
-        assertEquals(coordinateExpected.getRow(), coordinateRead.getRow());
-        assertEquals(coordinateExpected.getColumn(), coordinateRead.getColumn());
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testGivenNewCoordinatesWhenRow4AndColumn4ThenAssertionException() {
-        when(this.console.readInt("Row: ")).thenReturn(4);
-        when(this.console.readInt("Column: ")).thenReturn(4);
-        this.coordinateView.read("Title");
-        verify(this.console).readInt("Row: ");
-        verify(this.console).readInt("Column: ");
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testGivenNewCoordinatesWhenRow0AndColumn0ThenAssertionException() {
-        when(this.console.readInt("Row: ")).thenReturn(0);
-        when(this.console.readInt("Column: ")).thenReturn(0);
-        this.coordinateView.read("Title");
-        verify(this.console).readInt("Row: ");
-        verify(this.console).readInt("Column: ");
+    @BeforeEach
+    void before() {
+        openMocks(this);
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenRow1AndColumn1ThenIsCorrect() {
-        when(this.console.readInt("Row: ")).thenReturn(1);
-        when(this.console.readInt("Column: ")).thenReturn(1);
-        this.coordinateView.read("Title");
-        verify(this.console).readInt("Row: ");
-        verify(this.console).readInt("Column: ");
+    void testGivenNewCoordinateViewWhenReadCoordinateThenReturnCoordinate() {
+        try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readInt(anyString())).thenReturn(1);
+            console.when(Console::getInstance).thenReturn(this.console);
+            Coordinate coordinate = this.coordinateView.read("");
+            verify(this.console).writeln("");
+            assertThat(coordinate, is(new Coordinate(0, 0)));
+        }
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenRow3AndColumn3ThenIsCorrect() {
-        when(this.console.readInt("Row: ")).thenReturn(3);
-        when(this.console.readInt("Column: ")).thenReturn(3);
-        this.coordinateView.read("Title");
-        verify(this.console).readInt("Row: ");
-        verify(this.console).readInt("Column: ");
+    void testGivenNewCoordinateViewWhenReadInvalidCoordinateThenReadValidCoordinateAndReturnValidCoordinate() {
+        try (MockedStatic console = mockStatic(Console.class)) {
+            when(this.console.readInt(anyString())).thenReturn(4, 1);
+            console.when(Console::getInstance).thenReturn(this.console);
+            Coordinate coordinate = this.coordinateView.read("");
+            verify(this.console, times(2)).writeln("");
+            verify(this.console, times(4)).readInt(anyString());
+            assertThat(coordinate, is(new Coordinate(0, 0)));
+        }
     }
+
 }
-*/
