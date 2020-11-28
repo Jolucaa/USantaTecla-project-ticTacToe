@@ -18,7 +18,7 @@ tictactoe.TicTacToe <|-down- tictactoe.ConsoleTicTacToe
 
 @enduml
 
-@startuml paqueteTicTacToeViews
+@startuml paqueteTicTactoeViews
 enum Error as "tictactoe.types.Error" {}
 class Console as "usantatecla.utils.Console" {}
 
@@ -62,7 +62,7 @@ abstract class tictactoe.views.View {
 
 @enduml
 
-@startuml paqueteTicTacToeViewsConsole
+@startuml paqueteTicTactoeViewsConsole
 abstract class View as "tictactoe.views.\nView" {}
 class Coordinate as "tictactoe.models.\nCoordinate" {}
 class Error as "tictactoe.types.\nError" {}
@@ -158,7 +158,7 @@ tictactoe.views.console.StartView .down.> Console
 
 @enduml
 
-@startuml paqueteTicTacToeViewsGraphics
+@startuml paqueteTicTactoeViewsGraphics
 
 abstract class View as "usantatecla.views.\nView"
 
@@ -172,7 +172,7 @@ tictactoe.views.graphics.GraphicsView -up-|> View
 
 @enduml
 
-@startuml paqueteTicTacToeModels
+@startuml paqueteTicTactoeModels
 class ClosedInterval as "usantatecla.utils.\nClosedInterval" {}
 class ConcreteCoordinate as "usantatecla.utils.\nConcreteCoordinate" {}
 class Direction as "usantatecla.utils.\nDirection" {}
@@ -287,7 +287,7 @@ enum  tictactoe.types.Error{
 }
 @enduml
 
-@startuml paqueteTicTacToeControllers
+@startuml paqueteTicTactoeControllers
 class Game as "tictactoe.models.\nGame" {}
 class Coordinate as "tictactoe.models.\nCoordinate" {}
 class Error as "tictactoe.types.\nError" {}
