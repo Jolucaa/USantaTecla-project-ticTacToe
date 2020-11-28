@@ -18,7 +18,7 @@ tictactoe.TicTacToe <|-down- tictactoe.ConsoleTicTacToe
 
 @enduml
 
-@startuml paqueteTicTactoeViews
+@startuml paqueteTicTacToeViews
 enum Error as "tictactoe.types.Error" {}
 class Console as "usantatecla.utils.Console" {}
 
@@ -62,7 +62,7 @@ abstract class tictactoe.views.View {
 
 @enduml
 
-@startuml paqueteTicTactoeViewsConsole
+@startuml paqueteTicTacToeViewsConsole
 abstract class View as "tictactoe.views.\nView" {}
 class Coordinate as "tictactoe.models.\nCoordinate" {}
 class Error as "tictactoe.types.\nError" {}
