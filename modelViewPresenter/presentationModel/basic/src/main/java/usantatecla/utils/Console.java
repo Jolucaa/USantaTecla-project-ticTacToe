@@ -7,7 +7,7 @@ public class Console {
 
 	public static Console console;
 	
-	public static Console instance() {
+	public static Console getInstance() {
 		if (Console.console == null) {
 			Console.console = new Console();
 		}
