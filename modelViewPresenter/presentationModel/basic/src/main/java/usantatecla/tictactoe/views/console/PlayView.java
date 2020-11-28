@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.tictactoe.types.Error;
 
 class PlayView {
 
@@ -35,8 +35,7 @@ class PlayView {
             if (isUser) {
                 coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
             } else {
-                coordinate = new Coordinate();
-                coordinate.random();
+                coordinate = createRandomCoordinate();
             }
             error = this.playController.put(coordinate);
             if (isUser) {
@@ -55,16 +54,20 @@ class PlayView {
                 origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.toString());
                 target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.toString());
             } else {
-                origin = new Coordinate();
-                origin.random();
-                target = new Coordinate();
-                target.random();
+                origin = createRandomCoordinate();
+                target = createRandomCoordinate();
             }
             error = this.playController.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
         } while (!error.isNull());
+    }
+
+    Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
     }
 
 }

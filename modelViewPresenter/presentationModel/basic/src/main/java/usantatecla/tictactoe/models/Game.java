@@ -1,5 +1,7 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Error;
+
 public class Game {
     
     private Board board;

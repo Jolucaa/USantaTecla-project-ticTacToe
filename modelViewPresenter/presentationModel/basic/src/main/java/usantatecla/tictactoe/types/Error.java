@@ -1,6 +1,5 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
-//TODO MOVER A TIPOS....
 public enum Error {
 
 	NOT_EMPTY,

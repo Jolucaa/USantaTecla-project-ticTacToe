@@ -14,8 +14,8 @@ class StartView {
 		this.startController = startController;
 	}
 
-  void interact() {
-		Message.TITTLE.writeln();
+	void interact() {
+		Message.TITLE.writeln();
 		int users = new LimitedIntDialog(0, 
 			this.startController.getMaxPlayers()).read(Message.NUMBER_PLAYERS.toString());
 		this.startController.setUsers(users);
