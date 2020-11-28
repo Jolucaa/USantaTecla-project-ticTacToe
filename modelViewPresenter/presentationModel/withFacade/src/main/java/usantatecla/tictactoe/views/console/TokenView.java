@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Console;
 
 public class TokenView {

@@ -2,6 +2,7 @@ package usantatecla.tictactoe.models;
 
 import java.util.Random;
 
+import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.ConcreteCoordinate;
 import usantatecla.utils.Direction;

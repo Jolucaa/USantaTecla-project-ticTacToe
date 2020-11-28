@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Token;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

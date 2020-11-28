@@ -81,7 +81,7 @@ class usantatecla.tictactoe.views.View {
 
 class Game as "usantatecla.tictactoe.models.Game"
 class Console as "usantatecla.utils.Console"
-class Error as "usantatecla.tictactoe.models.Error"
+class Error as "usantatecla.tictactoe.types.Error"
 
 usantatecla.tictactoe.views.ErrorView *-down-> Error
 usantatecla.tictactoe.views.View *-down-> Game
@@ -98,7 +98,7 @@ class usantatecla.tictactoe.views.console.CoordinateView {
 usantatecla.tictactoe.views.console.CoordinateView .down.> usantatecla.tictactoe.views.console.ErrorView
 
 class Coordinate as "usantatecla.tictactoe.models.Coordinate"
-class Error as "usantatecla.tictactoe.models.Error"
+class Error as "usantatecla.tictactoe.types.Error"
 class Console as "usantatecla.utils.Console"
 
 usantatecla.tictactoe.views.console.CoordinateView .down.> Console
@@ -192,7 +192,7 @@ class usantatecla.tictactoe.views.console.TokenView {
 
 }
 
-class Token as "usantatecla.tictactoe.models.Token"
+class Token as "usantatecla.tictactoe.types.Token"
 
 usantatecla.tictactoe.views.console.TokenView *-down-> Token
 usantatecla.tictactoe.views.console.TokenView .down.> Console
@@ -263,7 +263,7 @@ class usantatecla.tictactoe.views.graphics.CoordinateMoveView extends usantatecl
 
 }
 
-class Error as "usantatecla.tictactoe.models.Error"
+class Error as "usantatecla.tictactoe.types.Error"
 class ErrorView as "usantatecla.tictactoe.views.ErrorView"
 
 
@@ -317,7 +317,7 @@ class usantatecla.tictactoe.views.graphics.GameView  {
 }
 
 class Game as "usantatecla.tictactoe.models.Game"
-class Token as "usantatecla.tictactoe.models.Token"
+class Token as "usantatecla.tictactoe.types.Token"
 class Message as "usantatecla.tictactoe.views.Message"
 class TokenView as "usantatecla.tictactoe.views.console.TokenView"
 
@@ -407,7 +407,7 @@ class ConcreteCoordinate as "usantatecla.utils.ConcreteCoordinate"
 class Direction as "usantatecla.utils.Direction"
 
 usantatecla.tictactoe.models.Board *-down-> usantatecla.tictactoe.models.Coordinate
-usantatecla.tictactoe.models.Board .down.> usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Board .down.> usantatecla.tictactoe.types.Token
 usantatecla.tictactoe.models.Board .down.> usantatecla.tictactoe.models.Turn
 usantatecla.tictactoe.models.Board .down.> Direction
 
@@ -424,11 +424,11 @@ class  usantatecla.tictactoe.models.Coordinate{
 + random()
 }
 ConcreteCoordinate <|-down- usantatecla.tictactoe.models.Coordinate
-usantatecla.tictactoe.models.Coordinate .down.> usantatecla.tictactoe.models.Error
+usantatecla.tictactoe.models.Coordinate .down.> usantatecla.tictactoe.types.Error
 usantatecla.tictactoe.models.Coordinate .down.> Direction
 usantatecla.tictactoe.models.Coordinate .down.> ClosedInterval
 
-enum  usantatecla.tictactoe.models.Error{
+enum  usantatecla.tictactoe.types.Error{
 + NOT_EMPTY
 + NOT_OWNER
 + SAME_COORDINATES
@@ -457,7 +457,7 @@ class  usantatecla.tictactoe.models.Game{
 usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Board
 usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Turn
 usantatecla.tictactoe.models.Game .down.> usantatecla.tictactoe.models.Coordinate
-usantatecla.tictactoe.models.Game .down.> usantatecla.tictactoe.models.Error
+usantatecla.tictactoe.models.Game .down.> usantatecla.tictactoe.types.Error
 
 class  usantatecla.tictactoe.models.Player{
 - token: Token
@@ -469,12 +469,12 @@ class  usantatecla.tictactoe.models.Player{
 + copy(Board): Player
 + equals(Object)
 }
-usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.types.Token
 usantatecla.tictactoe.models.Player *-down-> usantatecla.tictactoe.models.Board
 usantatecla.tictactoe.models.Player .down.> usantatecla.tictactoe.models.Coordinate
-usantatecla.tictactoe.models.Player .down.> usantatecla.tictactoe.models.Error
+usantatecla.tictactoe.models.Player .down.> usantatecla.tictactoe.types.Error
 
-enum  usantatecla.tictactoe.models.Token{
+enum  usantatecla.tictactoe.types.Token{
 + X
 + O
 + NULL
@@ -483,7 +483,7 @@ enum  usantatecla.tictactoe.models.Token{
 + toString(): String
 }
 
-usantatecla.tictactoe.models.Token .down.> ClosedInterval
+usantatecla.tictactoe.types.Token .down.> ClosedInterval
 
 class  usantatecla.tictactoe.models.Turn{
 + {static} NUM_PLAYERS: int
@@ -506,9 +506,9 @@ class  usantatecla.tictactoe.models.Turn{
 
 usantatecla.tictactoe.models.Turn *-down-> usantatecla.tictactoe.models.Player
 usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.models.Board
-usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.models.Token
+usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.types.Token
 usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.models.Coordinate
-usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.models.Error
+usantatecla.tictactoe.models.Turn .down.-> usantatecla.tictactoe.types.Error
 
 @enduml
 

@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.Console;
 
 public class CoordinateView {
