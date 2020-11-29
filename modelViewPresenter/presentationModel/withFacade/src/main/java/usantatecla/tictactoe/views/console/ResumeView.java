@@ -11,7 +11,7 @@ class ResumeView extends SubView {
     }
 
     boolean interact() {
-        boolean isResumed = new YesNoDialog().read(Message.RESUME.toString());
+        boolean isResumed = new YesNoDialog().read(Message.RESUME.getMessage());
         if (isResumed) {
             this.logic.resume();
         }

@@ -4,6 +4,7 @@ import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.utils.Console;
 
 class PlayView extends SubView {
 
@@ -21,7 +22,7 @@ class PlayView extends SubView {
             new GameView(this.logic).write();
         } while (!this.logic.isTicTacToe());
         new TokenView(this.logic.getToken()).write();
-        Message.PLAYER_WIN.writeln();
+        Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
     }
 
     private void put() {
