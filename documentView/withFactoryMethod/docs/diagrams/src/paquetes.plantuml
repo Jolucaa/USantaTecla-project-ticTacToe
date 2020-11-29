@@ -20,7 +20,7 @@ class  usantatecla.tictactoe.TicTacToe{
 - view: View
 # TicTacToe()
 # {abstract} createView(Game): View
-# play(): void
+# play()
 }
 
 usantatecla.tictactoe.TicTacToe <|-down- usantatecla.tictactoe.ConsoleTicTacToe

@@ -3,8 +3,8 @@ class  usantatecla.tictactoe.TicTacToe{
 - game: Game
 - view: View
 ~ TicTacToe()
-- play(): void
-+ main(String[]): void
+- play()
++ main(String[])
 }
 usantatecla.tictactoe.TicTacToe *-down-> tictactoe.models.Game
 usantatecla.tictactoe.TicTacToe *-down-> tictactoe.views.View
@@ -58,8 +58,8 @@ enum  tictactoe.views.Message{
 + RESUME
 - message: String
 - Message(String)
-~ write(): void
-~ writeln(): void
+~ write()
+~ writeln()
 + toString(): String
 }
 tictactoe.views.Message ..> Console

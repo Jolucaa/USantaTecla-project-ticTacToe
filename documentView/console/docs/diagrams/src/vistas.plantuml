@@ -1,23 +1,23 @@
 @startuml desarrollo_implementacion
-package "  "  as tictactoe {
+package "  "  as usantatecla.tictactoe {
 }
-package "  "  as tictactoe.models {
+package "  "  as usantatecla.tictactoe.models {
 }
-package "  "  as tictactoe.views {
+package "  "  as usantatecla.tictactoe.views {
 }
-package "  "  as utils {
+package "  "  as usantatecla.utils {
 }
 package "  "  as java.io {
 }
 package "  "  as java.util {
 }
 
-[mastermind.jar] as jar
+[tictactoe.jar] as jar
 
-jar *--> tictactoe
-jar *--> tictactoe.models
-jar *--> tictactoe.views
-jar *--> utils
+jar *--> usantatecla.tictactoe
+jar *--> usantatecla.tictactoe.models
+jar *--> usantatecla.tictactoe.views
+jar *--> usantatecla.utils
 jar *--> java.io
 jar *--> java.util
 @enduml
