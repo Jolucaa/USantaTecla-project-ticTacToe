@@ -2,9 +2,9 @@ package usantatecla.utils;
 
 public class NullCoordinate implements Coordinate {
 
-	public static NullCoordinate instance;
+	private static NullCoordinate instance;
 	
-	public static Coordinate instance() {
+	public static Coordinate getInstance() {
 		if (NullCoordinate.instance == null) {
 			NullCoordinate.instance = new NullCoordinate();
 		}
