@@ -13,7 +13,6 @@ class PlayView extends SubView {
 
     void interact() {
         do {
-            this.logic.next();
             if (!this.logic.isBoardComplete()) {
                 this.put();
             } else {

@@ -5,15 +5,15 @@ import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Token;
 
 public abstract class Controller {
-    
+
     protected Game game;
 
-	Controller(Game game) {
-		this.game = game;
-  }
+    Controller(Game game) {
+        this.game = game;
+    }
 
-	public Token getToken(Coordinate coordinate) {
-		return this.game.getToken(coordinate);
-	}
-  
+    public Token getToken(Coordinate coordinate) {
+        return this.game.getToken(coordinate);
+    }
+
 }

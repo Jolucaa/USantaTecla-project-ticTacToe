@@ -31,10 +31,6 @@ public class Logic {
     return this.playController.getToken();
   }
 
-  public void next() {
-    this.playController.next();
-  }
-
   public boolean isBoardComplete() {
     return this.playController.isBoardComplete();
   }
