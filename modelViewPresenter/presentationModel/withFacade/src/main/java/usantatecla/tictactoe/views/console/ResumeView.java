@@ -6,12 +6,16 @@ import usantatecla.utils.YesNoDialog;
 
 class ResumeView extends SubView {
 
-	public ResumeView(Logic logic) {
-		super(logic);
-	}
+    public ResumeView(Logic logic) {
+        super(logic);
+    }
 
-	boolean interact() {
-		return new YesNoDialog().read(Message.RESUME.toString());
-	}
+    boolean interact() {
+        boolean isResumed = new YesNoDialog().read(Message.RESUME.toString());
+        if (isResumed) {
+            this.logic.resume();
+        }
+        return isResumed;
+    }
 
 }

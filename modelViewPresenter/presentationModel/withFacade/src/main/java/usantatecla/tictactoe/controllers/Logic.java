@@ -16,6 +16,7 @@ public class Logic {
     this.game = new Game();
     this.startController = new StartController(this.game);
     this.playController = new PlayController(this.game);
+    this.resumeController = new ResumeController(this.game);
   }
 
   public int getMaxPlayers() {
