@@ -5,40 +5,66 @@ import usantatecla.tictactoe.types.Token;
 
 class Player {
 
-	private Token token;
-	private Board board;
+    private Token token;
+    Board board;
 
-	Player(Token token, Board board) {
-		assert token != null && !token.isNull();
-		assert board != null;
+    Player(Token token, Board board) {
+        this.token = token;
+        this.board = board;
+    }
 
-		this.token = token;
-		this.board = board;
-	}
+    Error put(Coordinate coordinate) {
+        assert coordinate != null && !coordinate.isNull();
 
-	Error put(Coordinate coordinate) {
-		if (!this.board.isEmpty(coordinate)) {
-			return Error.NOT_OWNER;
-		}
-		this.board.put(coordinate, this.token);
-		return Error.NULL;
-	}
+        if (!this.board.isEmpty(coordinate)) {
+            return Error.NOT_EMPTY;
+        }
+        this.board.put(coordinate, this.token);
+        return Error.NULL;
+    }
 
-	Error move(Coordinate origin, Coordinate target) {
-		if (!this.board.isOccupied(origin, this.token)) {
-			return Error.NOT_OWNER;
-		}
-		if (!this.board.isEmpty(target)) {
-			return Error.NOT_EMPTY;
-		} else if (origin.equals(target)) {
-			return Error.SAME_COORDINATES;
-		}
-		this.board.move(origin, target);
-		return Error.NULL;
-	}
+    Error move(Coordinate origin, Coordinate target) {
+        assert origin != null && !origin.isNull();
+        assert target != null && !target.isNull();
 
-	Token getToken() {
-		return this.token;
-	}
+        if (!this.board.isOccupied(origin, this.token)) {
+            return Error.NOT_OWNER;
+        }
+        if (origin.equals(target)) {
+            return Error.SAME_COORDINATES;
+        }
+        if (!this.board.isEmpty(target)) {
+            return Error.NOT_EMPTY;
+        }
+        this.board.move(origin, target);
+        return Error.NULL;
+    }
+
+    Token getToken() {
+        return this.token;
+    }
+
+    public Player copy(Board board) {
+        return new Player(this.token, board);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Player other = (Player) obj;
+        if (board == null) {
+            if (other.board != null)
+                return false;
+        } else if (!board.equals(other.board))
+            return false;
+        if (token != other.token)
+            return false;
+        return true;
+    }
 
 }

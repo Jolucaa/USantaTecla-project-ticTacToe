@@ -1,84 +1,58 @@
 package usantatecla.tictactoe.models;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
-import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.Direction;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-@ExtendWith(MockitoExtension.class)
+
 public class CoordinateTest {
 
-    private Coordinate coordinate00;
-    private Coordinate coordinate01;
-    private Coordinate coordinate11;
-    private Coordinate coordinate02;
-    private Coordinate coordinate12;
+    private Coordinate coordinate;
 
-    @Mock
-    private Console console;
-
-    @InjectMocks
-    private Coordinate coordinate = new Coordinate();
-
-    public CoordinateTest() {
-        this.coordinate00 = new Coordinate(0, 0);
-        this.coordinate01 = new Coordinate(0, 1);
-        this.coordinate11 = new Coordinate(1, 1);
-        this.coordinate02 = new Coordinate(0, 2);
-        this.coordinate12 = new Coordinate(1, 2);
+    @BeforeEach
+    void before() {
+        this.coordinate = new Coordinate(1, 1);
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareCoordinates00And01ThenIsHorizontal() {
-        assertEquals(Direction.HORIZONTAL, this.coordinate00.getDirection(this.coordinate01));
+    void testGivenNewCoordinateWhenIsNullThenIsFalse() {
+        assertThat(this.coordinate.isNull(), is(false));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareCoordinates01And11ThenIsVertical() {
-        assertEquals(Direction.VERTICAL, this.coordinate01.getDirection(this.coordinate11));
+    void testGivenNotValidCoordinateWhenIsValidThenIsErrorNotValid() {
+        Coordinate coordinate = new Coordinate(3, 3);
+        assertThat(coordinate.isValid(), is(Error.NOT_VALID));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareCoordinates00And11ThenIsMainDiagonal() {
-        assertEquals(Direction.MAIN_DIAGONAL, this.coordinate00.getDirection(this.coordinate11));
+    void testGivenValidCoordinateWhenIsValidThenIsErrorNull() {
+        assertThat(this.coordinate.isValid(), is(Error.NULL));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareCoordinates02And11ThenIsInverseDiagonal() {
-        assertEquals(Direction.INVERSE_DIAGONAL, this.coordinate02.getDirection(this.coordinate11));
+    void testGivenCoordinateAndNullCoordinateWhenNullCoordinateGetDirectionThenIsDirectionNull() {
+        assertThat(this.coordinate.getDirection(Coordinate.NULL_COORDINATE), is(Direction.NULL));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareCoordinates00And12ThenDirectionIsNull() {
-        assertEquals(Direction.NULL, this.coordinate00.getDirection(this.coordinate12));
+    void testGivenCoordinateAndInverseDiagonalCoordinateWhenInverseDiagonalCoordinateGetDirectionThenIsCoordinateInverseDiagonal() {
+        assertThat(this.coordinate.getDirection(new Coordinate(0, 2)), is(Direction.INVERSE_DIAGONAL));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareTwoCoordinateEqualsThenIsTrue() {
-        Coordinate coordinate00Copy = new Coordinate(0, 0);
-        assertTrue(this.coordinate00.equals(coordinate00Copy));
+    void testGivenCoordinateAndMainDiagonalCoordinateWhenMainDiagonalCoordinateGetDirectionThenIsCoordinateMainDiagonal() {
+        assertThat(this.coordinate.getDirection(new Coordinate(0, 0)), is(Direction.MAIN_DIAGONAL));
     }
 
     @Test
-    public void testGivenNewCoordinatesWhenCompareTwoCoordinateNotEqualsRowThenIsTrue() {
-        Coordinate coordinate01Copy = new Coordinate(1, 0);
-        assertTrue(!this.coordinate00.equals(coordinate01Copy));
+    void testGivenCoordinateWhenRandomThenIsErrorNull() {
+        this.coordinate.random();
+        assertThat(this.coordinate.isValid(), is(Error.NULL));
     }
 
-    @Test
-    public void testGivenNewCoordinatesWhenCompareTwoCoordinateNotEqualsColumnThenIsTrue() {
-        Coordinate coordinate01Copy = new Coordinate(0, 1);
-        assertTrue(!this.coordinate00.equals(coordinate01Copy));
-    }
-
-    @Test
-    public void testGivenNewCoordinatesWhenCompareOneCoordinateWithAnObjectThenIsFalse() {
-        assertFalse(this.coordinate00.equals(new Object()));
-    }
 }

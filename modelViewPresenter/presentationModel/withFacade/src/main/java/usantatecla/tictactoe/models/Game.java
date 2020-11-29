@@ -14,10 +14,10 @@ public class Game {
     
     public void reset() {
         this.board = new Board();
+        this.turn = new Turn(this.board);
 	}
     
     public void setUsers(int users) {
-        this.turn = new Turn(this.board);
 		this.turn.setUsers(users);
     }
 
@@ -30,15 +30,21 @@ public class Game {
 	}
 
     public Error put(Coordinate coordinate) {
-        return this.turn.put(coordinate);
+        Error error = this.turn.put(coordinate);
+        next(error);
+        return error;
     }
 
     public Error move(Coordinate origin, Coordinate target) {
-        return this.turn.move(origin, target);
+        Error error = this.turn.move(origin, target);
+        next(error);
+        return error;
     }
 
-    public void next() {
-        this.turn.next();
+    private void next(Error error){
+        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
+            this.turn.next();
+        }
     }
 
     public boolean isTicTacToe() {
@@ -56,5 +62,29 @@ public class Game {
 	public int getMaxPlayers() {
 		return Turn.NUMBER_PLAYERS;
 	}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Game other = (Game) obj;
+        if (board == null) {
+            if (other.board != null)
+                return false;
+        } else if (!board.equals(other.board))
+            return false;
+        if (turn == null) {
+            if (other.turn != null)
+                return false;
+        } else if (!turn.equals(other.turn))
+            return false;
+        return true;
+    }
+    
+    
 
 }
