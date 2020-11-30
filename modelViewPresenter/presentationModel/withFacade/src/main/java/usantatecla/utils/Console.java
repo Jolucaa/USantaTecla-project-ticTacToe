@@ -1,19 +1,15 @@
 package usantatecla.utils;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Console {
 
-	private static Console console;
-	
+	private static Console console = new Console();
+
 	public static Console getInstance() {
-		if (Console.console == null) {
-			Console.console = new Console();
-		}
-		return Console.console;
+		return console;
 	}
-	
+
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public String readString(String title) {
@@ -90,3 +86,4 @@ public class Console {
 	}
 
 }
+

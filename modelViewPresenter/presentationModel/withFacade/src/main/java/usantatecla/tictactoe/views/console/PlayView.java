@@ -31,10 +31,9 @@ class PlayView extends SubView {
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
+                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
-                coordinate = new Coordinate();
-                coordinate.random();
+                coordinate = createRandomCoordinate();
             }
             error = this.logic.put(coordinate);
             if (isUser) {
@@ -50,13 +49,11 @@ class PlayView extends SubView {
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.toString());
-                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.toString());
+                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.getMessage());
+                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
-                origin = new Coordinate();
-                origin.random();
-                target = new Coordinate();
-                target.random();
+                origin = createRandomCoordinate();
+                target = createRandomCoordinate();
             }
             error = this.logic.move(origin, target);
             if (isUser) {
@@ -65,4 +62,9 @@ class PlayView extends SubView {
         } while (!error.isNull());
     }
 
+    public Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
+    }
 }

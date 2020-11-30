@@ -55,8 +55,8 @@ public class Logic {
     return this.playController.getToken(coordinate);
   }
 
-  public void resume() {
-    this.resumeController.resume();
+  public void reset() {
+    this.resumeController.reset();
   }
 
 }

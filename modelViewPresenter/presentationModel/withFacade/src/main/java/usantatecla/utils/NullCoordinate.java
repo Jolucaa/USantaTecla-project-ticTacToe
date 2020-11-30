@@ -4,7 +4,7 @@ public class NullCoordinate implements Coordinate {
 
 	private static NullCoordinate instance;
 	
-	public static Coordinate getInstance() {
+	public static Coordinate instance() {
 		if (NullCoordinate.instance == null) {
 			NullCoordinate.instance = new NullCoordinate();
 		}
