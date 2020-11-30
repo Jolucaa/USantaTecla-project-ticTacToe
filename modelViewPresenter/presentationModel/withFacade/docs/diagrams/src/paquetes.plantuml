@@ -20,7 +20,6 @@ tictactoe.TicTacToe <|-down- tictactoe.ConsoleTicTacToe
 
 @startuml paqueteTicTactoeViews
 enum Error as "usantatecla.tictactoe.types.\nError" {}
-class Console as "usantatecla.utils.Console" {}
 
 class tictactoe.views.ErrorView{
   + {static} MESSAGES: String[]
@@ -46,12 +45,7 @@ enum tictactoe.views.Message{
   - message: String
   - Message(String)
   + getMessage(): String
-  + write()
-  + writeln()
-  + toString(): String
 }
-
-tictactoe.views.Message .down.> Console
 
 abstract class tictactoe.views.View {
   + interact()
@@ -98,6 +92,7 @@ class tictactoe.views.console.StartView {
 tictactoe.views.console.StartView -up-|> tictactoe.views.console.SubView
 tictactoe.views.console.StartView .down.> tictactoe.views.console.GameView
 tictactoe.views.console.StartView .down.> Message
+tictactoe.views.console.StartView .down.> Console
 tictactoe.views.console.StartView .down.> LimitedIntDialog
 
 class tictactoe.views.console.PlayView {
@@ -105,6 +100,7 @@ class tictactoe.views.console.PlayView {
   ~ interact()
   - put()
   - move()
+  + createRandomCoordinate(): Coordinate
 }
 tictactoe.views.console.PlayView -up-|> tictactoe.views.console.SubView
 tictactoe.views.console.PlayView .down.> tictactoe.views.console.GameView
@@ -147,6 +143,7 @@ tictactoe.views.console.GameView *-down-> Logic
 tictactoe.views.console.GameView .down.> tictactoe.views.console.TokenView
 tictactoe.views.console.GameView .down.> Coordinate
 tictactoe.views.console.GameView .down.> Message
+tictactoe.views.console.GameView .down.> Console
 
 class tictactoe.views.console.TokenView {
   + {static} SYMBOLS: char[]
@@ -259,6 +256,8 @@ class tictactoe.models.Player{
   ~ put(Coordinate): Error
   ~ move(Coordinate, Coordinate): Error
   ~ getToken(): Token
+  + copy(Board): Player
+  + equals(Object): boolean
 }
 tictactoe.models.Player *-down-> Token
 tictactoe.models.Player *-down-> tictactoe.models.Board

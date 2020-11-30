@@ -5,11 +5,14 @@ tictactoe .down.> tictactoe.views.console
 tictactoe .down.> tictactoe.views.graphics
 tictactoe .down.> tictactoe.controllers
 tictactoe .down.> tictactoe.views
+tictactoe .down.> tictactoe.types
 
 package tictactoe.controllers #DDDDDD { }
 tictactoe.controllers .down.> tictactoe.models
 
 package tictactoe.models #DDDDDD { }
+tictactoe.models .down.> tictactoe.types
+package tictactoe.types #DDDDDD { }
 package java.util{ }
 tictactoe.models .down.> java.util
 
