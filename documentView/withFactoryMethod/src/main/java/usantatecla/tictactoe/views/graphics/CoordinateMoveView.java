@@ -1,14 +1,12 @@
 package usantatecla.tictactoe.views.graphics;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Error;
 import usantatecla.tictactoe.views.ErrorView;
+import usantatecla.utils.ClosedInterval;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class CoordinateMoveView extends CoordinateView {
@@ -55,13 +53,20 @@ public class CoordinateMoveView extends CoordinateView {
                 Integer.parseInt(this.textFieldColumn.getText()) - 1);
         Coordinate targetCoordinate = new Coordinate(Integer.parseInt(this.textFieldRowToMove.getText()) - 1,
                 Integer.parseInt(this.textFieldColumnToMove.getText()) - 1);
-        if (originCoordinate.isValid().equals(Error.NULL)
-                && targetCoordinate.isValid().equals(Error.NULL)) {
+        Error error;
+        ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
+        if (!limits.isIncluded(originCoordinate.getRow()) || !limits.isIncluded(originCoordinate.getColumn()) &&
+                !limits.isIncluded(originCoordinate.getRow()) || !limits.isIncluded(originCoordinate.getColumn())) {
+            error = Error.NOT_VALID;
+        } else {
+            error = Error.NULL;
+        }
+        if (error.isNull()) {
             this.coordinates = new Coordinate[2];
             this.coordinates[0] = originCoordinate;
             this.coordinates[1] = targetCoordinate;
         } else {
-            JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[Error.NOT_VALID.ordinal()], "ERROR",
+            JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[error.ordinal()], "ERROR",
                     JOptionPane.WARNING_MESSAGE);
         }
         this.textFieldRowToMove.setText("");

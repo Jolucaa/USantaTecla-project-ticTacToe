@@ -51,7 +51,7 @@ class ChoosePlayersView extends JPanel implements ActionListener, KeyListener {
 		if (usersInserted >= 0 && usersInserted < 3) {
 			this.playersNumber = usersInsertedText;
 		} else {
-			JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[3], "ERROR", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[4], "ERROR", JOptionPane.WARNING_MESSAGE);
 		}
 		this.textField.setText("");
 	}

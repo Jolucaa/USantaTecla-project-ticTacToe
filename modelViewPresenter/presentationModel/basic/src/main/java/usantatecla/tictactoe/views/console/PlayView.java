@@ -1,9 +1,8 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.views.Message;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.views.Message;
 
 class PlayView {
 
@@ -15,7 +14,6 @@ class PlayView {
 
     void interact() {
         do {
-            //this.playController.next();
             if (!this.playController.isBoardComplete()) {
                 this.put();
             } else {
@@ -29,13 +27,13 @@ class PlayView {
 
     private void put() {
         boolean isUser = this.playController.isUser();
-        Coordinate coordinate;
+        int[] coordinate;
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
+                coordinate = new CoordinateView(this.playController).read(Message.COORDINATE_TO_PUT.toString());
             } else {
-                coordinate = createRandomCoordinate();
+                coordinate = this.playController.getRandomCoordinate();
             }
             error = this.playController.put(coordinate);
             if (isUser) {
@@ -46,28 +44,22 @@ class PlayView {
 
     private void move() {
         boolean isUser = this.playController.isUser();
-        Coordinate origin;
-        Coordinate target;
+        int[] origin;
+        int[] target;
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.toString());
-                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.toString());
+                origin = new CoordinateView(this.playController).read(Message.COORDINATE_TO_REMOVE.toString());
+                target = new CoordinateView(this.playController).read(Message.COORDINATE_TO_MOVE.toString());
             } else {
-                origin = createRandomCoordinate();
-                target = createRandomCoordinate();
+                origin = this.playController.getRandomCoordinate();
+                target = this.playController.getRandomCoordinate();
             }
             error = this.playController.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
         } while (!error.isNull());
-    }
-
-    Coordinate createRandomCoordinate() {
-        Coordinate coordinate = new Coordinate();
-        coordinate.random();
-        return coordinate;
     }
 
 }

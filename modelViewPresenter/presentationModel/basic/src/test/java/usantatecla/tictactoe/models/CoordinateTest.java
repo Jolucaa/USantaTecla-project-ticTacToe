@@ -24,17 +24,6 @@ public class CoordinateTest {
     }
 
     @Test
-    void testGivenNotValidCoordinateWhenIsValidThenIsErrorNotValid() {
-        Coordinate coordinate = new Coordinate(3, 3);
-        assertThat(coordinate.isValid(), is(Error.NOT_VALID));
-    }
-
-    @Test
-    void testGivenValidCoordinateWhenIsValidThenIsErrorNull() {
-        assertThat(this.coordinate.isValid(), is(Error.NULL));
-    }
-
-    @Test
     void testGivenCoordinateAndNullCoordinateWhenNullCoordinateGetDirectionThenIsDirectionNull() {
         assertThat(this.coordinate.getDirection(Coordinate.NULL_COORDINATE), is(Direction.NULL));
     }
@@ -47,12 +36,6 @@ public class CoordinateTest {
     @Test
     void testGivenCoordinateAndMainDiagonalCoordinateWhenMainDiagonalCoordinateGetDirectionThenIsCoordinateMainDiagonal() {
         assertThat(this.coordinate.getDirection(new Coordinate(0, 0)), is(Direction.MAIN_DIAGONAL));
-    }
-
-    @Test
-    void testGivenCoordinateWhenRandomThenIsErrorNull() {
-        this.coordinate.random();
-        assertThat(this.coordinate.isValid(), is(Error.NULL));
     }
 
 }

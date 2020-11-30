@@ -2,10 +2,10 @@ package usantatecla.tictactoe.models;
 
 public enum Error {
 
-	NOT_VALID,
 	NOT_EMPTY,
 	NOT_OWNER,
 	SAME_COORDINATES,
+	NOT_VALID,
 	NULL;
 
 	public boolean isNull(){

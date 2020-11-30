@@ -4,17 +4,17 @@ import usantatecla.tictactoe.models.Error;
 
 public class ErrorView {
 
-	public  static final String[] MESSAGES = {
-		"The square is not empty",
-		"There is not a token of yours", 
-		"The origin and target squares are the same",
-		"Wrong number of users",
-		"The coordinates are wrong" };
+    public static final String[] MESSAGES = {
+            "The square is not empty",
+            "There is not a token of yours",
+            "The origin and target squares are the same",
+            "The coordinates are wrong",
+            "Wrong number of users"};
 
-	protected Error error;
+    protected Error error;
 
-	public ErrorView(Error error) {
-		this.error = error;
-	}
+    public ErrorView(Error error) {
+        this.error = error;
+    }
 
 }

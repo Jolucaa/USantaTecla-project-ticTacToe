@@ -2,14 +2,14 @@ package usantatecla.tictactoe.models;
 
 public enum Error {
 
-	NOT_VALID,
-	NOT_EMPTY,
-	NOT_OWNER,
-	SAME_COORDINATES,
-	NULL;
+    NOT_EMPTY,
+    NOT_OWNER,
+    SAME_COORDINATES,
+    NOT_VALID,
+    NULL;
 
-	public boolean isNull(){
-		return this == Error.NULL;
-	}
+    public boolean isNull() {
+        return this == Error.NULL;
+    }
 
 }
