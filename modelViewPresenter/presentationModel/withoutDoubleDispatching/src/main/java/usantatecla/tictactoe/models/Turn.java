@@ -1,5 +1,8 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Error;
+
 public class Turn {
 
 	public static final int NUMBER_PLAYERS = 2;
@@ -19,7 +22,7 @@ public class Turn {
 		this.board.reset();
 		this.players = new Player[Turn.NUMBER_PLAYERS];
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
-			this.players[i] = new Player(Token.get(i), board);
+			this.players[i] = new Player(Token.values()[i], board);
 		}
 		this.active = Turn.NUMBER_PLAYERS - 1;
 	}

@@ -1,11 +1,11 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 public enum Error {
 
 	NOT_EMPTY,
 	NOT_OWNER,
 	SAME_COORDINATES,
-	WRONG_COORDINATES,
+	NOT_VALID,
 	NULL;
 
 	public boolean isNull(){

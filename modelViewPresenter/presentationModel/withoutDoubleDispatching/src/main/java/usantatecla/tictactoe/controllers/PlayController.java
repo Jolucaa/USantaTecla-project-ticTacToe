@@ -1,10 +1,10 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 
 public class PlayController extends Controller {
 

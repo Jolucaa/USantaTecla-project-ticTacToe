@@ -1,4 +1,6 @@
 package usantatecla.tictactoe.models;
+import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.types.Token;
 
 public class Game {
     

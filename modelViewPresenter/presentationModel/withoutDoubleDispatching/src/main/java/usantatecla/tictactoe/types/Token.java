@@ -1,11 +1,11 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 import usantatecla.utils.ClosedInterval;
 
 public enum Token {
 
 	X,
-	Y,
+	O,
 	NULL;
 
 	public boolean isNull() {
@@ -18,4 +18,11 @@ public enum Token {
 		return Token.values()[ordinal];
 	}
 
+	@Override
+	public String toString() {
+		if(this==NULL){
+			return " ";
+		}
+		else return this.name();
+	}
 }

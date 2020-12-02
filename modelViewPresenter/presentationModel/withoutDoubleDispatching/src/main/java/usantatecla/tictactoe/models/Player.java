@@ -1,5 +1,8 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Error;
+
 class Player {
 
 	private Token token;

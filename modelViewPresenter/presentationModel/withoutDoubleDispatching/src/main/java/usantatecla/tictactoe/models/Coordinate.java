@@ -5,6 +5,7 @@ import java.util.Random;
 import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.ConcreteCoordinate;
 import usantatecla.utils.Direction;
+import usantatecla.tictactoe.types.Error;
 
 public class Coordinate extends ConcreteCoordinate {
 
@@ -30,7 +31,7 @@ public class Coordinate extends ConcreteCoordinate {
 
 	public Error isValid() {
 		if (!LIMITS.isIncluded(this.row) || !LIMITS.isIncluded(this.column)){
-			return Error.WRONG_COORDINATES;
+			return Error.NOT_VALID;
 		}
 		return Error.NULL;
 	}

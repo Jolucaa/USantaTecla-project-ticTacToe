@@ -3,7 +3,7 @@ package usantatecla.tictactoe.controllers;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 
 public abstract class Controller {
 

@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Console;
 
 public class TokenView {
@@ -13,7 +13,7 @@ public class TokenView {
 	}
 
 	void write() {
-		Console.instance().write(TokenView.SYMBOLS[token.ordinal()]);
+		Console.getInstance().write(TokenView.SYMBOLS[token.ordinal()]);
 	}
 
 }

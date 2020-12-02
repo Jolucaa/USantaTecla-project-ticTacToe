@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.tictactoe.types.Error;
 
 class PlayView {
 
