@@ -2,6 +2,7 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.utils.Console;
 import usantatecla.utils.LimitedIntDialog;
 
 class StartView {
@@ -15,7 +16,7 @@ class StartView {
 	}
 
 	void interact() {
-		Message.TITLE.writeln();
+		Console.getInstance().writeln(Message.TITTLE.toString());
 		int users = new LimitedIntDialog(0, 
 			this.startController.getMaxPlayers()).read(Message.NUMBER_PLAYERS.toString());
 		this.startController.setUsers(users);

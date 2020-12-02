@@ -9,7 +9,7 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;

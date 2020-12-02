@@ -3,6 +3,7 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.utils.Console;
 
 class PlayView {
 
@@ -22,7 +23,7 @@ class PlayView {
             new GameView(this.playController).write();
         } while (!this.playController.isTicTacToe());
         new TokenView(this.playController.getToken()).write();
-        Message.PLAYER_WIN.writeln();
+        Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
     }
 
     private void put() {

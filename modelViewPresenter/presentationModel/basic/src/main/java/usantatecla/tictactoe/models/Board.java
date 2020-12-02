@@ -3,6 +3,7 @@ package usantatecla.tictactoe.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Direction;
 
 class Board {

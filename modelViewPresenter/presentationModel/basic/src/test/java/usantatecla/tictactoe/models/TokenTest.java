@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Token;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,7 +15,7 @@ public class TokenTest {
 
     @Test
     void testWhenGetFirstTokenThenTokenIsX() {
-        assertThat(Token.get(0), is(Token.X));
+        assertThat(Token.values()[0], is(Token.X));
     }
 
     @Test

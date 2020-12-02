@@ -9,7 +9,7 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Token;
+import usantatecla.tictactoe.types.Token;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
@@ -42,7 +42,7 @@ public class StartViewTest {
             when(this.startController.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.startView.interact();
-            verify(this.console).writeln(Message.TITLE.toString());
+            verify(this.console).writeln(Message.TITTLE.getMessage());
             verify(this.startController).setUsers(1);
         }
     }
