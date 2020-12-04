@@ -7,12 +7,12 @@ import usantatecla.tictactoe.views.console.ConsoleView;
 
 class ConsoleTicTacToe extends TicTacToe {
 
-	@Override
-	protected ConsoleView createView(StartController startController, PlayController playController, ResumeController resumeController){
-		return new ConsoleView(startController, playController, resumeController);
-	}
+    @Override
+    protected ConsoleView createView(StartController startController, PlayController playController, ResumeController resumeController) {
+        return new ConsoleView(startController, playController, resumeController);
+    }
 
-	public static void main(String[] args) {
-		new ConsoleTicTacToe().play();
-	}
+    public static void main(String[] args) {
+        new ConsoleTicTacToe().play();
+    }
 }

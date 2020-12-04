@@ -11,7 +11,7 @@ public class CoordinateView {
         Coordinate coordinate;
         Error error;
         do {
-			console.writeln(title);
+            console.writeln(title);
             int row = console.readInt("Row: ") - 1;
             int column = console.readInt("Column: ") - 1;
             coordinate = new Coordinate(row, column);

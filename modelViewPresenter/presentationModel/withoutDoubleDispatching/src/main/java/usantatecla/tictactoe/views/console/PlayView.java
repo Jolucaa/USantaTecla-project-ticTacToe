@@ -2,24 +2,24 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.views.Message;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.views.Message;
 
 class PlayView {
 
     void interact(PlayController playController) {
 
-            playController.next();
-            if (!playController.isBoardComplete()) {
-                this.put(playController);
-            } else {
-                this.move(playController);
-            }
-            new GameView(playController).write();
-            if (playController.isTicTacToe()){
-                new TokenView(playController.getToken()).write();
-                Message.PLAYER_WIN.writeln();
-            }
+        playController.next();
+        if (!playController.isBoardComplete()) {
+            this.put(playController);
+        } else {
+            this.move(playController);
+        }
+        new GameView(playController).write();
+        if (playController.isTicTacToe()) {
+            new TokenView(playController.getToken()).write();
+            Message.PLAYER_WIN.writeln();
+        }
     }
 
     private void put(PlayController playController) {

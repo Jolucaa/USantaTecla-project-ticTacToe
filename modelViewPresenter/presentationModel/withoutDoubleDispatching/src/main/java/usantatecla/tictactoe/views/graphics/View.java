@@ -4,8 +4,8 @@ import usantatecla.tictactoe.controllers.Controller;
 
 public class View extends usantatecla.tictactoe.views.View {
 
-	@Override
-	public void interact(Controller controller) {
-	}
+    @Override
+    public void interact(Controller controller) {
+    }
 
 }

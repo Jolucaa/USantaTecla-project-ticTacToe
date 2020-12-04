@@ -49,8 +49,8 @@ public class GameViewTest {
             verify(this.console, times(3)).writeln(Message.VERTICAL_LINE_RIGHT.toString());
             verify(this.console, times(21)).write(captor.capture());
             assertThat(captor.getAllValues().toString(), is("[| , X,  | , X,  | , X,  | , " +
-                                                                   "| , X,  | , X,  | , X,  | , " +
-                                                                   "| , X,  | , X,  | , X,  | ]"));
+                    "| , X,  | , X,  | , X,  | , " +
+                    "| , X,  | , X,  | , X,  | ]"));
         }
     }
 

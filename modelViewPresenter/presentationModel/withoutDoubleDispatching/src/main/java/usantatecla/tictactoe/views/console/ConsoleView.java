@@ -5,29 +5,29 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 
-public class View extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends usantatecla.tictactoe.views.View {
 
-	private StartView startView;
-	private PlayView playView;
-	private ResumeView resumeView;
+    private StartView startView;
+    private PlayView playView;
+    private ResumeView resumeView;
 
-	public View() {
-		this.startView = new StartView();
-		this.playView = new PlayView();
-		this.resumeView = new ResumeView();
-	}
+    public ConsoleView() {
+        this.startView = new StartView();
+        this.playView = new PlayView();
+        this.resumeView = new ResumeView();
+    }
 
-	@Override
-	public void interact(Controller controller) {
-		if (controller instanceof StartController) {
-			this.startView.interact((StartController) controller);
-		} else {
-			if (controller instanceof PlayController) {
-				this.playView.interact((PlayController) controller);
-			} else {
-				this.resumeView.interact((ResumeController) controller);
-			}
-		}
-	}
+    @Override
+    public void interact(Controller controller) {
+        if (controller instanceof StartController) {
+            this.startView.interact((StartController) controller);
+        } else {
+            if (controller instanceof PlayController) {
+                this.playView.interact((PlayController) controller);
+            } else {
+                this.resumeView.interact((ResumeController) controller);
+            }
+        }
+    }
 
 }

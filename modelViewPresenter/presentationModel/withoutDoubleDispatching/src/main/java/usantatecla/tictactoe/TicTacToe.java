@@ -18,12 +18,12 @@ public abstract class TicTacToe {
 
     protected void play() {
         Controller controller;
-		do {
+        do {
             controller = this.logic.getController();
             if (controller != null) {
                 this.view.interact(controller);
             }
-		} while (controller != null);
+        } while (controller != null);
     }
 
 }

@@ -5,88 +5,88 @@ import java.io.InputStreamReader;
 
 public class Console {
 
-	public static Console console;
-	
-	public static Console getInstance() {
-		if (Console.console == null) {
-			Console.console = new Console();
-		}
-		return Console.console;
-	}
-	
-	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    public static Console console;
 
-	public String readString(String title) {
-		String input = null;
-		this.write(title);
-		try {
-			input = this.bufferedReader.readLine();
-		} catch (Exception ex) {
-		}
-		return input;
-	}
+    public static Console getInstance() {
+        if (Console.console == null) {
+            Console.console = new Console();
+        }
+        return Console.console;
+    }
 
-	public String readString() {
-		return this.readString("");
-	}
+    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-	public int readInt(String title) {
-		int input = 0;
-		boolean ok = false;
-		do {
-			try {
-				input = Integer.parseInt(this.readString(title));
-				ok = true;
-			} catch (Exception ex) {
-				this.writeError("integer");
-			}
-			assert ok;
-		} while (!ok);
-		return input;
-	}
+    public String readString(String title) {
+        String input = null;
+        this.write(title);
+        try {
+            input = this.bufferedReader.readLine();
+        } catch (Exception ex) {
+        }
+        return input;
+    }
 
-	public char readChar(String title) {
-		char charValue = ' ';
-		boolean ok = false;
-		do {
-			String input = this.readString(title);
-			if (input.length() != 1) {
-				this.writeError("character");
-			} else {
-				charValue = input.charAt(0);
-				ok = true;
-			}
-			assert ok;
-		} while (!ok);
-		return charValue;
-	}
+    public String readString() {
+        return this.readString("");
+    }
 
-	public void writeln() {
-		System.out.println();
-	}
+    public int readInt(String title) {
+        int input = 0;
+        boolean ok = false;
+        do {
+            try {
+                input = Integer.parseInt(this.readString(title));
+                ok = true;
+            } catch (Exception ex) {
+                this.writeError("integer");
+            }
+            assert ok;
+        } while (!ok);
+        return input;
+    }
 
-	public void write(String string) {
-		System.out.print(string);
-	}
+    public char readChar(String title) {
+        char charValue = ' ';
+        boolean ok = false;
+        do {
+            String input = this.readString(title);
+            if (input.length() != 1) {
+                this.writeError("character");
+            } else {
+                charValue = input.charAt(0);
+                ok = true;
+            }
+            assert ok;
+        } while (!ok);
+        return charValue;
+    }
 
-	public void write(int integer) {
-		System.out.print(integer);
-	}
+    public void writeln() {
+        System.out.println();
+    }
 
-	public void writeln(String string) {
-		System.out.println(string);
-	}
+    public void write(String string) {
+        System.out.print(string);
+    }
 
-	public void writeln(int integer) {
-		System.out.println(integer);
-	}
+    public void write(int integer) {
+        System.out.print(integer);
+    }
 
-	public void write(char character) {
-		System.out.print(character);
-	}
+    public void writeln(String string) {
+        System.out.println(string);
+    }
 
-	public void writeError(String format) {
-		System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
-	}
+    public void writeln(int integer) {
+        System.out.println(integer);
+    }
+
+    public void write(char character) {
+        System.out.print(character);
+    }
+
+    public void writeError(String format) {
+        System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
+    }
 
 }
