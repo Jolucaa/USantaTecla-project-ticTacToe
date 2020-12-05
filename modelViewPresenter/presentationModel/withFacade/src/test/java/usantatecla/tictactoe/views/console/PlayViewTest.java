@@ -42,14 +42,14 @@ public class PlayViewTest {
             when(this.logic.isBoardComplete()).thenReturn(false);
             when(this.logic.isUser()).thenReturn(true);
             when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.logic.isValidCoordinate(any(int[].class))).thenReturn(Error.NULL);
-            when(this.logic.put(any(int[].class))).thenReturn(Error.NULL);
+            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.logic.put(any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);
             when(this.logic.getToken()).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.logic).put(new int[]{0, 0});
+            verify(this.logic).put(new Coordinate(0, 0));
             verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
     }
@@ -57,11 +57,11 @@ public class PlayViewTest {
     @Test
     void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            int[] coordinate = {0, 0};
+            Coordinate coordinate = new Coordinate(0, 0);
             when(this.logic.isBoardComplete()).thenReturn(false);
             when(this.logic.isUser()).thenReturn(false);
             when(this.logic.getRandomCoordinate()).thenReturn(coordinate);
-            when(this.logic.put(any(int[].class))).thenReturn(Error.NULL);
+            when(this.logic.put(any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);
             when(this.logic.getToken()).thenReturn(Token.X);
@@ -78,14 +78,14 @@ public class PlayViewTest {
             when(this.logic.isBoardComplete()).thenReturn(true);
             when(this.logic.isUser()).thenReturn(true);
             when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
-            when(this.logic.isValidCoordinate(any(int[].class))).thenReturn(Error.NULL);
-            when(this.logic.move(any(int[].class), any(int[].class))).thenReturn(Error.NULL);
+            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.logic.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);
             when(this.logic.getToken()).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.logic).move(new int[]{0, 0}, new int[]{1, 1});
+            verify(this.logic).move(new Coordinate(0, 0), new Coordinate(1, 1));
             verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
     }
@@ -93,12 +93,12 @@ public class PlayViewTest {
     @Test
     void testGivenNewPlayViewWhenMachinePlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            int[] origin = {0, 0};
-            int[] target = {1, 1};
+            Coordinate origin = new Coordinate(0, 0);
+            Coordinate target = new Coordinate(1, 1);
             when(this.logic.isBoardComplete()).thenReturn(true);
             when(this.logic.isUser()).thenReturn(false);
             when(this.logic.getRandomCoordinate()).thenReturn(origin, target);
-            when(this.logic.move(any(int[].class), any(int[].class))).thenReturn(Error.NULL);
+            when(this.logic.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);
             when(this.logic.getToken()).thenReturn(Token.X);

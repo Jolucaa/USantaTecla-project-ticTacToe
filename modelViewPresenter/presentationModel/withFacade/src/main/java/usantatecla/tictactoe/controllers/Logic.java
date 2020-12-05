@@ -43,19 +43,19 @@ public class Logic {
         return this.playController.isUser();
     }
 
-    public Error isValidCoordinate(int[] coordinate) {
+    public Error isValidCoordinate(Coordinate coordinate) {
         return this.playController.isValidCoordinate(coordinate);
     }
 
-    public int[] getRandomCoordinate() {
+    public Coordinate getRandomCoordinate() {
         return this.playController.getRandomCoordinate();
     }
 
-    public Error put(int[] coordinate) {
+    public Error put(Coordinate coordinate) {
         return this.playController.put(coordinate);
     }
 
-    public Error move(int[] origin, int[] target) {
+    public Error move(Coordinate origin, Coordinate target) {
         return this.playController.move(origin, target);
     }
 

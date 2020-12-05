@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
@@ -28,11 +29,11 @@ class PlayView {
 
     private void put() {
         boolean isUser = this.playController.isUser();
-        int[] coordinate;
+        Coordinate coordinate;
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView(this.playController).read(Message.COORDINATE_TO_PUT.toString());
+                coordinate = new CoordinateView(this.playController).read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
                 coordinate = this.playController.getRandomCoordinate();
             }
@@ -45,13 +46,13 @@ class PlayView {
 
     private void move() {
         boolean isUser = this.playController.isUser();
-        int[] origin;
-        int[] target;
+        Coordinate origin;
+        Coordinate target;
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView(this.playController).read(Message.COORDINATE_TO_REMOVE.toString());
-                target = new CoordinateView(this.playController).read(Message.COORDINATE_TO_MOVE.toString());
+                origin = new CoordinateView(this.playController).read(Message.COORDINATE_TO_REMOVE.getMessage());
+                target = new CoordinateView(this.playController).read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
                 origin = this.playController.getRandomCoordinate();
                 target = this.playController.getRandomCoordinate();

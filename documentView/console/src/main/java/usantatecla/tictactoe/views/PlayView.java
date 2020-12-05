@@ -21,7 +21,7 @@ class PlayView extends SubView {
             new GameView(this.game).write();
         } while (!this.game.isTicTacToe());
         new TokenView(this.game.getToken()).write();
-        Console.getInstance().writeln(Message.PLAYER_WIN.toString());
+        Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
     }
 
     private void put() {
@@ -31,7 +31,7 @@ class PlayView extends SubView {
         do {
             if (isUser) {
                 coordinate = new CoordinateView()
-                    .read(Message.COORDINATE_TO_PUT.toString());
+                    .read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
                 coordinate = createRandomCoordinate();
             }
@@ -50,9 +50,9 @@ class PlayView extends SubView {
         do {
             if (isUser) {
                 origin = new CoordinateView()
-                .read(Message.COORDINATE_TO_REMOVE.toString());
+                .read(Message.COORDINATE_TO_REMOVE.getMessage());
                 target = new CoordinateView()
-                .read(Message.COORDINATE_TO_MOVE.toString());
+                .read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
                 origin = createRandomCoordinate();
                 target = createRandomCoordinate();
