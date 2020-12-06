@@ -1,9 +1,9 @@
 @startuml paqueteTicTacToe
-class View as "tictactoe.views.View" {}
-class Game as "tictactoe.models.Game" {}
-class StartController as "tictactoe.controllers.StartController" {}
-class PlayController as "tictactoe.controllers.PlayController" {}
-class ResumeController as "tictactoe.controllers.ResumeController" {}
+class View as "tictactoe.views.\nView" {}
+class Game as "tictactoe.models.\nGame" {}
+class StartController as "tictactoe.controllers.\nStartController" {}
+class PlayController as "tictactoe.controllers.\nPlayController" {}
+class ResumeController as "tictactoe.controllers.\nResumeController" {}
 
 class  tictactoe.ConsoleTicTacToe{
 + {static} main(String[])
