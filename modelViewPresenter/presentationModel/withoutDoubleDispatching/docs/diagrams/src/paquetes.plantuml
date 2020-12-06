@@ -1,31 +1,32 @@
 @startuml paqueteTicTacToe
-class View as "tictactoe.views.View" {}
-class Game as "tictactoe.models.Game" {}
-class StartController as "tictactoe.controllers.StartController" {}
-class PlayController as "tictactoe.controllers.PlayController" {}
-class ResumeController as "tictactoe.controllers.ResumeController" {}
+class View as "tictactoe.views.\nView" {}
+class Logic as "tictactoe.controllers.\nLogic" {}
 
 class  tictactoe.ConsoleTicTacToe{
+# createView(): View
 + {static} main(String[])
-# createView(StartController, PlayController, ResumeController): View
 }
 tictactoe.TicTacToe <|-down- tictactoe.ConsoleTicTacToe
 
-abstract class  tictactoe.TicTacToe{
+class  tictactoe.GraphicsTicTacToe{
+# createView(): View
++ {static} main(String[])
+}
+tictactoe.TicTacToe <|-down- tictactoe.GraphicsTicTacToe
+
+class  tictactoe.TicTacToe{
 # TicTacToe()
-# {abstract} createView(StartController, PlayController, ResumeController): View
+# {abstract} createView(): View
 # play()
 }
-tictactoe.TicTacToe *-down-> Game
 tictactoe.TicTacToe *-down-> View
-tictactoe.TicTacToe *-down-> StartController
-tictactoe.TicTacToe *-down-> PlayController
-tictactoe.TicTacToe *-down-> ResumeController
+tictactoe.TicTacToe *-down-> Logic
 @enduml
 
-@startuml paqueteTicTactoeViews
+@startuml paqueteTicTacToeViews
 class Error as "tictactoe.types.\nError" {}
 class Console as "usantatecla.utils.\nConsole" {}
+class Controller as "tictactoe.controllers.\nController" {}
 
 class  tictactoe.views.ErrorView{
 + {static} MESSAGES: String[]
@@ -58,15 +59,13 @@ enum  tictactoe.views.Message{
 tictactoe.views.Message .down.> Console
 
 abstract class tictactoe.views.View {
-+ interact()
-# {abstract} start()
-# {abstract} play()
-# {abstract} isResumed(): boolean
++ {abstract} interact(Controller)
 }
 
+tictactoe.views.Message .down.> Controller
 @enduml
 
-@startuml paqueteTicTactoeViewsConsole
+@startuml paqueteTicTacToeViewsConsole
 class Error as "tictactoe.models.\nError" {}
 class Coordinate as "tictactoe.models.\nCoordinate" {}
 class Console as "usantatecla.utils.\nConsole" {}
@@ -81,15 +80,13 @@ class Message as "tictactoe.views.\nMessage" {}
 class ErrorView as "tictactoe.views.\nErrorView" {}
 
 class tictactoe.views.console.ConsoleView{
-+ ConsoleView(StartController, PlayController, ResumeController)
-+ interact()
-# start()
-# play()
-# isResumed(): boolean
++ ConsoleView()
++ interact(Controller)
 }
 tictactoe.views.console.ConsoleView *-down-> tictactoe.views.console.StartView
 tictactoe.views.console.ConsoleView *-down-> tictactoe.views.console.PlayView
 tictactoe.views.console.ConsoleView *-down-> tictactoe.views.console.ResumeView
+tictactoe.views.console.ConsoleView .down.> Controller
 
 class tictactoe.views.console.CoordinateView {
 + read(String): Coordinate
@@ -117,30 +114,27 @@ tictactoe.views.console.GameView .down.> Coordinate
 tictactoe.views.console.GameView .down.> Message
 
 class  tictactoe.views.console.PlayView{
-~ PlayView(PlayController)
-~ interact()
-- put()
-- move()
+~ interact(PlayController)
+- put(PlayController)
+- move(PlayController)
 }
 
-tictactoe.views.console.PlayView *-down-> PlayController
+tictactoe.views.console.PlayView .down.> PlayController
 tictactoe.views.console.PlayView .down.> Coordinate
 tictactoe.views.console.PlayView .down.> Message
 tictactoe.views.console.PlayView .down.> Error
 
 class  tictactoe.views.console.ResumeView{
-+ ResumeView(ResumeController)
-~ interact(): boolean
+~ interact(ResumeController): boolean
 }
-tictactoe.views.console.ResumeView *-down-> ResumeController
+tictactoe.views.console.ResumeView .down.> ResumeController
 tictactoe.views.console.ResumeView .down.> Message
 tictactoe.views.console.ResumeView .down.> YesNoDialog
 
 class tictactoe.views.console.StartView{
-~ StartView(StartController)
-~ interact(): void
+~ interact(StartController)
 }
-tictactoe.views.console.StartView *-down-> StartController
+tictactoe.views.console.StartView .down.> StartController
 tictactoe.views.console.StartView .down.> Message
 tictactoe.views.console.StartView .down.> LimitedIntDialog
 
@@ -166,8 +160,7 @@ tictactoe.views.graphics.GraphicsView ..> Controller
 View <|-down- tictactoe.views.graphics.GraphicsView
 @enduml
 
-
-@startuml paqueteTicTactoeModels
+@startuml paqueteTicTacToeModels
 class ClosedInterval as "usantatecla.utils.\nClosedInterval" {}
 class ConcreteCoordinate as "usantatecla.utils.\nConcreteCoordinate" {}
 class Direction as "usantatecla.utils.\nDirection" {}
@@ -201,7 +194,7 @@ class  tictactoe.models.Coordinate{
 + isNull(): boolean
 + isValid(): Error
 + getDirection(Coordinate): Direction
-~ inInverseDiagonal(): boolean
+- inInverseDiagonal(): boolean
 + random()
 + equals(Object): boolean
 }
@@ -218,7 +211,7 @@ class  tictactoe.models.Game{
 + isUser(): boolean
 + put(Coordinate): Error
 + move(Coordinate, Coordinate): Error
-+ next(Error)
++ next()
 + isTicTacToe(): boolean
 + getToken(Coordinate): Token
 + getToken(): Token
@@ -228,6 +221,7 @@ tictactoe.models.Game *-down-> tictactoe.models.Board
 tictactoe.models.Game *-down-> tictactoe.models.Turn
 tictactoe.models.Game .down.> tictactoe.models.Coordinate
 tictactoe.models.Game .down.> Error
+tictactoe.models.Game .down.> Token
 
 class  tictactoe.models.Player{
 ~ Player(Token, Board)
@@ -239,6 +233,23 @@ tictactoe.models.Player *-down-> Token
 tictactoe.models.Player *-down-> tictactoe.models.Board
 tictactoe.models.Player .down.> tictactoe.models.Coordinate
 tictactoe.models.Player .down.> Error
+tictactoe.models.Player .down.> Token
+
+class tictactoe.models.State{
++ State()
++ reset()
++ next()
++ getValueState(): StateValue
+}
+
+tictactoe.models.State *-down-> tictactoe.models.StateValue
+
+enum tictactoe.models.StateValue{
++ INITIAL
++ IN_GAME
++ RESUME
++ EXIT
+}
 
 class  tictactoe.models.Turn{
 + {static} NUMBER_PLAYERS: int
@@ -286,20 +297,37 @@ tictactoe.types.Token .down.> ClosedInterval
 
 @enduml
 
-@startuml paqueteTicTactoeControllers
+@startuml paqueteTicTacToeControllers
 class Game as "tictactoe.models.\nGame" {}
 class Coordinate as "tictactoe.models.\nCoordinate" {}
 class Error as "tictactoe.types.\nError" {}
 class Token as "tictactoe.types.\nToken" {}
+class State as "tictactoe.models.\nState" {}
+class StateValue as "tictactoe.models.\nStateValue" {}
 
 abstract class  tictactoe.controllers.Controller{
-~ Controller(Game)
+~ Controller(Game,State)
 + getToken(Coordinate): Token
++ next()
 }
 tictactoe.controllers.Controller *-down-> Game
+tictactoe.controllers.Controller *-down-> State
+tictactoe.controllers.Controller .down.> Coordinate
+tictactoe.controllers.Controller .down.> Token
+
+class tictactoe.controllers.Logic{
++ Logic()
++ getController(): Controller
+}
+
+tictactoe.controllers.Logic *-down-> Game
+tictactoe.controllers.Logic *-down-> State
+tictactoe.controllers.Logic *-down-> StateValue
+tictactoe.controllers.Logic *-down-> tictactoe.controllers.Controller
 
 class  tictactoe.controllers.PlayController{
-+ PlayController(Game)
++ PlayController(Game,State)
++ next()
 + isBoardComplete(): boolean
 + isTicTacToe(): boolean
 + getToken(): Token
@@ -312,21 +340,24 @@ tictactoe.controllers.PlayController .down.> Coordinate
 tictactoe.controllers.PlayController .down.> Error
 tictactoe.controllers.PlayController .down.> Game
 tictactoe.controllers.PlayController .down.> Token
+tictactoe.controllers.PlayController .down.> State
 
 class  tictactoe.controllers.ResumeController{
-+ ResumeController(Game)
++ ResumeController(Game,State)
 + resume()
 }
 tictactoe.controllers.Controller <|-down- tictactoe.controllers.ResumeController
 tictactoe.controllers.ResumeController .down.> Game
+tictactoe.controllers.ResumeController .down.> State
 
 class  tictactoe.controllers.StartController{
-+ StartController(Game)
++ StartController(Game,State)
 + setUsers(int)
 + getMaxPlayers(): int
 }
 tictactoe.controllers.Controller <|-down- tictactoe.controllers.StartController
 tictactoe.controllers.StartController .down.> Game
+tictactoe.controllers.StartController .down.> State
 @enduml
 
 @startuml paqueteUtils
