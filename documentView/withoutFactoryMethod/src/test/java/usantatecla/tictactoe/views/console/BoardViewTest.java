@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Token;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
@@ -18,13 +18,13 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
-public class GameViewTest {
+public class BoardViewTest {
 
     @Mock
-    private Logic logic;
+    private Game game;
 
     @InjectMocks
-    private GameView gameView;
+    private BoardView gameView;
 
     @Mock
     private Console console;
@@ -40,7 +40,7 @@ public class GameViewTest {
     @Test
     void testGivenNewGameViewWhenWriteThenPrintBoard() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.gameView.write();
             verify(this.console, times(2)).writeln(Message.SEPARATOR.getMessage());

@@ -118,7 +118,7 @@ ErrorView <|-down- usantatecla.tictactoe.views.console.ErrorView
 usantatecla.tictactoe.views.console.ErrorView .down.> Console
 usantatecla.tictactoe.views.console.ErrorView *-down-> Error
 
-class usantatecla.tictactoe.views.console.GameView {
+class usantatecla.tictactoe.views.console.BoardView {
 
     ~ GameView(Game)
 	~ write()
@@ -128,18 +128,18 @@ class usantatecla.tictactoe.views.console.GameView {
 class Game as "usantatecla.tictactoe.models.Game"
 class Message as "usantatecla.tictactoe.views.Message"
 
-usantatecla.tictactoe.views.console.GameView *-down-> Game
-usantatecla.tictactoe.views.console.GameView .down.> Coordinate
-usantatecla.tictactoe.views.console.GameView .down.> Message
-usantatecla.tictactoe.views.console.GameView .down.> usantatecla.tictactoe.views.console.TokenView
+usantatecla.tictactoe.views.console.BoardView *-down-> Game
+usantatecla.tictactoe.views.console.BoardView .down.> Coordinate
+usantatecla.tictactoe.views.console.BoardView .down.> Message
+usantatecla.tictactoe.views.console.BoardView .down.> usantatecla.tictactoe.views.console.TokenView
 
-class usantatecla.tictactoe.views.console.SubView {
+class usantatecla.tictactoe.views.WithGameView {
 
 	~ SubView(Game)
 
 }
 
-usantatecla.tictactoe.views.console.SubView *-down-> Game
+usantatecla.tictactoe.views.WithGameView *-down-> Game
 
 class usantatecla.tictactoe.views.console.PlayView {
 
@@ -149,13 +149,13 @@ class usantatecla.tictactoe.views.console.PlayView {
 
 }
 
-usantatecla.tictactoe.views.console.SubView <|-down- usantatecla.tictactoe.views.console.PlayView
+usantatecla.tictactoe.views.WithGameView <|-down- usantatecla.tictactoe.views.console.PlayView
 usantatecla.tictactoe.views.console.PlayView .down.> Coordinate
 usantatecla.tictactoe.views.console.PlayView .down.> Message
 usantatecla.tictactoe.views.console.PlayView .down.> Error
 usantatecla.tictactoe.views.console.PlayView .down.> usantatecla.tictactoe.views.console.ErrorView
 usantatecla.tictactoe.views.console.PlayView .down.> usantatecla.tictactoe.views.console.CoordinateView
-usantatecla.tictactoe.views.console.PlayView .down.> usantatecla.tictactoe.views.console.GameView
+usantatecla.tictactoe.views.console.PlayView .down.> usantatecla.tictactoe.views.console.BoardView
 usantatecla.tictactoe.views.console.PlayView .down.> usantatecla.tictactoe.views.console.TokenView
 
 class usantatecla.tictactoe.views.console.ResumeView {
@@ -166,7 +166,7 @@ class usantatecla.tictactoe.views.console.ResumeView {
 
 class YesNoDialog as "usantatecla.utils.YesNoDialog"
 
-usantatecla.tictactoe.views.console.SubView <|-down- usantatecla.tictactoe.views.console.ResumeView
+usantatecla.tictactoe.views.WithGameView <|-down- usantatecla.tictactoe.views.console.ResumeView
 usantatecla.tictactoe.views.console.ResumeView .down.> Message
 usantatecla.tictactoe.views.console.ResumeView .down.> YesNoDialog
 
@@ -178,10 +178,10 @@ class usantatecla.tictactoe.views.console.StartView {
 
 class LimitedIntDialog as "usantatecla.utils.LimitedIntDialog"
 
-usantatecla.tictactoe.views.console.SubView <|-down- usantatecla.tictactoe.views.console.StartView
+usantatecla.tictactoe.views.WithGameView <|-down- usantatecla.tictactoe.views.console.StartView
 usantatecla.tictactoe.views.console.StartView .down.> Message
 usantatecla.tictactoe.views.console.StartView .down.> LimitedIntDialog
-usantatecla.tictactoe.views.console.StartView .down.> usantatecla.tictactoe.views.console.GameView
+usantatecla.tictactoe.views.console.StartView .down.> usantatecla.tictactoe.views.console.BoardView
 
 class usantatecla.tictactoe.views.console.TokenView {
 

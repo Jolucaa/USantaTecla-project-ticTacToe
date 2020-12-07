@@ -3,14 +3,13 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.views.WithGameView;
 import usantatecla.utils.Console;
 
-class GameView {
+class BoardView extends WithGameView {
 
-    private Game game;
-
-    GameView(Game game) {
-        this.game = game;
+    BoardView(Game game) {
+        super(game);
     }
 
     void write() {

@@ -3,17 +3,19 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
+import usantatecla.tictactoe.views.View;
 
-public class ConsoleView extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends View {
 
-    private final StartView startView;
-    private final PlayView playView;
-    private final ResumeView resumeView;
+    private StartView startView;
+    private PlayView playView;
+    private ResumeView resumeView;
 
     public ConsoleView(StartController startController, PlayController playController, ResumeController resumeController) {
-        this.startView = new StartView(startController);
-        this.playView = new PlayView(playController);
-        this.resumeView = new ResumeView(resumeController);
+        super(startController, playController, resumeController);
+        this.startView = new StartView(this.startController);
+        this.playView = new PlayView(this.playController);
+        this.resumeView = new ResumeView(this.resumeController);
     }
 
     @Override

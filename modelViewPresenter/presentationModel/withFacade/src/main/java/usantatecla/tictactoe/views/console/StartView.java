@@ -2,10 +2,11 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.views.WithGameView;
 import usantatecla.utils.Console;
 import usantatecla.utils.LimitedIntDialog;
 
-class StartView extends SubView {
+class StartView extends WithGameView {
 
     StartView(Logic logic) {
         super(logic);
@@ -16,7 +17,7 @@ class StartView extends SubView {
         int users = new LimitedIntDialog(0,
                 this.logic.getMaxPlayers()).read(Message.NUMBER_PLAYERS.getMessage());
         this.logic.setUsers(users);
-        new GameView(this.logic).write();
+        new BoardView(this.logic).write();
     }
 
 }

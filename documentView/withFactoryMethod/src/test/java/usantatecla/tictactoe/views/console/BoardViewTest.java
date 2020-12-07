@@ -18,13 +18,13 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
-public class GameViewTest {
+public class BoardViewTest {
 
     @Mock
     private Game game;
 
     @InjectMocks
-    private GameView gameView;
+    private BoardView boardView;
 
     @Mock
     private Console console;
@@ -42,7 +42,7 @@ public class GameViewTest {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
-            this.gameView.write();
+            this.boardView.write();
             verify(this.console, times(2)).writeln(Message.SEPARATOR.getMessage());
             verify(this.console, times(3)).write(Message.VERTICAL_LINE_LEFT.getMessage());
             verify(this.console, times(9)).write(Message.VERTICAL_LINE_CENTERED.getMessage());

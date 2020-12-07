@@ -1,8 +1,9 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.views.View;
 
-public class ConsoleView extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends View {
 
 	private StartView startView;
 	private PlayView playView;

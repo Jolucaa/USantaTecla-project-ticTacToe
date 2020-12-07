@@ -21,7 +21,7 @@ class PlayView {
             } else {
                 this.move();
             }
-            new GameView(this.playController).write();
+            new BoardView(this.playController).write();
         } while (!this.playController.isTicTacToe());
         new TokenView(this.playController.getToken()).write();
         Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());

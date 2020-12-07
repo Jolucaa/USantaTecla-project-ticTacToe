@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.YesNoDialog;
 
-class ResumeView extends SubView {
+class ResumeView extends WithGameView {
 
     ResumeView(Game game) {
 		super(game);

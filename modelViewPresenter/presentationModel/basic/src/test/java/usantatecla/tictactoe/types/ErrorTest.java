@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Error;

@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Token;
@@ -15,11 +15,11 @@ public class TokenTest {
 
     @Test
     void testWhenGetFirstTokenThenTokenIsX() {
-        assertThat(Token.values()[0], is(Token.X));
+        assertThat(Token.get(0), is(Token.X));
     }
 
     @Test
-    void testGivenXTokenWhenToStringThenIsX() {
+    void testGivenXTokenWhenToStringThenIsX(){
         assertThat(Token.X.toString(), is("X"));
     }
 

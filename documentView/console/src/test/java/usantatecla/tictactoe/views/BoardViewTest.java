@@ -1,14 +1,13 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Token;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,16 +17,16 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
-public class GameViewTest {
+public class BoardViewTest {
+
+    @Mock
+    private Game game;
 
     @InjectMocks
-    private GameView gameView;
+    private BoardView gameView;
 
     @Mock
     private Console console;
-
-    @Mock
-    private Controller controller;
 
     @Captor
     private ArgumentCaptor<String> captor;
@@ -40,7 +39,7 @@ public class GameViewTest {
     @Test
     void testGivenNewGameViewWhenWriteThenPrintBoard() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.controller.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.gameView.write();
             verify(this.console, times(2)).writeln(Message.SEPARATOR.getMessage());
@@ -49,8 +48,8 @@ public class GameViewTest {
             verify(this.console, times(3)).writeln(Message.VERTICAL_LINE_RIGHT.getMessage());
             verify(this.console, times(21)).write(captor.capture());
             assertThat(captor.getAllValues().toString(), is("[| , X,  | , X,  | , X,  | , " +
-                    "| , X,  | , X,  | , X,  | , " +
-                    "| , X,  | , X,  | , X,  | ]"));
+                                                                   "| , X,  | , X,  | , X,  | , " +
+                                                                   "| , X,  | , X,  | , X,  | ]"));
         }
     }
 

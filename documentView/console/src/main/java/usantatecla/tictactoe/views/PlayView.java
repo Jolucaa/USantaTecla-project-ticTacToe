@@ -5,7 +5,7 @@ import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Error;
 import usantatecla.utils.Console;
 
-class PlayView extends SubView {
+class PlayView extends WithGameView {
 
     PlayView(Game game) {
         super(game);
@@ -18,7 +18,7 @@ class PlayView extends SubView {
             } else {
                 this.move();
             }
-            new GameView(this.game).write();
+            new BoardView(this.game).write();
         } while (!this.game.isTicTacToe());
         new TokenView(this.game.getToken()).write();
         Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
