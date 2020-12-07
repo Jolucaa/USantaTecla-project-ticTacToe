@@ -5,7 +5,7 @@ import usantatecla.utils.Console;
 
 public class TokenView {
 
-    private final Token token;
+    private Token token;
 
     TokenView(Token token) {
         this.token = token;

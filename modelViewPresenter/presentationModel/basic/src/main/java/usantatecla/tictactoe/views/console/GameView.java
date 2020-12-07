@@ -7,7 +7,7 @@ import usantatecla.utils.Console;
 
 class GameView {
 
-    private final Controller controller;
+    private Controller controller;
 
     GameView(Controller controller) {
         this.controller = controller;

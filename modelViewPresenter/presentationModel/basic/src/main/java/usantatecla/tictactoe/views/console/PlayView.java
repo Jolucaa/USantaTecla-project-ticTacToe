@@ -8,7 +8,7 @@ import usantatecla.utils.Console;
 
 class PlayView {
 
-    private final PlayController playController;
+    private PlayController playController;
 
     PlayView(PlayController playController) {
         this.playController = playController;
