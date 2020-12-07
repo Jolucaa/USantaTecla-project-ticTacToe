@@ -145,12 +145,12 @@ tictactoe.views.console.StartView .down.> Message
 tictactoe.views.console.StartView .down.> LimitedIntDialog
 
 class tictactoe.views.console.TokenView{
-+ {static} SYMBOLS: char[]
 ~ TokenView(Token)
 ~ write()
 }
 tictactoe.views.console.StartView *-down-> Token
 tictactoe.views.console.StartView .down.> Console
+
 
 @enduml
 

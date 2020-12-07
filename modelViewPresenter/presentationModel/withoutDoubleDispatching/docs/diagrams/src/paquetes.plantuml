@@ -75,7 +75,7 @@ class ResumeController as "tictactoe.controllers.\nResumeController" {}
 class YesNoDialog as "usantatecla.utils.\nYesNoDialog" {}
 class StartController as "tictactoe.controllers.\nStartController" {}
 class LimitedIntDialog as "usantatecla.utils.\nLimitedIntDialog" {}
-class Token as "tictactoe.models.\nToken" {}
+class Token as "tictactoe.types.\nToken" {}
 class Message as "tictactoe.views.\nMessage" {}
 class ErrorView as "tictactoe.views.\nErrorView" {}
 
@@ -139,7 +139,6 @@ tictactoe.views.console.StartView .down.> Message
 tictactoe.views.console.StartView .down.> LimitedIntDialog
 
 class tictactoe.views.console.TokenView{
-+ {static} SYMBOLS: char[]
 ~ TokenView(Token)
 ~ write()
 }
