@@ -8,7 +8,8 @@ public abstract class ErrorView {
             "The square is not empty",
             "There is not a token of yours",
             "The origin and target squares are the same",
-            "The coordinates are wrong"};
+            "The coordinates are wrong"
+    };
 
     protected Error error;
 

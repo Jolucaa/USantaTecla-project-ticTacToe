@@ -3,14 +3,13 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.views.WithGameView;
 import usantatecla.utils.Console;
 
-public class CoordinateView {
-
-    Logic logic;
+public class CoordinateView extends WithGameView {
 
     public CoordinateView(Logic logic) {
-        this.logic = logic;
+        super(logic);
     }
 
     public Coordinate read(String title) {

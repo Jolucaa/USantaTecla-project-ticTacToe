@@ -9,7 +9,7 @@ class ResumeView {
     boolean interact(ResumeController resumeController) {
         boolean isResumed = new YesNoDialog().read(Message.RESUME.getMessage());
         if (isResumed) {
-            resumeController.resume();
+            resumeController.reset();
         } else {
             resumeController.next();
         }

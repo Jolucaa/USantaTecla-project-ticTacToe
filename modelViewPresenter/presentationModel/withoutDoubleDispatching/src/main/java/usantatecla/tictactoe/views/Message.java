@@ -25,9 +25,4 @@ public enum Message {
         return this.message;
     }
 
-    @Override
-    public String toString() {
-        return this.message;
-    }
-
 }

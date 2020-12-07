@@ -9,14 +9,12 @@ import usantatecla.utils.Console;
 class PlayView {
 
     void interact(PlayController playController) {
-
-        //playController.next();
         if (!playController.isBoardComplete()) {
             this.put(playController);
         } else {
             this.move(playController);
         }
-        new GameView(playController).write();
+        new BoardView(playController).write();
         if (playController.isTicTacToe()) {
             new TokenView(playController.getToken()).write();
             Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
@@ -29,7 +27,7 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.getMessage());
+                coordinate = new CoordinateView(playController).read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
                 coordinate = playController.getRandomCoordinate();
 
@@ -48,8 +46,8 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.getMessage());
-                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.getMessage());
+                origin = new CoordinateView(playController).read(Message.COORDINATE_TO_REMOVE.getMessage());
+                target = new CoordinateView(playController).read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
                 origin = playController.getRandomCoordinate();
                 target = playController.getRandomCoordinate();

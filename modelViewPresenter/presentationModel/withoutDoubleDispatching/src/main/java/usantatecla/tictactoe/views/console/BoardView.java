@@ -5,11 +5,11 @@ import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
-class GameView {
+class BoardView {
 
     private Controller controller;
 
-    GameView(Controller controller) {
+    BoardView(Controller controller) {
         this.controller = controller;
     }
 

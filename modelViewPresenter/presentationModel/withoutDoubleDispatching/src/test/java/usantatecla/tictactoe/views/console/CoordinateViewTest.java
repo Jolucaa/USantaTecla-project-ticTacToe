@@ -10,6 +10,7 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -39,6 +40,7 @@ public class CoordinateViewTest {
     void testGivenNewCoordinateViewWhenReadCoordinateThenReturnCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.console.readInt(anyString())).thenReturn(1);
+            when(this.playController.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
             console.when(Console::getInstance).thenReturn(this.console);
             Coordinate coordinate = this.coordinateView.read("");
             verify(this.console).writeln("");
@@ -50,6 +52,7 @@ public class CoordinateViewTest {
     void testGivenNewCoordinateViewWhenReadInvalidCoordinateThenReadValidCoordinateAndReturnValidCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.console.readInt(anyString())).thenReturn(4, 1);
+            when(this.playController.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NOT_VALID, Error.NULL);
             console.when(Console::getInstance).thenReturn(this.console);
             Coordinate coordinate = this.coordinateView.read("");
             verify(this.console, times(2)).writeln("");
