@@ -11,8 +11,6 @@ public class Coordinate extends ConcreteCoordinate {
 
     public static final Coordinate NULL_COORDINATE = new Coordinate();
     public static final int DIMENSION = 3;
-    static final ClosedInterval LIMITS =
-            new ClosedInterval(0, Coordinate.DIMENSION - 1);
 
     public Coordinate() {
         super();
@@ -25,13 +23,6 @@ public class Coordinate extends ConcreteCoordinate {
     @Override
     public boolean isNull() {
         return this == Coordinate.NULL_COORDINATE;
-    }
-
-    public Error isValid() {
-        if (!LIMITS.isIncluded(this.row) || !LIMITS.isIncluded(this.column)) {
-            return Error.NOT_VALID;
-        }
-        return Error.NULL;
     }
 
     @Override

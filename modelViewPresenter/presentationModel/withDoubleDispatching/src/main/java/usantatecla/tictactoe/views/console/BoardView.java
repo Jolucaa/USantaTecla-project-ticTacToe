@@ -1,40 +1,29 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.views.MessageView;
-import usantatecla.utils.WithConsoleView;
+import usantatecla.tictactoe.views.Message;
+import usantatecla.utils.Console;
 
-class BoardView extends WithConsoleView {
-    
-    private PlayController playController;
+class BoardView {
 
-    BoardView(PlayController playController) {
-        this.playController = playController;
+    private Controller controller;
+
+    BoardView(Controller controller) {
+        this.controller = controller;
     }
 
     void write() {
-        this.console.writeln(MessageView.SEPARATOR.getMessage());
-		for (int i = 0; i < this.playController.getCoordinateDimension(); i++) {
-			this.printRowBoard(i);
+        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            Console.getInstance().write(Message.VERTICAL_LINE_LEFT.getMessage());
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                new TokenView(this.controller.getToken(new Coordinate(i, j))).write();
+                Console.getInstance().write(Message.VERTICAL_LINE_CENTERED.getMessage());
+            }
+            Console.getInstance().writeln(Message.VERTICAL_LINE_RIGHT.getMessage());
         }
-        this.console.writeln(MessageView.SEPARATOR.getMessage());
-	}
+        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+    }
 
-	private void printRowBoard(int row) {
-        this.console.write(MessageView.VERTICAL_LINE_LEFT.getMessage());
-		for (int j = 0; j < this.playController.getCoordinateDimension(); j++) {
-			this.printSquareBoard(new Coordinate(row, j));
-		}
-		this.console.writeln();
-	}
-
-	private void printSquareBoard(Coordinate coordinate) {
-		if (this.playController.isEmptyToken(coordinate)) {
-            this.console.write(MessageView.EMPTY.getMessage());
-		} else {
-			this.console.write(this.playController.getTokenChar(coordinate));
-        }
-        this.console.write(MessageView.VERTICAL_LINE_CENTERED.getMessage());
-	}
 }

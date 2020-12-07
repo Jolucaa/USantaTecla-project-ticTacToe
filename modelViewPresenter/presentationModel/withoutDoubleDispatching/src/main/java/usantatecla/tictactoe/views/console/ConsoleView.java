@@ -4,8 +4,9 @@ import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
+import usantatecla.tictactoe.views.View;
 
-public class ConsoleView extends usantatecla.tictactoe.views.View {
+public class ConsoleView extends View {
 
     private final StartView startView;
     private final PlayView playView;
