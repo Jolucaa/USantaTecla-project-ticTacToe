@@ -68,8 +68,8 @@ Universo Santa Tecla
 
 ### Diseño
 
-- ***DRY**: en las clases de vistas que asume el flujo de control y se repite en mastermind.views.console.ProposalView y mastermind.views.graphics.GameView  
-- ***Principio de Sustitución de Liskov**: las vistas preguntan por el tipo de controlador polimórfico*
+- ***DRY**: en las clases de vistas que asume el flujo de control y se repite en mastermind.views.console.ProposalView y mastermind.views.graphics.GameView*  
+- ***Principio de Sustitución de Liskov**: las vistas preguntan por el tipo de controlador polimórfico*  
 
 ## Vista de Desarrollo/Implementación
 
