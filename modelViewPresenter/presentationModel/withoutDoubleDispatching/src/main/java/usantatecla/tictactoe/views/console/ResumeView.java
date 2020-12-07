@@ -7,7 +7,7 @@ import usantatecla.utils.YesNoDialog;
 class ResumeView {
 
     boolean interact(ResumeController resumeController) {
-        boolean isResumed = new YesNoDialog().read(Message.RESUME.toString());
+        boolean isResumed = new YesNoDialog().read(Message.RESUME.getMessage());
         if (isResumed) {
             resumeController.resume();
         } else {

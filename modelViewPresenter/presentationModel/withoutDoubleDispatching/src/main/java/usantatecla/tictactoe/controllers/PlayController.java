@@ -12,9 +12,11 @@ public class PlayController extends Controller {
         super(game, state);
     }
 
+    /*
     public void next() {
         this.game.next();
     }
+    */
 
     public boolean isBoardComplete() {
         return this.game.isBoardComplete();
@@ -46,6 +48,12 @@ public class PlayController extends Controller {
             this.state.next();
         }
         return error;
+    }
+
+    public Coordinate getRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return new Coordinate(coordinate.getRow(), coordinate.getColumn());
     }
 
 }

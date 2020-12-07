@@ -7,7 +7,7 @@ public class Turn {
 
     public static final int NUMBER_PLAYERS = 2;
     private Player[] players;
-    private Board board;
+    private final Board board;
     private int active;
     private int users;
 
@@ -24,7 +24,7 @@ public class Turn {
         for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
             this.players[i] = new Player(Token.values()[i], board);
         }
-        this.active = Turn.NUMBER_PLAYERS - 1;
+        this.active = 0;
     }
 
     void next() {

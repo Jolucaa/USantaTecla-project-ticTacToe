@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Coordinate extends ConcreteCoordinate {
 
-    static final Coordinate NULL_COORDINATE = new Coordinate();
+    public static final Coordinate NULL_COORDINATE = new Coordinate();
     public static final int DIMENSION = 3;
     static final ClosedInterval LIMITS =
             new ClosedInterval(0, Coordinate.DIMENSION - 1);
@@ -20,8 +20,6 @@ public class Coordinate extends ConcreteCoordinate {
 
     public Coordinate(int row, int column) {
         super(row, column);
-        assert Coordinate.LIMITS.isIncluded(row);
-        assert Coordinate.LIMITS.isIncluded(column);
     }
 
     @Override

@@ -4,12 +4,13 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.utils.Console;
 
 class PlayView {
 
     void interact(PlayController playController) {
 
-        playController.next();
+        //playController.next();
         if (!playController.isBoardComplete()) {
             this.put(playController);
         } else {
@@ -18,7 +19,7 @@ class PlayView {
         new GameView(playController).write();
         if (playController.isTicTacToe()) {
             new TokenView(playController.getToken()).write();
-            Message.PLAYER_WIN.writeln();
+            Console.getInstance().writeln(Message.PLAYER_WIN.getMessage());
         }
     }
 
@@ -28,10 +29,10 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.toString());
+                coordinate = new CoordinateView().read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
-                coordinate = new Coordinate();
-                coordinate.random();
+                coordinate = playController.getRandomCoordinate();
+
             }
             error = playController.put(coordinate);
             if (isUser) {
@@ -47,13 +48,11 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.toString());
-                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.toString());
+                origin = new CoordinateView().read(Message.COORDINATE_TO_REMOVE.getMessage());
+                target = new CoordinateView().read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
-                origin = new Coordinate();
-                origin.random();
-                target = new Coordinate();
-                target.random();
+                origin = playController.getRandomCoordinate();
+                target = playController.getRandomCoordinate();
             }
             error = playController.move(origin, target);
             if (isUser) {

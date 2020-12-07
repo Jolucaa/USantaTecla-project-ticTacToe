@@ -1,7 +1,5 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.Console;
-
 public enum Message {
     TITTLE("--- TIC TAC TOE ---"),
     NUMBER_PLAYERS("Number of user"),
@@ -17,22 +15,14 @@ public enum Message {
     PLAYER_WIN(" Player: You win!!! :-)"),
     RESUME("Do you want to continue");
 
-    private String message;
+    private final String message;
 
-    private Message(String message) {
+    Message(String message) {
         this.message = message;
     }
 
     public String getMessage() {
         return this.message;
-    }
-
-    public void write() {
-        Console.getInstance().write(this.message);
-    }
-
-    public void writeln() {
-        Console.getInstance().writeln(this.message);
     }
 
     @Override

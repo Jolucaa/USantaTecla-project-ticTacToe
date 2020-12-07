@@ -86,9 +86,7 @@ public class ConcreteCoordinate implements Coordinate {
         ConcreteCoordinate other = (ConcreteCoordinate) obj;
         if (column != other.column)
             return false;
-        if (row != other.row)
-            return false;
-        return true;
+        return row == other.row;
     }
 
     @Override

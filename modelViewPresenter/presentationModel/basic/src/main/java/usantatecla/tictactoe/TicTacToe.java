@@ -8,11 +8,11 @@ import usantatecla.tictactoe.views.View;
 
 public abstract class TicTacToe {
 
-    private Game game;
-    private StartController startController;
-    private PlayController playController;
-    private ResumeController resumeController;
-    private View view;
+    private final Game game;
+    private final StartController startController;
+    private final PlayController playController;
+    private final ResumeController resumeController;
+    private final View view;
 
     protected TicTacToe() {
         this.game = new Game();

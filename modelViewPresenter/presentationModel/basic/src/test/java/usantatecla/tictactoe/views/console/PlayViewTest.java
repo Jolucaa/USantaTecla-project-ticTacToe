@@ -68,7 +68,7 @@ public class PlayViewTest {
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
             verify(this.playController).put(coordinate);
-            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ public class PlayViewTest {
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
             verify(this.playController).move(new int[]{0, 0}, new int[]{1, 1});
-            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ public class PlayViewTest {
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
             verify(this.playController).move(origin, target);
-            verify(this.console).writeln(Message.PLAYER_WIN.toString());
+            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
     }
 

@@ -7,10 +7,10 @@ public class ConcreteCoordinate implements Coordinate {
     static final String ROW = "Row: ";
     static final String COLUMN = "Column: ";
 
-    protected ConcreteCoordinate() {
+    public ConcreteCoordinate() {
     }
 
-    protected ConcreteCoordinate(int row, int column) {
+    public ConcreteCoordinate(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -86,9 +86,7 @@ public class ConcreteCoordinate implements Coordinate {
         ConcreteCoordinate other = (ConcreteCoordinate) obj;
         if (column != other.column)
             return false;
-        if (row != other.row)
-            return false;
-        return true;
+        return row == other.row;
     }
 
     @Override

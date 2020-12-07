@@ -7,7 +7,7 @@ import usantatecla.utils.Console;
 
 class PlayView {
 
-    private PlayController playController;
+    private final PlayController playController;
 
     PlayView(PlayController playController) {
         this.playController = playController;
@@ -32,7 +32,7 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                coordinate = new CoordinateView(this.playController).read(Message.COORDINATE_TO_PUT.toString());
+                coordinate = new CoordinateView(this.playController).read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
                 coordinate = this.playController.getRandomCoordinate();
             }
@@ -50,8 +50,8 @@ class PlayView {
         Error error;
         do {
             if (isUser) {
-                origin = new CoordinateView(this.playController).read(Message.COORDINATE_TO_REMOVE.toString());
-                target = new CoordinateView(this.playController).read(Message.COORDINATE_TO_MOVE.toString());
+                origin = new CoordinateView(this.playController).read(Message.COORDINATE_TO_REMOVE.getMessage());
+                target = new CoordinateView(this.playController).read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
                 origin = this.playController.getRandomCoordinate();
                 target = this.playController.getRandomCoordinate();

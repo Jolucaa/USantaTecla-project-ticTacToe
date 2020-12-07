@@ -7,7 +7,7 @@ public class Turn {
 
     public static final int NUMBER_PLAYERS = 2;
     private Player[] players;
-    private Board board;
+    private final Board board;
     private int active;
     private int users;
 
@@ -50,6 +50,4 @@ public class Turn {
     Token getToken() {
         return this.getPlayer().getToken();
     }
-
-
 }

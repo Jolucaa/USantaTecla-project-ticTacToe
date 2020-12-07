@@ -14,7 +14,7 @@ public class Console {
         return Console.console;
     }
 
-    private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     public String readString(String title) {
         String input = null;

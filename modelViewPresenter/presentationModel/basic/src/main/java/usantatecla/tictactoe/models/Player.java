@@ -5,8 +5,8 @@ import usantatecla.tictactoe.types.Token;
 
 class Player {
 
-    private Token token;
-    private Board board;
+    private final Token token;
+    private final Board board;
 
     Player(Token token, Board board) {
         assert token != null && !token.isNull();
