@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
@@ -28,7 +29,7 @@ class PlayView {
 
     private void put() {
         boolean isUser = this.playController.isUser();
-        int[] coordinate;
+        Coordinate coordinate;
         Error error;
         do {
             if (isUser) {
@@ -45,8 +46,8 @@ class PlayView {
 
     private void move() {
         boolean isUser = this.playController.isUser();
-        int[] origin;
-        int[] target;
+        Coordinate origin;
+        Coordinate target;
         Error error;
         do {
             if (isUser) {

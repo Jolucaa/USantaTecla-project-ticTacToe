@@ -11,9 +11,9 @@ class StartView extends SubView {
 	}
 
     void interact() {
-		Console.getInstance().writeln(Message.TITLE.toString());
+		Console.getInstance().writeln(Message.TITLE.getMessage());
 		int users = new LimitedIntDialog(0, 
-			this.game.getMaxPlayers()).read(Message.NUMBER_PLAYERS.toString());
+			this.game.getMaxPlayers()).read(Message.NUMBER_PLAYERS.getMessage());
 		this.game.setUsers(users);
 		new GameView(this.game).write();
 	}

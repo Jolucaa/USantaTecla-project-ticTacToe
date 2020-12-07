@@ -28,28 +28,28 @@ public class PlayController extends Controller {
         return this.game.isUser();
     }
 
-    public Error isValidCoordinate(int[] coordinate) {
+    public Error isValidCoordinate(Coordinate coordinate) {
         ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
-        if (!limits.isIncluded(coordinate[0]) || !limits.isIncluded(coordinate[1])) {
+        if (!limits.isIncluded(coordinate.getRow()) || !limits.isIncluded(coordinate.getColumn())) {
             return Error.NOT_VALID;
         }
         return Error.NULL;
     }
 
-    public int[] getRandomCoordinate() {
+    public Coordinate getRandomCoordinate() {
         Coordinate coordinate = new Coordinate();
         coordinate.random();
-        return new int[]{coordinate.getRow(), coordinate.getColumn()};
+        return coordinate;
     }
 
-    public Error put(int[] coordinate) {
-        return this.game.put(new Coordinate(coordinate[0], coordinate[1]));
+    public Error put(Coordinate coordinate) {
+        return this.game.put(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
     }
 
-    public Error move(int[] origin, int[] target) {
+    public Error move(Coordinate origin, Coordinate target) {
         return this.game.move(
-                new Coordinate(origin[0], origin[1]),
-                new Coordinate(target[0], target[1])
+                new Coordinate(origin.getRow(), origin.getColumn()),
+                new Coordinate(target.getRow(), target.getColumn())
         );
     }
 

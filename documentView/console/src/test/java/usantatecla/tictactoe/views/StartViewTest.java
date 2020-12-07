@@ -41,7 +41,7 @@ public class StartViewTest {
             when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.startView.interact();
-            verify(this.console).writeln(Message.TITLE.toString());
+            verify(this.console).writeln(Message.TITLE.getMessage());
             verify(this.game).setUsers(1);
         }
     }

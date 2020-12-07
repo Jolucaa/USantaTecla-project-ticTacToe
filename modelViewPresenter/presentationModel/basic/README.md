@@ -9,9 +9,10 @@ Universo Santa Tecla
 2.2. [Paquete tictactoe](#paquete-tictactoe)  
 2.3. [Paquete tictactoe.views](#paquete-tictactoeviews)  
 2.4. [Paquete tictactoe.views.console](#paquete-tictactoeviewsconsole)  
-2.5. [Paquete tictactoe.types](#paquete-tictactoetypes)  
-2.6. [Paquete tictactoe.models](#paquete-tictactoemodels)  
-2.7. [Paquete tictactoe.utils](#paquete-tictactoeutils)  
+2.5. [Paquete tictactoe.views.graphics](#paquete-tictactoeviewsgraphics)  
+2.6. [Paquete tictactoe.types](#paquete-tictactoetypes)  
+2.7. [Paquete tictactoe.models](#paquete-tictactoemodels)  
+2.8. [Paquete tictactoe.utils](#paquete-tictactoeutils)  
 3. [Calidad del Software](#calidad-del-software)  
 3.1. [Diseño](#diseño)  
 3.2. [Rediseño](#rediseño)  
@@ -42,7 +43,11 @@ Universo Santa Tecla
 
 ### Paquete *tictactoe.views.console*  
 
-![Paquete_tictactoe.views.console](./docs/diagrams/out/paquetes/paqueteTicTacToeViewsConsole.svg)
+![Paquete_tictactoe.views.console](./docs/diagrams/out/paquetes/paqueteTicTacToeViewsConsole.svg)  
+
+### Paquete *tictactoe.views.graphics*
+
+![Paquete_tictactoe.views.graphics](./docs/diagrams/out/paquetes/paqueteTicTacToeViewsGraphics.svg)  
 
 ### Paquete *tictactoe.models*
 

@@ -6,7 +6,7 @@ import usantatecla.tictactoe.views.MessageView;
 import usantatecla.utils.WithConsoleView;
 import usantatecla.tictactoe.types.Error;
 
-class CoordinateView extends WithConsoleView {
+class  CoordinateView extends WithConsoleView {
 
     PlayController playController;
 
