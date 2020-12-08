@@ -377,10 +377,12 @@ tictactoe.controllers.PlayController .down.> tictactoe.controllers.ControllersVi
 class tictactoe.controllers.ResumeController{
   + ResumeController(Game,State)
   + resume()
+  + accept(ControllersVisitor)
 }
 tictactoe.controllers.Controller <|-down- tictactoe.controllers.ResumeController
 tictactoe.controllers.ResumeController .down.> Game
 tictactoe.controllers.ResumeController .down.> State
+tictactoe.controllers.ResumeController .down.> tictactoe.controllers.ControllersVisitor
 
 class tictactoe.controllers.StartController{
   + StartController(Game,State)
