@@ -12,7 +12,7 @@ class PlayView {
         } else {
             this.randomPlay(playController);
         }
-        new GameView(playController).write();
+        new BoardView(playController).write();
     }
 
     private void randomPlay(PlayController playController) {

@@ -6,14 +6,18 @@ import usantatecla.tictactoe.types.Token;
 
 public abstract class UseCaseController {
 
-	protected Session session;
+    protected Session session;
 
-	UseCaseController(Session session) {
-		this.session = session;
-	}
+    UseCaseController(Session session) {
+        this.session = session;
+    }
 
-	public Token getToken(Coordinate coordinate) {
-		return this.session.getToken(coordinate);
-	}
+    public Token getToken(Coordinate coordinate) {
+        return this.session.getToken(coordinate);
+    }
+
+    public void next() {
+        this.session.next();
+    }
 
 }

@@ -1,11 +1,11 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Token;
+import usantatecla.utils.Direction;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import usantatecla.tictactoe.types.Token;
-import usantatecla.utils.Direction;
 
 class Board {
 
@@ -115,9 +115,7 @@ class Board {
 		if (getClass() != obj.getClass())
 			return false;
 		Board other = (Board) obj;
-		if (!Arrays.deepEquals(tokens, other.tokens))
-			return false;
-		return true;
+		return Arrays.deepEquals(tokens, other.tokens);
 	}	
 
 }

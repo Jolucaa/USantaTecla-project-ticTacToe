@@ -4,11 +4,11 @@ import usantatecla.tictactoe.controllers.PlayController;
 
 abstract class Command extends usantatecla.utils.Command {
 
-  protected PlayController playController;
+    protected PlayController playController;
 
-  protected Command(String title, PlayController playController) {
-    super(title);
-    this.playController = playController;
-  }
+    protected Command(String title, PlayController playController) {
+        super(title);
+        this.playController = playController;
+    }
 
 }
