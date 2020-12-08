@@ -60,7 +60,7 @@ public class PlayViewTest {
             Coordinate coordinate = new Coordinate(0, 0);
             when(this.logic.isBoardComplete()).thenReturn(false);
             when(this.logic.isUser()).thenReturn(false);
-            when(this.logic.getRandomCoordinate()).thenReturn(coordinate);
+            when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
             when(this.logic.put(any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);
@@ -97,7 +97,7 @@ public class PlayViewTest {
             Coordinate target = new Coordinate(1, 1);
             when(this.logic.isBoardComplete()).thenReturn(true);
             when(this.logic.isUser()).thenReturn(false);
-            when(this.logic.getRandomCoordinate()).thenReturn(origin, target);
+            when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
             when(this.logic.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
             when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
             when(this.logic.isTicTacToe()).thenReturn(true);

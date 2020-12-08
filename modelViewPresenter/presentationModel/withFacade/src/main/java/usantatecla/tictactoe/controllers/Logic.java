@@ -47,10 +47,6 @@ public class Logic {
         return this.playController.isValidCoordinate(coordinate);
     }
 
-    public Coordinate getRandomCoordinate() {
-        return this.playController.getRandomCoordinate();
-    }
-
     public Error put(Coordinate coordinate) {
         return this.playController.put(coordinate);
     }

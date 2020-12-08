@@ -29,7 +29,7 @@ class PlayView {
             if (isUser) {
                 coordinate = new CoordinateView(playController).read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
-                coordinate = playController.getRandomCoordinate();
+                coordinate = createRandomCoordinate();
 
             }
             error = playController.put(coordinate);
@@ -49,14 +49,20 @@ class PlayView {
                 origin = new CoordinateView(playController).read(Message.COORDINATE_TO_REMOVE.getMessage());
                 target = new CoordinateView(playController).read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
-                origin = playController.getRandomCoordinate();
-                target = playController.getRandomCoordinate();
+                origin = createRandomCoordinate();
+                target = createRandomCoordinate();
             }
             error = playController.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
         } while (!error.isNull());
+    }
+
+    public Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
     }
 
 }

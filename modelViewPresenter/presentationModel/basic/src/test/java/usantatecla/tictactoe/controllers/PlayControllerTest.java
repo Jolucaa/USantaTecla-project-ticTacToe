@@ -38,9 +38,4 @@ public class PlayControllerTest {
         assertThat(this.playController.isValidCoordinate(new Coordinate(7, 8)), is(Error.NOT_VALID));
     }
 
-    @Test
-    void testGivenNewPlayControllerWhenGetRandomCoordinateThenCoordinateIsValid() {
-        assertThat(this.playController.isValidCoordinate(this.playController.getRandomCoordinate()), is(Error.NULL));
-    }
-
 }

@@ -34,7 +34,7 @@ class PlayView extends WithGameView {
             if (isUser) {
                 coordinate = new CoordinateView(this.logic).read(Message.COORDINATE_TO_PUT.getMessage());
             } else {
-                coordinate = this.logic.getRandomCoordinate();
+                coordinate = this.createRandomCoordinate();
             }
             error = this.logic.put(coordinate);
             if (isUser) {
@@ -53,14 +53,20 @@ class PlayView extends WithGameView {
                 origin = new CoordinateView(this.logic).read(Message.COORDINATE_TO_REMOVE.getMessage());
                 target = new CoordinateView(this.logic).read(Message.COORDINATE_TO_MOVE.getMessage());
             } else {
-                origin = this.logic.getRandomCoordinate();
-                target = this.logic.getRandomCoordinate();
+                origin = this.createRandomCoordinate();
+                target = this.createRandomCoordinate();
             }
             error = this.logic.move(origin, target);
             if (isUser) {
                 new ErrorView(error).writeln();
             }
         } while (!error.isNull());
+    }
+
+    public Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
     }
 
 }

@@ -37,12 +37,6 @@ public class PlayController extends Controller {
         return Error.NULL;
     }
 
-    public Coordinate getRandomCoordinate() {
-        Coordinate coordinate = new Coordinate();
-        coordinate.random();
-        return coordinate;
-    }
-
     public Error put(Coordinate coordinate) {
         Error error = this.game.put(coordinate);
         if (error.isNull() && this.game.isTicTacToe()) {

@@ -36,12 +36,6 @@ public class PlayController extends Controller {
         return Error.NULL;
     }
 
-    public Coordinate getRandomCoordinate() {
-        Coordinate coordinate = new Coordinate();
-        coordinate.random();
-        return coordinate;
-    }
-
     public Error put(Coordinate coordinate) {
         return this.game.put(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
     }

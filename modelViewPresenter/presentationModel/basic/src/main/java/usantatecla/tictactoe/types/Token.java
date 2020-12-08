@@ -21,7 +21,7 @@ public enum Token {
     @Override
     public String toString() {
         if (this == NULL) {
-            return " ";
+            return ".";
         } else return this.name();
     }
 }

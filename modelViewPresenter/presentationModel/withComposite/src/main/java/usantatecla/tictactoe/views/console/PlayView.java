@@ -19,16 +19,20 @@ class PlayView {
         Error error;
         Coordinate target;
         do {
-            target = new Coordinate();
-            target.random();
+            target = createRandomCoordinate();
             if (!playController.isBoardComplete()) {
                 error = playController.put(target);
             } else {
-                Coordinate origin = new Coordinate();
-                origin.random();
+                Coordinate origin = createRandomCoordinate();
                 error = playController.move(origin, target);
             }
         } while (!error.isNull());
+    }
+
+    public Coordinate createRandomCoordinate() {
+        Coordinate coordinate = new Coordinate();
+        coordinate.random();
+        return coordinate;
     }
 
 }
