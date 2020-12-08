@@ -7,7 +7,6 @@ import usantatecla.tictactoe.views.View;
 public abstract class TicTacToe {
 
     private Logic logic;
-
     private View view;
 
     protected TicTacToe() {

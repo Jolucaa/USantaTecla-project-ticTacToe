@@ -8,9 +8,7 @@ import usantatecla.tictactoe.views.View;
 public class ConsoleView extends View {
 
     private StartView startView;
-
     private PlayView playView;
-
     private ResumeView resumeView;
 
     public ConsoleView() {
