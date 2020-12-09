@@ -1,15 +1,15 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.controllers.UseCaseController;
+import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
 class BoardView {
 
-    private UseCaseController controller;
+    private Controller controller;
 
-    BoardView(UseCaseController controller) {
+    BoardView(Controller controller) {
         this.controller = controller;
     }
 

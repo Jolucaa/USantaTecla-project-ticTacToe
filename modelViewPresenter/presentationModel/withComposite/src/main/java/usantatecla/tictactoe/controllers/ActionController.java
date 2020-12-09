@@ -6,7 +6,7 @@ import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.ClosedInterval;
 
-public class ActionController extends UseCaseController {
+public class ActionController extends Controller {
 
     public ActionController(Session session) {
         super(session);

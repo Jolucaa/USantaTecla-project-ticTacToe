@@ -5,7 +5,7 @@ import usantatecla.tictactoe.models.Session;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.Token;
 
-public class PlayController extends UseCaseController implements AcceptorController {
+public class PlayController extends Controller implements AcceptorController {
 
     private ActionController actionController;
     private UndoController undoController;

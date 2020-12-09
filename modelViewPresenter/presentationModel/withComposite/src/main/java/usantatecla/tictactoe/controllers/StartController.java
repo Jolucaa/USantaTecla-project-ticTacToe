@@ -2,7 +2,7 @@ package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Session;
 
-public class StartController extends UseCaseController implements AcceptorController {
+public class StartController extends Controller implements AcceptorController {
 
     public StartController(Session session) {
         super(session);

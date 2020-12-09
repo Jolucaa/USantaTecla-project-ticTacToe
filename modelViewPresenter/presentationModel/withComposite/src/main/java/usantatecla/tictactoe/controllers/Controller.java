@@ -4,11 +4,11 @@ import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Session;
 import usantatecla.tictactoe.types.Token;
 
-public abstract class UseCaseController {
+public abstract class Controller {
 
     protected Session session;
 
-    UseCaseController(Session session) {
+    Controller(Session session) {
         this.session = session;
     }
 

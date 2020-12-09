@@ -2,7 +2,7 @@ package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Session;
 
-public class ResumeController extends UseCaseController implements AcceptorController {
+public class ResumeController extends Controller implements AcceptorController {
 
     public ResumeController(Session session) {
         super(session);
