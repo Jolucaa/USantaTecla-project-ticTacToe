@@ -6,7 +6,7 @@ import usantatecla.tictactoe.types.Token;
 public class Session {
 
     private Game game;
-    private GameRegistry registry;
+    private Registry registry;
     private State state;
 
     public Session() {
@@ -28,7 +28,7 @@ public class Session {
 
     public void setUsers(int users) {
         this.game.setUsers(users);
-        this.registry = new GameRegistry(this.game);
+        this.registry = new Registry(this.game);
     }
 
     public int getMaxPlayers() {

@@ -1,9 +1,8 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
 class PlayCommand extends Command {

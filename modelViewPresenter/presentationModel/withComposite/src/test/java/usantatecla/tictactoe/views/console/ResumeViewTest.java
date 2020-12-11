@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.ResumeController;
-import usantatecla.tictactoe.views.console.ResumeView;
+import usantatecla.tictactoe.views.ResumeView;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

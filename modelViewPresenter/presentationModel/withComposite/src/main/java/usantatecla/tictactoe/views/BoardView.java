@@ -1,11 +1,10 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
-class BoardView {
+public class BoardView {
 
     private Controller controller;
 
@@ -13,7 +12,7 @@ class BoardView {
         this.controller = controller;
     }
 
-    void write() {
+    public void write() {
         Console.getInstance().writeln(Message.SEPARATOR.getMessage());
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             Console.getInstance().write(Message.VERTICAL_LINE_LEFT.getMessage());

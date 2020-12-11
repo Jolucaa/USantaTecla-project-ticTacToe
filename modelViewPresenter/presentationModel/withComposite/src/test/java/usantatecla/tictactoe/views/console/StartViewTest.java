@@ -11,7 +11,7 @@ import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Token;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.console.StartView;
+import usantatecla.tictactoe.views.StartView;
 import usantatecla.utils.Console;
 
 import static org.mockito.ArgumentMatchers.anyString;

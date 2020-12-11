@@ -5,8 +5,8 @@ import java.util.List;
 
 public abstract class Menu {
 
-    private static final String OPTION = "Option? [1-#size]: ";
-    private List<Command> commandList;
+    private static final String OPTION = "----- Choose one option -----";
+    private ArrayList<Command> commandList;
 
     public Menu() {
         this.commandList = new ArrayList<Command>();
@@ -19,17 +19,17 @@ public abstract class Menu {
                 commands.add(this.commandList.get(i));
             }
         }
-        int option;
-        Console console = Console.getInstance();
         boolean error;
+        int option;
         do {
             error = false;
-            console.writeln();
+            Console.getInstance().writeln();
+            Console.getInstance().writeln(Menu.OPTION);
             for (int i = 0; i < commands.size(); i++) {
-                console.writeln((i + 1) + ") " + commands.get(i).getTitle());
+                Console.getInstance().writeln((i + 1) + ") " + commands.get(i).getTitle());
             }
-            option = console.readInt(Menu.OPTION.replace("#size", "" + commands.size())) - 1;
-            if (!new ClosedInterval(0, commands.size() - 1).isIncluded(option)) {
+            option = Console.getInstance().readInt("") - 1;
+            if (!new ClosedInterval(0, commands.size()-1).isIncluded(option)) {
                 error = true;
             }
         } while (error);

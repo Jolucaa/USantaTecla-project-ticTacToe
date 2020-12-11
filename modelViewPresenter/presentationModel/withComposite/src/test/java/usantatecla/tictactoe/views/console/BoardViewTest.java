@@ -8,8 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.views.BoardView;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.console.BoardView;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

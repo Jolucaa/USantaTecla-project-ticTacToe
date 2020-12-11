@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Console;
@@ -11,7 +11,7 @@ public class TokenView {
         this.token = token;
     }
 
-    void write() {
+    public void write() {
         Console.getInstance().write(token.toString());
     }
 

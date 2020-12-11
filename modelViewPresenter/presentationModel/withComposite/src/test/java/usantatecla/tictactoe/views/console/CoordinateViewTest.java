@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.console.CoordinateView;
+import usantatecla.tictactoe.views.CoordinateView;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

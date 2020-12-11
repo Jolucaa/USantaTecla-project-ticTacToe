@@ -3,13 +3,13 @@ package usantatecla.tictactoe.models;
 import java.util.ArrayList;
 import java.util.List;
 
-class GameRegistry {
+class Registry {
 
     private List<GameMemento> mementos;
     private Game game;
     private int firstPrevious;
 
-    GameRegistry(Game game) {
+    Registry(Game game) {
         this.game = game;
         this.mementos = new ArrayList<GameMemento>();
         this.firstPrevious = 0;
