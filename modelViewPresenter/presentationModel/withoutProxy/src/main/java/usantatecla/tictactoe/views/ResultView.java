@@ -1,12 +1,12 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Token;
-import usantatecla.utils.WithConsoleView;
+import usantatecla.utils.Console;
 
-class ResultView extends WithConsoleView {
+class ResultView {
 
     void writeln(int winner) {
-        this.console.write(Token.values()[winner].getChar());
-		this.console.writeln(MessageView.PLAYER_WIN.getMessage());
+        Console.getInstance().write(Token.values()[winner].toString().charAt(0));
+        Console.getInstance().writeln(MessageView.PLAYER_WIN.getMessage());
     }
 }

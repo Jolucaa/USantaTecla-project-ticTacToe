@@ -2,15 +2,15 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Turn;
+import usantatecla.utils.Console;
 import usantatecla.utils.PlayersDialog;
-import usantatecla.utils.WithConsoleView;
 
-class StartView extends WithConsoleView {
+class StartView {
 
     void interact(StartController startController) {
 		startController.start();
-		this.console.writeln(MessageView.START_GAME.getMessage());
-		int numberOfUsers = new PlayersDialog().read(Turn.NUM_PLAYERS);
+		Console.getInstance().writeln(MessageView.START_GAME.getMessage());
+		int numberOfUsers = new PlayersDialog().read(Turn.NUMBER_PLAYERS);
 		startController.createPlayers(numberOfUsers);
 	}
 }

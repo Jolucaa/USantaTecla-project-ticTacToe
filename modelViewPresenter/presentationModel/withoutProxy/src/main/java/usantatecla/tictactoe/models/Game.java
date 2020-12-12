@@ -20,17 +20,17 @@ public class Game {
 		for (int i = 0; i < numberOfUsers; i++) {
 			this.players[i] = new Player(Token.values()[i], this.board, PlayerType.USER_PLAYER);
 		}
-		for (int i = numberOfUsers; i < Turn.NUM_PLAYERS; i++) {
+		for (int i = numberOfUsers; i < Turn.NUMBER_PLAYERS; i++) {
 			this.players[i] = new Player(Token.values()[i], this.board, PlayerType.MACHINE_PLAYER);
 		}
     }
 
-    Memento createMemento() {
+    GameMemento createMemento() {
         Board board = this.board.copy();
-        return new Memento(board, this.createCopyOfPlayers(this.players, board), this.turn);
+        return new GameMemento(this.turn, board, this.createCopyOfPlayers(this.players, board));
     }
 
-    void set(Memento memento) {
+    void set(GameMemento memento) {
         this.board = memento.getBoard().copy();
         this.players = this.createCopyOfPlayers(memento.getPlayers(), this.board);
         this.turn = memento.getTurn().copy(this.players);
@@ -38,7 +38,7 @@ public class Game {
 
     private Player[] createCopyOfPlayers(Player[] players, Board board) {
         Player[] playersCopy = new Player[2];
-        for (int i = 0; i < Turn.NUM_PLAYERS; i++) {
+        for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
             playersCopy[i] = new Player(players[i].getToken(), board, players[i].getType());
         }
         return playersCopy;
@@ -92,7 +92,7 @@ public class Game {
     }
 
     public boolean isTicTacToe() {
-        return this.board.isTicTacToe(this.turn.getOtherPlayer().getToken());
+        return this.board.isTicTacToe(this.turn.getPlayer().getToken());
     }
 
     public int getValueFromTurn() {
@@ -101,7 +101,7 @@ public class Game {
 
     public void newGame() {
 		this.board = new Board();
-        this.players = new Player[Turn.NUM_PLAYERS];
+        this.players = new Player[Turn.NUMBER_PLAYERS];
         this.turn = new Turn(this.players);
 	}
 }

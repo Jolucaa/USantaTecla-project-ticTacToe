@@ -1,5 +1,5 @@
 package usantatecla.tictactoe.models;
-
+/*
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -84,3 +84,4 @@ public class CoordinateTest {
         assertFalse(this.coordinate00.equals(new Object()));
     }
 }
+*/

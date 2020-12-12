@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.types.StateValue;
+import usantatecla.tictactoe.models.StateValue;
 
 public abstract class Controller {
     

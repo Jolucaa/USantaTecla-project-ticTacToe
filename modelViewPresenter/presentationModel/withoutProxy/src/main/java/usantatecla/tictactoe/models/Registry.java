@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Registry {
     
-    private ArrayList<Memento> mementoList;
+    private ArrayList<GameMemento> mementoList;
 	
 	private Game game;
 	
@@ -12,7 +12,7 @@ public class Registry {
 	
 	Registry(Game game) {
 		this.game = game;
-		this.mementoList = new ArrayList<Memento>();
+		this.mementoList = new ArrayList<GameMemento>();
 		// this.mementoList.add(firstPrevious, this.game.createMemento());
 		this.firstPrevious = 0;
 	}
@@ -44,7 +44,7 @@ public class Registry {
 	}
 
 	void reset() {
-		this.mementoList = new ArrayList<Memento>();
+		this.mementoList = new ArrayList<GameMemento>();
 		// this.mementoList.add(firstPrevious, this.game.createMemento());
 		this.firstPrevious = 0;
     }

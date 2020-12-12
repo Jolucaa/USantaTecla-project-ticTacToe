@@ -1,49 +1,57 @@
 package usantatecla.tictactoe.models;
 
-import java.util.Random;
-
+import usantatecla.utils.ConcreteCoordinate;
 import usantatecla.utils.Direction;
 
-public class Coordinate extends usantatecla.utils.Coordinate {
+import java.util.Random;
 
-	public static final int DIMENSION = 3;
+public class Coordinate extends ConcreteCoordinate {
 
-	public Coordinate() {
-		super();
-	}
+    static final Coordinate NULL_COORDINATE = new Coordinate();
+    public static final int DIMENSION = 3;
 
-	public Coordinate(int row, int column) {
-		super(row, column);
-	}
+    public Coordinate() {
+        super();
+    }
 
-	boolean inDirection(Coordinate coordinate) {
-		return this.getDirection(coordinate) != null;
-	}
+    public Coordinate(int row, int column) {
+        super(row, column);
+    }
 
-	Direction getDirection(Coordinate coordinate) {
-		Direction direction = super.getDirection(coordinate);
-		if (direction != null) {
-			return direction;
-		}
-		if (this.inInverseDiagonal() && coordinate.inInverseDiagonal()) {
-			return Direction.INVERSE_DIAGONAL;
-		}
-		return null;
-	}
+    @Override
+    public boolean isNull() {
+        return this == Coordinate.NULL_COORDINATE;
+    }
 
-	private boolean inInverseDiagonal() {
-		return this.row + this.column == Coordinate.DIMENSION - 1;
-	}
+    @Override
+    public Direction getDirection(usantatecla.utils.Coordinate coordinate) {
+        assert coordinate != null;
 
-	public boolean isValid() {
-		return this.row >= 0 && this.row < Coordinate.DIMENSION && this.column >= 0
-				&& this.column < Coordinate.DIMENSION;
-	}
+        if (coordinate.isNull()) {
+            return Direction.NULL;
+        }
+        if (this.inInverseDiagonal() && ((Coordinate) coordinate).inInverseDiagonal()) {
+            return Direction.INVERSE_DIAGONAL;
+        }
+        return super.getDirection(coordinate);
+    }
 
-	public void random() {
-		Random random = new Random(System.currentTimeMillis());
-		this.row = random.nextInt(Coordinate.DIMENSION);
-		this.column = random.nextInt(Coordinate.DIMENSION);
-	}
+    private boolean inInverseDiagonal() {
+        if (this.isNull()) {
+            return false;
+        }
+        return this.row + this.column == Coordinate.DIMENSION - 1;
+    }
+
+    public boolean isValid() {
+        return this.row >= 0 && this.row < Coordinate.DIMENSION && this.column >= 0
+                && this.column < Coordinate.DIMENSION;
+    }
+
+    public void random() {
+        Random random = new Random(System.currentTimeMillis());
+        this.row = random.nextInt(Coordinate.DIMENSION);
+        this.column = random.nextInt(Coordinate.DIMENSION);
+    }
 
 }

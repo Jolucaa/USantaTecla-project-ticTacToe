@@ -54,7 +54,7 @@ public class MovementController extends Controller {
 	}
 
 	public char getTokenChar(Coordinate coordinate) {
-		return this.session.getToken(coordinate).getChar();
+		return this.session.getToken(coordinate).toString().charAt(0);
 	}
 
 	public boolean isEmptyToken(Coordinate coordinate) {

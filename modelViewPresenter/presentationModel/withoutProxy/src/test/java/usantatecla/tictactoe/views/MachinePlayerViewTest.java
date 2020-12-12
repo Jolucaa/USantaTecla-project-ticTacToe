@@ -1,5 +1,5 @@
 package usantatecla.tictactoe.views;
-
+/*
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -37,4 +37,4 @@ public class MachinePlayerViewTest {
         assertNotNull(coordinates[1]);
     }
     
-}
+}*/

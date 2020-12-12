@@ -1,5 +1,5 @@
 package usantatecla.tictactoe.controllers;
-
+/*
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -186,4 +186,4 @@ public class PlayControllerTest {
         this.playController.redo();
         assertFalse(this.playController.isEmptyToken(coordinate01));
     }
-}
+}*/

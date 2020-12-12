@@ -1,36 +1,43 @@
 package usantatecla.utils;
 
-public class YesNoDialog  extends WithConsoleView {
+public class YesNoDialog {
 
-	private static final char AFIRMATIVE = 'y';
-
+	private static final char AFFIRMATIVE = 'y';
 	private static final char NEGATIVE = 'n';
-	
-	private static final String QUESTION = "? ("+YesNoDialog.AFIRMATIVE+"/"+YesNoDialog.NEGATIVE+"): ";
+	private static final String SUFFIX = "? (" +
+		YesNoDialog.AFFIRMATIVE+"/" + 
+		YesNoDialog.NEGATIVE+"): ";
+	private static final String MESSAGE = "The value must be '" + 
+		YesNoDialog.AFFIRMATIVE + "' or '" + 
+		YesNoDialog.NEGATIVE + "'";
+	private char answer;
 
-	private static final String MESSAGE = "The value must be '" + YesNoDialog.AFIRMATIVE + "' or '"
-			+ YesNoDialog.NEGATIVE + "'";
-
-	public boolean read(String title) {
-		assert title != null;
-		char answer;
-		boolean ok;
+	public boolean read(String message) {
+		assert message != null;
+		
+		Console console = Console.getInstance();
+		boolean error;
 		do {
-			answer = this.console.readChar(title + YesNoDialog.QUESTION);
-			ok = YesNoDialog.isAfirmative(answer) || YesNoDialog.isNegative(answer);
-			if (!ok) {
-				this.console.writeln(YesNoDialog.MESSAGE);
+			console.write(message);
+			this.answer = console.readChar(YesNoDialog.SUFFIX);
+			error = !this.isAffirmative() && !this.isNegative();
+			if (error) {
+				console.writeln(YesNoDialog.MESSAGE);
 			}
-		} while (!ok);
-		return YesNoDialog.isAfirmative(answer);
+		} while (error);
+		return this.isAffirmative();
 	}
 
-	private static boolean isAfirmative(char answer) {
-		return Character.toLowerCase(answer) == YesNoDialog.AFIRMATIVE;
+	private boolean isAffirmative() {
+		return this.getAnswer() == YesNoDialog.AFFIRMATIVE;
 	}
 
-	private static boolean isNegative(char answer) {
-		return Character.toLowerCase(answer) == YesNoDialog.NEGATIVE;
+	private char getAnswer(){
+		return Character.toLowerCase(this.answer);
+	}
+
+	private boolean isNegative() {
+		return Character.toLowerCase(this.answer) == YesNoDialog.NEGATIVE;
 	}
 
 }

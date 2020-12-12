@@ -5,7 +5,7 @@ import java.util.Map;
 
 import usantatecla.tictactoe.distributed.dispatchers.TCPIP;
 import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.types.StateValue;
+import usantatecla.tictactoe.models.StateValue;
 
 public class Logic {
 
