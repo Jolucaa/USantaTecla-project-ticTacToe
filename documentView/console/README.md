@@ -9,7 +9,8 @@ Universo Santa Tecla
 2.2. [Paquete tictactoe](#paquete-tictactoe)  
 2.3. [Paquete tictactoe.views](#paquete-tictactoeviews)  
 2.4. [Paquete tictactoe.models](#paquete-tictactoemodels)  
-2.5. [Paquete tictactoe.utils](#paquete-tictactoeutils)  
+2.5. [Paquete tictactoe.types](#paquete-tictactoetypes)  
+2.6. [Paquete tictactoe.utils](#paquete-tictactoeutils)  
 3. [Calidad del Software](#calidad-del-software)  
 3.1. [Diseño](#diseño)  
 3.2. [Rediseño](#rediseño)  
@@ -40,6 +41,10 @@ Universo Santa Tecla
 ## Paquete *tictactoe.models*
 
 ![Paquete_tictactoe.models](./docs/diagrams/out/paquetes/tictactoe.models.svg)
+
+## Paquete *tictactoe.types*
+
+![Paquete_tictactoe.types](./docs/diagrams/out/paquetes/tictactoe.types.svg)
 
 ## Paquete *tictactoe.utils*
 

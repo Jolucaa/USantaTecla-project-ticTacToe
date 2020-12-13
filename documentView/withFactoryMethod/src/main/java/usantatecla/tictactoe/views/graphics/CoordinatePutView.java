@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.views.graphics;
 
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Error;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.ErrorView;
 import usantatecla.utils.ClosedInterval;
 

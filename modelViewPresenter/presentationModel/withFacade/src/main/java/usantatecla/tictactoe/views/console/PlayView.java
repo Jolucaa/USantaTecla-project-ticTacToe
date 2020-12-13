@@ -4,10 +4,10 @@ import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithGameView;
+import usantatecla.tictactoe.views.WithLogicView;
 import usantatecla.utils.Console;
 
-class PlayView extends WithGameView {
+class PlayView extends WithLogicView {
 
     PlayView(Logic logic) {
         super(logic);

@@ -2,11 +2,11 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithGameView;
+import usantatecla.tictactoe.views.WithLogicView;
 import usantatecla.utils.Console;
 import usantatecla.utils.LimitedIntDialog;
 
-class StartView extends WithGameView {
+class StartView extends WithLogicView {
 
     StartView(Logic logic) {
         super(logic);

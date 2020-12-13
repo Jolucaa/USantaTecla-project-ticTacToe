@@ -3,10 +3,10 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithGameView;
+import usantatecla.tictactoe.views.WithLogicView;
 import usantatecla.utils.Console;
 
-class BoardView extends WithGameView {
+class BoardView extends WithLogicView {
 
     BoardView(Logic logic) {
         super(logic);

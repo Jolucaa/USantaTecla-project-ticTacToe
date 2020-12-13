@@ -6,7 +6,6 @@ import usantatecla.tictactoe.views.View;
 public abstract class TicTacToe {
 
     private Game game;
-
     private View view;
 
     protected TicTacToe() {

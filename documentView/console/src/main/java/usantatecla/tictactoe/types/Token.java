@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 import usantatecla.utils.ClosedInterval;
 
