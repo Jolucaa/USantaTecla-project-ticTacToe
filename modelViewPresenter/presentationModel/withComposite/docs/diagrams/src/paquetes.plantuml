@@ -1,0 +1,499 @@
+@startuml paqueteTicTacToe
+
+class View as "usantatecla.tictactoe.views.\nView" {}
+class Logic as "usantatecla.tictactoe.controllers.\nLogic" {}
+class Controller as "usantatecla.tictactoe.controllers.\nController"
+
+class usantatecla.tictactoe.TicTacToe{
+  # TicTacToe()
+  # play()
+  + main(String[])
+}
+usantatecla.tictactoe.TicTacToe *-down-> View
+usantatecla.tictactoe.TicTacToe *-down-> Logic
+usantatecla.tictactoe.TicTacToe .down.> Controller
+
+@enduml
+
+@startuml paqueteTicTacToeViews
+
+interface AcceptorController as "usantatecla.tictactoe.controllers.\nAcceptorController"
+interface ControllerVisitor as "usantatecla.tictactoe.controllers.\nControllerVisitor"
+class PlayController as "usantatecla.tictactoe.controllers.\nPlayController"
+class ResumeController as "usantatecla.tictactoe.controllers.\nResumeController"
+class StartController as "usantatecla.tictactoe.controllers.\nStartController"
+class Console as "utils.Console"
+class Command as "utils.Command"
+class Menu as "utils.Menu"
+class YesNoDialog as "utils.YesNoDialog"
+
+class  usantatecla.tictactoe.views.BoardView{
+- playController: PlayController
+~ BoardView(PlayController)
+~ write(): void
+}
+usantatecla.tictactoe.views.BoardView .down.> Console
+usantatecla.tictactoe.views.BoardView ..> PlayController
+
+class  usantatecla.tictactoe.views.Command{
+# playController: PlayController
+# Command(String, PlayController)
+}
+Command <|-down- usantatecla.tictactoe.views.Command
+
+class  usantatecla.tictactoe.views.CoordinateView{
+~ playController: PlayController
+~ CoordinateView(PlayController)
+~ read(String): int[]
+}
+usantatecla.tictactoe.views.CoordinateView .down.> Console
+usantatecla.tictactoe.views.CoordinateView ..> usantatecla.tictactoe.views.ErrorView
+usantatecla.tictactoe.views.CoordinateView ..> PlayController
+usantatecla.tictactoe.views.CoordinateView ..> usantatecla.tictactoe.views.Message
+
+class  usantatecla.tictactoe.views.ErrorView{
++ {static} MESSAGES: String[]
+# error: Error
++ ErrorView(Error)
+~ writeln(): void
+}
+
+enum  usantatecla.tictactoe.views.Message{
++ EMPTY
++ SEPARATOR
++ VERTICAL_LINE_CENTERED
++ VERTICAL_LINE_LEFT
++PLAYER_WIN
++START_GAME
++CHOOSE_PLAYER
++READ_ROW
++READ_COLUMN
++ERROR
++ PROPOSE_COMMAND
++ UNDO_COMMAND
++ REDO_COMMAND
++ RESUME
+- message: String
+- Message(String)
++ getMessage(): String
+}
+
+class  usantatecla.tictactoe.views.PlayCommand{
++ PlayCommand(PlayController)
+# execute(): void
+# isActive(): boolean
+}
+usantatecla.tictactoe.views.Command <|-down- usantatecla.tictactoe.views.PlayCommand
+usantatecla.tictactoe.views.PlayCommand ..> PlayController
+usantatecla.tictactoe.views.PlayCommand ..> usantatecla.tictactoe.views.Message
+usantatecla.tictactoe.views.PlayCommand ..> usantatecla.tictactoe.views.BoardView
+
+class usantatecla.tictactoe.views.PlayMenu{
+~ PlayMenu(PlayController)
+}
+Menu <|-down- usantatecla.tictactoe.views.PlayMenu
+usantatecla.tictactoe.views.PlayMenu ..> PlayController
+usantatecla.tictactoe.views.PlayMenu *-down-> usantatecla.tictactoe.views.PlayCommand
+usantatecla.tictactoe.views.PlayMenu *-down-> usantatecla.tictactoe.views.UndoCommand
+usantatecla.tictactoe.views.PlayMenu *-down-> usantatecla.tictactoe.views.RedoCommand
+
+class usantatecla.tictactoe.views.PlayView{
+~ interact(PlayController): void
+}
+usantatecla.tictactoe.views.PlayView ..> PlayController
+usantatecla.tictactoe.views.PlayView ..> usantatecla.tictactoe.views.PlayMenu
+
+class usantatecla.tictactoe.views.RedoCommand{
+~ RedoCommand(PlayController)
+# execute(): void
+# isActive(): boolean
+}
+usantatecla.tictactoe.views.Command <|-down- usantatecla.tictactoe.views.RedoCommand
+
+class usantatecla.tictactoe.views.ResumeView{
+~ interact(ResumeController): void
+}
+usantatecla.tictactoe.views.ResumeView ..> ResumeController
+usantatecla.tictactoe.views.ResumeView ..> YesNoDialog
+usantatecla.tictactoe.views.ResumeView ..> usantatecla.tictactoe.views.Message
+
+class usantatecla.tictactoe.views.StartView{
+~ interact(StartController): void
+}
+usantatecla.tictactoe.views.StartView .down.> Console
+usantatecla.tictactoe.views.StartView ..> StartController
+usantatecla.tictactoe.views.StartView ..> usantatecla.tictactoe.views.Message
+usantatecla.tictactoe.views.StartView ..> usantatecla.tictactoe.views.BoardView
+
+class usantatecla.tictactoe.views.UndoCommand{
+~ UndoCommand(PlayController)
+# execute(): void
+# isActive(): boolean
+}
+usantatecla.tictactoe.views.Command <|-down- usantatecla.tictactoe.views.UndoCommand
+usantatecla.tictactoe.views.UndoCommand ..> usantatecla.tictactoe.views.Message
+usantatecla.tictactoe.views.UndoCommand ..> PlayController
+usantatecla.tictactoe.views.UndoCommand ..> usantatecla.tictactoe.views.BoardView
+
+class  usantatecla.tictactoe.views.View{
+- startView: StartView
+- playView: PlayView
+- resumeView: ResumeView
++ View()
++ interact(AcceptorController): void
++ visit(StartController): void
++ visit(PlayController): void
++ visit(ResumeController): void
+}
+ControllerVisitor <|-down- usantatecla.tictactoe.views.View
+usantatecla.tictactoe.views.View ..> AcceptorController
+usantatecla.tictactoe.views.View *-down-> usantatecla.tictactoe.views.StartView
+usantatecla.tictactoe.views.View *-down-> usantatecla.tictactoe.views.PlayView
+usantatecla.tictactoe.views.View *-down-> usantatecla.tictactoe.views.ResumeView
+
+@enduml
+
+@startuml paqueteTicTacToeViewsGraphics
+class View as "tictactoe.views.View" {}
+class StartController as "tictactoe.controllers.\nStartController" {}
+class PlayController as "tictactoe.controllers.\nPlayController" {}
+class ResumeController as "tictactoe.controllers.\nResumeController" {}
+
+class  tictactoe.views.graphics.GraphicsView{
+  + visit(StartController)
+  + visit(PlayController)
+  + visit(ResumeController)
+}
+tictactoe.views.graphics.GraphicsView .down.> StartController
+tictactoe.views.graphics.GraphicsView .down.> PlayController
+tictactoe.views.graphics.GraphicsView .down.> ResumeController
+
+View <|-down- tictactoe.views.graphics.GraphicsView
+
+@enduml
+
+@startuml paqueteTicTacToeModels
+class ConcreteCoordinate as "usantatecla.utils.\nConcreteCoordinate" {}
+class Direction as "usantatecla.utils.\nDirection" {}
+class Error as "tictactoe.types.\nError" {}
+class Token as "tictactoe.types.\nToken" {}
+
+class tictactoe.models.Board{
+  + Board()
+  - Board(Board)
+  ~ copy(): Board
+  ~ getToken(Coordinate): Token
+  ~ put(Coordinate, Token)
+  ~ move(Coordinate, Coordinate)
+  ~ isCompleted(): boolean
+  ~ isOccupied(Coordinate, Token): boolean
+  ~ isEmpty(Coordinate): boolean
+  ~ isTicTacToe(Token): boolean
+  - getCoordinates(Token): List<Coordinate>
+  + equals(Object): boolean
+}
+
+tictactoe.models.Board *-down-> "*" Token
+tictactoe.models.Board .down.> tictactoe.models.Coordinate
+tictactoe.models.Board .down.> Direction
+
+class tictactoe.models.Coordinate{
+  ~ {static} NULL_COORDINATE: Coordinate
+  + {static} DIMENSION: int
+  + Coordinate()
+  + Coordinate(int, int)
+  + isNull(): boolean
+  + getDirection(Coordinate): Direction
+  - inInverseDiagonal(): boolean
+  + random()
+}
+ConcreteCoordinate <|-down- tictactoe.models.Coordinate
+tictactoe.models.Coordinate .down.> Direction
+
+class tictactoe.models.Game{
+  + Game()
+  + reset()
+  + setUsers(int)
+  + isBoardComplete(): boolean
+  + isUser(): boolean
+  + put(Coordinate): Error
+  + move(Coordinate, Coordinate): Error
+  + next(Error)
+  + isTicTacToe(): boolean
+  + getToken(Coordinate): Token
+  + getToken(): Token
+  + getMaxPlayers(): int
+  + equals(Object): boolean
+}
+tictactoe.models.Game *-down-> tictactoe.models.Board
+tictactoe.models.Game *-down-> tictactoe.models.Turn
+tictactoe.models.Game .down.> tictactoe.models.Coordinate
+tictactoe.models.Game .down.> Error
+tictactoe.models.Game .down.> Token
+
+class tictactoe.models.Player{
+  ~ Player(Token, Board)
+  ~ put(Coordinate): Error
+  ~ move(Coordinate, Coordinate): Error
+  ~ getToken(): Token
+  + copy(Board): Player
+  + equals(Object): boolean
+}
+tictactoe.models.Player *-down-> Token
+tictactoe.models.Player *-down-> tictactoe.models.Board
+tictactoe.models.Player .down.> tictactoe.models.Coordinate
+tictactoe.models.Player .down.> Error
+
+class tictactoe.models.State{
+  + State()
+  + reset()
+  + next()
+  + getValueState(): StateValue
+}
+tictactoe.models.State *-down-> tictactoe.models.StateValue
+
+enum tictactoe.models.StateValue{
+  + INITIAL
+  + IN_GAME
+  + RESUME
+  + EXIT
+}
+
+class tictactoe.models.Turn{
+  + {static} NUMBER_PLAYERS: int
+  - active: int
+  - users: int
+  ~ Turn(Board)
+  + Turn(Turn, Board)
+  + copy(Board): Turn
+  ~ setUsers(int)
+  ~ set(int)
+  ~ next()
+  ~ isUser(): boolean
+  ~ put(Coordinate): Error
+  ~ getPlayer(): Player
+  ~ move(Coordinate, Coordinate): Error
+  ~ getToken(): Token
+  + equals(Object): boolean
+}
+
+tictactoe.models.Turn *-down-> "*" tictactoe.models.Player
+tictactoe.models.Turn *-down-> tictactoe.models.Board
+tictactoe.models.Turn .down.-> Token
+tictactoe.models.Turn .down.-> tictactoe.models.Coordinate
+tictactoe.models.Turn .down.-> Error
+@enduml
+
+@startuml paqueteTypes
+class ClosedInterval as "usantatecla.utils.\nClosedInterval" {}
+
+enum tictactoe.types.Error{
+  + NOT_EMPTY
+  + NOT_OWNER
+  + SAME_COORDINATES
+  + NOT_VALID
+  + NULL
+  + isNull(): boolean
+}
+
+enum tictactoe.types.Token{
+  + X
+  + O
+  + NULL
+  + isNull(): boolean
+  + {static} get(int): Token
+  + toString(): String
+}
+tictactoe.types.Token .down.> ClosedInterval
+
+@enduml
+
+@startuml paqueteTicTacToeControllers
+class Game as "tictactoe.models.\nGame" {}
+class Coordinate as "tictactoe.models.\nCoordinate" {}
+class Error as "tictactoe.types.\nError" {}
+class Token as "tictactoe.types.\nToken" {}
+class State as "tictactoe.models.\nState" {}
+class StateValue as "tictactoe.models.\nStateValue" {}
+class ClosedInterval as "usantatecla.utils.\nClosedInterval" {}
+
+abstract class tictactoe.controllers.Controller{
+  ~ Controller(Game,State)
+  + getToken(Coordinate): Token
+  + next()
+  + {abstract} accept(ControllersVisitor)
+}
+tictactoe.controllers.Controller *-down-> Game
+tictactoe.controllers.Controller *-down-> State
+tictactoe.controllers.Controller .down.> Coordinate
+tictactoe.controllers.Controller .down.> Token
+tictactoe.controllers.Controller .down.> tictactoe.controllers.ControllersVisitor
+
+interface tictactoe.controllers.ControllersVisitor{
+  ~ visit(StartController)
+  ~ visit(PlayController)
+  ~ visit(ResumeController)
+}
+
+class tictactoe.controllers.Logic{
+  + Logic()
+  + getController(): Controller
+}
+
+tictactoe.controllers.Logic *-down-> Game
+tictactoe.controllers.Logic *-down-> State
+tictactoe.controllers.Logic *-down-> StateValue
+tictactoe.controllers.Logic *-down-> "*"tictactoe.controllers.Controller
+
+class tictactoe.controllers.PlayController{
+  + PlayController(Game,State)
+  + isBoardComplete(): boolean
+  + isTicTacToe(): boolean
+  + getToken(): Token
+  + isUser(): boolean
+  + isValidCoordinate(Coordinate): Error
+  + getRandomCoordinate(): Coordinate
+  + put(Coordinate): Error
+  + move(Coordinate,Coordinate): Error
+  + accept(ControllersVisitor)
+}
+tictactoe.controllers.Controller <|-down- tictactoe.controllers.PlayController
+tictactoe.controllers.PlayController .down.> Coordinate
+tictactoe.controllers.PlayController .down.> Error
+tictactoe.controllers.PlayController .down.> Game
+tictactoe.controllers.PlayController .down.> Token
+tictactoe.controllers.PlayController .down.> State
+tictactoe.controllers.PlayController .down.> ClosedInterval
+tictactoe.controllers.PlayController .down.> tictactoe.controllers.ControllersVisitor
+
+class tictactoe.controllers.ResumeController{
+  + ResumeController(Game,State)
+  + resume()
+  + accept(ControllersVisitor)
+}
+tictactoe.controllers.Controller <|-down- tictactoe.controllers.ResumeController
+tictactoe.controllers.ResumeController .down.> Game
+tictactoe.controllers.ResumeController .down.> State
+tictactoe.controllers.ResumeController .down.> tictactoe.controllers.ControllersVisitor
+
+class tictactoe.controllers.StartController{
+  + StartController(Game,State)
+  + setUsers(int)
+  + getMaxPlayers(): int
+  + accept(ControllersVisitor)
+}
+tictactoe.controllers.Controller <|-down- tictactoe.controllers.StartController
+tictactoe.controllers.StartController .down.> Game
+tictactoe.controllers.StartController .down.> State
+tictactoe.controllers.StartController .down.> tictactoe.controllers.ControllersVisitor
+@enduml
+
+@startuml paqueteUtils
+
+class BufferedReader as "java.io.BufferedReader"{}
+
+class  usantatecla.utils.ClosedInterval{
+  - min: int
+  - max: int
+  + ClosedInterval(int,int)
+  + isIncluded(int): boolean
+  + toString(): String
+}
+
+class usantatecla.utils.ConcreteCoordinate{
+  # row: int
+  # column: int
+  - {static} ROW: String
+  - {static} COLUMN: String
+  # ConcreteCoordinate()
+  # ConcreteCoordinate(int,int)
+  + isNull(): boolean
+  + getDirection(Coordinate): Direction
+  + inHorizontal(Coordinate): boolean
+  + inVertical(Coordinate): boolean
+  + inMainDiagonal(): boolean
+  # read(String)
+  + getRow(): int
+  + getColumn(): int
+  + hashCode(): int
+  + equals(Object): boolean
+  + toString(): String
+}
+
+usantatecla.utils.Coordinate <|-down- usantatecla.utils.ConcreteCoordinate
+usantatecla.utils.ConcreteCoordinate .down.> usantatecla.utils.Direction
+usantatecla.utils.ConcreteCoordinate .down.> usantatecla.utils.Console
+
+
+class usantatecla.utils.Console{
+  - {static} console: Console
+  + {static} instance(): Console
+  - readString(String): String
+  + readString(): String
+  + readInt(String): int
+  ~ readChar(String): char
+  + writeln()
+  + write(String)
+  + write(int)
+  + writeln(String)
+  + writeln(int)
+  + write(char)
+  - writeError(String)
+}
+usantatecla.utils.Console *-down-> BufferedReader
+
+interface usantatecla.utils.Coordinate{
+  ~ isNull(): boolean
+  ~ getDirection(Coordinate): Direction
+  ~ inHorizontal(Coordinate): boolean
+  ~ inVertical(Coordinate): boolean
+  ~ inMainDiagonal(): boolean
+}
+usantatecla.utils.Coordinate .down.> usantatecla.utils.Direction
+
+enum usantatecla.utils.Direction{
+  VERTICAL
+  HORIZONTAL
+  MAIN_DIAGONAL
+  INVERSE_DIAGONAL
+  NULL
+}
+
+class usantatecla.utils.LimitedIntDialog{
+  - LIMITS: ClosedInterval
+  - {static} ERROR_MESSAGE: String
+  + LimitedIntDialog(int,int)
+  + read(String): int
+}
+
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
+usantatecla.utils.LimitedIntDialog .down.> usantatecla.utils.Console
+
+class usantatecla.utils.NullCoordinate{
+  - {static} instance: NullCoordinate
+  + {static} instance(): Coordinate
+  + isNull(): boolean
+  + getDirection(Coordinate): Direction
+  + inHorizontal(Coordinate): boolean
+  + inVertical(Coordinate): boolean
+  + inMainDiagonal(): boolean
+  + hashCode(): int
+  + equals(Object): boolean
+  + toString(): String
+}
+usantatecla.utils.Coordinate <|-down- usantatecla.utils.NullCoordinate
+usantatecla.utils.NullCoordinate .down.> usantatecla.utils.Direction
+
+class usantatecla.utils.YesNoDialog{
+  - {static} AFIRMATIVE: char
+  - {static} NEGATIVE: char
+  - {static} SUFFIX: String
+  - {static} MESSAGE: String
+  - answer: char
+  + read(String): boolean
+  - isAffirmative(): boolean
+  - getAnswer(): char
+  - isNegative(): boolean
+}
+usantatecla.utils.YesNoDialog .down.> usantatecla.utils.Console
+@enduml
