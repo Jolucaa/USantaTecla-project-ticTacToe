@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.views;
-/*
-import static org.junit.Assert.assertNotNull;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+
+import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Session;
@@ -27,7 +27,7 @@ public class MachinePlayerViewTest {
     }
 
     @Test
-    public void testGivenNewCoordinateViewWhenReadCoordinateThenIsCorrec() {
+    public void testGivenNewCoordinateViewWhenReadCoordinatesThenIsCorrect() {
         Coordinate coordinate1 = this.machinePlayerView.readCoordinateToPut();
         this.session.putTokenPlayerFromTurn(coordinate1);
         Coordinate coordinate2 = this.machinePlayerView.readCoordinateToPut();
@@ -37,4 +37,4 @@ public class MachinePlayerViewTest {
         assertNotNull(coordinates[1]);
     }
     
-}*/
+}

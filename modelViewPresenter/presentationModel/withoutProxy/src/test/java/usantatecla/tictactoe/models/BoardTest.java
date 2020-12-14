@@ -1,11 +1,10 @@
 package usantatecla.tictactoe.models;
-/*
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Token;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class BoardTest {
 
@@ -20,14 +19,14 @@ public class BoardTest {
         Token token = Token.values()[0];
         Coordinate coordinate = new Coordinate(0, 0);
         this.board.put(coordinate, token);
-        assertTrue(this.board.isOccupied(coordinate, token));
+        assertThat(this.board.isOccupied(coordinate, token), is(true));
     }
 
     @Test
     public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsFalse() {
         Token token = Token.values()[0];
         Coordinate coordinate = new Coordinate(0, 0);
-        assertFalse(this.board.isOccupied(coordinate, token));
+        assertThat(this.board.isOccupied(coordinate, token), is(false));
     }
 
     @Test
@@ -37,8 +36,8 @@ public class BoardTest {
         Coordinate coordinateToMove = new Coordinate(0, 1);
         this.board.put(originCoordinate, token);
         this.board.move(originCoordinate, coordinateToMove);
-        assertTrue(this.board.isEmpty(originCoordinate));
-        assertTrue(this.board.isOccupied(coordinateToMove, token));
+        assertThat(this.board.isEmpty(originCoordinate), is(true));
+        assertThat(this.board.isOccupied(coordinateToMove, token), is(true));
     }
 
     @Test
@@ -48,11 +47,11 @@ public class BoardTest {
         Coordinate coordinateToMove = new Coordinate(0, 1);
         this.board.put(originCoordinate, token);
         this.board.move(originCoordinate, coordinateToMove);
-        assertFalse(this.board.isEmpty(coordinateToMove));
-        assertFalse(this.board.isOccupied(originCoordinate, token));
+        assertThat(this.board.isEmpty(coordinateToMove), is(false));
+        assertThat(this.board.isOccupied(originCoordinate, token), is(false));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test//(expected = AssertionError.class)
     public void testGivenNewBoardWhenMoveNewTokenTheOriginIsEmptyThenAssertionException() {
         Coordinate originCoordinate = new Coordinate(0, 0);
         Coordinate coordinateToMove = new Coordinate(0, 1);
@@ -68,7 +67,7 @@ public class BoardTest {
         this.board.put(coordinate11, token);
         this.board.put(coordinate12, token);
         this.board.put(coordinate13, token);
-        assertTrue(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(true));
     }
 
     @Test
@@ -78,13 +77,13 @@ public class BoardTest {
         Coordinate coordinate12 = new Coordinate(0, 1);
         this.board.put(coordinate11, token);
         this.board.put(coordinate12, token);
-        assertFalse(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(false));
     }
 
     @Test
     public void testGivenNewBoardWhenNotPutTokensAndIsTicTacToeThenIsFalse() {
         Token token = Token.values()[0];
-        assertFalse(this.board.isTicTacToe(token));
+        assertThat(this.board.isTicTacToe(token), is(false));
     }
 
     @Test
@@ -103,7 +102,7 @@ public class BoardTest {
         this.board.put(coordinate22, tokenO);
         this.board.put(coordinate23, tokenX);
         this.board.put(coordinate33, tokenO);
-        assertTrue(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(true));
     }
 
     @Test
@@ -120,12 +119,11 @@ public class BoardTest {
         this.board.put(coordinate12, tokenX);
         this.board.put(coordinate22, tokenO);
         this.board.put(coordinate23, tokenX);
-        assertFalse(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(false));
     }
 
     @Test
     public void testGivenNewBoardWhenNotPutTokensAndIsCompletedThenIsFalse() {
-        assertFalse(this.board.isCompleted());
+        assertThat(this.board.isCompleted(), is(false));
     }
 }
-*/

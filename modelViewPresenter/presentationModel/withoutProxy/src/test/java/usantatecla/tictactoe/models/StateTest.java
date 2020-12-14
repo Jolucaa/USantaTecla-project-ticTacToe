@@ -1,10 +1,9 @@
 package usantatecla.tictactoe.models;
-/*
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-import usantatecla.tictactoe.types.StateValue;
+import org.junit.jupiter.api.Test;
 
 public class StateTest {
     
@@ -16,20 +15,20 @@ public class StateTest {
 
     @Test
     public void testGivenNewStateWhenGetValueStateThenIsInitial() {
-        assertEquals(StateValue.INITIAL, this.state.getValueState());
+        assertThat(this.state.getValueState(), is(StateValue.INITIAL));
     }
 
     @Test
     public void testGivenNewStateWhenDoNextAndGetValueStateThenIsInGame() {
         this.state.next();
-        assertEquals(StateValue.IN_GAME, this.state.getValueState());
+        assertThat(this.state.getValueState(), is(StateValue.IN_GAME));
     }
 
     @Test
     public void testGivenNewStateWhenDoTwoNextAndGetValueStateThenIsResult() {
         this.state.next();
         this.state.next();
-        assertEquals(StateValue.RESUME, this.state.getValueState());
+        assertThat(this.state.getValueState(), is(StateValue.RESUME));
     }
 
     @Test
@@ -37,6 +36,6 @@ public class StateTest {
         this.state.next();
         this.state.next();
         this.state.next();
-        assertEquals(StateValue.EXIT, this.state.getValueState());
+        assertThat(this.state.getValueState(), is(StateValue.EXIT));
     }
-}*/
+}

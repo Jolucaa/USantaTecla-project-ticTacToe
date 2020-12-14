@@ -9,7 +9,7 @@ public abstract class Menu {
     private ArrayList<Command> commandList;
 
     public Menu() {
-        this.commandList = new ArrayList<Command>();
+        this.commandList = new ArrayList<>();
     }
 
     public void execute() {
