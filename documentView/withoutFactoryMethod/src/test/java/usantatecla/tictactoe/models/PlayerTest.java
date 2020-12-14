@@ -2,6 +2,8 @@ package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.types.Token;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

@@ -2,7 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.Logic;
 
-public abstract class View extends WithGameView {
+public abstract class View extends WithLogicView {
 
     public View(Logic logic) {
         super(logic);

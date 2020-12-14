@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Error;
-import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

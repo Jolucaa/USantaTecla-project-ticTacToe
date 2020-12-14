@@ -1,5 +1,8 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.types.Token;
+
 import java.util.Arrays;
 
 public class Turn {

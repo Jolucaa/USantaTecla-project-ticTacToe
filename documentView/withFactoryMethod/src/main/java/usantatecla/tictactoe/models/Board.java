@@ -1,5 +1,6 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Direction;
 
 import java.util.ArrayList;
