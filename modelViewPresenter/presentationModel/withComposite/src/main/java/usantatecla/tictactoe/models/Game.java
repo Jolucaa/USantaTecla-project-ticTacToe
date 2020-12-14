@@ -64,7 +64,7 @@ public class Game {
     }
 
     public GameMemento createMemento() {
-        return new GameMemento(this.turn, this.board);
+        return new GameMemento(this.turn.getUsers(), this.turn.get(), this.board.toCharacterArray());
     }
 
     public void set(GameMemento memento) {

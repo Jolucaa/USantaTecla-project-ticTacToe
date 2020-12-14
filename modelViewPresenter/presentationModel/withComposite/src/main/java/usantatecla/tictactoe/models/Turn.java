@@ -46,8 +46,16 @@ public class Turn {
         this.active = active;
     }
 
+    int get() {
+        return this.active;
+    }
+
     void next() {
         this.active = (this.active + 1) % Turn.NUMBER_PLAYERS;
+    }
+
+    int getUsers() {
+        return this.users;
     }
 
     boolean isUser() {
@@ -92,6 +100,5 @@ public class Turn {
             return false;
         return true;
     }
-
 
 }
