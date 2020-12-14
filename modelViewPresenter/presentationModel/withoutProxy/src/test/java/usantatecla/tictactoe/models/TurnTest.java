@@ -1,8 +1,7 @@
 package usantatecla.tictactoe.models;
-/*
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.PlayerType;
@@ -23,22 +22,22 @@ public class TurnTest {
 
     @Test
     public void testGivenNewTurnWhenChangeTurnThenIsOtherTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+        assertThat(this.turn.getPlayer().getToken(), is(this.players[0].getToken()));
+        assertThat(this.turn.getOtherPlayer().getToken(), is(this.players[1].getToken()));
         this.turn.change();
-        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
+        assertThat(this.turn.getPlayer().getToken(), is(this.players[1].getToken()));
+        assertThat(this.turn.getOtherPlayer().getToken(), is(this.players[0].getToken()));
     }
 
     @Test
     public void testGivenNewTurnWhenChangeTurnTwoTimesThenIsTheSameTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+        assertThat(this.turn.getPlayer().getToken(), is(this.players[0].getToken()));
+        assertThat(this.turn.getOtherPlayer().getToken(), is(this.players[1].getToken()));
         this.turn.change();
-        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
+        assertThat(this.turn.getPlayer().getToken(), is(this.players[1].getToken()));
+        assertThat(this.turn.getOtherPlayer().getToken(), is(this.players[0].getToken()));
         this.turn.change();
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+        assertThat(this.turn.getPlayer().getToken(), is(this.players[0].getToken()));
+        assertThat(this.turn.getOtherPlayer().getToken(), is(this.players[1].getToken()));
     }
-}*/
+}
