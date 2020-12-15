@@ -63,11 +63,11 @@ public class Game {
         return Turn.NUMBER_PLAYERS;
     }
 
-    public GameMemento createMemento() {
-        return new GameMemento(this.turn.getUsers(), this.turn.get(), this.board.toCharacterArray());
+    public Memento createMemento() {
+        return new Memento(this.turn.getUsers(), this.turn.get(), this.board.toCharacterArray());
     }
 
-    public void set(GameMemento memento) {
+    public void set(Memento memento) {
         this.turn.set(memento.getTurn().getToken().ordinal());
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {

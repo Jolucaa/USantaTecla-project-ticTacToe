@@ -30,7 +30,7 @@ public enum Token {
     }
 
     public char toCharacter() {
-        return this.toString().toCharArray()[0];
+        return this.toString().charAt(0);
     }
 
     @Override

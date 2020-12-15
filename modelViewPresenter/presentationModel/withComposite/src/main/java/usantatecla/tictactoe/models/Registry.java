@@ -5,13 +5,13 @@ import java.util.List;
 
 class Registry {
 
-    private List<GameMemento> mementos;
+    private List<Memento> mementos;
     private Game game;
     private int firstPrevious;
 
     Registry(Game game) {
         this.game = game;
-        this.mementos = new ArrayList<GameMemento>();
+        this.mementos = new ArrayList<>();
         this.firstPrevious = 0;
         this.mementos.add(this.firstPrevious, this.game.createMemento());
     }

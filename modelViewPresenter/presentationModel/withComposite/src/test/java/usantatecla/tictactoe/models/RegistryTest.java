@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class RegistryTest {
 
     @Captor
-    private ArgumentCaptor<GameMemento> argumentCaptor;
+    private ArgumentCaptor<Memento> argumentCaptor;
     @Spy
     private Game game;
     private Registry registry;

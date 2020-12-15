@@ -2,13 +2,13 @@ package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Token;
 
-class GameMemento {
+class Memento {
 
     private int users;
     private int activeTurn;
     private char[] boardTokens;
 
-    public GameMemento(int users, int activeTurn, char[] boardTokens) {
+    public Memento(int users, int activeTurn, char[] boardTokens) {
         this.users = users;
         this.activeTurn = activeTurn;
         this.boardTokens = boardTokens;

@@ -287,7 +287,7 @@ usantatecla.tictactoe.models.Turn *-down-> usantatecla.tictactoe.models.Board
 usantatecla.tictactoe.models.Turn *-down-> "2" usantatecla.tictactoe.models.Player
 usantatecla.tictactoe.models.Turn .down.> Error
 
-class usantatecla.tictactoe.models.GameMemento {
+class usantatecla.tictactoe.models.Memento {
 
     - users: int
     - activeTurn: int
@@ -299,9 +299,9 @@ class usantatecla.tictactoe.models.GameMemento {
 
 }
 
-usantatecla.tictactoe.models.GameMemento .down.> usantatecla.tictactoe.models.Board
-usantatecla.tictactoe.models.GameMemento .down.> usantatecla.tictactoe.models.Turn
-usantatecla.tictactoe.models.GameMemento .down.> Token
+usantatecla.tictactoe.models.Memento .down.> usantatecla.tictactoe.models.Board
+usantatecla.tictactoe.models.Memento .down.> usantatecla.tictactoe.models.Turn
+usantatecla.tictactoe.models.Memento .down.> Token
 
 class usantatecla.tictactoe.models.Registry {
 
@@ -319,7 +319,7 @@ class usantatecla.tictactoe.models.Registry {
 }
 
 usantatecla.tictactoe.models.Registry *-down-> usantatecla.tictactoe.models.Game
-usantatecla.tictactoe.models.Registry *-down-> "0..*" usantatecla.tictactoe.models.GameMemento
+usantatecla.tictactoe.models.Registry *-down-> "0..*" usantatecla.tictactoe.models.Memento
 
 class usantatecla.tictactoe.models.Game {
 
@@ -347,7 +347,7 @@ usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Board
 usantatecla.tictactoe.models.Game *-down-> usantatecla.tictactoe.models.Turn
 usantatecla.tictactoe.models.Game .down.> Error
 usantatecla.tictactoe.models.Game .down.> Token
-usantatecla.tictactoe.models.Game .down.> usantatecla.tictactoe.models.GameMemento
+usantatecla.tictactoe.models.Game .down.> usantatecla.tictactoe.models.Memento
 
 class usantatecla.tictactoe.models.Session {
 
