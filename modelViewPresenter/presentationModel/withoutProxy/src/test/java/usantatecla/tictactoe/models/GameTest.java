@@ -30,38 +30,6 @@ public class GameTest {
     }
 
     @Test
-    void testGivenHorizontalTicTacToeGameWhenIsTicTacToeThenIsTrue() {
-        Game game = new GameBuilder().rows("XXX",
-                "OO ",
-                "   ").build();
-        assertThat(game.isTicTacToe(), is(true));
-    }
-
-    @Test
-    void testGivenVerticalTicTacToeGameWhenIsTicTacToeThenIsTrue() {
-        Game game = new GameBuilder().rows("XOO",
-                "X  ",
-                "X  ").build();
-        assertThat(game.isTicTacToe(), is(true));
-    }
-
-    @Test
-    void testGivenDiagonalTicTacToeGameWhenIsHorizontalTicTacToeThenIsTrue() {
-        Game game = new GameBuilder().rows("XO ",
-                "OX ",
-                "  X").build();
-        assertThat(game.isTicTacToe(), is(true));
-    }
-
-    @Test
-    void testGivenInvertedDiagonalTicTacToeGameWhenIsHorizontalTicTacToeThenIsTrue() {
-        Game game = new GameBuilder().rows(" OX",
-                " XO",
-                "X  ").build();
-        assertThat(game.isTicTacToe(), is(true));
-    }
-
-    @Test
     void testGivenGameWithXTokenWhenGetTokenThenIsOToken() {
         Game game = new GameBuilder().rows("X  ",
                 "OX ",

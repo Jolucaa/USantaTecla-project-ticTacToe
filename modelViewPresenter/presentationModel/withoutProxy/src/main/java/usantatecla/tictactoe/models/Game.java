@@ -50,12 +50,12 @@ public class Game {
 
     public void putTokenPlayerFromTurn(Coordinate coordinate) {
         this.turn.getPlayer().put(coordinate);
-        //this.changeTurn();
+        this.changeTurn();
     }
 
     public void moveTokenPlayerFromTurn(Coordinate[] coordinates) {
         this.turn.getPlayer().move(coordinates);
-        //this.changeTurn();
+        this.changeTurn();
     }
 
     public PlayerType getTypeOfTokenPlayerFromTurn() {

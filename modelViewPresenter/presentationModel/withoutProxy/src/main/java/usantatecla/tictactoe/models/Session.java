@@ -70,13 +70,11 @@ public class Session {
 
     public void putTokenPlayerFromTurn(Coordinate coordinate) {
         this.game.putTokenPlayerFromTurn(coordinate);
-        this.changeTurn();
         this.registry.registry();
     }
 
     public void moveTokenPlayerFromTurn(Coordinate[] coordinates) {
         this.game.moveTokenPlayerFromTurn(coordinates);
-        this.changeTurn();
         this.registry.registry();
     }
 

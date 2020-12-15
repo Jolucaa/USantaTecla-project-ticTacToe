@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-/*@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class RegistryTest {
 
     @Captor
@@ -29,60 +29,23 @@ public class RegistryTest {
     }
 
     @Test
-    void testGivenNewGameRegistryWhenRegisterThenGameMementoIsCreatedAndGameRegistryIsUndoable() {
-        this.registry.register();
-        verify(this.game, times(2)).createMemento();
-        assertThat(this.registry.isUndoable(), is(true));
-    }
-
-    @Test
     void testGivenNewGameRegistryWhenUndoThenIndexOutOfBoundsExceptionIsThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> this.registry.undo());
-    }
-
-    @Test
-    void testGivenGameRegistryWithOneMementoWhenUndoThenGameIsSet() {
-        this.registry.register();
-        this.registry.undo();
-        verify(this.game).set(argumentCaptor.capture());
-        assertThat(this.argumentCaptor.getValue().getBoard(), is(new Board()));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.registry.undo(this.game));
     }
 
     @Test
     void testGivenNewGameRegistryWhenRedoThenIndexOutOfBoundsExceptionIsThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> this.registry.redo());
-    }
-
-    @Test
-    void testGivenGameRegistryWithOneMementoWhenRedoThenGameIsSet() {
-        this.registry.register();
-        this.registry.undo();
-        this.registry.redo();
-        verify(this.game, times(2)).set(argumentCaptor.capture());
-        assertThat(this.argumentCaptor.getValue().getBoard(), is(new Board()));
+        assertThrows(IndexOutOfBoundsException.class, () -> this.registry.redo(this.game));
     }
 
     @Test
     void testGivenNewGameRegistryWhenIsUndoableThenIsFalse() {
-        assertThat(this.registry.isUndoable(), is(false));
-    }
-
-    @Test
-    void testGivenGameRegistryWithOneMementoWhenIsUndoableThenIsTrue() {
-        this.registry.register();
-        assertThat(this.registry.isUndoable(), is(true));
+        assertThat(this.registry.undoable(), is(false));
     }
 
     @Test
     void testGivenNewGameRegistryWhenIsRedoableThenIsFalse() {
-        assertThat(this.registry.isRedoable(), is(false));
+        assertThat(this.registry.redoable(), is(false));
     }
 
-    @Test
-    void testGivenGameRegistryWithOneMementoWhenIsRedoableThenIsTrue() {
-        this.registry.register();
-        this.registry.undo();
-        assertThat(this.registry.isRedoable(), is(true));
-    }
-
-}*/
+}
