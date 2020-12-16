@@ -3,9 +3,7 @@ package usantatecla.tictactoe.controllers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.models.State;
 import usantatecla.tictactoe.types.Error;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,8 +8,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.BoardView;
-import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

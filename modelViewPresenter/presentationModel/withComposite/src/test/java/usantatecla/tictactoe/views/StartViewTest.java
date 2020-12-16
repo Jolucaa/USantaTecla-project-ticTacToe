@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views.console;
+package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.StartView;
 import usantatecla.utils.Console;
 
 import static org.mockito.ArgumentMatchers.anyString;
