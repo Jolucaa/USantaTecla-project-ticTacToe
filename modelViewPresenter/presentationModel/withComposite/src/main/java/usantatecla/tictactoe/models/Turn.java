@@ -10,6 +10,8 @@ public class Turn {
     public static final int NUMBER_PLAYERS = 2;
     private Player[] players;
     private Board board;
+
+    // TODO Cambiar nombre
     private int active;
     private int users;
 
@@ -29,6 +31,7 @@ public class Turn {
         this.users = turn.users;
     }
 
+    //TODO revisar copy - pasar a clone
     public Turn copy(Board board) {
         return new Turn(this, board);
     }
@@ -46,6 +49,7 @@ public class Turn {
         this.active = active;
     }
 
+    // TODO Cambiar nombre
     int get() {
         return this.active;
     }

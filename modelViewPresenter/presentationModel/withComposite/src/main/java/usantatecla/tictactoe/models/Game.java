@@ -67,6 +67,7 @@ public class Game {
         return new Memento(this.turn.getUsers(), this.turn.get(), this.board.toCharacterArray());
     }
 
+    // TODO Cambiar a setMemento
     public void set(Memento memento) {
         this.turn.set(memento.getTurn().getToken().ordinal());
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
