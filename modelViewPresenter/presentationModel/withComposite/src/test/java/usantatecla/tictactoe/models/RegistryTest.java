@@ -44,7 +44,7 @@ public class RegistryTest {
     void testGivenGameRegistryWithOneMementoWhenUndoThenGameIsSet() {
         this.registry.register();
         this.registry.undo();
-        verify(this.game).set(argumentCaptor.capture());
+        verify(this.game).setMemento(argumentCaptor.capture());
         assertThat(this.argumentCaptor.getValue().getBoard(), is(new Board()));
     }
 
@@ -58,7 +58,7 @@ public class RegistryTest {
         this.registry.register();
         this.registry.undo();
         this.registry.redo();
-        verify(this.game, times(2)).set(argumentCaptor.capture());
+        verify(this.game, times(2)).setMemento(argumentCaptor.capture());
         assertThat(this.argumentCaptor.getValue().getBoard(), is(new Board()));
     }
 

@@ -26,12 +26,12 @@ class Registry {
 
     void undo() {
         this.firstPrevious++;
-        this.game.set(this.mementos.get(this.firstPrevious));
+        this.game.setMemento(this.mementos.get(this.firstPrevious));
     }
 
     void redo() {
         this.firstPrevious--;
-        this.game.set(this.mementos.get(this.firstPrevious));
+        this.game.setMemento(this.mementos.get(this.firstPrevious));
     }
 
     boolean isUndoable() {

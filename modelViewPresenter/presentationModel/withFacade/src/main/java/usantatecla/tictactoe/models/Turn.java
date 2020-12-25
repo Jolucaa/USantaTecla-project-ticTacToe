@@ -10,7 +10,7 @@ public class Turn {
     public static final int NUMBER_PLAYERS = 2;
     private Player[] players;
     private Board board;
-    private int active;
+    private int activePlayer;
     private int users;
 
     Turn(Board board) {
@@ -25,7 +25,7 @@ public class Turn {
             this.players[i] = turn.players[i].copy(board);
         }
         this.board = board;
-        this.active = turn.active;
+        this.activePlayer = turn.activePlayer;
         this.users = turn.users;
     }
 
@@ -39,19 +39,19 @@ public class Turn {
         for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
             this.players[i] = new Player(Token.get(i), board);
         }
-        this.active = 0;
+        this.activePlayer = 0;
     }
 
-    void set(int active) {
-        this.active = active;
+    void set(int activePlayer) {
+        this.activePlayer = activePlayer;
     }
 
     void next() {
-        this.active = (this.active + 1) % Turn.NUMBER_PLAYERS;
+        this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
     }
 
     boolean isUser() {
-        return this.users == 2 || this.users == 1 && this.active == 0;
+        return this.users == 2 || this.users == 1 && this.activePlayer == 0;
     }
 
     Error put(Coordinate coordinate) {
@@ -59,7 +59,7 @@ public class Turn {
     }
 
     Player getPlayer() {
-        return this.players[this.active];
+        return this.players[this.activePlayer];
     }
 
     Error move(Coordinate origin, Coordinate target) {
@@ -79,7 +79,7 @@ public class Turn {
         if (getClass() != obj.getClass())
             return false;
         Turn other = (Turn) obj;
-        if (active != other.active)
+        if (activePlayer != other.activePlayer)
             return false;
         if (board == null) {
             if (other.board != null)

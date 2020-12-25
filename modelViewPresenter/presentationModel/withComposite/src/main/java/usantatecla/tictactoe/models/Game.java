@@ -47,6 +47,14 @@ public class Game {
         }
     }
 
+    int getActive() {
+        return this.turn.getActivePlayer();
+    }
+
+    int getUsers() {
+        return this.turn.getUsers();
+    }
+
     public boolean isTicTacToe() {
         return this.board.isTicTacToe(this.turn.getToken());
     }
@@ -59,16 +67,19 @@ public class Game {
         return this.turn.getToken();
     }
 
+    char[] getBoardCharacterArray() {
+        return this.board.toCharacterArray();
+    }
+
     public int getMaxPlayers() {
         return Turn.NUMBER_PLAYERS;
     }
 
     public Memento createMemento() {
-        return new Memento(this.turn.getUsers(), this.turn.get(), this.board.toCharacterArray());
+        return new Memento(this);
     }
 
-    // TODO Cambiar a setMemento
-    public void set(Memento memento) {
+    public void setMemento(Memento memento) {
         this.turn.set(memento.getTurn().getToken().ordinal());
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {

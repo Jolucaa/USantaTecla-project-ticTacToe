@@ -8,10 +8,10 @@ class Memento {
     private int activeTurn;
     private char[] boardTokens;
 
-    public Memento(int users, int activeTurn, char[] boardTokens) {
-        this.users = users;
-        this.activeTurn = activeTurn;
-        this.boardTokens = boardTokens;
+    public Memento(Game game) {
+        this.users = game.getUsers();
+        this.activeTurn = game.getActive();
+        this.boardTokens = game.getBoardCharacterArray();
     }
 
     Board getBoard() {
