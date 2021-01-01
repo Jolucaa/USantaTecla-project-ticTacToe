@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.views.console;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -11,7 +10,6 @@ import usantatecla.utils.Console;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class TokenViewTest {
@@ -28,15 +26,10 @@ public class TokenViewTest {
     @Captor
     private ArgumentCaptor<String> captor;
 
-    @BeforeEach
-    void before() {
-        openMocks(this);
-    }
-
     @Test
     void testGivenNewTokenViewWhenWriteThenPrintXToken() {
         when(this.token.toString()).thenReturn("X");
-        try (MockedStatic console = mockStatic(Console.class)) {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             tokenView.write();
             verify(this.console).write(captor.capture());
