@@ -7,7 +7,7 @@ import usantatecla.utils.LimitedIntDialog;
 
 class StartView {
 
-    private StartController startController;
+    private final StartController startController;
 
     StartView(StartController startController) {
         assert startController != null;

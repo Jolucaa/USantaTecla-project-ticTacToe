@@ -26,13 +26,6 @@ tictactoe.views.console .down.> tictactoe.controllers
 tictactoe.views.console .down.> utils
 
 package tictactoe.views.graphics #DDDDDD { }
-package java.awt{ }
-tictactoe.views.graphics .down.> java.awt
-package java.awt.event{ }
-tictactoe.views.graphics .down.> java.awt.event
 tictactoe.views.graphics .down.> tictactoe.views
-tictactoe.views.graphics .down.> tictactoe.controllers
-package javax.swing{ }
-tictactoe.views.graphics .down.> javax.swing
 
 @enduml
