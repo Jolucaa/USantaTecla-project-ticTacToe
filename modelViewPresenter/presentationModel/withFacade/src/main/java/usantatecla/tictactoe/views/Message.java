@@ -17,7 +17,7 @@ public enum Message {
 
     private String message;
 
-    private Message(String message) {
+    Message(String message) {
         this.message = message;
     }
 

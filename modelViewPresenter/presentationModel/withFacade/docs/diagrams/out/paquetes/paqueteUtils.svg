@@ -18,7 +18,7 @@ link usantatecla.utils.NullCoordinate to usantatecla.utils.Direction--><path cod
 link usantatecla.utils.Console to BufferedReader--><path codeLine="82" d="M312,765.102 C312,765.102 312,789.6664 312,799.6942 " fill="none" id="usantatecla.utils.Console-BufferedReader" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="312,812.8278,316,803.8278,312,807.8278,308,803.8278,312,812.8278" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="312" x2="312" y1="807.8278" y2="799.8279"/><polygon fill="#A80036" points="312,753.102,308,759.102,312,765.102,316,759.102,312,753.102" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ea5cf5ece861ff4fd45a5d576f5bc955]
 link usantatecla.utils.LimitedIntDialog to usantatecla.utils.ClosedInterval--><path codeLine="90" d="M115,407.542 C115,407.542 115,526.105 115,576.768 " fill="none" id="usantatecla.utils.LimitedIntDialog-usantatecla.utils.ClosedInterval" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="115,589.896,119,580.896,115,584.896,111,580.896,115,589.896" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="115" x2="115" y1="584.896" y2="576.896"/><polygon fill="#A80036" points="115,395.542,111,401.542,115,407.542,119,401.542,115,395.542" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9ea9fdac8877b2914dbfaebea76eb772]
 link usantatecla.utils.LimitedIntDialog to usantatecla.utils.Console--><path codeLine="91" d="M147.09,395.542 C171.961,433.164 207.405,486.78 239.064,534.671 " fill="none" id="usantatecla.utils.LimitedIntDialog-to-usantatecla.utils.Console" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="241.92,538.991,240.2928,529.2775,239.1623,534.8202,233.6196,533.6897,241.92,538.991" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bef9209ee563bd0cab945b38e8120dbd]
-link usantatecla.utils.YesNoDialog to usantatecla.utils.Console--><path codeLine="104" d="M312,427.643 C312,460.255 312,498.444 312,533.637 " fill="none" id="usantatecla.utils.YesNoDialog-to-usantatecla.utils.Console" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="312,538.806,316,529.806,312,533.806,308,529.806,312,538.806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1d15c1f1acda64d242ecbda0a56ba351]
+link usantatecla.utils.YesNoDialog to usantatecla.utils.Console--><path codeLine="104" d="M312,427.643 C312,460.255 312,498.444 312,533.637 " fill="none" id="usantatecla.utils.YesNoDialog-to-usantatecla.utils.Console" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="312,538.806,316,529.806,312,533.806,308,529.806,312,538.806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e52a592964bb7c4ccc2d78d2c64a8d65]
 @startuml
 class BufferedReader as "java.io.BufferedReader"{}
 
@@ -126,7 +126,7 @@ class usantatecla.utils.YesNoDialog{
 usantatecla.utils.YesNoDialog .down.> usantatecla.utils.Console
 @enduml
 
-PlantUML version 1.2020.21beta7(Unknown compile time)
+PlantUML version 1.2020.27beta2(Unknown compile time)
 (GPL source distribution)
 Java Runtime: Java(TM) SE Runtime Environment
 JVM: Java HotSpot(TM) 64-Bit Server VM

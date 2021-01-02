@@ -5,6 +5,7 @@ import usantatecla.tictactoe.controllers.Logic;
 public class GraphicsView extends usantatecla.tictactoe.views.View {
 
 	public GraphicsView(Logic logic) {
+		super(logic);
 		// TODO
 	}
 

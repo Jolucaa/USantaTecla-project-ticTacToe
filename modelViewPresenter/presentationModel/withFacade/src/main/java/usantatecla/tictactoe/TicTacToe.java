@@ -5,12 +5,10 @@ import usantatecla.tictactoe.views.View;
 
 public abstract class TicTacToe {
 
-    private Logic logic;
-    private View view;
+    private final View view;
 
     protected TicTacToe() {
-        this.logic = new Logic();
-        this.view = this.createView(this.logic);
+        this.view = this.createView(new Logic());
     }
 
     protected abstract View createView(Logic logic);
