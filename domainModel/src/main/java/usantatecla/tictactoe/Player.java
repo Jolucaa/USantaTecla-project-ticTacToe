@@ -2,86 +2,87 @@ package usantatecla.tictactoe;
 
 abstract class Player {
 
-	protected Token token;
+	protected Color color;
 	protected Board board;
+	private int putTokens;
 
-	Player(Token token, Board board) {
-		assert token != null && !token.isNull();
+	Player(Color color, Board board) {
+		assert !color.isNull();
 		assert board != null;
-		
-		this.token = token;
+
+		this.color = color;
 		this.board = board;
+		this.putTokens = 0;
 	}
 
 	void play() {
-		if (!this.board.isCompleted()) {
-			this.put();
+		if (this.putTokens < Coordinate.DIMENSION) {
+			this.putToken();
 		} else {
-			this.move();
+			this.moveToken();
 		}
 	}
 
-	private void put() {
-		Error error;
+	private void putToken() {
+		assert this.putTokens < Coordinate.DIMENSION;
+
 		Coordinate coordinate;
+		Error error = Error.NULL;
 		do {
 			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
-			error = this.checkPutCoordinateError(coordinate);
+			error = this.getPutTokenError(coordinate);
 		} while (error != Error.NULL);
-		this.board.put(coordinate, this.token);
+		this.board.put(coordinate, this.color);
+		this.putTokens++;
 	}
 
 	protected abstract Coordinate getCoordinate(Message message);
 
-	protected Error checkPutCoordinateError(Coordinate coordinate) {
+	protected Error getPutTokenError(Coordinate coordinate) {
 		if (!this.board.isEmpty(coordinate)) {
 			return Error.NOT_EMPTY;
 		}
 		return Error.NULL;
 	}
 
-	private void move() {
-		Error error;
+	private void moveToken() {
 		Coordinate origin;
+		Error error;
 		do {
 			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
-			error = this.checkMoveOriginCoordinateError(origin);
+			error = this.getOrigingMoveTokenError(origin);
 		} while (error != Error.NULL);
 		Coordinate target;
 		do {
 			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
-			error = this.checkMoveTargetCoordinateError(origin, target);
+			error = this.getTargetMoveTokenError(origin, target);
 		} while (error != Error.NULL);
 		this.board.move(origin, target);
 	}
 
-	protected Error checkMoveOriginCoordinateError(Coordinate origin) {
-		assert origin != null;
-
-		if (!this.board.isOccupied(origin, this.token)) {
+	protected Error getOrigingMoveTokenError(Coordinate origin) {
+		if (!this.board.isOccupied(origin, this.color)) {
 			return Error.NOT_OWNER;
 		}
 		return Error.NULL;
 	}
 
-	protected Error checkMoveTargetCoordinateError(Coordinate origin, Coordinate targetCoordinate) {
-		assert origin != null;
-		
-		if (origin.equals(targetCoordinate)) {
+	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+		if (origin.equals(target)) {
 			return Error.SAME_COORDINATES;
-		} 
-		if (!this.board.isEmpty(targetCoordinate)) {
+		}
+		if (!this.board.isEmpty(target)) {
 			return Error.NOT_EMPTY;
 		}
 		return Error.NULL;
 	}
 
 	void writeWinner() {
-		Message.PLAYER_WIN.writeln(this.token.name());
+		Message.PLAYER_WIN.writeln(this.color.name());
 	}
-	
-	Token getToken() {
-		return this.token;
+
+	Color getColor() {
+		return this.color;
 	}
-	
+
 }

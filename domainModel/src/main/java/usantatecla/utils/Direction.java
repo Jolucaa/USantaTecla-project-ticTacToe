@@ -8,4 +8,8 @@ public enum Direction {
 	INVERSE_DIAGONAL,
 	NULL;
 
+	public boolean isNull() {
+		return this == Direction.NULL;
+	}	
+
 }

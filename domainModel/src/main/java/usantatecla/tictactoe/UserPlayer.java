@@ -2,8 +2,8 @@ package usantatecla.tictactoe;
 
 class UserPlayer extends Player {
 
-	UserPlayer(Token token, Board board) {
-		super(token, board);
+	UserPlayer(Color color, Board board) {
+		super(color, board);
 	}
 
 	protected Coordinate getCoordinate(Message message){
@@ -15,29 +15,29 @@ class UserPlayer extends Player {
 	}
 
 	@Override
-	protected Error checkPutCoordinateError(Coordinate coordinate) {
+	protected Error getPutTokenError(Coordinate coordinate) {
 		assert coordinate != null;
 		
-		Error error = super.checkPutCoordinateError(coordinate);
+		Error error = super.getPutTokenError(coordinate);
 		error.writeln();
 		return error;
 	}
 	
 	@Override
-	protected Error checkMoveOriginCoordinateError(Coordinate origin) {
-		assert origin != null;
+	protected Error getOrigingMoveTokenError(Coordinate coordinate) {
+		assert !coordinate.isNull();
 		
-		Error error = super.checkMoveOriginCoordinateError(origin);
+		Error error = super.getOrigingMoveTokenError(coordinate);
 		error.writeln();
 		return error;
 	}
 
 	@Override
-	protected Error checkMoveTargetCoordinateError(Coordinate origin, Coordinate target) {
-		assert origin != null && !origin.isNull();
-		assert target != null && !target.isNull();
+	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+		assert !origin.isNull();
+		assert !target.isNull();
 		
-		Error error = super.checkMoveTargetCoordinateError(origin, target);
+		Error error = super.getTargetMoveTokenError(origin, target);
 		error.writeln();
 		return error;
 	}

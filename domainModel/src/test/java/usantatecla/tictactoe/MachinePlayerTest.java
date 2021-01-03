@@ -10,11 +10,11 @@ public class MachinePlayerTest {
 
     @BeforeEach
     void before() {
-        this.machinePlayer = new MachinePlayer(Token.X, new Board());
+        this.machinePlayer = new MachinePlayer(Color.X, new Board());
     }
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        assertThat(machinePlayer.getCoordinate(Message.VERTICAL_LINE_CENTERED).getClass(), is(new Coordinate().getClass()));
+        assertThat(machinePlayer.getCoordinate(Message.VERTICAL_LINE_CENTERED).getClass(), is(new SquaredBoundedCoordinateTest().getClass()));
     }
 }

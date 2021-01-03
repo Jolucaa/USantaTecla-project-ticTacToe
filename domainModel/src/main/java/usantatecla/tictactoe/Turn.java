@@ -1,45 +1,66 @@
 package usantatecla.tictactoe;
 
-import usantatecla.utils.LimitedIntDialog;
+import usantatecla.utils.BoundedIntDialog;
 
 class Turn {
 	
+	private Board board;
 	static final int NUMBER_PLAYERS = 2;
 	private Player[] players;
-	private int active;
+	private int activePlayer;
 
 	Turn(Board board) {
 		assert board != null;
-		
-		Message.TITTLE.writeln();
-		int numberUsers = new LimitedIntDialog(0, Turn.NUMBER_PLAYERS)
-			.read(Message.NUMBER_PLAYERS.toString());
 		this.players = new Player[Turn.NUMBER_PLAYERS];
+		this.reset();
+	}
+
+	void reset() {
+		this.activePlayer = 0;
+	}
+
+	void setUsers(int users){
+		int numberUsers = this.getUsers();
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
-				this.players[i] = new UserPlayer(Token.get(i), board);
+				this.players[i] = new UserPlayer(Color.get(i), this.board);
 			} else {
-				this.players[i] = new MachinePlayer(Token.get(i), board);
+				this.players[i] = new MachinePlayer(Color.get(i), this.board);
 			}
 		}
-		this.active = Turn.NUMBER_PLAYERS-1;
+		this.reset();
+	}
+
+	private int getUsers() {
+		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
+		return dialog.read(Message.NUMBER_PLAYERS.toString());
 	}
 
 	void play(){
-		this.active = (this.active+1) % Turn.NUMBER_PLAYERS;
-		this.getPlayer().play();
+		this.getActivePlayer().play();
+		if (this.isTicTacToe()){
+			this.activePlayer = this.getNextActivePlayer();
+		}
 	}
 
-	private Player getPlayer() {
-		return this.players[this.active];
+	private boolean isTicTacToe() {
+		return this.board.isTicTacToe(this.getActiveColor());
+	}
+
+	private int getNextActivePlayer() {
+		return (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
+	}
+
+	private Player getActivePlayer() {
+		return this.players[this.activePlayer];
 	}
 
 	void writeWinner(){
-		this.getPlayer().writeWinner();
+		this.getActivePlayer().writeWinner();
 	}
 
-	Token getToken() {
-		return this.getPlayer().getToken();
+	Color getActiveColor() {
+		return this.getActivePlayer().getColor();
 	}
 
 }

@@ -10,7 +10,8 @@ public class TokenTest {
 
     @Test
     public void testGivenNewTokenWhenCallGetThenReturnTheCorrectToken() {
-        assertThat(Token.get(0), is(Token.X));
+        
+        assertThat(Color.get(0), is(Color.X));
     }
 
 }

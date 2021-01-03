@@ -5,10 +5,9 @@ import usantatecla.utils.Console;
 enum Message {
 	TITTLE("--- TIC TAC TOE ---"),
 	NUMBER_PLAYERS("Number of user"), 
-	SEPARATOR("-------------"), 
+	HORIZONTAL_LINE("-------------"), 
 	VERTICAL_LINE_LEFT("| "), 
-	VERTICAL_LINE_CENTERED(" | "),
-	VERTICAL_LINE_RIGHT(""), 
+	VERTICAL_LINE_NO_LEFT(" | "),
 	ENTER_COORDINATE_TO_PUT("Enter a coordinate to put a token:"),
 	ENTER_COORDINATE_TO_REMOVE("Enter a coordinate to remove a token:"), 
 	COORDINATE_TO_PUT("Coordinate to put"),
@@ -24,16 +23,17 @@ enum Message {
 	}
 
 	void write() {
-		Console.getInstance().write(this.message);
+		Console.instance().write(this.message);
 	}
 
 	void writeln() {
-		Console.getInstance().writeln(this.message);
+		Console.instance().writeln(this.message);
 	}
 
 	void writeln(String player) {
 		assert this == Message.PLAYER_WIN;
-		Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
+		
+		Console.instance().writeln(this.message.replaceAll("#player", "" + player));
 	}
 
 	@Override

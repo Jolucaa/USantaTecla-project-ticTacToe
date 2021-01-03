@@ -9,6 +9,7 @@ class TicTacToe {
 
 	TicTacToe(){
 		this.board = new Board();
+		this.turn = new Turn(this.board);
 	}
 
 	private void play() {
@@ -18,21 +19,23 @@ class TicTacToe {
 	}
 
 	private void playGame() {
-		this.turn = new Turn(this.board);
+		Message.TITTLE.writeln();
 		this.board.write();
 		do {
 			this.turn.play();
 			this.board.write();
-		} while (!this.board.isTicTacToe(this.turn.getToken()));
+		} while (!this.board.isTicTacToe(this.turn.getActiveColor()));
 		this.turn.writeWinner();
 	}
 
 	private boolean isResumedGame() {
-		boolean isResumed = new YesNoDialog().read(Message.RESUME.toString());
-		if (isResumed) {
+		YesNoDialog yesNoDialog = new YesNoDialog();
+		yesNoDialog.read(Message.RESUME.toString());
+		if (yesNoDialog.isAffirmative()) {
 			this.board.reset();
+			this.turn.reset();
 		}
-		return isResumed;
+		return yesNoDialog.isAffirmative();
 	}
 
 	public static void main(String[] args) {

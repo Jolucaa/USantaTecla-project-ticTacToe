@@ -10,33 +10,33 @@ public class YesNoDialog {
 	private static final String MESSAGE = "The value must be '" + 
 		YesNoDialog.AFFIRMATIVE + "' or '" + 
 		YesNoDialog.NEGATIVE + "'";
-	private char answer;
+	private String answer;
 
-	public boolean read(String message) {
+	public void read(String message) {
 		assert message != null;
-		Console console = Console.getInstance();
-		boolean error;
+
+		Console console = Console.instance();
+		boolean ok = false;
 		do {
 			console.write(message);
-			this.answer = console.readChar(YesNoDialog.SUFFIX);
-			error = !this.isAfirmative() && !this.isNegative();
-			if (error) {
+			this.answer = console.readString(YesNoDialog.SUFFIX);
+			ok = this.isAffirmative() && this.isNegative();
+			if (!ok) {
 				console.writeln(YesNoDialog.MESSAGE);
 			}
-		} while (error);
-		return this.isAfirmative();
+		} while (!ok);
 	}
-
-	private boolean isAfirmative() {
+	
+	public boolean isAffirmative() {
 		return this.getAnswer() == YesNoDialog.AFFIRMATIVE;
 	}
-
+	
 	private char getAnswer(){
-		return Character.toLowerCase(this.answer);
+		return Character.toLowerCase(this.answer.charAt(0));
 	}
 
 	private boolean isNegative() {
-		return Character.toLowerCase(this.answer) == YesNoDialog.NEGATIVE;
+		return this.getAnswer() == YesNoDialog.NEGATIVE;
 	}
 
 }

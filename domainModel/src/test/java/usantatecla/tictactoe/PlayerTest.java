@@ -1,6 +1,5 @@
 package usantatecla.tictactoe;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,62 +10,65 @@ public class PlayerTest {
     
     private Board board;
     private Player player;
-    private Coordinate coordinate00;
-    private Coordinate coordinate01;
+    private Color color;
 
     @BeforeEach
     void before() {
         this.board = new Board();
-        this.player = new UserPlayer(Token.O, this.board);
-        this.coordinate00 = new Coordinate(0, 0);
-        this.coordinate01 = new Coordinate(0, 1);
+        this.color = Color.O;
+        this.player = new UserPlayer(this.color, this.board);
     }
 
     @Test
-    public void testGivenNewPlayerWhenPutNewTokenThenReturnErrorNotEmpty() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkPutCoordinateError(this.coordinate00), is(Error.NOT_EMPTY));
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        assertThat(this.player.getPutTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
-    public void testGivenNewPlayerWhenPutNewTokenThenNotReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkPutCoordinateError(new Coordinate(0, 2)) == Error.NULL, is(true));
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNotEmpty() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, this.color);
+        assertThat(this.player.getPutTokenError(coordinate), is(Error.NOT_EMPTY));
     }
 
     @Test
-    public void testGivenNewPlayerWhenRemoveTokenThenReturnErrorNotOwner() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkMoveOriginCoordinateError(this.coordinate01), is(Error.NOT_OWNER));
+    public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotEmpty() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, this.color);
+        assertThat(this.player.getOrigingMoveTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
-    public void testGivenNewPlayerWhenRemoveTokenThenReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkMoveOriginCoordinateError(this.coordinate00) == Error.NULL, is(true));
+    public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, Color.X);
+        assertThat(this.player.getOrigingMoveTokenError(coordinate), is(Error.NOT_OWNER));
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenReturnErrorSameCoordinates() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate00), is(Error.SAME_COORDINATES));
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotNull() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, this.color);
+        assertThat(this.player.getTargetMoveTokenError(coordinate, new Coordinate(0,0)), is(Error.NULL));
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenReturnErrorNotEmpty() {
-        this.board.put(this.coordinate00, Token.O);
-        this.board.put(this.coordinate01, Token.O);
-        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01), is(Error.NOT_EMPTY));
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, Color.X);
+        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate), is(Error.NOT_EMPTY));
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenNotReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.O);
-        assertThat(this.player.checkMoveTargetCoordinateError(this.coordinate00, this.coordinate01) == Error.NULL, is(true));
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        this.board.put(coordinate, Color.X);
+        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate), is(Error.NOT_EMPTY));
     }
 
     @Test
     public void testGivenNewPlayerWhenGetTokenThenReturnTheToken() {
-        assertThat(this.player.getToken(), is(Token.O));
+        assertThat(this.player.getColor(), is(this.color));
     }
 }
