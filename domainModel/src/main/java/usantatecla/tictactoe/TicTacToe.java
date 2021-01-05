@@ -24,8 +24,12 @@ class TicTacToe {
 		do {
 			this.turn.play();
 			this.board.write();
-		} while (!this.board.isTicTacToe(this.turn.getActiveColor()));
+		} while (!this.isTicTacToe());
 		this.turn.writeWinner();
+	}
+
+	private boolean isTicTacToe() {
+		return this.board.isTicTacToe(this.turn.getActiveColor());
 	}
 
 	private boolean isResumedGame() {

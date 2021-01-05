@@ -11,8 +11,9 @@ import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.CoordinateTest;
 
-public abstract class SquaredBoundedCoordinateTest {
+public class SquaredBoundedCoordinateTest {
 
   private SquaredBoundedCoordinate coordinate;
 
@@ -21,16 +22,12 @@ public abstract class SquaredBoundedCoordinateTest {
     this.coordinate = this.getCoordinate(1, 1);
   }
 
-  protected abstract SquaredBoundedCoordinate getCoordinate(int row, int column);
- 
   @Test
   public void testGivenCoordinateWhenIsNullThenValues() {
     assertThat(this.coordinate.isNull(), is(false));
     assertThat(this.getNullCoordinate().isNull(), is(true));
   }
 
-  protected abstract SquaredBoundedCoordinate getNullCoordinate();
- 
   @Test
   public void testGivenCoordinateWhenNewThenValues() {
     assertThat(this.coordinate.getRow(), is(1));
@@ -59,17 +56,48 @@ public abstract class SquaredBoundedCoordinateTest {
     assertThat(this.getNullCoordinate().getDirection(this.coordinate), is(Direction.NULL));
   }
 
-  // @Test
-  // public void testGivenCoordinateWhenReadThenValues(){
-  //   int row = 1;
-  //   int column = 3;
-  //   Console console = mock(Console.class);
-  //   when(console.readInt("")).thenReturn(0, row, 4, column);
-  //   SquaredBoundedCoordinate coordinate = this.getNullCoordinate();
-  //   coordinate.read("TITLE");
-  //   assertThat(coordinate.getRow(), is(row - 1));
-  //   assertThat(coordinate.getColumn(), is(column - 1));
-  // }
+  protected static final int BOUND = 3;
+  protected static final String ERROR = "ERROR";
+
+  protected SquaredBoundedCoordinate getCoordinate(int row, int column) {
+    return new SquaredBoundedCoordinate(row, column) {
+      @Override
+      public int getDimension() {
+        return SquaredBoundedCoordinateTest.BOUND;
+      }
+
+      @Override
+      protected String getErrorMessage() {
+        return SquaredBoundedCoordinateTest.ERROR;
+      }
+    };
+  }
+
+  protected SquaredBoundedCoordinate getNullCoordinate() {
+    return new SquaredBoundedCoordinate() {
+      @Override
+      public int getDimension() {
+        return SquaredBoundedCoordinateTest.BOUND;
+      }
+
+      @Override
+      protected String getErrorMessage() {
+        return SquaredBoundedCoordinateTest.ERROR;
+      }
+    };
+  }
+
+//   @Test
+//   public void testGivenCoordinateWhenReadThenValues(){
+//     int row = 1;
+//     int column = 3;
+//     Console console = mock(Console.class);
+//     when(console.readInt("")).thenReturn(0, row, 4, column);
+//     SquaredBoundedCoordinate coordinate = this.getNullCoordinate();
+//     coordinate.read("TITLE");
+//     assertThat(coordinate.getRow(), is(row - 1));
+//     assertThat(coordinate.getColumn(), is(column - 1));
+//   }
 
   // @Test
   // public void testGivenCoordinateWhenRandomThenValues(){

@@ -2,11 +2,12 @@ package usantatecla.tictactoe;
 
 import usantatecla.utils.Console;
 
+// TODO Revisar VERTICAL_LINE y borrar NO_LEFT
 enum Message {
 	TITTLE("--- TIC TAC TOE ---"),
 	NUMBER_PLAYERS("Number of user"), 
 	HORIZONTAL_LINE("-------------"), 
-	VERTICAL_LINE_LEFT("| "), 
+	VERTICAL_LINE_LEFT(" | "),
 	VERTICAL_LINE_NO_LEFT(" | "),
 	ENTER_COORDINATE_TO_PUT("Enter a coordinate to put a token:"),
 	ENTER_COORDINATE_TO_REMOVE("Enter a coordinate to remove a token:"), 

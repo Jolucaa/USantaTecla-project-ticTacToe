@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 
 public class ConsoleTest {
-
+  // TODO Completar y hacer tests para Read y para Write
   @Mock
   private BufferedReader bufferedReader;
   @Spy
