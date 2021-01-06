@@ -24,10 +24,10 @@ class UserPlayer extends Player {
 	}
 	
 	@Override
-	protected Error getOrigingMoveTokenError(Coordinate coordinate) {
+	protected Error getOriginMoveTokenError(Coordinate coordinate) {
 		assert !coordinate.isNull();
 		
-		Error error = super.getOrigingMoveTokenError(coordinate);
+		Error error = super.getOriginMoveTokenError(coordinate);
 		error.writeln();
 		return error;
 	}

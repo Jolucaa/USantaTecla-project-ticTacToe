@@ -2,7 +2,7 @@ package usantatecla.utils;
 
 interface Coordinate {
   
-  static Coordinate NULL = NullCoordinate.instance();
+  Coordinate NULL = NullCoordinate.getInstance();
   boolean isNull();
   Direction getDirection(Coordinate coordinate);
   boolean inHorizontal(Coordinate coordinate);

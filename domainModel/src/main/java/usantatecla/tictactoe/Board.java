@@ -100,10 +100,10 @@ class Board {
 	void write() {
 		Message.HORIZONTAL_LINE.writeln();
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			Message.VERTICAL_LINE_LEFT.write();
+			Message.VERTICAL_LINE.write();
 			for (int j = 0; j < Coordinate.DIMENSION; j++) {
 				this.getColor(new Coordinate(i, j)).write();
-				Message.VERTICAL_LINE_NO_LEFT.write();
+				Message.VERTICAL_LINE.write();
 			}
 		}
 		Message.HORIZONTAL_LINE.writeln();

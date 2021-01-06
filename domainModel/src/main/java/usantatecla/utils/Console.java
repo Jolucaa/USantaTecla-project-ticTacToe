@@ -1,29 +1,29 @@
 package usantatecla.utils;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Console {
 
-	private static Console instance;
-
-	public static Console instance() {
-		if (Console.instance == null) {
-			Console.instance = new Console();
-		}
+	private static Console instance = new Console();
+	
+	public static Console getInstance() {
 		return instance;
 	}
-
+	
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public String readString(String title) {
 		String input = null;
+		this.write(title);
 		try {
-			this.write(title);
 			input = this.bufferedReader.readLine();
 		} catch (Exception ex) {
 		}
 		return input;
+	}
+
+	public String readString() {
+		return this.readString("");
 	}
 
 	public int readInt(String title) {
@@ -36,8 +36,29 @@ public class Console {
 			} catch (Exception ex) {
 				this.writeError("integer");
 			}
+			assert ok; // TODO Para qué el assert
 		} while (!ok);
 		return input;
+	}
+
+	public char readChar(String title) {
+		char charValue = ' ';
+		boolean ok = false;
+		do {
+			String input = this.readString(title);
+			if (input.length() != 1) {
+				this.writeError("character");
+			} else {
+				charValue = input.charAt(0);
+				ok = true;
+			}
+			assert ok;
+		} while (!ok);
+		return charValue;
+	}
+
+	public void writeln() {
+		System.out.println();
 	}
 
 	public void write(String string) {
@@ -52,7 +73,15 @@ public class Console {
 		System.out.println(string);
 	}
 
-	private void writeError(String format) {
+	public void writeln(int integer) {
+		System.out.println(integer);
+	}
+
+	public void write(char character) {
+		System.out.print(character);
+	}
+
+	public void writeError(String format) {
 		System.out.println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
 	}
 

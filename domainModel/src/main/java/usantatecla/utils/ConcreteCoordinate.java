@@ -59,7 +59,7 @@ public class ConcreteCoordinate implements Coordinate {
 	}
 
 	protected void read(String title) {
-		Console console = Console.instance();
+		Console console = Console.getInstance();
 		console.writeln(title);
 		this.row = console.readInt(ConcreteCoordinate.ROW) - 1;
 		this.column = console.readInt(ConcreteCoordinate.COLUMN) - 1;

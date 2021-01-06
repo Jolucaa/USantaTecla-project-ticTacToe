@@ -26,20 +26,20 @@ public class ConsoleTest {
   public void testGivenConsoleWhenReadStringThenValue() throws IOException {
     String string = "***";
     when(this.bufferedReader.readLine()).thenReturn(string);
-    assertThat(Console.instance().readString("TITLE"), is(string));
+    assertThat(Console.getInstance().readString("TITLE"), is(string));
   }
 
   @Test
   public void testGivenConsoleWhenReadIntThenValue() throws IOException {
     String string = "123";
     when(this.bufferedReader.readLine()).thenReturn("", "***", string);
-    assertThat(Console.instance().readString("TITLE"), is(Integer.parseInt(string)));
+    assertThat(Console.getInstance().readString("TITLE"), is(Integer.parseInt(string)));
   }
 
   @Test
   public void testGivenConsoleWhenWriteStringThenDisplay(){
     String string = "***";
-    Console.instance().write(string);
+    Console.getInstance().write(string);
     ArgumentCaptor<Integer> value = ArgumentCaptor.forClass(Integer.class);
     verify(this.outputStream).print(value.capture());
     assertThat(value.getValue(), is(string));
@@ -48,7 +48,7 @@ public class ConsoleTest {
   @Test
   public void testGivenConsoleWhenWriteIntThenDisplay(){
     String string = "123";
-    Console.instance().write(string);
+    Console.getInstance().write(string);
     ArgumentCaptor<Integer> value = ArgumentCaptor.forClass(Integer.class);
     verify(this.outputStream).print(value.capture());
     assertThat(value.getValue(), is(Integer.parseInt(string)));

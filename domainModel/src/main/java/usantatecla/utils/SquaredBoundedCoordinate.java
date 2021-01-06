@@ -7,7 +7,7 @@ public abstract class SquaredBoundedCoordinate {
 	private Coordinate adaptee;
 
 	public SquaredBoundedCoordinate() {
-		this.adaptee = NullCoordinate.instance();
+		this.adaptee = NullCoordinate.getInstance();
 	}
 
 	public boolean isNull() {
@@ -58,7 +58,7 @@ public abstract class SquaredBoundedCoordinate {
 			coordinate.read(message);
 			error = !this.isValid();
 			if (error) {
-				Console.instance().writeln(this.getErrorMessage());
+				Console.getInstance().writeln(this.getErrorMessage());
 			}
 		} while (error);
 		this.adaptee = coordinate;

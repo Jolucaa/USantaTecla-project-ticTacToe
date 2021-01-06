@@ -8,22 +8,21 @@ enum Color {
 	O,
 	NULL;
 
-	boolean isNull() {
-		return this.equals(Color.NULL);
+	static Color get(int ordinal){
+		assert ordinal < Color.NULL.ordinal();
+
+		return Color.values()[ordinal];
 	}
 
 	void write() {
 		String string = this.name();
-		if (this == Color.NULL){
+		if (this.isNull()) {
 			string = " ";
 		}
-		Console.instance().write(string);
+		Console.getInstance().write(string);
 	}
 
-	static Color get(int ordinal){
-		assert ordinal < Color.NULL.ordinal();
-		
-		return Color.values()[ordinal];
+	boolean isNull() {
+		return this == Color.NULL;
 	}
-
 }

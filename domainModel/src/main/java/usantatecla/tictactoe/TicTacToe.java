@@ -19,7 +19,7 @@ class TicTacToe {
 	}
 
 	private void playGame() {
-		Message.TITTLE.writeln();
+		Message.TITLE.writeln();
 		this.board.write();
 		do {
 			this.turn.play();

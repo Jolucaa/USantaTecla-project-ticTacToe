@@ -36,14 +36,14 @@ public class PlayerTest {
     public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotEmpty() {
         Coordinate coordinate = new Coordinate(1, 1);
         this.board.put(coordinate, this.color);
-        assertThat(this.player.getOrigingMoveTokenError(coordinate), is(Error.NULL));
+        assertThat(this.player.getOriginMoveTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
     public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
         Coordinate coordinate = new Coordinate(1, 1);
         this.board.put(coordinate, Color.X);
-        assertThat(this.player.getOrigingMoveTokenError(coordinate), is(Error.NOT_OWNER));
+        assertThat(this.player.getOriginMoveTokenError(coordinate), is(Error.NOT_OWNER));
     }
 
     @Test

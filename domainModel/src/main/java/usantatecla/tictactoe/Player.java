@@ -24,14 +24,12 @@ abstract class Player {
 	}
 
 	private void putToken() {
-		assert this.putTokens < Coordinate.DIMENSION;
-
 		Coordinate coordinate;
-		Error error = Error.NULL;
+		Error error;
 		do {
 			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
 			error = this.getPutTokenError(coordinate);
-		} while (error != Error.NULL);
+		} while (error.isNull());
 		this.board.put(coordinate, this.color);
 		this.putTokens++;
 	}
@@ -50,7 +48,7 @@ abstract class Player {
 		Error error;
 		do {
 			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
-			error = this.getOrigingMoveTokenError(origin);
+			error = this.getOriginMoveTokenError(origin);
 		} while (error != Error.NULL);
 		Coordinate target;
 		do {
@@ -60,7 +58,7 @@ abstract class Player {
 		this.board.move(origin, target);
 	}
 
-	protected Error getOrigingMoveTokenError(Coordinate origin) {
+	protected Error getOriginMoveTokenError(Coordinate origin) {
 		if (!this.board.isOccupied(origin, this.color)) {
 			return Error.NOT_OWNER;
 		}

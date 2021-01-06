@@ -12,17 +12,21 @@ enum Error {
 
 	private String message;
 
-	private Error(){
+	Error(){
 	}
 
-	private Error(String message){
+	Error(String message){
 		this.message = message;
 	}
 
 	void writeln() {
-		if (this != Error.NULL){
-			Console.instance().writeln(this.message);
+		if (!this.isNull()){
+			Console.getInstance().writeln(this.message);
 		}
+	}
+
+	public boolean isNull() {
+		return this == Error.NULL;
 	}
 
 }

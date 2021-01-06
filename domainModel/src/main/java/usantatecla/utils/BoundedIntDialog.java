@@ -15,10 +15,10 @@ public class BoundedIntDialog {
 		boolean ok = false;
 		int value;
 		do {
-			value = Console.instance().readInt(message + "? " + this.LIMITS + ": ");
+			value = Console.getInstance().readInt(message + "? " + this.LIMITS + ": ");
 			ok = this.LIMITS.isIncluded(value);
 			if (!ok) {
-				Console.instance().writeln(BoundedIntDialog.ERROR_MESSAGE);
+				Console.getInstance().writeln(BoundedIntDialog.ERROR_MESSAGE);
 			}
 		} while(!ok);
 		return value;

@@ -11,6 +11,7 @@ class Turn {
 
 	Turn(Board board) {
 		assert board != null;
+		this.board = board;
 		this.players = new Player[Turn.NUMBER_PLAYERS];
 		this.reset();
 	}
@@ -19,7 +20,7 @@ class Turn {
 		this.activePlayer = 0;
 	}
 
-	void setUsers(int users){
+	void setUsers(int users){ // TODO Metodo sin utilizar. ¿Dónde utilizar?
 		int numberUsers = this.getUsers();
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
@@ -38,7 +39,7 @@ class Turn {
 
 	void play(){
 		this.getActivePlayer().play();
-		if (this.isTicTacToe()){
+		if (!this.isTicTacToe()){
 			this.activePlayer = this.getNextActivePlayer();
 		}
 	}

@@ -8,7 +8,7 @@ class MachinePlayer extends Player {
 
 	protected Coordinate getCoordinate(Message message){
 		Coordinate coordinate = new Coordinate();
-		coordinate.random();
+		coordinate.random(); // TODO ¿Hacer método estático para dar directamente coordenada random?
 		return coordinate;
 	}	
 	
