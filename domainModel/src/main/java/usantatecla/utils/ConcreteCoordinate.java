@@ -74,7 +74,7 @@ public class ConcreteCoordinate implements Coordinate {
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode() { // TODO ¿El hashcode se usa?
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + column;

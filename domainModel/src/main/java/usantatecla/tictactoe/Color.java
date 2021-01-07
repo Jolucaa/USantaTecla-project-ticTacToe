@@ -9,7 +9,7 @@ enum Color {
 	NULL;
 
 	static Color get(int ordinal){
-		assert ordinal < Color.NULL.ordinal();
+		assert ordinal >= 0 && ordinal < Color.NULL.ordinal();
 
 		return Color.values()[ordinal];
 	}
