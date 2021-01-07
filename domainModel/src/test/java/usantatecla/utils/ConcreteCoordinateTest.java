@@ -85,4 +85,9 @@ public class ConcreteCoordinateTest {
     assertThat(Coordinate.NULL.toString(), is("Coordinate (NULL)"));
   }
 
+    @Test
+    public void testHashCodeGivenNewConcreteCoordinate() {
+        assertThat(this.coordinate.hashCode(), is(993));
+    }
+
 }
