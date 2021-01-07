@@ -40,19 +40,19 @@ public class BoundedIntDialogTest {
        }
 
     }
-
-
   }
-  /*
+
   @Test
   public void testGivenLimitedIntDialogWhenReadOutsideThenRepeat() {
-    try (MockedStatic<Console> console = mockStatic(Console.class)) {
-      console.when(Console::getInstance).thenReturn(this.console);
-      when(this.console.readInt("")).thenReturn(-2, -2, 0);
-      assertThat(this.boundedIntDialog.read(this.title), is(0));
-    }
-  }
+      try (MockedStatic<Console> console = mockStatic(Console.class)) {
+          console.when(Console::getInstance).thenReturn(this.console);
+          int attempts = 3;
+          for (int i = 0; i< attempts;i++){
+              when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(-1,-1,1);
+              assertThat(this.boundedIntDialog.read(title), is(1));
+          }
 
-   */
+      }
+  }
 
 }
