@@ -2,6 +2,7 @@ package usantatecla.tictactoe;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -15,6 +16,6 @@ public class MachinePlayerTest {
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        assertThat(machinePlayer.getCoordinate(Message.VERTICAL_LINE_CENTERED).getClass(), is(new SquaredBoundedCoordinateTest().getClass()));
+        assertThat(machinePlayer.getCoordinate(Message.VERTICAL_LINE).getClass(), is(new Coordinate().getClass()));
     }
 }

@@ -56,15 +56,17 @@ public class PlayerTest {
     @Test
     public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
         Coordinate coordinate = new Coordinate(1, 1);
+        Coordinate coordinate2 = new Coordinate(1, 2);
         this.board.put(coordinate, Color.X);
-        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate), is(Error.NOT_EMPTY));
+        this.board.put(coordinate2, Color.X);
+        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate2), is(Error.NOT_EMPTY));
     }
 
     @Test
     public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
         Coordinate coordinate = new Coordinate(1, 1);
         this.board.put(coordinate, Color.X);
-        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate), is(Error.NOT_EMPTY));
+        assertThat(this.player.getTargetMoveTokenError(coordinate, coordinate), is(Error.SAME_COORDINATES));
     }
 
     @Test

@@ -21,12 +21,22 @@ public class ConcreteCoordinateTest {
         this.coordinate = new ConcreteCoordinate();
     }
 
-    @Test
+    /*@Test
     public void testGivenConcreteCoordinateWhenReadThenChangeState() {
         int row = 1;
         int column = 1;
         when(console.readInt(anyString())).thenReturn(0, row, 4, column);
         assertThat(this.coordinate, is(new ConcreteCoordinate(row, column)));
+    }*/
+
+    @Test
+    public void testGivenNewConcreteCoordinateWhenToString() {
+        assertThat(this.coordinate.toString(), is("Coordinate (0, 0)"));
+    }
+
+    @Test
+    public void testGivenNewConcreteCoordinateWhenIsNull() {
+        assertThat(this.coordinate.isNull(), is(false));
     }
 
 }
