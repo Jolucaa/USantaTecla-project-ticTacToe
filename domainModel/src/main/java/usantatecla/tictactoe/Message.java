@@ -34,4 +34,7 @@ enum Message {
 		Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
 	}
 
+	public String getMessage() {
+		return message;
+	}
 }

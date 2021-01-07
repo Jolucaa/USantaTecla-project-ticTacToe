@@ -37,13 +37,13 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenMoveNewTokenIsOccupiedAndOriginIsEmptyThenIsTrue() {
-        Color token = Color.O;
+        Color color = Color.O;
         Coordinate origin = new Coordinate(0, 0);
-        this.board.put(origin, token);
+        this.board.put(origin, color);
         Coordinate target = new Coordinate(0, 1);
         this.board.move(origin, target);
         assertThat(this.board.isEmpty(origin), is(true));
-        assertThat(this.board.isOccupied(target, token), is(true));
+        assertThat(this.board.isOccupied(target, color), is(true));
     }
 
     @Test
@@ -62,11 +62,11 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenPutTwoTokenAndIsTicTacToeThenIsFalse() {
-        Color token = Color.O;
-        for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
-            this.board.put(new Coordinate(i, 2), token);
+        Color color = Color.O;
+        for (int i = 0; i < Coordinate.DIMENSION - 1 ; i++) {
+            this.board.put(new Coordinate(i, 2), color);
         }
-        assertThat(this.board.isTicTacToe(token), is(false));
+        assertThat(this.board.isTicTacToe(color), is(false));
     }
 
     @Test

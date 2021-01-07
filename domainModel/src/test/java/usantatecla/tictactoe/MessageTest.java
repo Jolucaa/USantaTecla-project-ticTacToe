@@ -5,10 +5,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class MessageTest {
-    private Message message;
 
     @Test
     public void testGivenNewMessageWhenToString() {
-        assertThat(Message.COORDINATE_TO_PUT.toString(), is("Coordinate to put"));
+        assertThat(Message.COORDINATE_TO_PUT.getMessage(), is("Coordinate to put"));
     }
+/*
+    @Test
+    public void prueba() {
+        Message.COORDINATE_TO_MOVE.write();
+        assertThat(Message.COORDINATE_TO_PUT.getMessage(), is("Coordinate to put"));
+    }
+
+ */
 }

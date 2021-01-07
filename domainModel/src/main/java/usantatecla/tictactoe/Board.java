@@ -24,8 +24,10 @@ class Board {
 
 	void put(Coordinate coordinate, Color color) {
 		assert !coordinate.isNull();
-		assert !color.isNull();
-
+		//TODO aqui assert !color.isNull();
+		// Nuevo assert para verificar que no se puede hacer un put cuando ya hay 3 colores
+		assert (!color.isNull()&&
+				this.getCoordinates(color).size()<coordinate.getDimension());
 		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
 	}
 
@@ -34,7 +36,7 @@ class Board {
 		assert !target.isNull();
 		assert !origin.equals(target);
 
-		Color color = this.getColor(origin);
+		final Color color = this.getColor(origin);
 		this.remove(origin);
 		this.put(target, color);
 	}
@@ -64,6 +66,8 @@ class Board {
 		if (directions.size() < Coordinate.DIMENSION - 1) {
 			return false;
 		}
+		//TODO Coordinate.DIMENSION -> En el caso de que haya dos elementos
+		// en la lista siempre está comparando con 3
 		for (int i = 0; i < directions.size() - 1; i++) {
 			if (directions.get(i) != directions.get(i + 1)) {
 				return false;
@@ -77,8 +81,11 @@ class Board {
 
 		List<Direction> directions = new ArrayList<Direction>();
 		List<Coordinate> coordinates = this.getCoordinates(color);
-		for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
-			directions.add(coordinates.get(i).getDirection(coordinates.get(i + 1)));
+		//TODO aqui
+		if(!coordinates.isEmpty()){
+			for (int i = 0; i < coordinates.size() - 1; i++) {
+				directions.add(coordinates.get(i).getDirection(coordinates.get(i + 1)));
+			}
 		}
 		return directions;
 	}
