@@ -87,8 +87,7 @@ public class ConcreteCoordinateTest {
 
     @Test
     public void testHashCodeGivenNewConcreteCoordinate() {
-        ConcreteCoordinate coordinate1 = new ConcreteCoordinate(1,1);
-        assertThat(this.coordinate.hashCode(), is(961));
+        assertThat(this.coordinate.hashCode(), is(993));
     }
 
 }
