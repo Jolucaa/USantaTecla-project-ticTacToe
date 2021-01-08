@@ -9,6 +9,9 @@ public class NullCoordinateTest {
 
     private final ConcreteCoordinate concreteCoordinate = new ConcreteCoordinate(1,1);
 
+    // TODO BeforeEach
+
+
     @Test
     public void testGivenNullCoordinateWhenIsNullThenIsTrue() {
         assertThat(Coordinate.NULL.isNull(), is(true));
@@ -35,7 +38,6 @@ public class NullCoordinateTest {
         assertThat(Coordinate.NULL.inMainDiagonal(), is(false));
     }
 
-    // TODO equals no está sobreescrito en la coordenada nula. ¿Se queda este caso de prueba?
     @Test
     public void testGivenNullCoordinateWhenIsEqualsToAnotherCoordinateThenFalse() {
         assertThat(Coordinate.NULL.equals(this.concreteCoordinate), is(false));

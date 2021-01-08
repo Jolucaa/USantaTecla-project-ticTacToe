@@ -60,34 +60,28 @@ public class ConcreteCoordinateTest {
     try (MockedStatic<Console> console = mockStatic(Console.class)) {
       console.when(Console::getInstance).thenReturn(this.console);
 
+      // TODO Array de dos coordenadas
       final int[] coordinates = new int[]{1, 2, 0, 3};
       for(int i = 0; i < coordinates.length; i += 2) {
         when(this.console.readInt(anyString())).thenReturn(coordinates[i], coordinates[i+1]);
-        ConcreteCoordinate newCoordinate = new ConcreteCoordinate();
-        newCoordinate.read("TITLE");
+        ConcreteCoordinate coordinate = new ConcreteCoordinate();
+        coordinate.read("TITLE");
 
-        assertThat(newCoordinate.getRow(), is(coordinates[i] - 1));
-        assertThat(newCoordinate.getColumn(), is(coordinates[i+1] - 1));
+        assertThat(coordinate, is(coordinates[i]));
       }
     }
   }
 
   @Test
-  public void testGivenCoordinateWhenIsEqualsTrue() {
+  public void testGivenCoordinateWhenIsEqualsThenReturn() {
     assertThat(this.coordinate.equals(new ConcreteCoordinate(1, 1)), is(true));
     assertThat(this.coordinate.equals(new ConcreteCoordinate(0, 1)), is(false));
     assertThat(this.coordinate.equals(Coordinate.NULL), is(false));
   }
 
   @Test
-  public void testGivenCoordinateWhenToString() {
+  public void testGivenCoordinateWhenToStringThenReturn() {
     assertThat(this.coordinate.toString(), is("Coordinate (1, 1)"));
-    assertThat(Coordinate.NULL.toString(), is("Coordinate (NULL)"));
   }
-
-    @Test
-    public void testHashCodeGivenNewConcreteCoordinate() {
-        assertThat(this.coordinate.hashCode(), is(993));
-    }
 
 }

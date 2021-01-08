@@ -24,16 +24,15 @@ class Board {
 
 	void put(Coordinate coordinate, Color color) {
 		assert !coordinate.isNull();
-		//TODO aqui assert !color.isNull();
-		// Nuevo assert para verificar que no se puede hacer un put cuando ya hay 3 colores
+		// TODO Nuevo assert para verificar que no se puede hacer un put cuando ya hay 3 colores
 		assert (!color.isNull()&&
 				this.getCoordinates(color).size()<coordinate.getDimension());
 		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
 	}
 
 	void move(Coordinate origin, Coordinate target) {
-		assert !origin.isNull();
-		assert !target.isNull();
+		assert !origin.isNull() && !this.isEmpty(origin);
+		assert !target.isNull() && this.isEmpty(target);
 		assert !origin.equals(target);
 
 		final Color color = this.getColor(origin);

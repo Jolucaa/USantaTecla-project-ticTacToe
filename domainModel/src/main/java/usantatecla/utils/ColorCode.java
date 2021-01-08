@@ -1,5 +1,6 @@
 package usantatecla.utils;
 
+// TODO Sincronizar con Mastermind
 public enum ColorCode {
     BLACK("\u001B[30m"),
     RED("\u001B[31m"),

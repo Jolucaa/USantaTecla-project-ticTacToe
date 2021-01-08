@@ -20,6 +20,7 @@ public class BoardTest {
         assertThat(this.board.isEmpty(new Coordinate(0, 0)),is(true));
         assertThat(this.board.isEmpty(new Coordinate(2, 2)),is(true));
     }
+    // TODO Caso de prueba con isEmpty false
 
     @Test
     public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsFalse() {
@@ -46,8 +47,10 @@ public class BoardTest {
         assertThat(this.board.isOccupied(target, color), is(true));
     }
 
+    // TODO Más casos con move (asserts)
+
     @Test
-    public void testGivenNewBoardWhenNotPutTokensAndIsTicTacToeThenIsFalse() {
+    public void testGivenNewBoardWhenIsTicTacToeThenIsFalse() {
         assertThat(this.board.isTicTacToe(Color.O), is(false));
     }
 
