@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,7 +19,12 @@ public class ConcreteCoordinateTest {
   @Mock
   Console console;
 
-  private final Coordinate coordinate = new ConcreteCoordinate(1, 1);
+  private Coordinate coordinate;
+
+  @BeforeEach
+  public void beforeEach() {
+    this.coordinate = new ConcreteCoordinate(1, 1);
+  }
 
   @Test
   public void testGivenCoordinateWhenIsNullThenIsFalse() {
@@ -56,14 +62,13 @@ public class ConcreteCoordinateTest {
   }
 
   @Test
-  public void testGivenEmptyCoordinateWhenReadThenCorrectAttributes() {
+  public void testGivenEmptyCoordinatesWhenReadThenCorrectValues() {
     try (MockedStatic<Console> console = mockStatic(Console.class)) {
       console.when(Console::getInstance).thenReturn(this.console);
 
-      // TODO Array de dos coordenadas
-      final int[] coordinates = new int[]{1, 2, 0, 3};
-      for(int i = 0; i < coordinates.length; i += 2) {
-        when(this.console.readInt(anyString())).thenReturn(coordinates[i], coordinates[i+1]);
+      final ConcreteCoordinate[] coordinates = {  new ConcreteCoordinate(1, 2), new ConcreteCoordinate(0, 3) };
+      for(int i = 0; i < coordinates.length; i++) {
+        when(this.console.readInt(anyString())).thenReturn(coordinates[i].getRow() + 1, coordinates[i].getColumn() + 1);
         ConcreteCoordinate coordinate = new ConcreteCoordinate();
         coordinate.read("TITLE");
 

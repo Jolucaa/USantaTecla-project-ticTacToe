@@ -1,5 +1,6 @@
 package usantatecla.utils;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -7,9 +8,12 @@ import static org.hamcrest.Matchers.is;
 
 public class NullCoordinateTest {
 
-    private final ConcreteCoordinate concreteCoordinate = new ConcreteCoordinate(1,1);
+    private ConcreteCoordinate concreteCoordinate;
 
-    // TODO BeforeEach
+    @BeforeEach
+    public void beforeEach() {
+        this.concreteCoordinate = new ConcreteCoordinate(1, 1);
+    }
 
 
     @Test

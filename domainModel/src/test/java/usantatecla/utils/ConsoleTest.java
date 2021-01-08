@@ -10,12 +10,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,11 +26,13 @@ public class ConsoleTest {
   @InjectMocks
   Console console;
 
-  // TODO El espia del out habría que hacerlo como Console (ver comentario debajo)
-  /*
-  @Spy
-  private PrintStream outputStream = spy(System.out);
-  */
+  private PrintStream outputStream;
+
+  @BeforeEach
+  public void beforeEach() {
+    this.outputStream = spy(System.out);
+    System.setOut(this.outputStream);
+  }
 
   @Test
   public void testGivenConsoleWhenReadStringThenValue() throws IOException {
@@ -54,23 +55,52 @@ public class ConsoleTest {
     assertThat(this.console.readChar("TITLE"), is(string.charAt(0)));
   }
 
-  /*
+
   @Test
   public void testGivenConsoleWhenWriteStringThenDisplay(){
     String string = "***";
     Console.getInstance().write(string);
-    ArgumentCaptor<Integer> value = ArgumentCaptor.forClass(Integer.class);
-    verify(this.outputStream).print(value.capture());
-    assertThat(value.getValue(), is(string));
+    verify(this.outputStream).print(string);
   }
 
   @Test
   public void testGivenConsoleWhenWriteIntThenDisplay(){
-    String string = "123";
-    Console.getInstance().write(string);
-    ArgumentCaptor<Integer> value = ArgumentCaptor.forClass(Integer.class);
-    verify(this.outputStream).print(value.capture());
-    assertThat(value.getValue(), is(Integer.parseInt(string)));
+    int integer = 123;
+    Console.getInstance().write(integer);
+    verify(this.outputStream).print(integer);
   }
-  */
+
+  @Test
+  public void testGivenConsoleWhenWriteCharacterThenDisplay(){
+    char character = 'a';
+    Console.getInstance().write(character);
+    verify(this.outputStream).print(character);
+  }
+
+  @Test
+  public void testGivenConsoleWhenWritelnThenDisplay(){
+    Console.getInstance().writeln();
+    verify(this.outputStream).println();
+  }
+
+  @Test
+  public void testGivenConsoleWhenWritelnStringThenDisplay(){
+    String string = "***";
+    Console.getInstance().writeln(string);
+    verify(this.outputStream).println(string);
+  }
+
+  @Test
+  public void testGivenConsoleWhenWritelnIntegerThenDisplay(){
+    int integer = 123;
+    Console.getInstance().writeln(integer);
+    verify(this.outputStream).println(integer);
+  }
+
+  @Test
+  public void testGivenConsoleWhenWriteErrorThenDisplay(){
+    String format = "(a | b)";
+    Console.getInstance().writeError(format);
+    verify(this.outputStream).println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
+  }
 }

@@ -23,8 +23,10 @@ public class ColorTest {
     public void testGivenNewColorWhenGetThenReturn() {
         assertThat(Color.get(0), is(Color.X));
         assertThat(Color.get(1), is(Color.O));
+    }
 
-        // TODO
+    @Test
+    public void testGivenNewColorWhenGetThenAssertionError() {
         Assertions.assertThrows(AssertionError.class, () -> Color.get(2));
         Assertions.assertThrows(AssertionError.class, () -> Color.get(-1));
     }
