@@ -15,45 +15,33 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class BoundedIntDialogTest {
 
-  private BoundedIntDialog boundedIntDialog;
-  private ClosedInterval limits;
-  private String title = "TITLE";
-  private final int MIN = 0; // TODO
+    private final int MIN = -1;
+    private final int MAX = 1;
+    private BoundedIntDialog boundedIntDialog;
+    private ClosedInterval limits;
+    private String title = "TITLE";
 
-  @Mock
-  Console console;
+    @Mock
+    Console console;
 
-  @BeforeEach
-  void before() {
-    this.boundedIntDialog = new BoundedIntDialog(0, 3);
-    this.limits = new ClosedInterval(0, 3);
-
-  }
-
-  @Test
-  public void testGivenLimitedIntDialogWhenReadInsideThenValue() {
-    try (MockedStatic<Console> console = mockStatic(Console.class)) {
-      console.when(Console::getInstance).thenReturn(this.console);
-       int[] VALUES ={0,1,2};
-       for (int i = 0; i< VALUES.length;i++){
-            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(VALUES[i]);
-            assertThat(this.boundedIntDialog.read(title), is(VALUES[i]));
-       }
-
+    @BeforeEach
+    void before() {
+        this.boundedIntDialog = new BoundedIntDialog(MIN, MAX);
+        this.limits = new ClosedInterval(MIN, MAX);
     }
-  }
 
-  @Test
-  public void testGivenLimitedIntDialogWhenReadOutsideThenRepeat() {
-      try (MockedStatic<Console> console = mockStatic(Console.class)) {
-          console.when(Console::getInstance).thenReturn(this.console);
+    @Test
+    public void testGivenLimitedIntDialogWhenReadOutsideThenRepeat() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
 
-          for (int i = 0; i < 3; i++){
-              when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(-1,-1,1);
-              assertThat(this.boundedIntDialog.read(title), is(1));
-          }
+            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MIN-1,MIN-1,MIN);
+            assertThat(this.boundedIntDialog.read(title), is(MIN));
 
-      }
-  }
+            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MAX+1,MAX+1,MAX);
+            assertThat(this.boundedIntDialog.read(title), is(MAX));
+
+        }
+    }
 
 }
