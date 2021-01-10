@@ -30,7 +30,7 @@ public abstract class SquaredBoundedCoordinate {
 
 	protected ClosedInterval getLimits(){
 		return new ClosedInterval(0, this.getDimension() - 1);
-	};
+	}
 
 	public Direction getDirection(SquaredBoundedCoordinate coordinate) {
 		if (this.equals(coordinate) || this.isNull() || coordinate.isNull()){
@@ -56,12 +56,12 @@ public abstract class SquaredBoundedCoordinate {
 		boolean error;
 		do {
 			coordinate.read(message);
+			this.adaptee = coordinate;//TODO ?
 			error = !this.isValid();
 			if (error) {
 				Console.getInstance().writeln(this.getErrorMessage());
 			}
 		} while (error);
-		this.adaptee = coordinate;
 	}
 
 	protected abstract String getErrorMessage();

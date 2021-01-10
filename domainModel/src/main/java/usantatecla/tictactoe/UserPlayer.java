@@ -10,7 +10,7 @@ class UserPlayer extends Player {
 		assert message != null;
 		
 		Coordinate coordinate = new Coordinate();
-		coordinate.read(message.toString());
+		coordinate.read(message.getMessage());
 		return coordinate;
 	}
 

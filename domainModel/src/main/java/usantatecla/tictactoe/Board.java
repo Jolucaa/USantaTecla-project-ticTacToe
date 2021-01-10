@@ -3,6 +3,7 @@ package usantatecla.tictactoe;
 import java.util.ArrayList;
 import java.util.List;
 
+import usantatecla.utils.Console;
 import usantatecla.utils.Direction;
 
 class Board {
@@ -62,8 +63,6 @@ class Board {
 		if (directions.size() < Coordinate.DIMENSION - 1) {
 			return false;
 		}
-		//TODO Coordinate.DIMENSION -> En el caso de que haya dos elementos
-		// en la lista siempre está comparando con 3
 		for (int i = 0; i < directions.size() - 1; i++) {
 			if (directions.get(i) != directions.get(i + 1)) {
 				return false;
@@ -75,9 +74,8 @@ class Board {
 	private List<Direction> getDirections(Color color) {
 		assert !color.isNull();
 
-		List<Direction> directions = new ArrayList<Direction>();
+		List<Direction> directions = new ArrayList<>();
 		List<Coordinate> coordinates = this.getCoordinates(color);
-		//TODO aqui
 		if(!coordinates.isEmpty()){
 			for (int i = 0; i < coordinates.size() - 1; i++) {
 				directions.add(coordinates.get(i).getDirection(coordinates.get(i + 1)));
@@ -89,7 +87,7 @@ class Board {
 	private List<Coordinate> getCoordinates(Color color) {
 		assert !color.isNull();
 
-		List<Coordinate> coordinates = new ArrayList<Coordinate>();
+		List<Coordinate> coordinates = new ArrayList<>();
 		for (int i = 0; i < Coordinate.DIMENSION; i++) {
 			for (int j = 0; j < Coordinate.DIMENSION; j++) {
 				if (this.getColor(new Coordinate(i,j)) == color) {
@@ -108,6 +106,7 @@ class Board {
 				this.getColor(new Coordinate(i, j)).write();
 				Message.VERTICAL_LINE.write();
 			}
+			Console.getInstance().writeln();
 		}
 		Message.HORIZONTAL_LINE.writeln();
 	}

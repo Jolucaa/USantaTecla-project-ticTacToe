@@ -29,7 +29,7 @@ abstract class Player {
 		do {
 			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
 			error = this.getPutTokenError(coordinate);
-		} while (error.isNull());
+		} while (!error.isNull());
 		this.board.put(coordinate, this.color);
 		this.putTokens++;
 	}

@@ -17,10 +17,6 @@ class Turn {
 	}
 
 	void reset() {
-		this.activePlayer = 0;
-	}
-
-	void setUsers(int users){ // TODO Metodo sin utilizar. ¿Dónde utilizar?
 		int numberUsers = this.getUsers();
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
@@ -29,12 +25,12 @@ class Turn {
 				this.players[i] = new MachinePlayer(Color.get(i), this.board);
 			}
 		}
-		this.reset();
+		this.activePlayer = 0;
 	}
 
 	private int getUsers() {
 		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		return dialog.read(Message.NUMBER_PLAYERS.toString());
+		return dialog.read(Message.NUMBER_PLAYERS.getMessage());
 	}
 
 	void play(){
