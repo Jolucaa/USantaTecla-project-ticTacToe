@@ -24,9 +24,6 @@ class Board {
 
 	void put(Coordinate coordinate, Color color) {
 		assert !coordinate.isNull();
-		// TODO Nuevo assert para verificar que no se puede hacer un put cuando ya hay 3 colores
-		assert (!color.isNull()&&
-				this.getCoordinates(color).size()<coordinate.getDimension());
 		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
 	}
 
