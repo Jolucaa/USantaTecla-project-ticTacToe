@@ -11,12 +11,13 @@ import usantatecla.utils.Console;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerTest {
-    
+
     private Board board;
     private Player player;
     private Color color;
@@ -86,18 +87,19 @@ public class PlayerTest {
         assertThat(this.player.getColor(), is(this.color));
     }
 
-    /*@Test
+    @Test
     void testGivenCompleteBoardWhenPutTokenThenIsFalse() {
-        Board board1 = new BoardBuilder().rows("XXX",
-                "OO ",
-                "  O").build();
-        Player player1 = new UserPlayer(this.color, board1);
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.console.readInt(any())).thenReturn(1,0,2,0);
+            Board board1 = new Board();
+            Player player1 = new UserPlayer(this.color, board1);
+            when(this.console.readInt(anyString())).thenReturn(1,1,1,2,2,1,2,1,3,1);//TODO Mock de consola en PlayerBuilder?
+            player1.play();
+            player1.play();
+            player1.play();
             player1.play();
             assertThat(board1.isEmpty(new Coordinate(1,0)), is(true));
             assertThat(board1.isOccupied(new Coordinate(2,0), Color.O), is(true));
         }
-    }*/
+    }
 }
