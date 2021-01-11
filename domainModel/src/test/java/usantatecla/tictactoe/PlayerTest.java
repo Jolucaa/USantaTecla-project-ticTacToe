@@ -22,7 +22,9 @@ public class PlayerTest {
     public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
         Coordinate coordinate = new Coordinate(1, 1);
         Player player = new PlayerBuilder().setColor(this.color).setTypeUserPlayer().build();
+        Player player2 = new PlayerBuilder().setColor(this.color).setTypeMachinePlayer().build();
         assertThat(player.getPutTokenError(coordinate), is(Error.NULL));
+        assertThat(player2.getPutTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
