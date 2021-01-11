@@ -4,16 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerTest {
@@ -88,18 +83,11 @@ public class PlayerTest {
     }
 
     @Test
-    void testGivenCompleteBoardWhenPutTokenThenIsFalse() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            Board board1 = new Board();
-            Player player1 = new UserPlayer(this.color, board1);
-            when(this.console.readInt(anyString())).thenReturn(1,1,1,2,2,1,2,1,3,1);//TODO Mock de consola en PlayerBuilder?
-            player1.play();
-            player1.play();
-            player1.play();
-            player1.play();
-            assertThat(board1.isEmpty(new Coordinate(1,0)), is(true));
-            assertThat(board1.isOccupied(new Coordinate(2,0), Color.O), is(true));
-        }
+    void testGivenPlayerWhenMoveThenIsTrue() {
+        Player player1 = new PlayerBuilder().setColor(Color.O).setTypeUserPlayer()
+                .putToken(new Coordinate(0,0)).putToken(new Coordinate(0,1))
+                .putToken(new Coordinate(1,0)).moveToken(new Coordinate(1,0), new Coordinate(2,0)).build();
+        assertThat(player1.board.isEmpty(new Coordinate(1,0)), is(true));
+        assertThat(player1.board.isOccupied(new Coordinate(2,0), Color.O), is(true));
     }
 }

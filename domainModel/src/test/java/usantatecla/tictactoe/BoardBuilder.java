@@ -6,13 +6,11 @@ import java.util.regex.Pattern;
 
 public class BoardBuilder {
 
-    private Color[][] colors;
     private List<String> strings;
     private List<Coordinate> xCoordinates;
     private List<Coordinate> oCoordinates;
 
     public BoardBuilder() {
-        this.colors = new Color[Coordinate.DIMENSION][Coordinate.DIMENSION];
         this.strings = new ArrayList<>();
         this.xCoordinates = new ArrayList<>();
         this.oCoordinates = new ArrayList<>();

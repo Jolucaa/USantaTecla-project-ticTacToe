@@ -34,7 +34,7 @@ class TicTacToe {
 
 	private boolean isResumedGame() {
 		YesNoDialog yesNoDialog = new YesNoDialog();
-		yesNoDialog.read(Message.RESUME.getMessage());//TODO toString?
+		yesNoDialog.read(Message.RESUME.getMessage());//TODO toString
 		if (yesNoDialog.isAffirmative()) {
 			this.board.reset();
 			this.turn.reset();
