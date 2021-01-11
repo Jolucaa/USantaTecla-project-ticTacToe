@@ -9,8 +9,8 @@ public class CoordinateTest extends SquaredBoundedCoordinateTest {
     protected static final String ERROR = "ERROR";
 
     @Override
-    protected SquaredBoundedCoordinate getCoordinate(int row, int column) {
-        return new SquaredBoundedCoordinate(row, column) {
+    public SquaredBoundedCoordinate getNullCoordinate() {
+        return new SquaredBoundedCoordinate() {
             @Override
             public int getDimension() {
                 return CoordinateTest.BOUND;
@@ -24,8 +24,13 @@ public class CoordinateTest extends SquaredBoundedCoordinateTest {
     }
 
     @Override
-    protected SquaredBoundedCoordinate getNullCoordinate() {
-        return new SquaredBoundedCoordinate() {
+    public int getDimension() {
+        return CoordinateTest.BOUND;
+    }
+
+    @Override
+    public SquaredBoundedCoordinate getCoordinate(int row, int column) {
+        return new SquaredBoundedCoordinate(row, column) {
             @Override
             public int getDimension() {
                 return CoordinateTest.BOUND;
@@ -37,5 +42,6 @@ public class CoordinateTest extends SquaredBoundedCoordinateTest {
             }
         };
     }
+
 
 }

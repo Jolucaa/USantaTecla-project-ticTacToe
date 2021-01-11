@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,11 +27,11 @@ public class ConsoleTest {
   @InjectMocks
   Console console;
 
+  @Mock
   private PrintStream outputStream;
 
   @BeforeEach
   public void beforeEach() {
-    this.outputStream = spy(System.out);
     System.setOut(this.outputStream);
   }
 

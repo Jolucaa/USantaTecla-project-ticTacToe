@@ -4,83 +4,84 @@ import java.util.Random;
 
 public abstract class SquaredBoundedCoordinate {
 
-	private Coordinate adaptee;
+    private Coordinate adaptee;
 
-	public SquaredBoundedCoordinate() {
-		this.adaptee = NullCoordinate.getInstance();
-	}
+    public SquaredBoundedCoordinate() {
+        this.adaptee = NullCoordinate.getInstance();
+    }
 
-	public boolean isNull() {
-		return this.adaptee.isNull();
-	}
+    public boolean isNull() {
+        return this.adaptee.isNull();
+    }
 
-	public SquaredBoundedCoordinate(int row, int column) {
-		this.adaptee = new ConcreteCoordinate(row, column);
+    public SquaredBoundedCoordinate(int row, int column) {
+        this.adaptee = new ConcreteCoordinate(row, column);
 
-		assert this.isValid();
-	}
+        assert this.isValid();
+    }
 
-	private boolean isValid() {
-		assert !this.adaptee.isNull();
+    private boolean isValid() {
+        assert !this.adaptee.isNull();
 
-		ConcreteCoordinate concreteCoordinate = (ConcreteCoordinate) this.adaptee;
-		return this.getLimits().isIncluded(concreteCoordinate.getRow()) 
-			&& this.getLimits().isIncluded(concreteCoordinate.getColumn());
-	}
+        ConcreteCoordinate concreteCoordinate = (ConcreteCoordinate) this.adaptee;
+        return this.getLimits().isIncluded(concreteCoordinate.getRow())
+                && this.getLimits().isIncluded(concreteCoordinate.getColumn());
+    }
 
-	protected ClosedInterval getLimits(){
-		return new ClosedInterval(0, this.getDimension() - 1);
-	}
+    protected ClosedInterval getLimits() {
+        return new ClosedInterval(0, this.getDimension() - 1);
+    }
 
-	public Direction getDirection(SquaredBoundedCoordinate coordinate) {
-		if (this.equals(coordinate) || this.isNull() || coordinate.isNull()){
-			return Direction.NULL;
-		}
-		if (this.inInverseDiagonal() && coordinate.inInverseDiagonal()) {
-			return Direction.INVERSE_DIAGONAL;
-		}
-		return this.adaptee.getDirection(coordinate.adaptee);
-	}
+    protected abstract int getDimension();
 
-	private boolean inInverseDiagonal() {
-		ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
-		return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
-	}
+    public Direction getDirection(SquaredBoundedCoordinate coordinate) {
+        if (this.equals(coordinate) || this.isNull() || coordinate.isNull()) {
+            return Direction.NULL;
+        }
+        if (this.inInverseDiagonal() && coordinate.inInverseDiagonal()) {
+            return Direction.INVERSE_DIAGONAL;
+        }
+        return this.adaptee.getDirection(coordinate.adaptee);
+    }
 
-	protected abstract int getDimension();
+    private boolean inInverseDiagonal() {
+        ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
+        return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
+    }
 
-	public void read(String message) {
-		assert message != null;
 
-		ConcreteCoordinate coordinate = new ConcreteCoordinate();
-		boolean error;
-		do {
-			coordinate.read(message);
-			this.adaptee = coordinate;//TODO ?
-			error = !this.isValid();
-			if (error) {
-				Console.getInstance().writeln(this.getErrorMessage());
-			}
-		} while (error);
-	}
+    public void read(String message) {
+        assert message != null;
 
-	protected abstract String getErrorMessage();
+        this.adaptee = new ConcreteCoordinate();
+        ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
+        boolean error;
+        do {
+            coordinate.read(message);
+            error = !this.isValid();
+            if (error) {
+                Console.getInstance().writeln(this.getErrorMessage());
+            }
+        } while (error);
+    }
 
-	public void random() {
-		Random random = new Random(System.currentTimeMillis());
-		this.adaptee = new ConcreteCoordinate(random.nextInt(this.getDimension()), random.nextInt(this.getDimension()));
-	}
+    protected abstract String getErrorMessage();
 
-	public int getRow() {
-		assert !this.adaptee.isNull();
+    public void random() {
+        Random random = new Random(System.currentTimeMillis());
+        this.adaptee = new ConcreteCoordinate(random.nextInt(this.getDimension()), random.nextInt(this.getDimension()));
+    }
 
-		return ((ConcreteCoordinate) this.adaptee).getRow();
-	}
+    public int getRow() {
+        assert !this.adaptee.isNull();
 
-	public int getColumn() {
-		assert !this.adaptee.isNull();
+        return ((ConcreteCoordinate) this.adaptee).getRow();
+    }
 
-		return ((ConcreteCoordinate) this.adaptee).getColumn();
-	}
+    public int getColumn() {
+        assert !this.adaptee.isNull();
+
+        return ((ConcreteCoordinate) this.adaptee).getColumn();
+    }
 
 }
