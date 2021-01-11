@@ -5,42 +5,19 @@ import usantatecla.utils.SquaredBoundedCoordinateTest;
 
 public class CoordinateTest extends SquaredBoundedCoordinateTest {
 
-    protected static final int BOUND = 3;
-    protected static final String ERROR = "ERROR";
-
     @Override
     public SquaredBoundedCoordinate getNullCoordinate() {
-        return new SquaredBoundedCoordinate() {
-            @Override
-            public int getDimension() {
-                return CoordinateTest.BOUND;
-            }
-
-            @Override
-            protected String getErrorMessage() {
-                return CoordinateTest.ERROR;
-            }
-        };
+        return new Coordinate();
     }
 
     @Override
     public int getDimension() {
-        return CoordinateTest.BOUND;
+        return Coordinate.DIMENSION;
     }
 
     @Override
     public SquaredBoundedCoordinate getCoordinate(int row, int column) {
-        return new SquaredBoundedCoordinate(row, column) {
-            @Override
-            public int getDimension() {
-                return CoordinateTest.BOUND;
-            }
-
-            @Override
-            protected String getErrorMessage() {
-                return CoordinateTest.ERROR;
-            }
-        };
+        return new Coordinate(row, column);
     }
 
 
