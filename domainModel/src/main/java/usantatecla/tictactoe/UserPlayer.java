@@ -10,7 +10,7 @@ class UserPlayer extends Player {
 		assert message != null;
 		
 		Coordinate coordinate = new Coordinate();
-		coordinate.read(message.getMessage());
+		coordinate.read(message.toString());
 		return coordinate;
 	}
 
@@ -34,7 +34,7 @@ class UserPlayer extends Player {
 
 	@Override
 	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
-		assert !origin.isNull();
+		assert !origin.isNull()/*TODO || !target.isNull()*/;
 		assert !target.isNull();
 		
 		Error error = super.getTargetMoveTokenError(origin, target);

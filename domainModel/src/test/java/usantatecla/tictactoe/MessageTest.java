@@ -21,20 +21,20 @@ public class MessageTest {
 
     @Test
     public void testGivenNewMessageWhenToString() {
-        assertThat(Message.COORDINATE_TO_PUT.getMessage(), is("Coordinate to put"));
+        assertThat(Message.COORDINATE_TO_PUT.toString(), is("Coordinate to put"));
     }
 
     @Test
     public void testGivenNewMessageWhenWrite(){
         Message.COORDINATE_TO_PUT.write();
-        assertThat(Message.COORDINATE_TO_PUT.getMessage(), is(output.toString()));
+        assertThat(Message.COORDINATE_TO_PUT.toString(), is(output.toString()));
     }
 
     @Test
     public void testGivenNewMessageWhenWritelnWithoutParams(){
         String newLine = System.getProperty("line.separator");
         Message.COORDINATE_TO_PUT.writeln();
-        assertThat(Message.COORDINATE_TO_PUT.getMessage()+newLine, is(output.toString()));
+        assertThat(Message.COORDINATE_TO_PUT.toString()+newLine, is(output.toString()));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MessageTest {
         String playerName = "player";
         String newLine = System.getProperty("line.separator");
         Message.PLAYER_WIN.writeln(playerName);
-        assertThat(Message.PLAYER_WIN.getMessage().replaceAll("#player", "" + playerName)+newLine, is(output.toString()));
+        assertThat(Message.PLAYER_WIN.toString().replaceAll("#player", "" + playerName)+newLine, is(output.toString()));
     }
 }
 

@@ -30,7 +30,7 @@ class Turn {
 
 	private int getUsers() {
 		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		return dialog.read(Message.NUMBER_PLAYERS.getMessage());
+		return dialog.read(Message.NUMBER_PLAYERS.toString());
 	}
 
 	void play(){

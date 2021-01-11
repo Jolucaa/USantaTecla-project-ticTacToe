@@ -2,26 +2,40 @@ package usantatecla.tictactoe;
 
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.utils.Console;
 import usantatecla.utils.SquaredBoundedCoordinate;
 import usantatecla.utils.SquaredBoundedCoordinateTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class UserPlayerTest {
-    private Board board;
+    /*
     private UserPlayer player;
     private Coordinate coordinate00;
-    private Coordinate coordinate01;
+    private Coordinate coordinate01;*/
+    private Color color;
+
+    @Mock
+    Console console;
 
     public UserPlayerTest() {
-        this.board = new Board();
+        this.color = Color.X;
+        /*this.board = new Board();
         this.player = new UserPlayer(Color.O, this.board);
         this.coordinate00 = new Coordinate(0, 0);
-        this.coordinate01 = new Coordinate(0, 1);
+        this.coordinate01 = new Coordinate(0, 1);*/
     }
 
-    @Test
+    /*@Test
     public void testGivenNewUserPlayerWhenPutNewTokenThenReturnErrorNotEmpty() {
         this.board.put(this.coordinate00, Color.O);
         assertThat(this.player.getPutTokenError(this.coordinate00), is(Error.NOT_EMPTY));
@@ -62,5 +76,17 @@ public class UserPlayerTest {
     public void testGivenNewUserPlayerWhenMoveTokenThenNotReturnErrorNull() {
         this.board.put(this.coordinate00, Color.O);
         assertThat(this.player.getTargetMoveTokenError(this.coordinate00, this.coordinate01) == Error.NULL, is(true));
+    }*/
+
+    @Test
+    public void testGivenNewMachinePlayerWhenCreateCoordinate() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = new PlayerBuilder().setColor(this.color).setTypeUserPlayer().build();
+            when(this.console.readInt(anyString())).thenReturn(2, 1);
+            Coordinate coordinate = player.getCoordinate(Message.COORDINATE_TO_PUT);
+            assertThat(coordinate.getColumn(), is(0));
+            assertThat(coordinate.getRow(), is(1));
+        }
     }
 }
