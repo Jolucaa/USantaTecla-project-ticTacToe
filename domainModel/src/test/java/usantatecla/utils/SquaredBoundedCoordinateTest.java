@@ -10,6 +10,7 @@ import static org.mockito.Mockito.*;
 public class SquaredBoundedCoordinateTest {
 
     private static final int DIMENSION = 7;
+    private static final String ERROR = "error";
 
     public SquaredBoundedCoordinate getNullCoordinate() {
         return new SquaredBoundedCoordinate() {
@@ -20,7 +21,7 @@ public class SquaredBoundedCoordinateTest {
 
             @Override
             protected String getErrorMessage() {
-                return "error";
+                return SquaredBoundedCoordinateTest.ERROR;
             }
         };
     }
@@ -38,7 +39,7 @@ public class SquaredBoundedCoordinateTest {
 
             @Override
             protected String getErrorMessage() {
-                return "error";
+                return SquaredBoundedCoordinateTest.ERROR;
             }
         };
     }
