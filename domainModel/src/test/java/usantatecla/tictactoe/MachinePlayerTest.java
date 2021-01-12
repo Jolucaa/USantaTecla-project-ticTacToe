@@ -1,22 +1,20 @@
 package usantatecla.tictactoe;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MachinePlayerTest {
-    private MachinePlayer machinePlayer;
+public class MachinePlayerTest extends PlayerTest {
 
-    @BeforeEach
-    void before() {
-        this.machinePlayer = new MachinePlayer(Color.X, new Board());
+    @Override
+    public PlayerBuilder getPlayerBuilder() {
+        return new PlayerBuilder().setColor(Color.O).setTypeMachinePlayer();
     }
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        assertThat(machinePlayer.getCoordinate(Message.VERTICAL_LINE).getClass(), is(new Coordinate().getClass()));
+        Player player = this.playerBuilder.build();
+        assertThat(player.getCoordinate(Message.VERTICAL_LINE).getClass(), is(new Coordinate().getClass()));
     }
 }

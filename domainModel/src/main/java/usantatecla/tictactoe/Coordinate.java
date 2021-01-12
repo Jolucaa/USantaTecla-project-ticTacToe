@@ -1,5 +1,6 @@
 package usantatecla.tictactoe;
 
+import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.SquaredBoundedCoordinate;
 
 class Coordinate extends SquaredBoundedCoordinate {
@@ -22,6 +23,24 @@ class Coordinate extends SquaredBoundedCoordinate {
   @Override
   protected String getErrorMessage() {
     return Error.WRONG_COORDINATES.toString();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Coordinate other = (Coordinate) obj;
+    if(!other.isNull()) {
+      if (this.getRow() != other.getRow())
+        return false;
+      if (this.getColumn() != other.getColumn())
+        return false;
+    }
+    return true;
   }
 
 }

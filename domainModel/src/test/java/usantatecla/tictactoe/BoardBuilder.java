@@ -28,7 +28,7 @@ public class BoardBuilder {
     public Board build() {
         Board board = new Board();
         board.reset();
-        if (this.strings.size() != 0) {
+        if (!this.strings.isEmpty()) {
             readRows();
             putCoordinates(board);
         }
