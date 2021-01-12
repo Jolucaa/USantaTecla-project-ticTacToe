@@ -35,7 +35,6 @@ class UserPlayer extends Player {
 	@Override
 	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		assert !origin.isNull() && !target.isNull();
-		//TODO assert !target.isNull();
 		
 		Error error = super.getTargetMoveTokenError(origin, target);
 		error.writeln();

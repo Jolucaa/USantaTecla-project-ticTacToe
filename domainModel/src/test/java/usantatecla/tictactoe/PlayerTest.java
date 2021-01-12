@@ -8,13 +8,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+//TODO Abstracción
 @ExtendWith(MockitoExtension.class)
 public class PlayerTest {
 
     private Color color;
 
+    //TODO beforeEach
     @BeforeEach
-    void before() {
+    void beforeEach() {
         this.color = Color.O;
     }
 

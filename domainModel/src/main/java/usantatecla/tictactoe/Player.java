@@ -2,6 +2,7 @@ package usantatecla.tictactoe;
 
 abstract class Player {
 
+	//TODO TOKEN A COLOR
 	protected Color color;
 	protected Board board;
 	private int putTokens;

@@ -2,6 +2,7 @@ package usantatecla.tictactoe;
 
 import static org.mockito.Mockito.*;
 
+//TODO Cambiar lectura de coordenadas
 public class PlayerBuilder {
 
     private Player player;

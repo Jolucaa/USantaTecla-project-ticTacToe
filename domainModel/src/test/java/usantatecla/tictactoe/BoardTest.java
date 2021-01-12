@@ -10,7 +10,8 @@ public class BoardTest {
 
     @Test
     public void testGivenEmptyBoardWhenStartThenIsEmpty() {
-        Board board = new BoardBuilder().rows("   ",
+        Board board = new BoardBuilder().rows(
+                "   ",
                 "   ",
                 "   ").build();
         assertThat(board.isEmpty(new Coordinate(0, 0)), is(true));
@@ -19,7 +20,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenIsEmptyThenIsFalse() {
-        Board board = new BoardBuilder().rows("X  ",
+        Board board = new BoardBuilder().rows(
+                "X  ",
                 "   ",
                 "O  ").build();
         assertThat(board.isEmpty(new Coordinate(0, 0)), is(false));
@@ -28,7 +30,8 @@ public class BoardTest {
 
     @Test
     public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
-        Board board = new BoardBuilder().rows("   ",
+        Board board = new BoardBuilder().rows(
+                "   ",
                 "   ",
                 "   ").build();
         assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));
@@ -37,7 +40,8 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsTrue() {
-        Board board = new BoardBuilder().rows("   ",
+        Board board = new BoardBuilder().rows(
+                "   ",
                 "   ",
                 "   ").build();
         Color token = Color.O;
@@ -48,7 +52,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveXTokenOriginIsEmptyAndTargetIsOccupiedThenIsTrue() {
-        Board board = new BoardBuilder().rows("X  ",
+        Board board = new BoardBuilder().rows(
+                "X  ",
                 "   ",
                 "   ").build();
         Color color = Color.X;
@@ -61,7 +66,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveXTokenAndTargetIsOccupiedThenIsAssertion() {
-        Board board = new BoardBuilder().rows("XO ",
+        Board board = new BoardBuilder().rows(
+                "XO ",
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
@@ -71,7 +77,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveTokenAndOriginIsEmptyThenIsAssertion() {
-        Board board = new BoardBuilder().rows("XO ",
+        Board board = new BoardBuilder().rows(
+                "XO ",
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(1, 0);
@@ -81,7 +88,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveTokenAndOriginIsEqualsTargetThenIsAssertion() {
-        Board board = new BoardBuilder().rows("XO ",
+        Board board = new BoardBuilder().rows(
+                "XO ",
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
@@ -91,7 +99,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
-        Board board = new BoardBuilder().rows("   ",
+        Board board = new BoardBuilder().rows(
+                "   ",
                 "   ",
                 "   ").build();
         assertThat(board.isTicTacToe(Color.O), is(false));
@@ -99,7 +108,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenIsTicTacToeThenIsTrue() {
-        Board board = new BoardBuilder().rows(" X ",
+        Board board = new BoardBuilder().rows(
+                " X ",
                 "OXO",
                 " X ").build();
         Color color = Color.X;
@@ -108,14 +118,15 @@ public class BoardTest {
 
     @Test
     public void testGivenCompleteBoardAndIsTicTacToeThenIsFalse() {
-        Board board = new BoardBuilder().rows("XO ",
+        Board board = new BoardBuilder().rows(
+                "XO ",
                 "XO ",
                 "OX ").build();
         Color token = Color.O;
         assertThat(board.isTicTacToe(token), is(false));
     }
 
-    //TODO Preguntar si hay que comprobar el Write, capturanto el System.out
+    //TODO Pruebas de write
 
 /*   Se va a player, por reparto de responsabilidades.
     @Test

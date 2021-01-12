@@ -50,16 +50,16 @@ public class UserPlayerTest {
         Assertions.assertThrows(AssertionError.class, () -> player.getPutTokenError(null));
     }
 
-    //TODO No se puede pasar coordenadas nulas para probar los asserts
-    /*@Test
+    @Test
     public void testGivenNewUserPlayerWhenGetOriginMoveTokenErrorWithNullMessageThenAssertionError() {
         Player player = new PlayerBuilder().setColor(this.color).setTypeUserPlayer().build();
-        Assertions.assertThrows(AssertionError.class, () -> player.getOriginMoveTokenError(Coordinate.Nu));
+        Assertions.assertThrows(AssertionError.class, () -> player.getOriginMoveTokenError(new Coordinate()));
     }
 
     @Test
     public void testGivenNewUserPlayerWhenGetTargetMoveTokenErrorWithNullMessageThenAssertionError() {
         Player player = new PlayerBuilder().setColor(this.color).setTypeUserPlayer().build();
-        Assertions.assertThrows(AssertionError.class, () -> player.getTargetMoveTokenError(null, null));
-    }*/
+        Assertions.assertThrows(AssertionError.class, () -> player.getTargetMoveTokenError(new Coordinate(), new Coordinate()));
+    }
+
 }
