@@ -14,7 +14,7 @@ public class MessageTest {
     Console console;
 
     @BeforeEach
-    public void before() {
+    public void beforeEach() {
         System.setOut(new PrintStream(output));
         this.console = Console.getInstance();
     }
