@@ -16,7 +16,6 @@ public class PlayerBuilder {
 
     public PlayerBuilder() {
         this.board = new Board();
-        this.board.reset();
         this.strings = new ArrayList<>();
         this.coordinates = new ArrayList<>();
     }

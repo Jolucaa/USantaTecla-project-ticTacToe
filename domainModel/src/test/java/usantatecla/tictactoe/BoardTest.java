@@ -1,10 +1,14 @@
 package usantatecla.tictactoe;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
+import org.mockito.MockedStatic;
+import usantatecla.utils.Console;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
 
 public class BoardTest {
 
@@ -126,14 +130,46 @@ public class BoardTest {
         assertThat(board.isTicTacToe(token), is(false));
     }
 
-    //TODO Pruebas de write
-
-/*   Se va a player, por reparto de responsabilidades.
     @Test
-    public void testGivenCompletedBoardWhenPutTokenThenIsAssertion() {
-        Board board = new BoardBuilder().rows("XOX",
-                "OXO",
-                "   ").build();
-        Assertions.assertThrows(AssertionError.class, () -> board.put(new Coordinate(2, 0), Color.X));
-    }*/
+    public void testGivenEmptyBoardWhenWriteThenPrint() {
+        Console console = mock(Console.class);
+        try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
+            staticConsole.when(Console::getInstance).thenReturn(console);
+            Board board = new BoardBuilder().rows(
+                    "   ",
+                    "   ",
+                    "   ").build();
+            board.write();
+            verify(console, times(2)).writeln("---------------");
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION)).writeln();
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION)).write(" ");
+        }
+    }
+
+    @Test
+    public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() {
+        Console console = mock(Console.class);
+        try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
+            staticConsole.when(Console::getInstance).thenReturn(console);
+            InOrder colorPrinted = inOrder(console);
+            Board board = new BoardBuilder().rows(
+                    "X X",
+                    "XO ",
+                    "O O").build();
+            board.write();
+            verify(console, times(2)).writeln("---------------");
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION)).writeln();
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write("O");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("O");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("O");
+        }
+    }
 }

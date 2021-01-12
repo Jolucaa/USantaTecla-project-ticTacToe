@@ -1,6 +1,5 @@
 package usantatecla.tictactoe;
 
-import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.SquaredBoundedCoordinate;
 
 class Coordinate extends SquaredBoundedCoordinate {
