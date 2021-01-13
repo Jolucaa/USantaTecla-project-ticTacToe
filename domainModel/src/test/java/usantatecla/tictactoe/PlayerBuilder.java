@@ -20,17 +20,17 @@ public class PlayerBuilder {
         this.coordinates = new ArrayList<>();
     }
 
-    public PlayerBuilder setColor(Color color) {
+    public PlayerBuilder color(Color color) {
         this.color = color;
         return this;
     }
 
-    public PlayerBuilder setTypeUserPlayer() {
+    public PlayerBuilder user() {
         this.player = spy(new UserPlayer(this.color, this.board));
         return this;
     }
 
-    public PlayerBuilder setTypeMachinePlayer() {
+    public PlayerBuilder machine() {
         this.player = spy(new MachinePlayer(this.color, this.board));
         return this;
     }
@@ -41,7 +41,7 @@ public class PlayerBuilder {
         if(this.coordinates.isEmpty()) {
             if (!this.strings.isEmpty()) {
                 this.coordinates = this.readRows();
-                this.putCoordinate();
+                this.putCoordinates();
             }
         }else{
             if (!this.strings.isEmpty()) {
@@ -62,18 +62,6 @@ public class PlayerBuilder {
         }
     }
 
-    public PlayerBuilder moveToken(Coordinate origin, Coordinate target){
-        assert !origin.isNull() && !target.isNull();
-
-        doReturn(origin, target).when(this.player).getCoordinate(any());
-        this.player.play();
-        return this;
-    }
-
-    public Player build() {
-        return this.player;
-    }
-
     private List<Coordinate> readRows() {
         List<Coordinate> coordinates = new ArrayList<>();
         for (int i = 0; i < this.strings.size(); i++) {
@@ -84,6 +72,27 @@ public class PlayerBuilder {
             }
         }
         return coordinates;
+    }
+
+    private void putCoordinates() {
+        assert this.coordinates.size() <= Coordinate.DIMENSION;
+
+        for (int i = 0; i < this.coordinates.size(); i++) {
+            this.putToken(this.coordinates.get(i));
+        }
+    }
+
+    private void putToken(Coordinate coordinate){
+        doReturn(coordinate).when(this.player).getCoordinate(any());
+        this.player.play();
+    }
+
+    public PlayerBuilder moveToken(Coordinate origin, Coordinate target){
+        assert !origin.isNull() && !target.isNull();
+
+        doReturn(origin, target).when(this.player).getCoordinate(any());
+        this.player.play();
+        return this;
     }
 
     private Coordinate getTargetCoordinate(List<Coordinate> coordinates){
@@ -104,17 +113,8 @@ public class PlayerBuilder {
         return new Coordinate();
     }
 
-    private void putCoordinate() {
-        assert this.coordinates.size() <= Coordinate.DIMENSION;
-
-        for (int i = 0; i < this.coordinates.size(); i++) {
-            this.putToken(this.coordinates.get(i));
-        }
-    }
-
-    private void putToken(Coordinate coordinate){
-        doReturn(coordinate).when(this.player).getCoordinate(any());
-        this.player.play();
+    public Player build() {
+        return this.player;
     }
 
 

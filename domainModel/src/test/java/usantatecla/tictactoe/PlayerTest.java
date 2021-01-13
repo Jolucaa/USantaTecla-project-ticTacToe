@@ -3,18 +3,26 @@ package usantatecla.tictactoe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public abstract class PlayerTest {
 
+    @Mock
+    Console console;
+
     protected PlayerBuilder playerBuilder;
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         this.playerBuilder = this.getPlayerBuilder();
     }
 
@@ -44,7 +52,7 @@ public abstract class PlayerTest {
                 " O ",
                 "   "
         ).build();
-        Player player2 = new PlayerBuilder().setColor(Color.X).setTypeUserPlayer().build();
+        Player player2 = new PlayerBuilder().color(Color.X).user().build();
         player2.board = player.board;
         assertThat(player2.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
     }
@@ -56,7 +64,7 @@ public abstract class PlayerTest {
                 " O ",
                 "   "
         ).build();
-        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(0,0)), is(Error.NULL));
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(0, 0)), is(Error.NULL));
     }
 
     @Test
@@ -66,7 +74,7 @@ public abstract class PlayerTest {
                 " OO",
                 "   "
         ).build();
-        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1,2)), is(Error.NOT_EMPTY));
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 2)), is(Error.NOT_EMPTY));
     }
 
     @Test
@@ -86,7 +94,7 @@ public abstract class PlayerTest {
     }
 
     @Test
-    void testGivenPlayerWhenMoveThenIsTrue() {
+    public void testGivenPlayerWhenMoveThenIsTrue() {
         Player player = this.playerBuilder.rows(
                 "OO ",
                 "O  ",
@@ -96,7 +104,18 @@ public abstract class PlayerTest {
                 "   ",
                 "O  "
         ).build();
-        assertThat(player.board.isEmpty(new Coordinate(1,0)), is(true));
-        assertThat(player.board.isOccupied(new Coordinate(2,0), Color.O), is(true));
+        assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
+        assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
     }
+
+    @Test
+    public void testGivenPlayerWhenWriteWinnerThenPrint() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.build();
+            player.writeWinner();
+            verify(this.console).writeln(Color.O.toString() + " player: You win!!! :-)");
+        }
+    }
+
 }

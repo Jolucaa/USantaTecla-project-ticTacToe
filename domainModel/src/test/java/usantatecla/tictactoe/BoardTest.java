@@ -14,44 +14,21 @@ public class BoardTest {
 
     @Test
     public void testGivenEmptyBoardWhenStartThenIsEmpty() {
-        Board board = new BoardBuilder().rows(
-                "   ",
-                "   ",
-                "   ").build();
-        assertThat(board.isEmpty(new Coordinate(0, 0)), is(true));
-        assertThat(board.isEmpty(new Coordinate(2, 2)), is(true));
+        Board board = new BoardBuilder().build();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
+            }
+        }
     }
 
     @Test
-    public void testGivenBoardWhenIsEmptyThenIsFalse() {
-        Board board = new BoardBuilder().rows(
-                "X  ",
-                "   ",
-                "O  ").build();
-        assertThat(board.isEmpty(new Coordinate(0, 0)), is(false));
-        assertThat(board.isEmpty(new Coordinate(2, 0)), is(false));
-    }
-
-    @Test
-    public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
-        Board board = new BoardBuilder().rows(
-                "   ",
-                "   ",
-                "   ").build();
-        assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));
-        assertThat(board.isOccupied(new Coordinate(0, 0), Color.O), is(false));
-    }
-
-    @Test
-    public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsTrue() {
-        Board board = new BoardBuilder().rows(
-                "   ",
-                "   ",
-                "   ").build();
-        Color token = Color.O;
+    public void testGivenNewBoardWhenPutNewTokenThenIsOccupiedIsTrue() {
+        Board board = new BoardBuilder().build();
+        Color color = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
-        board.put(coordinate, token);
-        assertThat(board.isOccupied(coordinate, token), is(true));
+        board.put(coordinate, color);
+        assertThat(board.isOccupied(coordinate, color), is(true));
     }
 
     @Test
@@ -102,12 +79,36 @@ public class BoardTest {
     }
 
     @Test
-    public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
+    public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
+        Board board = new BoardBuilder().build();
+        assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));
+    }
+
+    @Test
+    public void testGivenBoardWhenCheckIsOccupiedThenIsTrue() {
         Board board = new BoardBuilder().rows(
-                "   ",
+                "X  ",
                 "   ",
                 "   ").build();
+        assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenCheckNullCoordinateIsOccupiedThenAssertionError() {
+        Board board = new BoardBuilder().build();
+        Assertions.assertThrows(AssertionError.class, () -> board.isOccupied(new Coordinate(), Color.O));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
+        Board board = new BoardBuilder().build();
         assertThat(board.isTicTacToe(Color.O), is(false));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsTicTacToeNullColorThenAssertionError() {
+        Board board = new BoardBuilder().build();
+        Assertions.assertThrows(AssertionError.class, () -> board.isTicTacToe(Color.NULL));
     }
 
     @Test
@@ -135,15 +136,12 @@ public class BoardTest {
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
-            Board board = new BoardBuilder().rows(
-                    "   ",
-                    "   ",
-                    "   ").build();
+            Board board = new BoardBuilder().build();
             board.write();
             verify(console, times(2)).writeln("---------------");
-            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
             verify(console, times(Coordinate.DIMENSION)).writeln();
-            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION)).write(" ");
+            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION)).write(" ");
         }
     }
 
@@ -159,7 +157,7 @@ public class BoardTest {
                     "O O").build();
             board.write();
             verify(console, times(2)).writeln("---------------");
-            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
             verify(console, times(Coordinate.DIMENSION)).writeln();
             colorPrinted.verify(console).write("X");
             colorPrinted.verify(console).write(" ");

@@ -24,10 +24,9 @@ public class TurnTest {
 
     @BeforeEach
     public void beforeEach() {
-        final int USER_PLAYERS = 0;
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.console.readInt(anyString())).thenReturn(USER_PLAYERS);
+            when(this.console.readInt(anyString())).thenReturn(0);
             this.turn = new Turn(new Board());
         }
     }

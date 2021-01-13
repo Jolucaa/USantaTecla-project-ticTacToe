@@ -4,7 +4,6 @@ package usantatecla.tictactoe;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
@@ -12,18 +11,14 @@ import usantatecla.utils.Console;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserPlayerTest extends PlayerTest{
-
-    @Mock
-    Console console;
+public class UserPlayerTest extends PlayerTest {
 
     @Override
     public PlayerBuilder getPlayerBuilder() {
-        return new PlayerBuilder().setColor(Color.O).setTypeUserPlayer();
+        return new PlayerBuilder().color(Color.O).user();
     }
 
     @Test
@@ -33,8 +28,7 @@ public class UserPlayerTest extends PlayerTest{
             Player player = this.playerBuilder.build();
             when(this.console.readInt(anyString())).thenReturn(2, 1);
             Coordinate coordinate = player.getCoordinate(Message.COORDINATE_TO_PUT);
-            assertThat(coordinate.getColumn(), is(0));
-            assertThat(coordinate.getRow(), is(1));
+            assertThat(coordinate, is(new Coordinate(1, 0)));
         }
     }
 
