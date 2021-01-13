@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.ClosedInterval;
 import usantatecla.utils.Console;
+import usantatecla.tictactoe.types.Error;
 
 public class CoordinateView {
 
@@ -18,7 +18,7 @@ public class CoordinateView {
             coordinate = new Coordinate(row, column);
             ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
             if (!limits.isIncluded(coordinate.getRow()) || !limits.isIncluded(coordinate.getColumn())) {
-                error = Error.NOT_VALID;
+                error = Error.WRONG_COORDINATES;
             } else {
                 error = Error.NULL;
             }

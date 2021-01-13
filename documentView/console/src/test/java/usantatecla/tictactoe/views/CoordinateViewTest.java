@@ -18,7 +18,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class CoordinateViewTest {
-
+    /*
     @Mock
     private Console console;
 
@@ -51,6 +51,6 @@ public class CoordinateViewTest {
             verify(this.console, times(4)).readInt(anyString());
             assertThat(coordinate, is(new Coordinate(0, 0)));
         }
-    }
+    }*/
 
 }

@@ -1,59 +1,51 @@
 package usantatecla.tictactoe.models;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class TurnTest {
 
-    private Turn turn;
-    private Board board;
+    @Mock
+    Console console;
+
+    Turn turn;
 
     @BeforeEach
-    void before() {
-        this.board = new Board();
-        this.turn = new Turn(this.board);
-        this.turn.setUsers(0);
+    public void beforeEach() {
+        final int USER_PLAYERS = 0;
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readInt(anyString())).thenReturn(USER_PLAYERS);
+            this.turn = new Turn(new Board());
+        }
     }
 
     @Test
-    void testGivenNewTurnWhenCopyTurnThenIsSameTurn() {
-        assertThat(this.turn.copy(this.board), is(this.turn));
+    public void testGivenNewTurnWhenNullBoardThenAssertionError() {
+        Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
     @Test
-    void testGivenTwoUsersTurnWhenIsUserThenIsTrue() {
-        this.turn.setUsers(2);
-        assertThat(this.turn.isUser(), is(true));
+    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured(){
+        assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
     @Test
-    void testGivenNewTurnWhenPutCoordinateThenIsErrorNull() {
-        assertThat(this.turn.put(new Coordinate(0, 0)), is(Error.NULL));
+    public void testGivenTurnWhenPlayAndGetActiveColorThenCorrectColorIsCaptured(){
+        this.turn.play();
+        assertThat(this.turn.getActiveColor(), is(Color.O));
     }
-
-    @Test
-    void testGivenNewTurnWhenGetPlayerThenPlayerTokenIsX() {
-        assertThat(this.turn.getPlayer().getToken(), is(Token.X));
-    }
-
-    @Test
-    void testGivenNewTurnWhenMoveOriginToTargetThenIsErrorNotOwner() {
-        assertThat(this.turn.move(new Coordinate(0, 0), new Coordinate(0, 1)), is(Error.NOT_OWNER));
-    }
-
-    @Test
-    void testGivenNewTurnWhenGetTokenThenIsXToken() {
-        assertThat(this.turn.getToken(), is(Token.X));
-    }
-
-    @Test
-    void testGivenNewTurnAndCopyTurnWhenEqualsThenIsTrue() {
-        assertThat(this.turn.equals(this.turn.copy(this.board)), is(true));
-    }
-
 }

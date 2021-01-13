@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 public class Game {
     
@@ -16,51 +16,39 @@ public class Game {
         this.board = new Board();
         this.turn = new Turn(this.board);
 	}
-    
-    public void setUsers(int users) {
-		this.turn.setUsers(users);
-    }
 
-    public boolean isBoardComplete() {
-        return this.board.isCompleted();
+	public void play() {
+        this.turn.getActivePlayer().play();
     }
-
-    public boolean isUser() {
-		return this.turn.isUser();
-	}
 
     public Error put(Coordinate coordinate) {
-        Error error = this.turn.put(coordinate);
+        Error error = this.turn.getActivePlayer().getPutTokenError(coordinate);
         next(error);
         return error;
     }
 
     public Error move(Coordinate origin, Coordinate target) {
-        Error error = this.turn.move(origin, target);
+        Error error = this.turn.getActivePlayer().getTargetMoveTokenError(origin, target);
         next(error);
         return error;
     }
 
     private void next(Error error){
-        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())){
-            this.turn.next();
+        if (error.isNull() && !this.board.isTicTacToe(this.turn.getActiveColor())){
+            this.turn.getNextActivePlayer();
         }
     }
 
     public boolean isTicTacToe() {
-        return this.board.isTicTacToe(this.turn.getToken());
+        return this.board.isTicTacToe(this.turn.getActiveColor());
     }
 
-	public Token getToken(Coordinate coordinate) {
-		return this.board.getToken(coordinate);
+	public Color getColor(Coordinate coordinate) {
+		return this.board.getColor(coordinate);
     }
     
-    public Token getToken() {
-		return this.turn.getToken();
-	}
-
-	public int getMaxPlayers() {
-		return Turn.NUMBER_PLAYERS;
+    public Color getActiveColor() {
+		return this.turn.getActiveColor();
 	}
 
     @Override
@@ -84,7 +72,4 @@ public class Game {
             return false;
         return true;
     }
-    
-    
-
 }

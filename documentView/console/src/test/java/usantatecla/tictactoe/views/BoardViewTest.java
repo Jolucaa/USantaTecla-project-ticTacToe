@@ -6,8 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Token;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,7 +16,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class BoardViewTest {
-
+    /*
     @Mock
     private Game game;
 
@@ -52,5 +50,50 @@ public class BoardViewTest {
                                                                    "| , X,  | , X,  | , X,  | ]"));
         }
     }
+
+    /*
+    @Test
+    public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() {
+        Console console = mock(Console.class);
+        try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
+            staticConsole.when(Console::getInstance).thenReturn(console);
+            InOrder colorPrinted = inOrder(console);
+            Board board = new BoardBuilder().rows(
+                    "X X",
+                    "XO ",
+                    "O O").build();
+            board.write();
+            verify(console, times(2)).writeln("---------------");
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION)).writeln();
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write("X");
+            colorPrinted.verify(console).write("O");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("O");
+            colorPrinted.verify(console).write(" ");
+            colorPrinted.verify(console).write("O");
+        }
+    }
+
+    @Test
+    public void testGivenEmptyBoardWhenWriteThenPrint() {
+        Console console = mock(Console.class);
+        try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
+            staticConsole.when(Console::getInstance).thenReturn(console);
+            Board board = new BoardBuilder().rows(
+                    "   ",
+                    "   ",
+                    "   ").build();
+            board.write();
+            verify(console, times(2)).writeln("---------------");
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(Coordinate.DIMENSION)).writeln();
+            verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION)).write(" ");
+        }
+    }
+    */
 
 }

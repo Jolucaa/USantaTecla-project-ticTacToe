@@ -1,70 +1,86 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.views.Message;
 
-class Player {
+public abstract class Player {
 
-	private Token token;
-	Board board;
+	protected Color color;
+	protected Board board;
+	private int putTokens;
 
-	Player(Token token, Board board) {
-		this.token = token;
+	Player(Color color, Board board) {
+		assert !color.isNull();
+		assert board != null;
+
+		this.color = color;
 		this.board = board;
+		this.putTokens = 0;
 	}
 
-	Error put(Coordinate coordinate) {
-		assert coordinate != null && !coordinate.isNull();
+	public void play() {
+		if (this.putTokens < Coordinate.DIMENSION) {
+			this.putToken();
+		} else {
+			this.moveToken();
+		}
+	}
 
+	private void putToken() {
+		Coordinate coordinate;
+		Error error;
+		do {
+			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
+			error = this.getPutTokenError(coordinate);
+		} while (!error.isNull());
+		this.board.put(coordinate, this.color);
+		this.putTokens++;
+	}
+
+	protected abstract Coordinate getCoordinate(Message message);
+
+	protected Error getPutTokenError(Coordinate coordinate) {
 		if (!this.board.isEmpty(coordinate)) {
 			return Error.NOT_EMPTY;
 		}
-		this.board.put(coordinate, this.token);
 		return Error.NULL;
 	}
 
-	Error move(Coordinate origin, Coordinate target) {
-		assert origin != null && !origin.isNull();
-		assert target != null && !target.isNull();
+	private void moveToken() {
+		Coordinate origin;
+		Error error;
+		do {
+			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
+			error = this.getOriginMoveTokenError(origin);
+		} while (error != Error.NULL);
+		Coordinate target;
+		do {
+			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
+			error = this.getTargetMoveTokenError(origin, target);
+		} while (error != Error.NULL);
+		this.board.move(origin, target);
+	}
 
-		if (!this.board.isOccupied(origin, this.token)) {
+	protected Error getOriginMoveTokenError(Coordinate origin) {
+		if (!this.board.isOccupied(origin, this.color)) {
 			return Error.NOT_OWNER;
 		}
+		return Error.NULL;
+	}
+
+	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		if (origin.equals(target)) {
 			return Error.SAME_COORDINATES;
-		} 
+		}
 		if (!this.board.isEmpty(target)) {
 			return Error.NOT_EMPTY;
 		}
-		this.board.move(origin, target);
 		return Error.NULL;
 	}
 
-	Token getToken() {
-		return this.token;
-	}
-
-	public Player copy(Board board) {
-		return new Player(this.token, board);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Player other = (Player) obj;
-		if (board == null) {
-			if (other.board != null)
-				return false;
-		} else if (!board.equals(other.board))
-			return false;
-		if (token != other.token)
-			return false;
-		return true;
+	public Color getColor() {
+		return this.color;
 	}
 
 }

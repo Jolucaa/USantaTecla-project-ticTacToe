@@ -1,40 +1,24 @@
 package usantatecla.tictactoe.models;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import usantatecla.utils.Direction;
+import usantatecla.utils.SquaredBoundedCoordinate;
+import usantatecla.utils.SquaredBoundedCoordinateTest;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+public class CoordinateTest extends SquaredBoundedCoordinateTest {
 
-
-public class CoordinateTest {
-
-    private Coordinate coordinate;
-
-    @BeforeEach
-    void before() {
-        this.coordinate = new Coordinate(1, 1);
+    @Override
+    public SquaredBoundedCoordinate getNullCoordinate() {
+        return new Coordinate();
     }
 
-    @Test
-    void testGivenNewCoordinateWhenIsNullThenIsFalse() {
-        assertThat(this.coordinate.isNull(), is(false));
+    @Override
+    public int getDimension() {
+        return Coordinate.DIMENSION;
     }
 
-    @Test
-    void testGivenCoordinateAndNullCoordinateWhenNullCoordinateGetDirectionThenIsDirectionNull() {
-        assertThat(this.coordinate.getDirection(Coordinate.NULL_COORDINATE), is(Direction.NULL));
+    @Override
+    public SquaredBoundedCoordinate getCoordinate(int row, int column) {
+        return new Coordinate(row, column);
     }
 
-    @Test
-    void testGivenCoordinateAndInverseDiagonalCoordinateWhenInverseDiagonalCoordinateGetDirectionThenIsCoordinateInverseDiagonal() {
-        assertThat(this.coordinate.getDirection(new Coordinate(0, 2)), is(Direction.INVERSE_DIAGONAL));
-    }
-
-    @Test
-    void testGivenCoordinateAndMainDiagonalCoordinateWhenMainDiagonalCoordinateGetDirectionThenIsCoordinateMainDiagonal() {
-        assertThat(this.coordinate.getDirection(new Coordinate(0, 0)), is(Direction.MAIN_DIAGONAL));
-    }
 
 }

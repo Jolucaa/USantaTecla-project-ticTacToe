@@ -11,16 +11,16 @@ class BoardView extends WithGameView {
     }
 
     void write() {
-        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+        Message.HORIZONTAL_LINE.writeln();
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            Console.getInstance().write(Message.VERTICAL_LINE_LEFT.getMessage());
+            Message.VERTICAL_LINE.write();
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                new TokenView(this.game.getToken(new Coordinate(i, j))).write();
-                Console.getInstance().write(Message.VERTICAL_LINE_CENTERED.getMessage());
+                new ColorView(this.game.getColor(new Coordinate(i, j))).write();
+                Message.VERTICAL_LINE.write();
             }
-            Console.getInstance().writeln(Message.VERTICAL_LINE_RIGHT.getMessage());
+            Console.getInstance().writeln();
         }
-        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+        Message.HORIZONTAL_LINE.writeln();
     }
 
 }

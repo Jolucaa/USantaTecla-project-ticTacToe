@@ -1,11 +1,11 @@
 package usantatecla.utils;
 
 public class ConcreteCoordinate implements Coordinate {
-
-	protected int row;
-	protected int column;
+	
 	static final String ROW = "Row: ";
 	static final String COLUMN = "Column: ";
+	protected int row;
+	protected int column;
 
 	protected ConcreteCoordinate() {
 	}
@@ -20,7 +20,11 @@ public class ConcreteCoordinate implements Coordinate {
 		return false;
 	}
 
+	@Override
 	public Direction getDirection(Coordinate coordinate) {
+		if (this.equals(coordinate)){
+			return Direction.NULL;
+		}
 		if (this.inHorizontal(coordinate)) {
 			return Direction.HORIZONTAL;
 		}
@@ -33,6 +37,7 @@ public class ConcreteCoordinate implements Coordinate {
 		return Direction.NULL;
 	}
 
+	@Override
 	public boolean inHorizontal(Coordinate coordinate) {
 		if (coordinate.isNull()){
 			return false;
@@ -40,6 +45,7 @@ public class ConcreteCoordinate implements Coordinate {
 		return this.row == ((ConcreteCoordinate) coordinate).row;
 	}
 
+	@Override
 	public boolean inVertical(Coordinate coordinate) {
 		if (coordinate.isNull()){
 			return false;
@@ -47,6 +53,7 @@ public class ConcreteCoordinate implements Coordinate {
 		return this.column == ((ConcreteCoordinate) coordinate).column;
 	}
 
+	@Override
 	public boolean inMainDiagonal() {
 		return this.row - this.column == 0;
 	}
@@ -93,8 +100,7 @@ public class ConcreteCoordinate implements Coordinate {
 
 	@Override
 	public String toString() {
-		return "Coordinate [row=" + row + ", column=" + column + "]";
+		return "Coordinate (" + row + ", " + column + ")";
 	}
 
 }
-
