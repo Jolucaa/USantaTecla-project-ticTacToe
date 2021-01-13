@@ -36,4 +36,5 @@ public class ClosedInterval {
 			return false;
 		return true;
 	}
+
 }
