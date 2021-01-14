@@ -18,7 +18,7 @@ public class Turn {
 		this.activePlayer = 0;
 	}
 
-	void setUsers(int numberUsers) {
+	void setUsers(int numberUsers) {//TODO ?
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
 				this.players[i] = new UserPlayer(Color.get(i), this.board);
@@ -29,26 +29,14 @@ public class Turn {
 	}
 
 	public void play(){
-		this.getActivePlayer().play();
-		if (!this.isTicTacToe()){
-			this.activePlayer = this.getNextActivePlayer();
+		this.players[this.activePlayer].play();
+		if (!this.board.isTicTacToe(this.getActiveColor())){
+			this.activePlayer = (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
 		}
 	}
 
-	private boolean isTicTacToe() {
-		return this.board.isTicTacToe(this.getActiveColor());
-	}
-
-	private int getNextActivePlayer() {
-		return (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
-	}
-
-	public Player getActivePlayer() {
-		return this.players[this.activePlayer];
-	}
-
 	public Color getActiveColor() {
-		return this.getActivePlayer().getColor();
+		return this.players[this.activePlayer].getColor();
 	}
 
 }

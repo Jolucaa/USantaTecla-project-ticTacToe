@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
+import usantatecla.tictactoe.types.Error;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,7 +15,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class ErrorViewTest {
-    /*
+
     @Mock
     private Error error;
 
@@ -41,8 +42,8 @@ public class ErrorViewTest {
             verify(this.console, never()).writeln(anyString());
         }
     }
-
-    @Test
+    //TODO DEBERIA FUNCIONAR
+    /*@Test
     void testGivenNewGameViewWhenWriteNotNullErrorThenPrintErrorMessage() {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.error.isNull()).thenReturn(false);
@@ -52,6 +53,6 @@ public class ErrorViewTest {
             verify(this.console).writeln(captor.capture());
             assertThat(captor.getValue(), is("The square is not empty"));
         }
-    }
-    */
+    }*/
+
 }

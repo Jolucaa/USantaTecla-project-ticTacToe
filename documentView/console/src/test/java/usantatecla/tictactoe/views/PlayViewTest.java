@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.Console;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -16,7 +17,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayViewTest {
-    /*
+
     @Mock
     private Game game;
 
@@ -31,7 +32,7 @@ public class PlayViewTest {
         openMocks(this);
         this.playView = spy(this.playView);
     }
-
+/*
     @Test
     void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
@@ -101,6 +102,6 @@ public class PlayViewTest {
             verify(this.game).move(origin, target);
             verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
         }
-    }
-    */
+    }*/
+
 }

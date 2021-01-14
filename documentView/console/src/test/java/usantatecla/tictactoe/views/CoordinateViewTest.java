@@ -18,7 +18,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class CoordinateViewTest {
-    /*
+
     @Mock
     private Console console;
 
@@ -41,7 +41,8 @@ public class CoordinateViewTest {
         }
     }
 
-    @Test
+    //TODO ?
+    /*@Test
     void testGivenNewCoordinateViewWhenReadInvalidCoordinateThenReadValidCoordinateAndReturnValidCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.console.readInt(anyString())).thenReturn(4, 1);

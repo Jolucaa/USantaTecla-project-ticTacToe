@@ -34,12 +34,8 @@ public class Board {
 		assert !origin.equals(target);
 
 		final Color color = this.getColor(origin);
-		this.remove(origin);
+		this.put(origin, Color.NULL);
 		this.put(target, color);
-	}
-
-	private void remove(Coordinate coordinate) {
-		this.put(coordinate, Color.NULL);
 	}
 
 	public Color getColor(Coordinate coordinate) {
