@@ -1,6 +1,8 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Turn;
+import usantatecla.utils.BoundedIntDialog;
 import usantatecla.utils.Console;
 
 class StartView extends WithGameView {
@@ -11,7 +13,12 @@ class StartView extends WithGameView {
 
     void interact() {
 		Console.getInstance().writeln(Message.TITLE.toString());
-		this.game.reset();
+		this.game.setUsers(this.getUsers());
+	}
+
+	private int getUsers() {
+		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
+		return dialog.read(Message.NUMBER_PLAYERS.toString());
 	}
 
 }

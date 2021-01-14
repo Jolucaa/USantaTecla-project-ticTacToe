@@ -13,12 +13,6 @@ class PlayView extends WithGameView {
             this.game.play();
             new BoardView(this.game).write();
         } while (!this.game.isTicTacToe());
-        new ColorView(this.game.getActiveColor()).write();
-        this.writeWinner();
+        Message.PLAYER_WIN.writeln(this.game.getActiveColor().name());
     }
-
-    private void writeWinner() {
-		Message.PLAYER_WIN.writeln(this.game.getActiveColor().name());
-	}
-
 }

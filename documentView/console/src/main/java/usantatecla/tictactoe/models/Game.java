@@ -18,25 +18,11 @@ public class Game {
 	}
 
 	public void play() {
-        this.turn.getActivePlayer().play();
+        this.turn.play();
     }
 
-    public Error put(Coordinate coordinate) {
-        Error error = this.turn.getActivePlayer().getPutTokenError(coordinate);
-        next(error);
-        return error;
-    }
-
-    public Error move(Coordinate origin, Coordinate target) {
-        Error error = this.turn.getActivePlayer().getTargetMoveTokenError(origin, target);
-        next(error);
-        return error;
-    }
-
-    private void next(Error error){
-        if (error.isNull() && !this.board.isTicTacToe(this.turn.getActiveColor())){
-            this.turn.getNextActivePlayer();
-        }
+    public void setUsers(int numberUsers){
+        this.turn.setUsers(numberUsers);
     }
 
     public boolean isTicTacToe() {

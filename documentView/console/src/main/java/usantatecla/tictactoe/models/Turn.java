@@ -7,7 +7,7 @@ import usantatecla.utils.BoundedIntDialog;
 public class Turn {
 	
 	private Board board;
-	static final int NUMBER_PLAYERS = 2;
+	public static final int NUMBER_PLAYERS = 2;
 	private Player[] players;
 	private int activePlayer;
 
@@ -15,11 +15,10 @@ public class Turn {
 		assert board != null;
 		this.board = board;
 		this.players = new Player[Turn.NUMBER_PLAYERS];
-		this.reset();
+		this.activePlayer = 0;
 	}
 
-	void reset() {
-		int numberUsers = this.getUsers();
+	void setUsers(int numberUsers) {
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
 				this.players[i] = new UserPlayer(Color.get(i), this.board);
@@ -27,12 +26,6 @@ public class Turn {
 				this.players[i] = new MachinePlayer(Color.get(i), this.board);
 			}
 		}
-		this.activePlayer = 0;
-	}
-
-	private int getUsers() {
-		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		return dialog.read(Message.NUMBER_PLAYERS.toString());
 	}
 
 	public void play(){
@@ -46,7 +39,7 @@ public class Turn {
 		return this.board.isTicTacToe(this.getActiveColor());
 	}
 
-	public int getNextActivePlayer() {
+	private int getNextActivePlayer() {
 		return (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
 	}
 
