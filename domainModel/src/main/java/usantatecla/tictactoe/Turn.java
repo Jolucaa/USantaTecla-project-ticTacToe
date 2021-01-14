@@ -17,7 +17,8 @@ class Turn {
 	}
 
 	void reset() {
-		int numberUsers = this.getUsers();
+		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
+		int numberUsers = dialog.read(Message.NUMBER_PLAYERS.toString());
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
 				this.players[i] = new UserPlayer(Color.get(i), this.board);
@@ -28,36 +29,19 @@ class Turn {
 		this.activePlayer = 0;
 	}
 
-	private int getUsers() {
-		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		return dialog.read(Message.NUMBER_PLAYERS.toString());
-	}
-
 	void play(){
-		this.getActivePlayer().play();
-		if (!this.isTicTacToe()){
-			this.activePlayer = this.getNextActivePlayer();
+		this.players[this.activePlayer].play();
+		if (!this.board.isTicTacToe(this.getActiveColor())){
+			this.activePlayer = (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
 		}
 	}
 
-	private boolean isTicTacToe() {
-		return this.board.isTicTacToe(this.getActiveColor());
-	}
-
-	private int getNextActivePlayer() {
-		return (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
-	}
-
-	private Player getActivePlayer() {
-		return this.players[this.activePlayer];
-	}
-
 	void writeWinner(){
-		this.getActivePlayer().writeWinner();
+		this.players[this.activePlayer].writeWinner();
 	}
 
 	Color getActiveColor() {
-		return this.getActivePlayer().getColor();
+		return this.players[this.activePlayer].getColor();
 	}
 
 }
