@@ -15,7 +15,7 @@ public class MachinePlayerTest extends PlayerTest {
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        Player player = this.playerBuilder.build();
+        Player player = this.getPlayerBuilder().build();
         assertThat(player.getCoordinate(any(Message.class)).getClass(), is(Coordinate.class));
     }
 }

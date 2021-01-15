@@ -42,7 +42,8 @@ public class MessageTest {
         String playerName = "player";
         String newLine = System.getProperty("line.separator");
         Message.PLAYER_WIN.writeln(playerName);
-        assertThat(Message.PLAYER_WIN.toString().replaceAll("#player", "" + playerName)+newLine, is(output.toString()));
+        assertThat(Message.PLAYER_WIN.toString().replaceAll("#player", "" + playerName)+newLine
+                , is(output.toString()));
     }
 }
 
