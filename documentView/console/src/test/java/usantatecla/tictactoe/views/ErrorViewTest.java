@@ -8,8 +8,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
 import usantatecla.tictactoe.types.Error;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 

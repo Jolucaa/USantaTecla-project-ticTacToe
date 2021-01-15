@@ -10,7 +10,7 @@ public class UserPlayer extends Player {
 		super(color, board);
 	}
 
-	protected Coordinate getCoordinate(Message message){
+	protected Coordinate getCoordinate(Message message){//TODO PlayerView con Doble Despacho
 		assert message != null;
 		
 		Coordinate coordinate = new Coordinate();
@@ -23,6 +23,7 @@ public class UserPlayer extends Player {
 		assert coordinate != null;
 		
 		Error error = super.getPutTokenError(coordinate);
+		//TODO error.writeln() ¿VISTAS?
 		return error;
 	}
 	
@@ -31,6 +32,7 @@ public class UserPlayer extends Player {
 		assert !coordinate.isNull();
 		
 		Error error = super.getOriginMoveTokenError(coordinate);
+		//TODO error.writeln()
 		return error;
 	}
 
@@ -39,6 +41,7 @@ public class UserPlayer extends Player {
 		assert !origin.isNull() && !target.isNull();
 		
 		Error error = super.getTargetMoveTokenError(origin, target);
+		//TODO error.writeln()
 		return error;
 	}
 
