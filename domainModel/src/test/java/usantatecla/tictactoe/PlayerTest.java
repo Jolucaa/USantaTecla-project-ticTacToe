@@ -19,25 +19,20 @@ public abstract class PlayerTest {
     @Mock
     Console console;
 
-    protected PlayerBuilder playerBuilder;
-
-    @BeforeEach
-    public void beforeEach() {
-        this.playerBuilder = this.getPlayerBuilder();
-    }
-
+    protected final Color COLOR = Color.O;
     public abstract PlayerBuilder getPlayerBuilder();
+
 
     @Test
     public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
         Coordinate coordinate = new Coordinate(1, 1);
-        Player player = this.playerBuilder.build();
+        Player player = this.getPlayerBuilder().build();
         assertThat(player.getPutTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
     public void testGivenPlayerWhenGetPutTokenErrorThenErrorNotEmpty() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "   ",
                 " O ",
                 "   "
@@ -47,7 +42,7 @@ public abstract class PlayerTest {
 
     @Test
     public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "   ",
                 " O ",
                 "   "
@@ -59,7 +54,7 @@ public abstract class PlayerTest {
 
     @Test
     public void testGivenPlayerWhenGetTargetMoveTokenErrorThenNoError() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "   ",
                 " O ",
                 "   "
@@ -69,7 +64,7 @@ public abstract class PlayerTest {
 
     @Test
     public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "   ",
                 " OO",
                 "   "
@@ -79,7 +74,7 @@ public abstract class PlayerTest {
 
     @Test
     public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "   ",
                 " O ",
                 "   "
@@ -89,13 +84,13 @@ public abstract class PlayerTest {
 
     @Test
     public void testGivenNewPlayerWhenGetTokenThenReturnTheToken() {
-        Player player = this.playerBuilder.build();
+        Player player = this.getPlayerBuilder().build();
         assertThat(player.getColor(), is(Color.O));
     }
 
     @Test
     public void testGivenPlayerWhenMoveThenIsTrue() {
-        Player player = this.playerBuilder.rows(
+        Player player = this.getPlayerBuilder().rows(
                 "OO ",
                 "O  ",
                 "   "
@@ -112,7 +107,7 @@ public abstract class PlayerTest {
     public void testGivenPlayerWhenWriteWinnerThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            Player player = this.playerBuilder.build();
+            Player player = this.getPlayerBuilder().build();
             player.writeWinner();
             verify(this.console).writeln(Color.O.toString() + " player: You win!!! :-)");
         }

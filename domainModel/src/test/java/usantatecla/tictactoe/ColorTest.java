@@ -47,7 +47,7 @@ public class ColorTest {
     }
 
     @Test
-    public void testGivenColorWhenIsNullThenReturn() {
+    public void testGivenColorWhenIsNullThenValue() {
         assertThat(Color.X.isNull(), is(false));
         assertThat(Color.O.isNull(), is(false));
         assertThat(Color.NULL.isNull(), is(true));
