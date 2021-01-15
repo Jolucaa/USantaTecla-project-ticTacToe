@@ -10,7 +10,7 @@ public class UserPlayer extends Player {
 		super(color, board);
 	}
 
-	protected Coordinate getCoordinate(Message message){
+	protected Coordinate getCoordinate(Message message){//TODO PlayerView con Doble Despacho
 		assert message != null;
 		
 		Coordinate coordinate = new Coordinate();

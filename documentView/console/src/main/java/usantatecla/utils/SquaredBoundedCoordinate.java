@@ -2,7 +2,7 @@ package usantatecla.utils;
 
 import java.util.Random;
 
-public abstract class SquaredBoundedCoordinate {
+public abstract class SquaredBoundedCoordinate {//TODO SquaredBoundedCoordinateView
 
     private Coordinate adaptee;
 

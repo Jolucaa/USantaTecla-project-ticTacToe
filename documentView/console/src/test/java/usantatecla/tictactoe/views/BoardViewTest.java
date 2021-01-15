@@ -9,8 +9,10 @@ import usantatecla.tictactoe.models.*;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.Console;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
@@ -24,64 +26,45 @@ public class BoardViewTest {
     @InjectMocks
     private BoardView boardView;
 
-    @Mock
-    private Console console;
-
-    @Captor
-    private ArgumentCaptor<String> captor;
-
     @BeforeEach
     void before() {
         openMocks(this);
     }
 
     @Test
-    void testGivenNewGameViewWhenWriteThenPrintBoard() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.X);
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.boardView.write();
-            verify(this.console, times(2)).writeln(Message.HORIZONTAL_LINE.toString());
-            verify(this.console, times(12)).write(Message.VERTICAL_LINE.toString());
-            verify(this.console, times(21)).write(captor.capture());
-            assertThat(captor.getAllValues().toString(), is("[ | , X,  | , X,  | , X,  | , " +
-                                                                   " | , X,  | , X,  | , X,  | , " +
-                                                                   " | , X,  | , X,  | , X,  | ]"));
-        }
-    }
-
-    @Test
-    public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() {
+    public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() { //TODO Reducir tamanyo
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
             InOrder colorPrinted = inOrder(console);
-            /*this.game = new GameBuilder().rows(
+            String[] board = {
                     "X X",
                     "XO ",
-                    "O O").build();*/
-            when(this.game.getColor(any(Coordinate.class))).thenReturn( //TODO ?
-                    Color.X,Color.NULL,Color.X,
-                    Color.X,Color.O,Color.NULL,
-                    Color.O,Color.NULL,Color.O);
+                    "O O"
+            };
+            Color[] colors = this.getBoardColors(board);
+            when(this.game.getColor(any(Coordinate.class))).thenReturn(
+                    colors[0],colors[1],colors[2],
+                    colors[3],colors[4],colors[5],
+                    colors[6],colors[7],colors[8]);
             this.boardView.write();
             verify(console, times(2)).writeln("---------------");
             verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
             verify(console, times(Coordinate.DIMENSION)).writeln();
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write("O");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("O");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("O");
+            for(int i=0;i<colors.length;i++){
+                if(colors[i]==Color.X){
+                    colorPrinted.verify(console).write("X");
+                }else if(colors[i]==Color.O){
+                    colorPrinted.verify(console).write("O");
+                }else{
+                    colorPrinted.verify(console).write(" ");
+                }
+            }
         }
     }
 
     @Test
-    public void testGivenEmptyBoardWhenWriteThenPrint() {
+    public void testGivenEmptyBoardWhenWriteThenPrint() { //TODO CON O SIN USAR METODO PRIVADO
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
@@ -96,6 +79,30 @@ public class BoardViewTest {
             verify(console, times(Coordinate.DIMENSION)).writeln();
             verify(console, times(Coordinate.DIMENSION*Coordinate.DIMENSION)).write(" ");
         }
+    }
+
+    private Color[] getBoardColors(String[] board){ //TODO REDUCIR TAMANYO
+        assert board.length == 3;
+        List<String> strings = new ArrayList<>();
+        Color[] colors = new Color[Coordinate.DIMENSION*Coordinate.DIMENSION];
+        for (String row : board) {
+            assert Pattern.matches("[XO ]{3}", row);
+            strings.add(row);
+        }
+        int cont=0;
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                if(strings.get(i).charAt(j) == 'X'){
+                    colors[cont] = Color.X;
+                }else if(strings.get(i).charAt(j) == 'O'){
+                    colors[cont] = Color.O;
+                }else{
+                    colors[cont] = Color.NULL;
+                }
+                cont++;
+            }
+        }
+        return colors;
     }
 
 
