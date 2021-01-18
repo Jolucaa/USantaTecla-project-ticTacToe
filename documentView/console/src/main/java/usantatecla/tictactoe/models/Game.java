@@ -33,10 +33,6 @@ public class Game {
         return this.board.isTicTacToe(this.turn.getActiveColor());
     }
 
-	public Color getColor(Coordinate coordinate) {
-		return this.board.getColor(coordinate);
-    }
-
     public Board getBoard() {
         return this.board;
     }
