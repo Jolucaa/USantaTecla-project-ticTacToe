@@ -16,7 +16,7 @@ public class UserPlayerView extends PlayerView {
         assert coordinate != null;
 
         Error error = super.getPutTokenError(coordinate);
-        new ErrorView(error).writeln();
+        new ErrorView().writeln(error);
         return error;
     }
 
@@ -25,7 +25,7 @@ public class UserPlayerView extends PlayerView {
         assert !coordinate.isNull();
 
         Error error = super.getOriginMoveTokenError(coordinate);
-        new ErrorView(error).writeln();
+        new ErrorView().writeln(error);
         return error;
     }
 
@@ -34,7 +34,7 @@ public class UserPlayerView extends PlayerView {
         assert !origin.isNull() && !target.isNull();
 
         Error error = super.getTargetMoveTokenError(origin, target);
-        new ErrorView(error).writeln();
+        new ErrorView().writeln(error);
         return error;
     }
 

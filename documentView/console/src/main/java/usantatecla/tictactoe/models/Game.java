@@ -36,6 +36,10 @@ public class Game {
 	public Color getColor(Coordinate coordinate) {
 		return this.board.getColor(coordinate);
     }
+
+    public Board getBoard() {
+        return this.board;
+    }
     
     public Color getActiveColor() {
 		return this.turn.getActiveColor();

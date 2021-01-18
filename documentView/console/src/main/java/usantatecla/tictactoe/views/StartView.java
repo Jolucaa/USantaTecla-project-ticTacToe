@@ -14,6 +14,7 @@ class StartView extends WithGameView {
     void interact() {
 		Console.getInstance().writeln(Message.TITLE.toString());
 		this.game.setUsers(this.getUsers());
+		new BoardView().write(this.game.getBoard());
 	}
 
 	private int getUsers() {

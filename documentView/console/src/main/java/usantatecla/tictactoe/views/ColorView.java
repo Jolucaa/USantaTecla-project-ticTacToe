@@ -5,15 +5,9 @@ import usantatecla.utils.views.Console;
 
 public class ColorView {
 
-    private Color color;
-
-	ColorView(Color color){
-		this.color = color;
-	}
-
-    void write() {
-		String string = this.color.name();
-		if (this.color.isNull()) {
+    void write(Color color) {
+		String string = color.name();
+		if (color.isNull()) {
 			string = " ";
 		}
 		Console.getInstance().write(string);
