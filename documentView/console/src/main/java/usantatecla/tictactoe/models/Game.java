@@ -17,8 +17,12 @@ public class Game {
         this.turn = new Turn(this.board);
 	}
 
-	public void play() {
-        this.turn.play();
+    public Player getPlayer() {
+        return this.turn.getActivePlayer();
+    }
+
+    public void next() {
+        this.turn.next();
     }
 
     public void setUsers(int numberUsers){

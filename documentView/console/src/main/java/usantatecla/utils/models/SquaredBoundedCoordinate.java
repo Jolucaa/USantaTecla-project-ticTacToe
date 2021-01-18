@@ -1,13 +1,17 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
 import java.util.Random;
 
-public abstract class SquaredBoundedCoordinate {//TODO SquaredBoundedCoordinateView
+public abstract class SquaredBoundedCoordinate {
 
     private Coordinate adaptee;
 
     public SquaredBoundedCoordinate() {
-        this.adaptee = NullCoordinate.getInstance();
+        this(NullCoordinate.getInstance());
+    }
+
+    public SquaredBoundedCoordinate(Coordinate coordinate) {
+        this.adaptee = coordinate;
     }
 
     public boolean isNull() {
@@ -20,7 +24,7 @@ public abstract class SquaredBoundedCoordinate {//TODO SquaredBoundedCoordinateV
         assert this.isValid();
     }
 
-    private boolean isValid() {
+    public boolean isValid() {
         assert !this.adaptee.isNull();
 
         ConcreteCoordinate concreteCoordinate = (ConcreteCoordinate) this.adaptee;
@@ -49,23 +53,7 @@ public abstract class SquaredBoundedCoordinate {//TODO SquaredBoundedCoordinateV
         return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
     }
 
-
-    public void read(String message) {
-        assert message != null;
-
-        this.adaptee = new ConcreteCoordinate();
-        ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
-        boolean error;
-        do {
-            coordinate.read(message);
-            error = !this.isValid();
-            if (error) {
-                Console.getInstance().writeln(this.getErrorMessage());
-            }
-        } while (error);
-    }
-
-    protected abstract String getErrorMessage();
+    public abstract String getErrorMessage();
 
     public void random() {
         Random random = new Random(System.currentTimeMillis());
@@ -84,4 +72,11 @@ public abstract class SquaredBoundedCoordinate {//TODO SquaredBoundedCoordinateV
         return ((ConcreteCoordinate) this.adaptee).getColumn();
     }
 
+    Coordinate getAdaptee() {
+        return adaptee;
+    }
+
+    void setAdaptee(Coordinate adaptee) {
+        this.adaptee = adaptee;
+    }
 }

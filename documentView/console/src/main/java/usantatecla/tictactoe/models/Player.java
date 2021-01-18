@@ -2,6 +2,7 @@ package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.tictactoe.views.Message;
 
 public abstract class Player {
@@ -19,57 +20,36 @@ public abstract class Player {
 		this.putTokens = 0;
 	}
 
-	public void play() {
-		if (this.putTokens < Coordinate.DIMENSION) {
-			this.putToken();
-		} else {
-			this.moveToken();
-		}
+	public int getPutTokens() {
+		return this.putTokens;
 	}
 
-	private void putToken() {
-		Coordinate coordinate;
-		Error error;
-		do {
-			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
-			error = this.getPutTokenError(coordinate);
-		} while (!error.isNull());
+	public void putToken(Coordinate coordinate) {
 		this.board.put(coordinate, this.color);
 		this.putTokens++;
 	}
 
-	protected abstract Coordinate getCoordinate(Message message);
+	public abstract PlayerType getType();
 
-	protected Error getPutTokenError(Coordinate coordinate) {
+	public Error getPutTokenError(Coordinate coordinate) {
 		if (!this.board.isEmpty(coordinate)) {
 			return Error.NOT_EMPTY;
 		}
 		return Error.NULL;
 	}
 
-	private void moveToken() {
-		Coordinate origin;
-		Error error;
-		do {
-			origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
-			error = this.getOriginMoveTokenError(origin);
-		} while (error != Error.NULL);
-		Coordinate target;
-		do {
-			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
-			error = this.getTargetMoveTokenError(origin, target);
-		} while (error != Error.NULL);
+	public void moveToken(Coordinate origin, Coordinate target) {
 		this.board.move(origin, target);
 	}
 
-	protected Error getOriginMoveTokenError(Coordinate origin) {
+	public Error getOriginMoveTokenError(Coordinate origin) {
 		if (!this.board.isOccupied(origin, this.color)) {
 			return Error.NOT_OWNER;
 		}
 		return Error.NULL;
 	}
 
-	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+	public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		if (origin.equals(target)) {
 			return Error.SAME_COORDINATES;
 		}
@@ -79,7 +59,7 @@ public abstract class Player {
 		return Error.NULL;
 	}
 
-	public Color getColor() {
+	Color getColor() {
 		return this.color;
 	}
 

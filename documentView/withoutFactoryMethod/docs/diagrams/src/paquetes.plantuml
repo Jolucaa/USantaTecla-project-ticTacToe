@@ -555,5 +555,5 @@ namespace usantatecla.utils {
 class BufferedReader as "java.io.BufferedReader"{
 
 }
-usantatecla.utils.Console *-down-> BufferedReader
+usantatecla.utils.views.Console *-down-> BufferedReader
 @enduml

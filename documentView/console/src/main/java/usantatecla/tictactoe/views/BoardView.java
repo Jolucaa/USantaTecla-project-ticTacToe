@@ -2,7 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 class BoardView extends WithGameView {
 

@@ -1,8 +1,10 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
+
+import usantatecla.utils.models.ClosedInterval;
 
 public class BoundedIntDialog {
 
-	private  ClosedInterval LIMITS;
+	private ClosedInterval LIMITS;
 	private static final String ERROR_MESSAGE = "Invalid number";
 
 	public BoundedIntDialog(int min, int max){
@@ -12,7 +14,7 @@ public class BoundedIntDialog {
 	public int read(String message) {
 		assert message != null;
 
-		boolean ok = false;
+		boolean ok;
 		int value;
 		do {
 			value = Console.getInstance().readInt(message + "? " + this.LIMITS + ": ");

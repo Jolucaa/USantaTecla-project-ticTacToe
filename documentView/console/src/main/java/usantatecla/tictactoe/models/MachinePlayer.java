@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.tictactoe.views.Message;
 
 public class MachinePlayer extends Player {
@@ -9,10 +10,15 @@ public class MachinePlayer extends Player {
 		super(color, board);
 	}
 
-	protected Coordinate getCoordinate(Message message){
+	public Coordinate getRandomCoordinate(){
 		Coordinate coordinate = new Coordinate();
 		coordinate.random();
 		return coordinate;
-	}	
-	
+	}
+
+	@Override
+	public PlayerType getType() {
+		return PlayerType.MACHINE;
+	}
+
 }

@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Color;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 public class ColorView {
 

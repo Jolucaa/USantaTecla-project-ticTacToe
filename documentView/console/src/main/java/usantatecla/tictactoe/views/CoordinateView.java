@@ -1,30 +1,15 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.utils.ClosedInterval;
-import usantatecla.utils.Console;
-import usantatecla.tictactoe.types.Error;
+import usantatecla.utils.models.ConcreteCoordinate;
+import usantatecla.utils.views.SquareBoundedCoordinateView;
+import usantatecla.utils.models.SquaredBoundedCoordinate;
 
-public class CoordinateView {
+public class CoordinateView extends SquareBoundedCoordinateView {
 
-    public Coordinate read(String title) {
-        Console console = Console.getInstance();
-        Coordinate coordinate;
-        Error error;
-        do {
-            console.writeln(title);
-            int row = console.readInt("Row: ") - 1;
-            int column = console.readInt("Column: ") - 1;
-            coordinate = new Coordinate(row, column);
-            ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
-            if (!limits.isIncluded(coordinate.getRow()) || !limits.isIncluded(coordinate.getColumn())) {
-                error = Error.WRONG_COORDINATES;
-            } else {
-                error = Error.NULL;
-            }
-            new ErrorView(error).writeln();
-        } while (!error.isNull());
-        return coordinate;
+    @Override
+    public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
+        return new Coordinate(concreteCoordinate);
     }
 
 }

@@ -23,7 +23,7 @@ class Coordinate {
 	~ Coordinate()
 	~ Coordinate(int, int)
 	+ isNull(): boolean 
-	+ getDirection(usantatecla.utils.Coordinate): Direction 
+	+ getDirection(usantatecla.utils.models.Coordinate): Direction
 	+ inInverseDiagonal(): boolean 
 	+ read(String)
 	+ random() 
@@ -137,15 +137,15 @@ Turn .down.> Message
 
 }
 
-class ConcreteCoordinate as "usantatecla.utils.ConcreteCoordinate"{
+class ConcreteCoordinate as "usantatecla.utils.models.ConcreteCoordinate"{
 
 }
 
-class ClosedInterval as "usantatecla.utils.ClosedInterval"{
+class ClosedInterval as "usantatecla.utils.models.ClosedInterval"{
 	
 }
 
-class Console as "usantatecla.utils.Console"{
+class Console as "usantatecla.utils.views.Console"{
 	
 }
 
@@ -153,11 +153,11 @@ class LimitedIntDialog as "usantatecla.utils.LimitedIntDialog"{
 	
 }
 
-class YesNoDialog as "usantatecla.utils.YesNoDialog"{
+class YesNoDialog as "usantatecla.utils.views.YesNoDialog"{
 	
 }
 
-enum Direction as "usantatecla.utils.Direction"{
+enum Direction as "usantatecla.utils.models.Direction"{
 	
 }
 
@@ -289,5 +289,5 @@ LimitedIntDialog .down.> ClosedInterval
 class BufferedReader as "java.io.BufferedReader"{
 	
 }
-usantatecla.utils.Console *-down-> BufferedReader 
+usantatecla.utils.views.Console *-down-> BufferedReader
 @enduml

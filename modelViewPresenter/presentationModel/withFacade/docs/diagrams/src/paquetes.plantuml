@@ -389,7 +389,7 @@ tictactoe.controllers.ResumeController .down.> Game
 
 class BufferedReader as "java.io.BufferedReader"{}
 
-class usantatecla.utils.ClosedInterval{
+class usantatecla.utils.models.ClosedInterval{
   - min: int
   - max: int
   + ClosedInterval(int,int)
@@ -397,7 +397,7 @@ class usantatecla.utils.ClosedInterval{
   + toString(): String
 }
 
-enum usantatecla.utils.Direction{
+enum usantatecla.utils.models.Direction{
   VERTICAL
   HORIZONTAL
   MAIN_DIAGONAL
@@ -405,16 +405,16 @@ enum usantatecla.utils.Direction{
   NULL
 }
 
-interface usantatecla.utils.Coordinate {
+interface usantatecla.utils.models.Coordinate {
   ~ isNull(): boolean
   ~ getDirection(Coordinate): Direction
   ~ inHorizontal(Coordinate): boolean
   ~ inVertical(Coordinate): boolean
   ~ inMainDiagonal(): boolean
 }
-usantatecla.utils.Coordinate .down.> usantatecla.utils.Direction
+usantatecla.utils.models.Coordinate .down.> usantatecla.utils.models.Direction
 
-class usantatecla.utils.ConcreteCoordinate{
+class usantatecla.utils.models.ConcreteCoordinate{
   # row: int
   # column: int
   - {static} ROW: String
@@ -434,11 +434,11 @@ class usantatecla.utils.ConcreteCoordinate{
   + toString(): String
 }
 
-usantatecla.utils.Coordinate <|-down- usantatecla.utils.ConcreteCoordinate
-usantatecla.utils.ConcreteCoordinate .down.> usantatecla.utils.Direction
-usantatecla.utils.ConcreteCoordinate .down.> usantatecla.utils.Console
+usantatecla.utils.models.Coordinate <|-down- usantatecla.utils.models.ConcreteCoordinate
+usantatecla.utils.models.ConcreteCoordinate .down.> usantatecla.utils.models.Direction
+usantatecla.utils.models.ConcreteCoordinate .down.> usantatecla.utils.views.Console
 
-class usantatecla.utils.NullCoordinate{
+class usantatecla.utils.models.NullCoordinate{
   - {static} instance: NullCoordinate
   + {static} getInstance(): Coordinate
   + isNull(): boolean
@@ -450,10 +450,10 @@ class usantatecla.utils.NullCoordinate{
   + equals(Object): boolean
   + toString(): String
 }
-usantatecla.utils.Coordinate <|-down- usantatecla.utils.NullCoordinate
-usantatecla.utils.NullCoordinate .down.> usantatecla.utils.Direction
+usantatecla.utils.models.Coordinate <|-down- usantatecla.utils.models.NullCoordinate
+usantatecla.utils.models.NullCoordinate .down.> usantatecla.utils.models.Direction
 
-class usantatecla.utils.Console{
+class usantatecla.utils.views.Console{
   - {static} console: Console
   + {static} getInstance(): Console
   - readString(String): String
@@ -468,7 +468,7 @@ class usantatecla.utils.Console{
   + write(char)
   - writeError(String)
 }
-usantatecla.utils.Console *-down-> BufferedReader
+usantatecla.utils.views.Console *-down-> BufferedReader
 
 class usantatecla.utils.LimitedIntDialog{
   - LIMITS: ClosedInterval
@@ -476,10 +476,10 @@ class usantatecla.utils.LimitedIntDialog{
   + LimitedIntDialog(int,int)
   + read(String): int
 }
-usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.ClosedInterval
-usantatecla.utils.LimitedIntDialog .down.> usantatecla.utils.Console
+usantatecla.utils.LimitedIntDialog *-down-> usantatecla.utils.models.ClosedInterval
+usantatecla.utils.LimitedIntDialog .down.> usantatecla.utils.views.Console
 
-class usantatecla.utils.YesNoDialog{
+class usantatecla.utils.views.YesNoDialog{
   - {static} AFIRMATIVE: char
   - {static} NEGATIVE: char
   - {static} SUFFIX: String
@@ -490,5 +490,5 @@ class usantatecla.utils.YesNoDialog{
   - getAnswer(): char
   - isNegative(): boolean
 }
-usantatecla.utils.YesNoDialog .down.> usantatecla.utils.Console
+usantatecla.utils.views.YesNoDialog .down.> usantatecla.utils.views.Console
 @enduml

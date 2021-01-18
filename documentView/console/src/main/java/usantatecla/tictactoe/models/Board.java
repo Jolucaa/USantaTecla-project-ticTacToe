@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import usantatecla.tictactoe.types.Color;
-import usantatecla.utils.Direction;
+import usantatecla.utils.models.Direction;
 
 public class Board {
 

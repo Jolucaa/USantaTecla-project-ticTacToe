@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 import usantatecla.tictactoe.types.Error;
 
 class ErrorView {
@@ -13,7 +13,7 @@ class ErrorView {
 	
 	void writeln() {
 		if (!error.isNull()){
-			Console.getInstance().writeln(this.error.ordinal());
+			Console.getInstance().writeln(this.error.toString());
 		}
 	}
 

@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
 public class ClosedInterval {
 
@@ -36,4 +36,5 @@ public class ClosedInterval {
 			return false;
 		return true;
 	}
+
 }

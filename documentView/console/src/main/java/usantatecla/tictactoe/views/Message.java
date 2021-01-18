@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 public enum Message {
     TITLE("--- TIC TAC TOE ---"),

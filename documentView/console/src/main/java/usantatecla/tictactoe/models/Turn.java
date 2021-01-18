@@ -1,8 +1,6 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.views.Message;
-import usantatecla.utils.BoundedIntDialog;
 
 public class Turn {
 	
@@ -18,7 +16,7 @@ public class Turn {
 		this.activePlayer = 0;
 	}
 
-	void setUsers(int numberUsers) {//TODO ?
+	void setUsers(int numberUsers) {
 		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
 			if (i < numberUsers){
 				this.players[i] = new UserPlayer(Color.get(i), this.board);
@@ -28,15 +26,18 @@ public class Turn {
 		}
 	}
 
-	public void play(){
-		this.players[this.activePlayer].play();
+	void next() {
 		if (!this.board.isTicTacToe(this.getActiveColor())){
 			this.activePlayer = (this.activePlayer+1) % Turn.NUMBER_PLAYERS;
 		}
 	}
 
+	Player getActivePlayer() {
+		return this.players[this.activePlayer];
+	}
+
 	public Color getActiveColor() {
-		return this.players[this.activePlayer].getColor();
+		return this.getActivePlayer().getColor();
 	}
 
 }

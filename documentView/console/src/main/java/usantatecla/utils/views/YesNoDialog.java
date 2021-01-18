@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
 
 public class YesNoDialog {
 

@@ -2,8 +2,8 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Turn;
-import usantatecla.utils.BoundedIntDialog;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.BoundedIntDialog;
+import usantatecla.utils.views.Console;
 
 class StartView extends WithGameView {
 
