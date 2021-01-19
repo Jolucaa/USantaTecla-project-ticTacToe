@@ -1,5 +1,6 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 
 public class NullCoordinateTest {
 
-    /*private ConcreteCoordinate concreteCoordinate;
+    private ConcreteCoordinate concreteCoordinate;
 
     @BeforeEach
     public void beforeEach() {
@@ -23,8 +24,8 @@ public class NullCoordinateTest {
 
     @Test
     public void testGivenNullCoordinateWhenGetDirectionThenNullDirection() {
-        assertThat(Coordinate.NULL.getDirection(this.concreteCoordinate), is(Direction.NULL));
-        assertThat(Coordinate.NULL.getDirection(Coordinate.NULL), is(Direction.NULL));
+        assertThat(Coordinate.NULL.getDirection(this.concreteCoordinate), Matchers.is(Direction.NULL));
+        assertThat(Coordinate.NULL.getDirection(Coordinate.NULL), Matchers.is(Direction.NULL));
     }
 
     @Test
@@ -50,5 +51,5 @@ public class NullCoordinateTest {
     @Test
     public void testGivenNullCoordinateWhenToStringThenValue() {
         assertThat(Coordinate.NULL.toString(), is("Coordinate (NULL)"));
-    }*/
+    }
 }

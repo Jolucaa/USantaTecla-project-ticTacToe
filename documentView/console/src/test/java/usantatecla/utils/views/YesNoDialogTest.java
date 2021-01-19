@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class YesNoDialogTest {
 
- /* private YesNoDialog yesNoDialog;
+ private YesNoDialog yesNoDialog;
   private String title = "TITLE";
 
   @Mock
@@ -63,5 +63,5 @@ public class YesNoDialogTest {
       verify(this.console, times(4)).writeln("The value must be 'y' or 'n'");
       assertThat(this.yesNoDialog.isAffirmative(), is(true));
     }
-  }*/
+  }
 }

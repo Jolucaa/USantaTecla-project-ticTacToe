@@ -4,9 +4,9 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.utils.models.ConcreteCoordinate;
 import usantatecla.utils.models.SquaredBoundedCoordinate;
-import usantatecla.utils.views.SquareBoundedCoordinateView;
+import usantatecla.utils.views.SquaredBoundedCoordinateView;
 
-public class CoordinateView extends SquareBoundedCoordinateView {
+public class CoordinateView extends SquaredBoundedCoordinateView {
 
     @Override
     public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {

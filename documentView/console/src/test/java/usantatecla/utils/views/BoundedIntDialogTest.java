@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -11,11 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.utils.models.ClosedInterval;
 
 @ExtendWith(MockitoExtension.class)
 public class BoundedIntDialogTest {
 
-   /* private final int MIN = -1;
+    private final int MIN = -1;
     private final int MAX = 1;
     private BoundedIntDialog boundedIntDialog;
     private ClosedInterval limits;
@@ -42,6 +43,6 @@ public class BoundedIntDialogTest {
             assertThat(this.boundedIntDialog.read(title), is(MAX));
 
         }
-    }*/
+    }
 
 }

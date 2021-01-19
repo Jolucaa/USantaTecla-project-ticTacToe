@@ -3,7 +3,7 @@ package usantatecla.utils.views;
 import usantatecla.utils.models.ConcreteCoordinate;
 import usantatecla.utils.models.SquaredBoundedCoordinate;
 
-public abstract class SquareBoundedCoordinateView {
+public abstract class SquaredBoundedCoordinateView {
 
     public SquaredBoundedCoordinate read(String message) {
         assert message != null;

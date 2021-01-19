@@ -2,7 +2,7 @@ package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.utils.models.SquaredBoundedCoordinate;
-import usantatecla.utils.SquaredBoundedCoordinateTest;
+import usantatecla.utils.models.SquaredBoundedCoordinateTest;
 
 public class CoordinateTest extends SquaredBoundedCoordinateTest {
 
