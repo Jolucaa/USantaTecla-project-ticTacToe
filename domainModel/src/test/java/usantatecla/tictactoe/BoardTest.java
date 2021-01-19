@@ -8,6 +8,7 @@ import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import usantatecla.utils.Console;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -151,39 +152,31 @@ public class BoardTest {
             Board board = this.boardBuilder.build();
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            verify(console, times(2)).writeln(argumentCaptor.capture());
-            verify(console, times(21)).write(argumentCaptor.capture());
-            verify(console, times(Coordinate.DIMENSION)).writeln();
-            assertThat(argumentCaptor.getAllValues().get(0),is("---------------"));
+            //TODO Segun la documentación cuando usamos argumentCapture, no es necesario indicarle exactamente el número de veces que se captura.(LOGICO)
+            verify(console,atLeast(0)).write(argumentCaptor.capture());
             assertThat(argumentCaptor.getAllValues().contains("X"),is(false));
-
+            assertThat(argumentCaptor.getAllValues().contains("O"),is(false));
+            assertThat(Collections.frequency(argumentCaptor.getAllValues()," "),is(9));
         }
     }
 
     //TODO ArgumentCaptor
     @Test
-    public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() {
+    public void testGivenCompleteBoardWhenWriteThenPrint() {
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
-            InOrder colorPrinted = inOrder(console);
             Board board = this.boardBuilder.rows(
                     "X X",
                     "XO ",
                     "O O").build();
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            verify(console, times(2)).writeln("---------------");
-            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
-            verify(console, times(Coordinate.DIMENSION)).writeln();
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write("X");
-            colorPrinted.verify(console).write("O");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("O");
-            colorPrinted.verify(console).write(" ");
-            colorPrinted.verify(console).write("O");
+            verify(console,atLeast(0)).write(argumentCaptor.capture());
+            assertThat(Collections.frequency(argumentCaptor.getAllValues(),"X"),is(3));
+            assertThat(Collections.frequency(argumentCaptor.getAllValues(),"O"),is(3));
+            assertThat(Collections.frequency(argumentCaptor.getAllValues()," "),is(3));
+
         }
     }
 }
