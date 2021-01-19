@@ -32,7 +32,7 @@ public abstract class SquaredBoundedCoordinate {
                 && this.getLimits().isIncluded(concreteCoordinate.getColumn());
     }
 
-    protected ClosedInterval getLimits() {
+    public ClosedInterval getLimits() {
         return new ClosedInterval(0, this.getDimension() - 1);
     }
 
@@ -70,6 +70,7 @@ public abstract class SquaredBoundedCoordinate {
         return ((ConcreteCoordinate) this.adaptee).getColumn();
     }
 
+    //TODO QUITAR SET Y GET DEL ADAPTEE
     Coordinate getAdaptee() {
         return adaptee;
     }

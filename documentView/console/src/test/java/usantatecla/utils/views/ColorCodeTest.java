@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ColorCodeTest {
 
-    /*@Mock
+    @Mock
     Console console;
 
     private ColorCode colorCode;
@@ -77,5 +77,5 @@ public class ColorCodeTest {
             ColorCode.NULL.write();
             verifyNoInteractions(this.console);
         }
-    }*/
+    }
 }

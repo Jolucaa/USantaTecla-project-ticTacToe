@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.views;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -19,7 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class ConsoleTest {
 
- /* @Mock
+ @Mock
   private BufferedReader bufferedReader;
 
   @InjectMocks
@@ -101,5 +101,5 @@ public class ConsoleTest {
     String format = "(a | b)";
     Console.getInstance().writeError(format);
     verify(this.outputStream).println("FORMAT ERROR! " + "Enter a " + format + " formatted value.");
-  }*/
+  }
 }

@@ -1,25 +1,17 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ConcreteCoordinateTest {
-/*
-  @Mock
-  Console console;
 
-  private Coordinate coordinate;
+  private ConcreteCoordinate coordinate;
 
   @BeforeEach
   public void beforeEach() {
@@ -62,22 +54,6 @@ public class ConcreteCoordinateTest {
   }
 
   @Test
-  public void testGivenEmptyCoordinatesWhenReadThenCorrectValues() {
-    try (MockedStatic<Console> console = mockStatic(Console.class)) {
-      console.when(Console::getInstance).thenReturn(this.console);
-
-      final ConcreteCoordinate[] coordinates = {  new ConcreteCoordinate(1, 2), new ConcreteCoordinate(0, 3) };
-      for(int i = 0; i < coordinates.length; i++) {
-        when(this.console.readInt(anyString())).thenReturn(coordinates[i].getRow() + 1, coordinates[i].getColumn() + 1);
-        ConcreteCoordinate coordinate = new ConcreteCoordinate();
-        coordinate.read("TITLE");
-
-        assertThat(coordinate, is(coordinates[i]));
-      }
-    }
-  }
-
-  @Test
   public void testGivenCoordinateWhenIsEqualsThenReturn() {
     assertThat(this.coordinate.equals(new ConcreteCoordinate(1, 1)), is(true));
     assertThat(this.coordinate.equals(new ConcreteCoordinate(0, 1)), is(false));
@@ -87,6 +63,6 @@ public class ConcreteCoordinateTest {
   @Test
   public void testGivenCoordinateWhenToStringThenReturn() {
     assertThat(this.coordinate.toString(), is("Coordinate (1, 1)"));
-  }*/
+  }
 
 }
