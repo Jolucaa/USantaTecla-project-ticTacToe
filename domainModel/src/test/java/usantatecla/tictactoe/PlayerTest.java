@@ -20,6 +20,7 @@ public abstract class PlayerTest {
     Console console;
 
     protected final Color COLOR = Color.O;
+
     public abstract PlayerBuilder getPlayerBuilder();
 
 

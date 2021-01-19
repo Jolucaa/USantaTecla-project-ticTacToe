@@ -37,7 +37,7 @@ public class TurnTest {
     }
 
     @Test
-    public void testGivenNewTurnWhenWriteWinnerThenCorrectMessage(){
+    public void testGivenNewTurnWhenWriteWinnerThenCorrectMessage() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             this.turn.writeWinner();
@@ -46,22 +46,12 @@ public class TurnTest {
     }
 
     @Test
-    public void testGivenTurnWhenPlayAndWriteWinnerThenCorrectMessage(){
-        try (MockedStatic<Console> console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.turn.play();
-            this.turn.writeWinner();
-            verify(this.console).writeln("O player: You win!!! :-)");
-        }
-    }
-
-    @Test
-    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured(){
+    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured() {
         assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
     @Test
-    public void testGivenTurnWhenPlayAndGetActiveColorThenCorrectColorIsCaptured(){
+    public void testGivenTurnWhenPlayAndGetActiveColorThenCorrectColorIsCaptured() {
         this.turn.play();
         assertThat(this.turn.getActiveColor(), is(Color.O));
     }
