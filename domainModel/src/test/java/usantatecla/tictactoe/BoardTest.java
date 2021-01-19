@@ -3,9 +3,12 @@ package usantatecla.tictactoe;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import usantatecla.utils.Console;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -146,11 +149,14 @@ public class BoardTest {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
             Board board = this.boardBuilder.build();
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            verify(console, times(2)).writeln("---------------");
-            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
+            verify(console, times(2)).writeln(argumentCaptor.capture());
+            verify(console, times(21)).write(argumentCaptor.capture());
             verify(console, times(Coordinate.DIMENSION)).writeln();
-            verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION)).write(" ");
+            assertThat(argumentCaptor.getAllValues().get(0),is("---------------"));
+            assertThat(argumentCaptor.getAllValues().contains("X"),is(false));
+
         }
     }
 
