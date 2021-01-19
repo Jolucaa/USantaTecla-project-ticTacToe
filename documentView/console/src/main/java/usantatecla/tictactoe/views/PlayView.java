@@ -1,24 +1,22 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.models.Player;
 
 class PlayView extends WithGameView {
 
-    private PlayViewPrototype playViewPrototype;
+    private PlayerViewPrototype playerViewPrototype;
 
     PlayView(Game game) {
         super(game);
-        this.playViewPrototype = new PlayViewPrototype();
+        this.playerViewPrototype = new PlayerViewPrototype();
     }
 
     void interact() {
         do {
-            Player player = this.game.getPlayer();
-            PlayerView playerView = this.playViewPrototype.createView(player);
-            playerView.interact(player);
+            PlayerView playerView = this.playerViewPrototype.createView(this.game.getType());
+            playerView.interact(this.game);
             this.game.next();
-            new BoardView().write(this.game.getBoard());
+            new BoardView().write(this.game);
         } while (!this.game.isTicTacToe());
         Message.PLAYER_WIN.writeln(this.game.getActiveColor().name());
     }

@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

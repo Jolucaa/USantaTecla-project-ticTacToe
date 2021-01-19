@@ -3,7 +3,6 @@ package usantatecla.tictactoe.views;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Turn;
 import usantatecla.utils.views.BoundedIntDialog;
-import usantatecla.utils.views.Console;
 
 class StartView extends WithGameView {
 
@@ -12,14 +11,10 @@ class StartView extends WithGameView {
 	}
 
     void interact() {
-		Console.getInstance().writeln(Message.TITLE.toString());
-		this.game.setUsers(this.getUsers());
-		new BoardView().write(this.game.getBoard());
-	}
-
-	private int getUsers() {
+		Message.TITLE.writeln();
 		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		return dialog.read(Message.NUMBER_PLAYERS.toString());
+		this.game.setUsers(dialog.read(Message.NUMBER_PLAYERS.toString()));
+		new BoardView().write(this.game);
 	}
 
 }
