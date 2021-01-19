@@ -1,7 +1,9 @@
 package usantatecla.tictactoe;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usantatecla.utils.Console;
+
 import java.io.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,24 +27,24 @@ public class MessageTest {
     }
 
     @Test
-    public void testGivenNewMessageWhenWrite(){
+    public void testGivenNewMessageWhenWrite() {
         Message.COORDINATE_TO_PUT.write();
         assertThat(Message.COORDINATE_TO_PUT.toString(), is(output.toString()));
     }
 
     @Test
-    public void testGivenNewMessageWhenWritelnWithoutParams(){
+    public void testGivenNewMessageWhenWritelnWithoutParams() {
         String newLine = System.getProperty("line.separator");
         Message.COORDINATE_TO_PUT.writeln();
-        assertThat(Message.COORDINATE_TO_PUT.toString()+newLine, is(output.toString()));
+        assertThat(Message.COORDINATE_TO_PUT.toString() + newLine, is(output.toString()));
     }
 
     @Test
-    public void testGivenNewMessageWhenWritelnWithParams(){
+    public void testGivenNewMessageWhenWritelnWithParams() {
         String playerName = "player";
         String newLine = System.getProperty("line.separator");
         Message.PLAYER_WIN.writeln(playerName);
-        assertThat(Message.PLAYER_WIN.toString().replaceAll("#player", "" + playerName)+newLine
+        assertThat(Message.PLAYER_WIN.toString().replaceAll("#player", "" + playerName) + newLine
                 , is(output.toString()));
     }
 }

@@ -1,6 +1,7 @@
 package usantatecla.tictactoe;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.MockedStatic;
@@ -12,9 +13,16 @@ import static org.mockito.Mockito.*;
 
 public class BoardTest {
 
+    BoardBuilder boardBuilder;
+
+    @BeforeEach
+    public void beforeEach() {
+        this.boardBuilder = new BoardBuilder();
+    }
+
     @Test
     public void testGivenEmptyBoardWhenStartThenIsEmpty() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
                 assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
@@ -24,7 +32,7 @@ public class BoardTest {
 
     @Test
     public void testGivenNewBoardWhenPutNewTokenThenIsOccupiedIsTrue() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         Color color = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
         board.put(coordinate, color);
@@ -33,7 +41,7 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveXTokenOriginIsEmptyAndTargetIsOccupiedThenIsTrue() {
-        Board board = new BoardBuilder().rows(
+        Board board = this.boardBuilder.rows(
                 "X  ",
                 "   ",
                 "   ").build();
@@ -47,7 +55,7 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveXTokenAndTargetIsOccupiedThenIsAssertion() {
-        Board board = new BoardBuilder().rows(
+        Board board = this.boardBuilder.rows(
                 "XO ",
                 "   ",
                 "   ").build();
@@ -58,8 +66,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveTokenAndOriginIsEmptyThenIsAssertion() {
-        Board board = new BoardBuilder().rows(
-                "XO ",
+        Board board = this.boardBuilder.rows(
+                "   ",
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(1, 0);
@@ -69,8 +77,8 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenMoveTokenAndOriginIsEqualsTargetThenIsAssertion() {
-        Board board = new BoardBuilder().rows(
-                "XO ",
+        Board board = this.boardBuilder.rows(
+                "X  ",
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
@@ -80,13 +88,13 @@ public class BoardTest {
 
     @Test
     public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));
     }
 
     @Test
     public void testGivenBoardWhenCheckIsOccupiedThenIsTrue() {
-        Board board = new BoardBuilder().rows(
+        Board board = this.boardBuilder.rows(
                 "X  ",
                 "   ",
                 "   ").build();
@@ -95,25 +103,26 @@ public class BoardTest {
 
     @Test
     public void testGivenBoardWhenCheckNullCoordinateIsOccupiedThenAssertionError() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         Assertions.assertThrows(AssertionError.class, () -> board.isOccupied(new Coordinate(), Color.O));
     }
 
     @Test
     public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         assertThat(board.isTicTacToe(Color.O), is(false));
     }
 
     @Test
     public void testGivenBoardWhenIsTicTacToeNullColorThenAssertionError() {
-        Board board = new BoardBuilder().build();
+        Board board = this.boardBuilder.build();
         Assertions.assertThrows(AssertionError.class, () -> board.isTicTacToe(Color.NULL));
     }
 
+    //TODO vertical diagonal inversa
     @Test
     public void testGivenBoardWhenIsTicTacToeThenIsTrue() {
-        Board board = new BoardBuilder().rows(
+        Board board = this.boardBuilder.rows(
                 " X ",
                 "OXO",
                 " X ").build();
@@ -123,7 +132,7 @@ public class BoardTest {
 
     @Test
     public void testGivenCompleteBoardAndIsTicTacToeThenIsFalse() {
-        Board board = new BoardBuilder().rows(
+        Board board = this.boardBuilder.rows(
                 "XO ",
                 "XO ",
                 "OX ").build();
@@ -136,7 +145,7 @@ public class BoardTest {
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
-            Board board = new BoardBuilder().build();
+            Board board = this.boardBuilder.build();
             board.write();
             verify(console, times(2)).writeln("---------------");
             verify(console, times(Coordinate.DIMENSION * Coordinate.DIMENSION + Coordinate.DIMENSION)).write(" | ");
@@ -145,13 +154,14 @@ public class BoardTest {
         }
     }
 
+    //TODO ArgumentCaptor
     @Test
     public void testGivenCompleteBoardWhenWriteThenPrintInCorrectOrder() {
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
             InOrder colorPrinted = inOrder(console);
-            Board board = new BoardBuilder().rows(
+            Board board = this.boardBuilder.rows(
                     "X X",
                     "XO ",
                     "O O").build();

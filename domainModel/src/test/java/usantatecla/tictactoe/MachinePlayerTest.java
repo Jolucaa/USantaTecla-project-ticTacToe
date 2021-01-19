@@ -8,6 +8,8 @@ import static org.mockito.ArgumentMatchers.any;
 
 public class MachinePlayerTest extends PlayerTest {
 
+    //TODO Mock para el random
+
     @Override
     public PlayerBuilder getPlayerBuilder() {
         return new PlayerBuilder().color(Color.O).machine();
