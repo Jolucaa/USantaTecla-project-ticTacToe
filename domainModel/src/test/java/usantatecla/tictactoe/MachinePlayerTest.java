@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class MachinePlayerTest extends PlayerTest {
-
-    //TODO Mock para el random
 
     @Override
     public PlayerBuilder getPlayerBuilder() {
@@ -17,7 +16,9 @@ public class MachinePlayerTest extends PlayerTest {
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
+        Coordinate coordinate = new Coordinate(1,1);
         Player player = this.getPlayerBuilder().build();
-        assertThat(player.getCoordinate(any(Message.class)).getClass(), is(Coordinate.class));
+        when(player.getCoordinate(any(Message.class))).thenReturn(coordinate);
+        assertThat(player.getCoordinate(Message.ENTER_COORDINATE_TO_PUT).equals(coordinate), is(true));
     }
 }

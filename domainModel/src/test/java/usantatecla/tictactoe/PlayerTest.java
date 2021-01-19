@@ -101,6 +101,9 @@ public abstract class PlayerTest {
                 "   ",
                 "O  "
         )*/
+
+
+
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
     }

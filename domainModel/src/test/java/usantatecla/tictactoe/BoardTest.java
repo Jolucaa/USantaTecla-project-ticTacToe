@@ -123,13 +123,42 @@ public class BoardTest {
         Assertions.assertThrows(AssertionError.class, () -> board.isTicTacToe(Color.NULL));
     }
 
-    //TODO vertical diagonal inversa
     @Test
-    public void testGivenBoardWhenIsTicTacToeThenIsTrue() {
+    public void testGivenBoardWhenIsVerticalTicTacToeThenIsTrue() {
         Board board = this.boardBuilder.rows(
                 " X ",
                 "OXO",
                 " X ").build();
+        Color color = Color.X;
+        assertThat(board.isTicTacToe(color), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsHorizontalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                " O ",
+                "XXX",
+                " O ").build();
+        Color color = Color.X;
+        assertThat(board.isTicTacToe(color), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsDiagonalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "OXO",
+                "  X").build();
+        Color color = Color.X;
+        assertThat(board.isTicTacToe(color), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsInversalDiagonalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "  X",
+                "OXO",
+                "X  ").build();
         Color color = Color.X;
         assertThat(board.isTicTacToe(color), is(true));
     }
