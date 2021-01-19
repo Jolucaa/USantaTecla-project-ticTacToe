@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.types.Color;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -16,9 +16,6 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class ColorViewTest {
-
-    @Mock
-    private Color Color;
 
     @InjectMocks
     private ColorView ColorView;
@@ -38,8 +35,7 @@ public class ColorViewTest {
     void testGivenNewColorViewWhenWriteThenPrintXColor() {
         try (MockedStatic console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.Color.name()).thenReturn("X");
-            ColorView.write();
+            ColorView.write(Color.X);
             verify(this.console).getInstance().write(captor.capture());
             assertThat(captor.getValue(), is(Color.X.toString()));
         }
@@ -49,10 +45,9 @@ public class ColorViewTest {
     public void testGivenColorWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.Color.name()).thenReturn("X","O"," ");
-            ColorView.write();
-            ColorView.write();
-            ColorView.write();
+            ColorView.write(Color.X);
+            ColorView.write(Color.O);
+            ColorView.write(Color.NULL);
             verify(this.console).write("X");
             verify(this.console).write("O");
             verify(this.console).write(" ");

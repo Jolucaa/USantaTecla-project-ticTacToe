@@ -9,7 +9,7 @@ import org.mockito.MockedStatic;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ConcreteCoordinateTest {
-
+/*
   @Mock
   Console console;
 
@@ -87,6 +87,6 @@ public class ConcreteCoordinateTest {
   @Test
   public void testGivenCoordinateWhenToStringThenReturn() {
     assertThat(this.coordinate.toString(), is("Coordinate (1, 1)"));
-  }
+  }*/
 
 }

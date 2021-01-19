@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 import usantatecla.tictactoe.types.Error;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class ErrorViewTest {
-
-    @Mock
-    private Error error;
 
     @InjectMocks
     private ErrorView errorView;
@@ -34,23 +33,20 @@ public class ErrorViewTest {
     @Test
     void testGivenNewGameViewWhenWriteNullErrorThenNeverPrint() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.error.isNull()).thenReturn(true);
             console.when(Console::getInstance).thenReturn(this.console);
-            this.errorView.writeln();
+            this.errorView.writeln(Error.NULL);
             verify(this.console, never()).writeln(anyString());
         }
     }
-    //TODO DEBERIA FUNCIONAR
-    /*@Test
+
+    @Test
     void testGivenNewGameViewWhenWriteNotNullErrorThenPrintErrorMessage() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.error.isNull()).thenReturn(false);
-            when(this.error.ordinal()).thenReturn(0);
             console.when(Console::getInstance).thenReturn(this.console);
-            this.errorView.writeln();
+            this.errorView.writeln(Error.NOT_EMPTY);
             verify(this.console).writeln(captor.capture());
             assertThat(captor.getValue(), is("The square is not empty"));
         }
-    }*/
+    }
 
 }

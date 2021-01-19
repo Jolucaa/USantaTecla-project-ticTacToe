@@ -8,7 +8,8 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.utils.views.Console;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -36,6 +37,7 @@ public class StartViewTest {
         try (MockedStatic console = mockStatic(Console.class)) {
             when(this.console.readInt(anyString())).thenReturn(1);
             console.when(Console::getInstance).thenReturn(this.console);
+            when(this.game.getColor(any())).thenReturn(Color.NULL);
             this.startView.interact();
             verify(this.console).writeln(Message.TITLE.toString());
             verify(this.game).setUsers(1);

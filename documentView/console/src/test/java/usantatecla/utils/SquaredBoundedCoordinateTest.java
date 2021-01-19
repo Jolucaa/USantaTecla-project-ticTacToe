@@ -2,6 +2,10 @@ package usantatecla.utils;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+import usantatecla.utils.models.ClosedInterval;
+import usantatecla.utils.models.Direction;
+import usantatecla.utils.models.SquaredBoundedCoordinate;
+import usantatecla.utils.views.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -19,10 +23,10 @@ public class SquaredBoundedCoordinateTest {
                 return SquaredBoundedCoordinateTest.DIMENSION;
             }
 
-            @Override
+            /*@Override
             protected String getErrorMessage() {
                 return SquaredBoundedCoordinateTest.ERROR;
-            }
+            }*/
         };
     }
 
@@ -37,10 +41,10 @@ public class SquaredBoundedCoordinateTest {
                 return SquaredBoundedCoordinateTest.DIMENSION;
             }
 
-            @Override
+            /*@Override
             protected String getErrorMessage() {
                 return SquaredBoundedCoordinateTest.ERROR;
-            }
+            }*/
         };
     }
 
@@ -58,13 +62,13 @@ public class SquaredBoundedCoordinateTest {
         assertThat(coordinate.getColumn(), is(column));
     }
 
-    @Test
+    /*@Test
     public void testGivenSquaredBoundedCoordinateWhenGetLimitsThenCorrect() {
         int row = 0;
         int column = this.getDimension() - 1;
         SquaredBoundedCoordinate coordinate = this.getCoordinate(row + 1, column - 1);
         assertThat(coordinate.getLimits(), is(new ClosedInterval(row, column)));
-    }
+    }*/
 
     @Test
     public void testGivenSquaredBoundedCoordinateWhenGetDirectionThenNullDirection() {
@@ -78,7 +82,7 @@ public class SquaredBoundedCoordinateTest {
         assertThat(coordinate.getDirection(this.getNullCoordinate()), is(Direction.NULL));
     }
 
-    @Test
+    /*@Test
     public void testGivenSquareBoundedCoordinateWhenReadThenCorrect() {
         Console console = mock(Console.class);
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
@@ -101,6 +105,6 @@ public class SquaredBoundedCoordinateTest {
             coordinate.read("");
             verify(console).writeln(coordinate.getErrorMessage());
         }
-    }
+    }*/
 
 }

@@ -90,16 +90,17 @@ public abstract class PlayerTest {
     }
 
     @Test
-    public void testGivenPlayerWhenMoveThenIsTrue() {
+    public void testGivenPlayerWhenMoveThenIsTrue() {//TODO Hacer el move
         Player player = this.getPlayerBuilder().rows(
                 "OO ",
                 "O  ",
                 "   "
-        ).rows(
+        ).build();
+        /*.rows(
                 "OO ",
                 "   ",
                 "O  "
-        ).build();
+        )*/
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
     }

@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;

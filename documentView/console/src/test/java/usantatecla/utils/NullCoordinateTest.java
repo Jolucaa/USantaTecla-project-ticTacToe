@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 
 public class NullCoordinateTest {
 
-    private ConcreteCoordinate concreteCoordinate;
+    /*private ConcreteCoordinate concreteCoordinate;
 
     @BeforeEach
     public void beforeEach() {
@@ -50,5 +50,5 @@ public class NullCoordinateTest {
     @Test
     public void testGivenNullCoordinateWhenToStringThenValue() {
         assertThat(Coordinate.NULL.toString(), is("Coordinate (NULL)"));
-    }
+    }*/
 }

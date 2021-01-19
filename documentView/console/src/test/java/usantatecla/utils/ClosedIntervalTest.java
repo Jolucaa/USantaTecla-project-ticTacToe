@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class ClosedIntervalTest {
 
-    private ClosedInterval closedInterval;
+    /*private ClosedInterval closedInterval;
 
     @BeforeEach
     void beforeEach() {
@@ -31,6 +31,6 @@ public class ClosedIntervalTest {
     @Test
     public void testGivenClosedIntervalWhenToStringThenOk() {
         assertThat(this.closedInterval.toString(), is("[-1, 1]"));
-    }
+    }*/
 
 }

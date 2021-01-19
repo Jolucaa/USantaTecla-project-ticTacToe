@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 public class PlayerBuilder {
 
-    private Player player;
+    /*private Player player;
     private Color color;
     private Board board;
     private List<String> strings;
@@ -118,7 +118,7 @@ public class PlayerBuilder {
     private void putToken(Coordinate coordinate){
         doReturn(coordinate).when(this.player).getCoordinate(any());
         this.player.play();
-    }
+    }*/
 
 
 }

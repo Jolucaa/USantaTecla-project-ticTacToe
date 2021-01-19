@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 @ExtendWith(MockitoExtension.class)
 public abstract class PlayerTest {
 
-    protected PlayerBuilder playerBuilder;
+    /*protected PlayerBuilder playerBuilder;
 
     @BeforeEach
     void beforeEach() {
@@ -101,5 +101,5 @@ public abstract class PlayerTest {
         ).build();
         assertThat(player.board.isEmpty(new Coordinate(1,0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2,0), Color.O), is(true));
-    }
+    }*/
 }

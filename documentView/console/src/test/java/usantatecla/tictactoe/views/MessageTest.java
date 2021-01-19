@@ -1,7 +1,7 @@
 package usantatecla.tictactoe.views;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 import java.io.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class BoundedIntDialogTest {
 
-    private final int MIN = -1;
+   /* private final int MIN = -1;
     private final int MAX = 1;
     private BoundedIntDialog boundedIntDialog;
     private ClosedInterval limits;
@@ -42,6 +42,6 @@ public class BoundedIntDialogTest {
             assertThat(this.boundedIntDialog.read(title), is(MAX));
 
         }
-    }
+    }*/
 
 }

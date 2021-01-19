@@ -8,7 +8,7 @@ import org.mockito.stubbing.OngoingStubbing;
 import usantatecla.tictactoe.models.*;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 import java.util.regex.Pattern;
 
@@ -41,7 +41,7 @@ public class BoardViewTest {
             for(int i = 0; i< colors.length; i++){
                 stubbing = stubbing.thenReturn(colors[i]);
             }
-            this.boardView.write();
+            this.boardView.write(this.game);
             verify(console, times(2)).writeln("---------------");
             verify(console, times(BoardViewTest.BOARD_DIMENSION + Coordinate.DIMENSION)).write(" | ");
             verify(console, times(Coordinate.DIMENSION)).writeln();
@@ -57,7 +57,7 @@ public class BoardViewTest {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
             when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.NULL);
-            this.boardView.write();
+            this.boardView.write(this.game);
             verify(console, times(2)).writeln("---------------");
             verify(console, times(BoardViewTest.BOARD_DIMENSION + Coordinate.DIMENSION)).write(" | ");
             verify(console, times(Coordinate.DIMENSION)).writeln();
