@@ -70,6 +70,7 @@ public abstract class SquaredBoundedCoordinate {
         return ((ConcreteCoordinate) this.adaptee).getColumn();
     }
 
+    //TODO QUITAR SET Y GET DEL ADAPTEE
     Coordinate getAdaptee() {
         return adaptee;
     }
