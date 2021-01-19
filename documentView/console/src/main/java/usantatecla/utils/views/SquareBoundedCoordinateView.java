@@ -16,11 +16,14 @@ public abstract class SquareBoundedCoordinateView {
 
             error = !squaredBoundedCoordinate.isValid();
             if (error) {
-                Console.getInstance().writeln(squaredBoundedCoordinate.getErrorMessage());
+                Console.getInstance().writeln(this.getErrorMessage());
             }
         } while (error);
         return squaredBoundedCoordinate;
     }
 
     public abstract SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate);
+
+    public abstract String getErrorMessage();
+
 }

@@ -3,6 +3,7 @@ package usantatecla.tictactoe.models;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -47,7 +48,7 @@ public class BoardTest {
                 "   ").build();
         Color token = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
-        board.put(coordinate, token);
+        board.putToken(coordinate, token);
         assertThat(board.isOccupied(coordinate, token), is(true));
     }
 
@@ -60,7 +61,7 @@ public class BoardTest {
         Color color = Color.X;
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 1);
-        board.move(origin, target);
+        board.moveToken(origin, target);
         assertThat(board.isEmpty(origin), is(true));
         assertThat(board.isOccupied(target, color), is(true));
     }
@@ -73,7 +74,7 @@ public class BoardTest {
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 1);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
@@ -84,7 +85,7 @@ public class BoardTest {
                 "   ").build();
         Coordinate origin = new Coordinate(1, 0);
         Coordinate target = new Coordinate(2, 2);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
@@ -95,7 +96,7 @@ public class BoardTest {
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 0);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test

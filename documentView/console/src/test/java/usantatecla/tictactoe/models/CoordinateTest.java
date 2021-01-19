@@ -1,5 +1,6 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.utils.SquaredBoundedCoordinate;
 import usantatecla.utils.SquaredBoundedCoordinateTest;
 

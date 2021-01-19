@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.utils.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

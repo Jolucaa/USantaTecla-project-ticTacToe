@@ -1,16 +1,16 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.models.Player;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 public abstract class PlayerView {
 
-    protected Player player;
+    protected Game game;
 
-    void interact(Player player) {
-        this.player = player;
-        if (this.player.getPutTokens() < Coordinate.DIMENSION) {
+    void interact(Game game) {
+        this.game = game;
+        if (!this.game.areAllTokensOnBoard()) {
             this.putToken();
         } else {
             this.moveToken();
@@ -24,13 +24,13 @@ public abstract class PlayerView {
             coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
             error = this.getPutTokenError(coordinate);
         } while (!error.isNull());
-        this.player.putToken(coordinate);
+        this.game.putToken(coordinate);
     }
 
     protected abstract Coordinate getCoordinate(Message message);
 
     protected Error getPutTokenError(Coordinate coordinate) {
-        return this.player.getPutTokenError(coordinate);
+        return this.game.getPutTokenError(coordinate);
     }
 
     private void moveToken() {
@@ -45,14 +45,14 @@ public abstract class PlayerView {
             target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
             error = this.getTargetMoveTokenError(origin, target);
         } while (error != Error.NULL);
-        this.player.moveToken(origin, target);
+        this.game.moveToken(origin, target);
     }
 
     protected Error getOriginMoveTokenError(Coordinate origin) {
-        return this.player.getOriginMoveTokenError(origin);
+        return this.game.getOriginMoveTokenError(origin);
     }
 
     protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
-        return this.player.getTargetMoveTokenError(origin, target);
+        return this.game.getTargetMoveTokenError(origin, target);
     }
 }

@@ -2,6 +2,7 @@ package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
 
 import static org.hamcrest.MatcherAssert.assertThat;

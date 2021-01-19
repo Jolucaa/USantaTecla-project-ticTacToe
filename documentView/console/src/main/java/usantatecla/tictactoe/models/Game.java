@@ -1,45 +1,75 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.types.PlayerType;
 
 public class Game {
-    
+
     private Board board;
     private Turn turn;
-    
+
     public Game() {
         this.reset();
     }
-    
+
     public void reset() {
         this.board = new Board();
         this.turn = new Turn(this.board);
-	}
-
-    public Player getPlayer() {
-        return this.turn.getActivePlayer();
     }
 
     public void next() {
         this.turn.next();
     }
 
-    public void setUsers(int numberUsers){
+    public void setUsers(int numberUsers) {
         this.turn.setUsers(numberUsers);
+    }
+
+    public Color getActiveColor() {
+        return this.turn.getActiveColor();
     }
 
     public boolean isTicTacToe() {
         return this.board.isTicTacToe(this.turn.getActiveColor());
     }
 
-    public Board getBoard() {
-        return this.board;
+    public Color getColor(Coordinate coordinate) {
+        return this.board.getColor(coordinate);
     }
-    
-    public Color getActiveColor() {
-		return this.turn.getActiveColor();
-	}
+
+    public boolean areAllTokensOnBoard() {
+        return this.turn.areAllTokensOnBoard();
+    }
+
+    public void putToken(Coordinate coordinate) {
+        this.turn.putToken(coordinate);
+    }
+
+    public Error getPutTokenError(Coordinate coordinate) {
+        return this.turn.getPutTokenError(coordinate);
+    }
+
+    public void moveToken(Coordinate origin, Coordinate target) {
+        this.turn.moveToken(origin, target);
+    }
+
+    public Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.turn.getOriginMoveTokenError(coordinate);
+    }
+
+    public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.turn.getTargetMoveTokenError(origin, target);
+    }
+
+    public PlayerType getType() {
+        return this.turn.getType();
+    }
+
+    public Coordinate getRandomCoordinate() {
+        return this.turn.getRandomCoordinate();
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -62,4 +92,5 @@ public class Game {
             return false;
         return true;
     }
+
 }

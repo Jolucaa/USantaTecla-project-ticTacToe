@@ -53,8 +53,6 @@ public abstract class SquaredBoundedCoordinate {
         return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
     }
 
-    public abstract String getErrorMessage();
-
     public void random() {
         Random random = new Random(System.currentTimeMillis());
         this.adaptee = new ConcreteCoordinate(random.nextInt(this.getDimension()), random.nextInt(this.getDimension()));

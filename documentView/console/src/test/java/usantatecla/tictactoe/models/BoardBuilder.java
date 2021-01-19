@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +59,9 @@ public class BoardBuilder {
                 this.oCoordinates.size() <= this.xCoordinates.size();
 
         for (int i = 0; i < xCoordinates.size(); i++) {
-            board.put(xCoordinates.get(i), Color.X);
+            board.putToken(xCoordinates.get(i), Color.X);
             if (i < oCoordinates.size()) {
-                board.put(oCoordinates.get(i), Color.O);
+                board.putToken(oCoordinates.get(i), Color.O);
             }
         }
     }

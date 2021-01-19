@@ -1,8 +1,7 @@
-package usantatecla.tictactoe.models;
+package usantatecla.tictactoe.types;
 
 import usantatecla.utils.models.ConcreteCoordinate;
 import usantatecla.utils.models.SquaredBoundedCoordinate;
-import usantatecla.tictactoe.types.Error;
 
 public class Coordinate extends SquaredBoundedCoordinate {
 
@@ -23,11 +22,6 @@ public class Coordinate extends SquaredBoundedCoordinate {
   @Override
   protected int getDimension() {
     return Coordinate.DIMENSION;
-  }
-
-  @Override
-  public String getErrorMessage() {
-    return Error.WRONG_COORDINATES.toString();
   }
 
   @Override

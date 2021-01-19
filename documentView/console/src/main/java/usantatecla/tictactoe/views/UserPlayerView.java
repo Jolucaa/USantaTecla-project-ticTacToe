@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 public class UserPlayerView extends PlayerView {
