@@ -96,11 +96,11 @@ public abstract class PlayerTest {
                 "O  ",
                 "   "
         ).build();
-        Board board = new BoardBuilder().rows(
-                            "OO ",
-                            "   ",
-                            "O  ").build();
-        Coordinate[] coordinates = this.getMovedCoordinates(player.board, board);
+        Board targetBoard = new BoardBuilder().rows(
+                "OO ",
+                "   ",
+                "O  ").build();
+        Coordinate[] coordinates = this.getMovedCoordinates(player.board, targetBoard);
         player = spy(player);
         doReturn(coordinates[0], coordinates[1]).when(player).getCoordinate(any());
         player.play();
@@ -118,32 +118,25 @@ public abstract class PlayerTest {
         }
     }
 
-    private Coordinate[] getMovedCoordinates(Board boardPlayer, Board board){
+    private Coordinate[] getMovedCoordinates(Board originBoard, Board targetBoard) {
+        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
+        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
+
+        return this.getOriginTargetCoordinates(originBoardCoordinates, targetBoardCoordinates);
+    }
+
+    private Coordinate[] getOriginTargetCoordinates(List<Coordinate> originBoardCoordinates, List<Coordinate> targetBoardCoordinates) {
         Coordinate[] coordinates = new Coordinate[2];
-            List<Coordinate> coordinates1 = boardPlayer.getCoordinates(Color.O);
-            List<Coordinate> coordinates2 = board.getCoordinates(Color.O);
 
-        coordinates[0] = this.getOriginCoordinate(coordinates1, coordinates2);
-        coordinates[1] = this.getTargetCoordinate(coordinates1, coordinates2);
-            return coordinates;
-    }
-
-    private Coordinate getOriginCoordinate(List<Coordinate> coordinates1, List<Coordinate> coordinates2){
-        for(int i=0; i<coordinates1.size(); i++){
-            if(!coordinates2.contains(coordinates1.get(i))){
-                return coordinates1.get(i);
+        for (int i = 0; i < originBoardCoordinates.size(); i++) {
+            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
+                coordinates[0] = originBoardCoordinates.get(i);
+            }
+            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
+                coordinates[1] = targetBoardCoordinates.get(i);
             }
         }
-        return new Coordinate();
-    }
-
-    private Coordinate getTargetCoordinate(List<Coordinate> coordinates1, List<Coordinate> coordinates2) {
-        for (int i = 0; i < coordinates1.size(); i++) {
-            if (!coordinates1.contains(coordinates2.get(i))) {
-                return coordinates2.get(i);
-            }
-        }
-        return new Coordinate();
+        return coordinates;
     }
 
 }
