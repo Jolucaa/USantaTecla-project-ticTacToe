@@ -181,15 +181,16 @@ public class BoardTest {
             Board board = this.boardBuilder.build();
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            //TODO Segun la documentación cuando usamos argumentCapture, no es necesario indicarle exactamente el número de veces que se captura.(LOGICO)
+            String[] strings = {
+                    " |   |   |   | ",
+                    " |   |   |   | ",
+                    " |   |   |   | "
+            };
             verify(console,atLeast(0)).write(argumentCaptor.capture());
-            assertThat(argumentCaptor.getAllValues().contains("X"),is(false));
-            assertThat(argumentCaptor.getAllValues().contains("O"),is(false));
-            assertThat(Collections.frequency(argumentCaptor.getAllValues()," "),is(9));
+            assertThat(arrayToString(strings),is(arrayToString(argumentCaptor.getAllValues().toArray())));
         }
     }
 
-    //TODO ArgumentCaptor
     @Test
     public void testGivenCompleteBoardWhenWriteThenPrint() {
         Console console = mock(Console.class);
@@ -201,11 +202,21 @@ public class BoardTest {
                     "O O").build();
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
+            String[] strings = {
+                    " | X |   | X | ",
+                    " | X | O |   | ",
+                    " | O |   | O | "
+            };
             verify(console,atLeast(0)).write(argumentCaptor.capture());
-            assertThat(Collections.frequency(argumentCaptor.getAllValues(),"X"),is(3));
-            assertThat(Collections.frequency(argumentCaptor.getAllValues(),"O"),is(3));
-            assertThat(Collections.frequency(argumentCaptor.getAllValues()," "),is(3));
-
+            assertThat(arrayToString(strings),is(arrayToString(argumentCaptor.getAllValues().toArray())));
         }
+    }
+
+    private String arrayToString(Object [] stringArray){
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < stringArray.length; i++) {
+            stringBuilder.append(stringArray[i]);
+        }
+        return stringBuilder.toString();
     }
 }
