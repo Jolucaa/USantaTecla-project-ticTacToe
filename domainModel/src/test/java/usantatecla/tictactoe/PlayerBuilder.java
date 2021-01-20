@@ -1,5 +1,7 @@
 package usantatecla.tictactoe;
 
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 public class PlayerBuilder {
@@ -7,6 +9,7 @@ public class PlayerBuilder {
     private Color color;
     private String[] rows;
     private boolean isUser;
+    private Player player;
 
     public PlayerBuilder() {
         this.rows = new String[]{
@@ -36,15 +39,25 @@ public class PlayerBuilder {
     }
 
     public Player build() {
-        Board board = new BoardBuilder().rows(this.rows).build();
-        Player player;
+        Board board = new BoardBuilder().build();
         if (this.isUser) {
-            player = new UserPlayer(this.color, board);
+            this.player = new UserPlayer(this.color, board);
         } else {
-            player = new MachinePlayer(this.color, board);
+            this.player = new MachinePlayer(this.color, board);
         }
-        player = spy(player);
-        return player;
+        this.player = spy(this.player);
+        this.putTokens();
+        return this.player;
+    }
+
+    private void putTokens(){
+        Board board = new BoardBuilder().rows(this.rows).build();
+        List<Coordinate> coordinates = board.getCoordinates(this.color);
+        while (coordinates.size() > 0) {
+                Coordinate coordinate = coordinates.remove(0);
+                doReturn(coordinate).when(this.player).getCoordinate(any());
+                this.player.play();
+        }
     }
 
 

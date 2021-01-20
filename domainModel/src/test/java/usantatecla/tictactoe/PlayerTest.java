@@ -1,6 +1,5 @@
 package usantatecla.tictactoe;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -8,10 +7,11 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public abstract class PlayerTest {
@@ -96,14 +96,14 @@ public abstract class PlayerTest {
                 "O  ",
                 "   "
         ).build();
-        /*.rows(
-                "OO ",
-                "   ",
-                "O  "
-        )*/
-
-
-
+        Board board = new BoardBuilder().rows(
+                            "OO ",
+                            "   ",
+                            "O  ").build();
+        Coordinate[] coordinates = this.getMovedCoordinates(player.board, board);
+        player = spy(player);
+        doReturn(coordinates[0], coordinates[1]).when(player).getCoordinate(any());
+        player.play();
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
     }
@@ -116,6 +116,34 @@ public abstract class PlayerTest {
             player.writeWinner();
             verify(this.console).writeln(Color.O.toString() + " player: You win!!! :-)");
         }
+    }
+
+    private Coordinate[] getMovedCoordinates(Board boardPlayer, Board board){
+        Coordinate[] coordinates = new Coordinate[2];
+            List<Coordinate> coordinates1 = boardPlayer.getCoordinates(Color.O);
+            List<Coordinate> coordinates2 = board.getCoordinates(Color.O);
+
+        coordinates[0] = this.getOriginCoordinate(coordinates1, coordinates2);
+        coordinates[1] = this.getTargetCoordinate(coordinates1, coordinates2);
+            return coordinates;
+    }
+
+    private Coordinate getOriginCoordinate(List<Coordinate> coordinates1, List<Coordinate> coordinates2){
+        for(int i=0; i<coordinates1.size(); i++){
+            if(!coordinates2.contains(coordinates1.get(i))){
+                return coordinates1.get(i);
+            }
+        }
+        return new Coordinate();
+    }
+
+    private Coordinate getTargetCoordinate(List<Coordinate> coordinates1, List<Coordinate> coordinates2) {
+        for (int i = 0; i < coordinates1.size(); i++) {
+            if (!coordinates1.contains(coordinates2.get(i))) {
+                return coordinates2.get(i);
+            }
+        }
+        return new Coordinate();
     }
 
 }
