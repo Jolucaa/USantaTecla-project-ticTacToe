@@ -81,7 +81,7 @@ class Board {
         return directions;
     }
 
-    private List<Coordinate> getCoordinates(Color color) {
+    List<Coordinate> getCoordinates(Color color) {
         assert !color.isNull();
 
         List<Coordinate> coordinates = new ArrayList<>();

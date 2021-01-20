@@ -9,14 +9,10 @@ import java.util.regex.Pattern;
 
 public class BoardBuilder {
 
-    private List<String> strings;
-    private List<Coordinate> xCoordinates;
-    private List<Coordinate> oCoordinates;
+    private final List<String> strings;
 
     public BoardBuilder() {
         this.strings = new ArrayList<>();
-        this.xCoordinates = new ArrayList<>();
-        this.oCoordinates = new ArrayList<>();
     }
 
     public BoardBuilder rows(String... rows) {
@@ -32,38 +28,25 @@ public class BoardBuilder {
         Board board = new Board();
         board.reset();
         if (!this.strings.isEmpty()) {
-            readRows();
-            putCoordinates(board);
+            for (int i = 0; i < this.strings.size(); i++) {
+                String string = this.strings.get(i);
+                for (int j = 0; j < string.length(); j++) {
+                    board.putToken(new Coordinate(i, j), this.getColor(string.charAt(j)));
+                }
+            }
         }
         return board;
     }
 
-    private void readRows() {
-        for (int i = 0; i < strings.size(); i++) {
-            for (int j = 0; j < strings.get(i).length(); j++) {
-                setCoordinate(strings.get(i).charAt(j), i, j);
+    private Color getColor(char character) {
+        Color result = Color.NULL;
+        for (int i = 0; i < Color.values().length - 1; i++) {
+            Color color = Color.values()[i];
+            if (color.name().equals("" + character)) {
+                result = color;
             }
         }
-    }
-
-    private void setCoordinate(char token, int row, int column) {
-        if (token == 'X') {
-            this.xCoordinates.add(new Coordinate(row, column));
-        } else if (token == 'O') {
-            this.oCoordinates.add(new Coordinate(row, column));
-        }
-    }
-
-    private void putCoordinates(Board board) {
-        assert this.xCoordinates.size() <= this.oCoordinates.size() + 1 &&
-                this.oCoordinates.size() <= this.xCoordinates.size();
-
-        for (int i = 0; i < xCoordinates.size(); i++) {
-            board.putToken(xCoordinates.get(i), Color.X);
-            if (i < oCoordinates.size()) {
-                board.putToken(oCoordinates.get(i), Color.O);
-            }
-        }
+        return result;
     }
 
 }

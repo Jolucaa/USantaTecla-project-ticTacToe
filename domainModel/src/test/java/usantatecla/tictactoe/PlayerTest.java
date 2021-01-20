@@ -90,7 +90,7 @@ public abstract class PlayerTest {
     }
 
     @Test
-    public void testGivenPlayerWhenMoveThenIsTrue() {//TODO Hacer el move
+    public void testGivenPlayerWhenMoveThenIsTrue() {
         Player player = this.getPlayerBuilder().rows(
                 "OO ",
                 "O  ",
