@@ -59,10 +59,7 @@ public class PlayerBuilder {
         List<Coordinate> coordinates = board.getCoordinates(this.color);
         while (coordinates.size() > 0) {
                 Coordinate coordinate = coordinates.remove(0);
-                //doReturn(coordinate).when(this.player).getCoordinate(any());
                 this.player.putToken(coordinate);
         }
     }
-
-
 }

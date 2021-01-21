@@ -99,7 +99,6 @@ public abstract class PlayerTest {
                 "O  ").build();
         Coordinate[] coordinates = this.getMovedCoordinates(player.board, targetBoard);
         player = spy(player);
-        //doReturn(coordinates[0], coordinates[1]).when(player).getCoordinate(any());
         player.moveToken(coordinates[0], coordinates[1]);
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
@@ -112,6 +111,7 @@ public abstract class PlayerTest {
         return this.getOriginTargetCoordinates(originBoardCoordinates, targetBoardCoordinates);
     }
 
+    //TODO Dividir en dos métodos
     private Coordinate[] getOriginTargetCoordinates(List<Coordinate> originBoardCoordinates, List<Coordinate> targetBoardCoordinates) {
         Coordinate[] coordinates = new Coordinate[2];
 
