@@ -1,13 +1,19 @@
 package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.utils.views.Console;
+import usantatecla.tictactoe.types.Error;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -23,30 +29,34 @@ public class PlayViewTest {
     @Mock
     private Console console;
 
+    @Captor
+    private ArgumentCaptor<String> captor;
+
     @BeforeEach
     void before() {
         openMocks(this);
         this.playView = spy(this.playView);
     }
-/*
+
     @Test
     void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.game.isBoardComplete()).thenReturn(false);
-            when(this.game.isUser()).thenReturn(true);
+            when(this.game.areAllTokensOnBoard()).thenReturn(false);
+            when(this.game.getType()).thenReturn(PlayerType.USER);
             when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.X);
             when(this.game.isTicTacToe()).thenReturn(true);
-            when(this.game.getToken()).thenReturn(Token.X);
+            when(this.game.getActiveColor()).thenReturn(Color.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.game).put(new Coordinate(0, 0));
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
+            verify(this.game).putToken(new Coordinate(0, 0));
+            verify(this.console, times(4)).writeln(captor.capture());
+            assertThat(captor.getValue(), is("X player: You win!!! :-)"));
         }
     }
 
-    @Test
+    /*@Test
     void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
             Coordinate coordinate = new Coordinate(0, 0);

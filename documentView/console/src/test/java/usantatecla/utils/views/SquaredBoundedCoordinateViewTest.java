@@ -45,6 +45,22 @@ public class SquaredBoundedCoordinateViewTest {
         };
     }
 
+    public SquaredBoundedCoordinateView getCoordinateView() {
+        return new SquaredBoundedCoordinateView() {
+
+            @Override
+            public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
+                return getCoordinate(1, 2);
+            }
+
+            @Override
+            public String getErrorMessage() {
+                return SquaredBoundedCoordinateViewTest.ERROR;
+            }
+
+        };
+    }
+
     @Test
     public void testGivenSquaredBoundedCoordinateWhenGetLimitsThenCorrect() {
         int row = 0;
@@ -58,40 +74,20 @@ public class SquaredBoundedCoordinateViewTest {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(this.getDimension());
-            SquaredBoundedCoordinateView coordinate = new SquaredBoundedCoordinateView() {
-                @Override
-                public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
-                    return getCoordinate(1, 2);
-                }
-
-                @Override
-                public String getErrorMessage() {
-                    return SquaredBoundedCoordinateViewTest.ERROR;
-                }
-            };
+            SquaredBoundedCoordinateView coordinate = this.getCoordinateView();
 
             assertThat(coordinate.read("").getRow(), is(1));
             assertThat(coordinate.read("").getColumn(), is(2));
         }
     }
 
-    //TODO REVISAR
+    //TODO ?Revisar metodo read SquareBoundedCoordinate y ver assert en constructor
     /*@Test
     public void testGivenSquareBoundedCoordinateWhenReadThenIncorrect() {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(this.getDimension() + 1, this.getDimension());
-            SquaredBoundedCoordinateView coordinate = new SquaredBoundedCoordinateView() {
-                @Override
-                public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
-                    return getNullCoordinate();
-                }
-
-                @Override
-                public String getErrorMessage() {
-                    return SquaredBoundedCoordinateViewTest.ERROR;
-                }
-            };
+            SquaredBoundedCoordinateView coordinate = this.getCoordinateView();
             coordinate.read("");
             verify(this.console).writeln(coordinate.getErrorMessage());
         }
