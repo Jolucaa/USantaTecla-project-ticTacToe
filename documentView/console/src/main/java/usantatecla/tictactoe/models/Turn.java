@@ -5,6 +5,7 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.PlayerType;
 
+//TODO Completar tests de turno que delegan en player
 public class Turn {
 
     private Board board;

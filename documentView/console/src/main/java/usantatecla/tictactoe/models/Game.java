@@ -5,6 +5,7 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.PlayerType;
 
+//TODO Hacer tests del Game??
 public class Game {
 
     private Board board;

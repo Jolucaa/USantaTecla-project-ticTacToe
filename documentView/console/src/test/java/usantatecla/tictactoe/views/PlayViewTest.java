@@ -56,38 +56,41 @@ public class PlayViewTest {
         }
     }
 
-    /*@Test
+    @Test
     void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
         try (MockedStatic console = mockStatic(Console.class)) {
             Coordinate coordinate = new Coordinate(0, 0);
-            when(this.game.isBoardComplete()).thenReturn(false);
-            when(this.game.isUser()).thenReturn(false);
-            when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
-            when(this.game.put(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.areAllTokensOnBoard()).thenReturn(false);
+            when(this.game.getType()).thenReturn(PlayerType.MACHINE);
+            when(this.game.getRandomCoordinate()).thenReturn(coordinate);
+            when(this.game.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.X);
             when(this.game.isTicTacToe()).thenReturn(true);
-            when(this.game.getToken()).thenReturn(Token.X);
+            when(this.game.getActiveColor()).thenReturn(Color.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.game).put(coordinate);
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
+            verify(this.game).putToken(coordinate);
+            verify(this.console, times(3)).writeln(captor.capture());
+            assertThat(captor.getValue(), is("X player: You win!!! :-)"));
         }
     }
 
     @Test
     void testGivenNewPlayViewWhenUserPlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
         try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.game.isBoardComplete()).thenReturn(true);
-            when(this.game.isUser()).thenReturn(true);
+            when(this.game.areAllTokensOnBoard()).thenReturn(true);
+            when(this.game.getType()).thenReturn(PlayerType.USER);
             when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
-            when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.getTargetMoveTokenError(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getOriginMoveTokenError((any(Coordinate.class)))).thenReturn(Error.NULL);
+            when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.X);
             when(this.game.isTicTacToe()).thenReturn(true);
-            when(this.game.getToken()).thenReturn(Token.X);
+            when(this.game.getActiveColor()).thenReturn(Color.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.game).move(new Coordinate(0, 0), new Coordinate(1, 1));
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
+            verify(this.game).moveToken(new Coordinate(0, 0), new Coordinate(1, 1));
+            verify(this.console, times(5)).writeln(captor.capture());
+            assertThat(captor.getValue(), is("X player: You win!!! :-)"));
         }
     }
 
@@ -96,37 +99,20 @@ public class PlayViewTest {
         try (MockedStatic console = mockStatic(Console.class)) {
             Coordinate origin = new Coordinate(0, 0);
             Coordinate target = new Coordinate(0, 0);
-            when(this.game.isBoardComplete()).thenReturn(true);
-            when(this.game.isUser()).thenReturn(false);
-            when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
-            when(this.game.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+            when(this.game.areAllTokensOnBoard()).thenReturn(true);
+            when(this.game.getType()).thenReturn(PlayerType.MACHINE);
+            when(this.game.getRandomCoordinate()).thenReturn(origin, target);
+            when(this.game.getTargetMoveTokenError(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.game.getOriginMoveTokenError((any(Coordinate.class)))).thenReturn(Error.NULL);
+            when(this.game.getColor(any(Coordinate.class))).thenReturn(Color.X);
             when(this.game.isTicTacToe()).thenReturn(true);
-            when(this.game.getToken()).thenReturn(Token.X);
+            when(this.game.getActiveColor()).thenReturn(Color.X);
             console.when(Console::getInstance).thenReturn(this.console);
             this.playView.interact();
-            verify(this.game).move(origin, target);
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
-        }
-    }*/
-
-    /*@Test
-    public void testGivenNewTurnWhenWriteWinnerThenCorrectMessage(){
-        try (MockedStatic<Console> console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.turn.writeWinner();
-            verify(this.console).writeln("X player: You win!!! :-)");
+            verify(this.game).moveToken(origin, target);
+            verify(this.console, times(3)).writeln(captor.capture());
+            assertThat(captor.getValue(), is("X player: You win!!! :-)"));
         }
     }
-
-    @Test
-    public void testGivenTurnWhenPlayAndWriteWinnerThenCorrectMessage(){
-        try (MockedStatic<Console> console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.turn.play();
-            this.turn.writeWinner();
-            verify(this.console).writeln("O player: You win!!! :-)");
-        }
-    }*/
 
 }

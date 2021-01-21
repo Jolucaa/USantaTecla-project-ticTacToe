@@ -4,6 +4,7 @@ import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.PlayerType;
 
+//TODO Testear getRandomCoordinate?
 public class MachinePlayer extends Player {
 
 	MachinePlayer(Color color, Board board) {
