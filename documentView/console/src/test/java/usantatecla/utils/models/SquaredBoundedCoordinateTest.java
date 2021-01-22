@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.is;
 public class SquaredBoundedCoordinateTest {
 
     private static final int DIMENSION = 7;
-    private static final String ERROR = "error";
 
     public SquaredBoundedCoordinate getNullCoordinate() {
         return new SquaredBoundedCoordinate() {
@@ -16,11 +15,6 @@ public class SquaredBoundedCoordinateTest {
             protected int getDimension() {
                 return SquaredBoundedCoordinateTest.DIMENSION;
             }
-
-            /*@Override
-            protected String getErrorMessage() {
-                return SquaredBoundedCoordinateTest.ERROR;
-            }*/
         };
     }
 
@@ -61,6 +55,14 @@ public class SquaredBoundedCoordinateTest {
         assertThat(coordinate.getDirection(this.getCoordinate(0, this.getDimension() - 1)), is(Direction.INVERSE_DIAGONAL));
         assertThat(coordinate.getDirection(coordinate), is(Direction.NULL));
         assertThat(coordinate.getDirection(this.getNullCoordinate()), is(Direction.NULL));
+    }
+
+    @Test
+    public void testGivenSquaredBoundedCoordinateWhenGetLimitsThenCorrect() {
+        int row = 0;
+        int column = this.getDimension() - 1;
+        SquaredBoundedCoordinate coordinate = this.getCoordinate(row + 1, column - 1);
+        assertThat(coordinate.getLimits(), is(new ClosedInterval(row, column)));
     }
 
 }

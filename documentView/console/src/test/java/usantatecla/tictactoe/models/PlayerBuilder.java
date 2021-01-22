@@ -1,12 +1,11 @@
 package usantatecla.tictactoe.models;
 
 import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.views.PlayerView;
 import usantatecla.tictactoe.types.Coordinate;
 
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
 
 public class PlayerBuilder {
 

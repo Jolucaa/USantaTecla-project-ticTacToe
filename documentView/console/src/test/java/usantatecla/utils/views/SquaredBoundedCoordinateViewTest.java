@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.utils.models.ClosedInterval;
 import usantatecla.utils.models.ConcreteCoordinate;
 import usantatecla.utils.models.SquaredBoundedCoordinate;
 
@@ -23,26 +22,8 @@ public class SquaredBoundedCoordinateViewTest {
     private static final int DIMENSION = 7;
     private static final String ERROR = "error";
 
-    public SquaredBoundedCoordinate getNullCoordinate() {
-        return new SquaredBoundedCoordinate() {
-            @Override
-            protected int getDimension() {
-                return SquaredBoundedCoordinateViewTest.DIMENSION;
-            }
-        };
-    }
-
     public int getDimension() {
         return SquaredBoundedCoordinateViewTest.DIMENSION;
-    }
-
-    public SquaredBoundedCoordinate getCoordinate(int row, int column) {
-        return new SquaredBoundedCoordinate(row, column) {
-            @Override
-            protected int getDimension() {
-                return SquaredBoundedCoordinateViewTest.DIMENSION;
-            }
-        };
     }
 
     public SquaredBoundedCoordinateView getCoordinateView() {
@@ -50,7 +31,12 @@ public class SquaredBoundedCoordinateViewTest {
 
             @Override
             public SquaredBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
-                return getCoordinate(1, 2);
+                return new SquaredBoundedCoordinate(concreteCoordinate) {
+                    @Override
+                    protected int getDimension() {
+                        return SquaredBoundedCoordinateViewTest.DIMENSION;
+                    }
+                };
             }
 
             @Override
@@ -62,27 +48,18 @@ public class SquaredBoundedCoordinateViewTest {
     }
 
     @Test
-    public void testGivenSquaredBoundedCoordinateWhenGetLimitsThenCorrect() {
-        int row = 0;
-        int column = this.getDimension() - 1;
-        SquaredBoundedCoordinate coordinate = this.getCoordinate(row + 1, column - 1);
-        assertThat(coordinate.getLimits(), is(new ClosedInterval(row, column)));
-    }
-
-    @Test
     public void testGivenSquareBoundedCoordinateWhenReadThenCorrect() {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(this.getDimension());
-            SquaredBoundedCoordinateView coordinate = this.getCoordinateView();
+            SquaredBoundedCoordinate coordinate = this.getCoordinateView().read("");
 
-            assertThat(coordinate.read("").getRow(), is(1));
-            assertThat(coordinate.read("").getColumn(), is(2));
+            assertThat(coordinate.getRow(), is(this.getDimension()-1));
+            assertThat(coordinate.getColumn(), is(this.getDimension()-1));
         }
     }
 
-    //TODO ?Revisar metodo read SquareBoundedCoordinate y ver assert en constructor
-    /*@Test
+    @Test
     public void testGivenSquareBoundedCoordinateWhenReadThenIncorrect() {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(this.console);
@@ -91,6 +68,6 @@ public class SquaredBoundedCoordinateViewTest {
             coordinate.read("");
             verify(this.console).writeln(coordinate.getErrorMessage());
         }
-    }*/
+    }
 
 }

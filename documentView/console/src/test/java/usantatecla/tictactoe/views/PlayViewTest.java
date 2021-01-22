@@ -8,9 +8,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.PlayerType;
 import usantatecla.utils.views.Console;
-import usantatecla.tictactoe.types.Error;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
