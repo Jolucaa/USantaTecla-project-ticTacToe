@@ -4,11 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 import usantatecla.utils.Console;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -181,13 +179,18 @@ public class BoardTest {
             Board board = this.boardBuilder.build();
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            String[] strings = {
+            String string = this.arrayToString(new String[] {
+                    "---------------",
                     " |   |   |   | ",
                     " |   |   |   | ",
-                    " |   |   |   | "
-            };
+                    " |   |   |   | ",
+                    "---------------",
+            });
+            verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
-            assertThat(arrayToString(strings),is(arrayToString(argumentCaptor.getAllValues().toArray())));
+            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
+            this.moveFromIndexToEnd(argumentCaptorValues,1);
+            assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
         }
     }
 
@@ -202,14 +205,23 @@ public class BoardTest {
                     "O O").build();
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
-            String[] strings = {
+            String string = this.arrayToString(new String[] {
+                    "---------------",
                     " | X |   | X | ",
                     " | X | O |   | ",
-                    " | O |   | O | "
-            };
+                    " | O |   | O | ",
+                    "---------------"
+            });
+            verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
-            assertThat(arrayToString(strings),is(arrayToString(argumentCaptor.getAllValues().toArray())));
+            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
+            this.moveFromIndexToEnd(argumentCaptorValues,1);
+            assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
         }
+    }
+
+    private void moveFromIndexToEnd(List<String> list, int index){ //TODO YAGNI?
+        list.add(list.size()-1, list.remove(index));
     }
 
     private String arrayToString(Object [] stringArray){
