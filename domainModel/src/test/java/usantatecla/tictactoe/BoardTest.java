@@ -189,7 +189,7 @@ public class BoardTest {
             verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.moveFromIndexToEnd(argumentCaptorValues,1);
+            this.moveFromIndexToEnd(argumentCaptorValues);
             assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
         }
     }
@@ -215,13 +215,13 @@ public class BoardTest {
             verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.moveFromIndexToEnd(argumentCaptorValues,1);
+            this.moveFromIndexToEnd(argumentCaptorValues);
             assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
         }
     }
 
-    private void moveFromIndexToEnd(List<String> list, int index){ //TODO YAGNI?
-        list.add(list.size()-1, list.remove(index));
+    private void moveFromIndexToEnd(List<String> list){
+        list.add(list.size()-1, list.remove(1));
     }
 
     private String arrayToString(Object [] stringArray){
