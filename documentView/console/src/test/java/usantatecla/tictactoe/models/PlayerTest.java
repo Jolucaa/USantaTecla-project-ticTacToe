@@ -87,6 +87,26 @@ public abstract class PlayerTest {
     }
 
     @Test
+    public void testGivenNewPlayerWhenGetOriginMoveTokenErrorThenReturnErrorNull() {
+        Player player = this.getPlayerBuilder().rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.getOriginMoveTokenError(new Coordinate(0,1)), is(Error.NULL));
+    }
+
+    @Test
+    public void testGivenNewPlayerWhenAreAllTokensOnBoardThenReturnTrue() {
+        Player player = this.getPlayerBuilder().rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
+    }
+
+    @Test
     public void testGivenPlayerWhenMoveThenIsTrue() {
         Player player = this.getPlayerBuilder().rows(
                 "OO ",
