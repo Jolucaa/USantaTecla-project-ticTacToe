@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.types;
 
 import usantatecla.utils.models.ConcreteCoordinate;
-import usantatecla.utils.models.SquaredBoundedCoordinate;
+import usantatecla.utils.models.SquareBoundedCoordinate;
 
-public class Coordinate extends SquaredBoundedCoordinate {
+public class Coordinate extends SquareBoundedCoordinate {
 
   public static final int DIMENSION = 3;
   

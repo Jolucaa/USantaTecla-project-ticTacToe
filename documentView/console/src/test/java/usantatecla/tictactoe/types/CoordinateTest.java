@@ -1,13 +1,12 @@
 package usantatecla.tictactoe.types;
 
-import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.utils.models.SquaredBoundedCoordinate;
-import usantatecla.utils.models.SquaredBoundedCoordinateTest;
+import usantatecla.utils.models.SquareBoundedCoordinate;
+import usantatecla.utils.models.SquareBoundedCoordinateTest;
 
-public class CoordinateTest extends SquaredBoundedCoordinateTest {
+public class CoordinateTest extends SquareBoundedCoordinateTest {
 
     @Override
-    public SquaredBoundedCoordinate getNullCoordinate() {
+    public SquareBoundedCoordinate getNullCoordinate() {
         return new Coordinate();
     }
 
@@ -17,7 +16,7 @@ public class CoordinateTest extends SquaredBoundedCoordinateTest {
     }
 
     @Override
-    public SquaredBoundedCoordinate getCoordinate(int row, int column) {
+    public SquareBoundedCoordinate getCoordinate(int row, int column) {
         return new Coordinate(row, column);
     }
 

@@ -4,7 +4,7 @@ import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
-public abstract class PlayerView {
+abstract class PlayerView {
 
     protected Game game;
 

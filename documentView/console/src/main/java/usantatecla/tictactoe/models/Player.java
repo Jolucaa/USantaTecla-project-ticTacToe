@@ -5,7 +5,7 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.types.PlayerType;
 
-public abstract class Player {
+abstract class Player {
 
     protected Color color;
     protected Board board;

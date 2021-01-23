@@ -2,7 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Coordinate;
 
-public class MachinePlayerView extends PlayerView {
+class MachinePlayerView extends PlayerView {
 
     @Override
     protected Coordinate getCoordinate(Message message) {

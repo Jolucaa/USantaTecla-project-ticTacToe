@@ -21,5 +21,4 @@ public class View extends WithGameView {
             this.playView.interact();
         } while (this.resumeView.interact());
     }
-
 }

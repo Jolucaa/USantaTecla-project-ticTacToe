@@ -3,7 +3,8 @@ package usantatecla.tictactoe.views;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
-public class UserPlayerView extends PlayerView {
+class UserPlayerView extends PlayerView {
+
     @Override
     protected Coordinate getCoordinate(Message message) {
         assert message != null;

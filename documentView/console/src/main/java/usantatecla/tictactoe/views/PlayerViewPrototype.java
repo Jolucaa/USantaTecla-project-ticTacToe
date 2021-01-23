@@ -4,7 +4,7 @@ import usantatecla.tictactoe.types.PlayerType;
 
 import java.util.HashMap;
 
-public class PlayerViewPrototype {
+class PlayerViewPrototype {
 
     private HashMap<PlayerType, PlayerView> playerViewAsoc;
 
@@ -14,7 +14,7 @@ public class PlayerViewPrototype {
         this.playerViewAsoc.put(PlayerType.MACHINE, new MachinePlayerView());
     }
 
-    public PlayerView createView(PlayerType playerType) {
+    PlayerView createView(PlayerType playerType) {
         return this.playerViewAsoc.get(playerType);
     }
 

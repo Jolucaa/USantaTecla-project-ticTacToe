@@ -3,11 +3,11 @@ package usantatecla.tictactoe.views;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.utils.views.SquaredBoundedCoordinateView;
-import usantatecla.utils.views.SquaredBoundedCoordinateViewTest;
+import usantatecla.utils.views.SquareBoundedCoordinateView;
+import usantatecla.utils.views.SquareBoundedCoordinateViewTest;
 
 @ExtendWith(MockitoExtension.class)
-public class CoordinateViewTest extends SquaredBoundedCoordinateViewTest {
+public class CoordinateViewTest extends SquareBoundedCoordinateViewTest {
 
     @Override
     public int getDimension() {
@@ -15,7 +15,7 @@ public class CoordinateViewTest extends SquaredBoundedCoordinateViewTest {
     }
 
     @Override
-    public SquaredBoundedCoordinateView getCoordinateView() {
+    public SquareBoundedCoordinateView getCoordinateView() {
         return new CoordinateView();
     }
 

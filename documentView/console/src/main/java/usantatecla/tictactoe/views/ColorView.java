@@ -3,7 +3,7 @@ package usantatecla.tictactoe.views;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
 
-public class ColorView {
+class ColorView {
 
     void write(Color color) {
 		String string = color.name();
