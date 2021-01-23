@@ -54,12 +54,10 @@ public abstract class PlayerTest {
     public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
         Player player = this.getPlayerBuilder().rows(
                 "   ",
-                " O ",
+                " X ",
                 "   "
         ).build();
-        Player player2 = new PlayerBuilder().color(Color.X).user().build();
-        player2.board = player.board;
-        assertThat(player2.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
+        assertThat(player.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
     }
 
     @Test
