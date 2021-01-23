@@ -30,7 +30,7 @@ abstract class Player {
 			coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
 			error = this.getPutTokenError(coordinate);
 		} while (!error.isNull());
-		this.board.put(coordinate, this.color);
+		this.board.putToken(coordinate, this.color);
 		this.putTokens++;
 	}
 
@@ -55,7 +55,7 @@ abstract class Player {
 			target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
 			error = this.getTargetMoveTokenError(origin, target);
 		} while (error != Error.NULL);
-		this.board.move(origin, target);
+		this.board.moveToken(origin, target);
 	}
 
 	protected Error getOriginMoveTokenError(Coordinate origin) {

@@ -2,7 +2,6 @@ package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.PlayerType;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,9 +22,8 @@ public class MachinePlayerTest extends PlayerTest {
 
     @Test
     public void testGivenMachinePlayerWhenGetRandomCoordinateThenReturnValidCoordinate() {
-        MachinePlayer player = new MachinePlayer(Color.O, new Board());
-        Coordinate coordinate = player.getRandomCoordinate();
-        assertThat(coordinate.isValid(), is(true));
+        MachinePlayer player = (MachinePlayer) this.getPlayerBuilder().build();
+        assertThat(player.getRandomCoordinate().isValid(), is(true));
     }
 
 

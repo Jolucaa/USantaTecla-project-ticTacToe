@@ -23,19 +23,19 @@ class Board {
 		}
 	}
 
-	void put(Coordinate coordinate, Color color) {
+	void putToken(Coordinate coordinate, Color color) {
 		assert !coordinate.isNull();
 		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
 	}
 
-	void move(Coordinate origin, Coordinate target) {
+	void moveToken(Coordinate origin, Coordinate target) {
 		assert !origin.isNull() && !this.isEmpty(origin);
 		assert !target.isNull() && this.isEmpty(target);
 		assert !origin.equals(target);
 
 		final Color color = this.getColor(origin);
-		this.put(origin, Color.NULL);
-		this.put(target, color);
+		this.putToken(origin, Color.NULL);
+		this.putToken(target, color);
 	}
 
 	private Color getColor(Coordinate coordinate) {

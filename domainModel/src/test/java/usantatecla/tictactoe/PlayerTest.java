@@ -100,12 +100,37 @@ public abstract class PlayerTest {
                 "OO ",
                 "   ",
                 "O  ").build();
-        Coordinate[] coordinates = this.getMovedCoordinates(player.board, targetBoard);
+        Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
+        Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
         player = spy(player);
-        doReturn(coordinates[0], coordinates[1]).when(player).getCoordinate(any());
+        doReturn(origin, target).when(player).getCoordinate(any());
         player.play();
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
         assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
+    }
+
+    private Coordinate getOriginCoordinate(Board originBoard, Board targetBoard) {
+        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
+        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
+        Coordinate origin = new Coordinate();
+        for (int i = 0; i < originBoardCoordinates.size(); i++) {
+            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
+                origin = originBoardCoordinates.get(i);
+            }
+        }
+        return origin;
+    }
+
+    private Coordinate getTargetCoordinate(Board originBoard, Board targetBoard) {
+        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
+        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
+        Coordinate target = new Coordinate();
+        for (int i = 0; i < originBoardCoordinates.size(); i++) {
+            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
+                target = targetBoardCoordinates.get(i);
+            }
+        }
+        return target;
     }
 
     @Test
@@ -116,27 +141,6 @@ public abstract class PlayerTest {
             player.writeWinner();
             verify(this.console).writeln(Color.O.toString() + " player: You win!!! :-)");
         }
-    }
-
-    private Coordinate[] getMovedCoordinates(Board originBoard, Board targetBoard) {
-        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
-        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-
-        return this.getOriginTargetCoordinates(originBoardCoordinates, targetBoardCoordinates);
-    }
-
-    private Coordinate[] getOriginTargetCoordinates(List<Coordinate> originBoardCoordinates, List<Coordinate> targetBoardCoordinates) {
-        Coordinate[] coordinates = new Coordinate[2];
-
-        for (int i = 0; i < originBoardCoordinates.size(); i++) {
-            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
-                coordinates[0] = originBoardCoordinates.get(i);
-            }
-            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
-                coordinates[1] = targetBoardCoordinates.get(i);
-            }
-        }
-        return coordinates;
     }
 
 }

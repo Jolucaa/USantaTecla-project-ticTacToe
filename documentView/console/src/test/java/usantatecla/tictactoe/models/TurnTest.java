@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 
 public class TurnTest {
 
-    Turn turn;
+    private Turn turn;
 
     @BeforeEach
     public void beforeEach() {
@@ -24,13 +24,20 @@ public class TurnTest {
     }
 
     @Test
+    public void testGivenNewTurnWhenGetActivePlayerThenReturn(){
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
+    }
+
+    @Test
     public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured(){
         assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
     @Test
-    public void testGivenTurnWhenPlayAndGetActiveColorThenCorrectColorIsCaptured(){
+    public void testGivenTurnWhenNextThenNextTurn(){
         this.turn.next();
         assertThat(this.turn.getActiveColor(), is(Color.O));
+        this.turn.next();
+        assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 }

@@ -26,6 +26,7 @@ class Board {
 
     void putToken(Coordinate coordinate, Color color) {
         assert !coordinate.isNull();
+
         this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
     }
 

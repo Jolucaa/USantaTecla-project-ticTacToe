@@ -28,7 +28,7 @@ public class BoardBuilder {
             for (int i = 0; i < this.strings.size(); i++) {
                 String string = this.strings.get(i);
                 for (int j = 0; j < string.length(); j++) {
-                    board.put(new Coordinate(i, j), this.getColor(string.charAt(j)));
+                    board.putToken(new Coordinate(i, j), this.getColor(string.charAt(j)));
                 }
             }
         }

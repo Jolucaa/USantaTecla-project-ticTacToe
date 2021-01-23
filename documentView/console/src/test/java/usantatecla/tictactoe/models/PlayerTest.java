@@ -1,8 +1,6 @@
 package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
@@ -13,13 +11,27 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.spy;
 
-@ExtendWith(MockitoExtension.class)
 public abstract class PlayerTest {
 
     protected final Color COLOR = Color.O;
 
     public abstract PlayerBuilder getPlayerBuilder();
 
+    @Test
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenTrue() {
+        Player player = this.getPlayerBuilder().rows(
+                "OO ",
+                "   ",
+                " O "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
+    }
+
+    @Test
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenFalse() {
+        Player player = this.getPlayerBuilder().build();
+        assertThat(player.areAllTokensOnBoard(), is(false));
+    }
 
     @Test
     public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
@@ -93,7 +105,7 @@ public abstract class PlayerTest {
                 "O  ",
                 "   "
         ).build();
-        assertThat(player.getOriginMoveTokenError(new Coordinate(0,1)), is(Error.NULL));
+        assertThat(player.getOriginMoveTokenError(new Coordinate(0, 1)), is(Error.NULL));
     }
 
     @Test
@@ -117,35 +129,35 @@ public abstract class PlayerTest {
                 "OO ",
                 "   ",
                 "O  ").build();
-        Coordinate originCoordinate = this.getOriginCoordinate(player.board, targetBoard);
-        Coordinate targetCoordinate = this.getTargetCoordinate(player.board, targetBoard);
+        Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
+        Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
         player = spy(player);
-        player.moveToken(originCoordinate, targetCoordinate);
-        assertThat(player.board.isEmpty(originCoordinate), is(true));
-        assertThat(player.board.isOccupied(targetCoordinate, Color.O), is(true));
+        player.moveToken(origin, target);
+        assertThat(player.board.isEmpty(origin), is(true));
+        assertThat(player.board.isOccupied(target, Color.O), is(true));
     }
 
     private Coordinate getOriginCoordinate(Board originBoard, Board targetBoard) {
         List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
         List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate originCoordinate = new Coordinate();
+        Coordinate origin = new Coordinate();
         for (int i = 0; i < originBoardCoordinates.size(); i++) {
             if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
-                originCoordinate = originBoardCoordinates.get(i);
+                origin = originBoardCoordinates.get(i);
             }
         }
-        return originCoordinate;
+        return origin;
     }
 
     private Coordinate getTargetCoordinate(Board originBoard, Board targetBoard) {
         List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
         List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate targetCoordinate = new Coordinate();
+        Coordinate target = new Coordinate();
         for (int i = 0; i < originBoardCoordinates.size(); i++) {
             if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
-                targetCoordinate = targetBoardCoordinates.get(i);
+                target = targetBoardCoordinates.get(i);
             }
         }
-        return targetCoordinate;
+        return target;
     }
 }

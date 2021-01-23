@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 public class BoardTest {
 
-    BoardBuilder boardBuilder;
+    private BoardBuilder boardBuilder;
 
     @BeforeEach
     public void beforeEach() {
@@ -37,7 +37,7 @@ public class BoardTest {
         Board board = this.boardBuilder.build();
         Color color = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
-        board.put(coordinate, color);
+        board.putToken(coordinate, color);
         assertThat(board.isOccupied(coordinate, color), is(true));
     }
 
@@ -47,12 +47,11 @@ public class BoardTest {
                 "X  ",
                 "   ",
                 "   ").build();
-        Color color = Color.X;
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 1);
-        board.move(origin, target);
+        board.moveToken(origin, target);
         assertThat(board.isEmpty(origin), is(true));
-        assertThat(board.isOccupied(target, color), is(true));
+        assertThat(board.isOccupied(target, Color.X), is(true));
     }
 
     @Test
@@ -63,18 +62,15 @@ public class BoardTest {
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 1);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
     public void testGivenBoardWhenMoveTokenAndOriginIsEmptyThenIsAssertion() {
-        Board board = this.boardBuilder.rows(
-                "   ",
-                "   ",
-                "   ").build();
+        Board board = this.boardBuilder.build();
         Coordinate origin = new Coordinate(1, 0);
         Coordinate target = new Coordinate(2, 2);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
@@ -85,7 +81,7 @@ public class BoardTest {
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
         Coordinate target = new Coordinate(0, 0);
-        Assertions.assertThrows(AssertionError.class, () -> board.move(origin, target));
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
@@ -127,8 +123,7 @@ public class BoardTest {
                 " X ",
                 "OXO",
                 " X ").build();
-        Color color = Color.X;
-        assertThat(board.isTicTacToe(color), is(true));
+        assertThat(board.isTicTacToe(Color.X), is(true));
     }
 
     @Test
@@ -137,8 +132,7 @@ public class BoardTest {
                 " O ",
                 "XXX",
                 " O ").build();
-        Color color = Color.X;
-        assertThat(board.isTicTacToe(color), is(true));
+        assertThat(board.isTicTacToe(Color.X), is(true));
     }
 
     @Test
@@ -147,18 +141,16 @@ public class BoardTest {
                 "X  ",
                 "OXO",
                 "  X").build();
-        Color color = Color.X;
-        assertThat(board.isTicTacToe(color), is(true));
+        assertThat(board.isTicTacToe(Color.X), is(true));
     }
 
     @Test
-    public void testGivenBoardWhenIsInversalDiagonalTicTacToeThenIsTrue() {
+    public void testGivenBoardWhenIsInverseDiagonalTicTacToeThenIsTrue() {
         Board board = this.boardBuilder.rows(
                 "  X",
                 "OXO",
                 "X  ").build();
-        Color color = Color.X;
-        assertThat(board.isTicTacToe(color), is(true));
+        assertThat(board.isTicTacToe(Color.X), is(true));
     }
 
     @Test
@@ -167,8 +159,8 @@ public class BoardTest {
                 "XO ",
                 "XO ",
                 "OX ").build();
-        Color token = Color.O;
-        assertThat(board.isTicTacToe(token), is(false));
+        assertThat(board.isTicTacToe(Color.X), is(false));
+        assertThat(board.isTicTacToe(Color.O), is(false));
     }
 
     @Test
