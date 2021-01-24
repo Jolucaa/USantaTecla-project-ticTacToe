@@ -1,7 +1,5 @@
 package usantatecla.tictactoe;
 
-import usantatecla.utils.BoundedIntDialog;
-
 class Turn {
 	
 	private Board board;
@@ -17,14 +15,8 @@ class Turn {
 	}
 
 	void reset() {
-		BoundedIntDialog dialog = new BoundedIntDialog(0, Turn.NUMBER_PLAYERS);
-		int numberUsers = dialog.read(Message.NUMBER_PLAYERS.toString());
-		for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
-			if (i < numberUsers){ //TODO no está probado, solo con machine
-				this.players[i] = new UserPlayer(Color.get(i), this.board);
-			} else {
-				this.players[i] = new MachinePlayer(Color.get(i), this.board);
-			}
+		for (int i = 0; i < NUMBER_PLAYERS; i++) {
+			this.players[i] = new Player(Color.get(i), this.board);
 		}
 		this.activePlayer = 0;
 	}
