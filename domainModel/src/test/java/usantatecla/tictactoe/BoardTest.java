@@ -169,7 +169,6 @@ public class BoardTest {
         try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
             staticConsole.when(Console::getInstance).thenReturn(console);
             Board board = this.boardBuilder.build();
-            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
             String string = this.arrayToString(new String[] {
                     "---------------",
@@ -178,10 +177,11 @@ public class BoardTest {
                     " |   |   |   | ",
                     "---------------",
             });
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.moveFromIndexToEnd(argumentCaptorValues);
+            this.reorder(argumentCaptorValues);
             assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
         }
     }
@@ -195,7 +195,6 @@ public class BoardTest {
                     "X X",
                     "XO ",
                     "O O").build();
-            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             board.write();
             String string = this.arrayToString(new String[] {
                     "---------------",
@@ -204,16 +203,13 @@ public class BoardTest {
                     " | O |   | O | ",
                     "---------------"
             });
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
             verify(console,atLeast(0)).writeln(argumentCaptor.capture());
             verify(console,atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.moveFromIndexToEnd(argumentCaptorValues);
-            assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
+            this.reorder(argumentCaptorValues);
+            assertThat(string,is(this.arrayToString(argumentCaptorValues.toArray())));
         }
-    }
-
-    private void moveFromIndexToEnd(List<String> list){
-        list.add(list.size()-1, list.remove(1));
     }
 
     private String arrayToString(Object [] stringArray){
@@ -223,4 +219,9 @@ public class BoardTest {
         }
         return stringBuilder.toString();
     }
+
+    private void reorder(List<String> list){
+        list.add(list.size()-1, list.remove(1));
+    }
+
 }
