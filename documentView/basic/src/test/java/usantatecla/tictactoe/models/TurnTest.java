@@ -24,17 +24,17 @@ public class TurnTest {
     }
 
     @Test
-    public void testGivenNewTurnWhenGetActivePlayerThenReturn(){
+    public void testGivenNewTurnWhenGetActivePlayerThenReturn() {
         assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
     }
 
     @Test
-    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured(){
+    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured() {
         assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
     @Test
-    public void testGivenTurnWhenNextThenNextTurn(){
+    public void testGivenTurnWhenNextThenNextTurn() {
         this.turn.next();
         assertThat(this.turn.getActiveColor(), is(Color.O));
         this.turn.next();

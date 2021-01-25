@@ -7,13 +7,13 @@ import usantatecla.utils.views.BoundedIntDialog;
 class StartView extends WithGameView {
 
     StartView(Game game) {
-		super(game);
-	}
+        super(game);
+    }
 
     void interact() {
-		Message.TITLE.writeln();
-		this.game.setUsers();
-		new BoardView().write(this.game);
-	}
+        Message.TITLE.writeln();
+        this.game.setUsers();
+        new BoardView().write(this.game);
+    }
 
 }

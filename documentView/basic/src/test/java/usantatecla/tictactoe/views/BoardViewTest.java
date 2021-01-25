@@ -86,11 +86,11 @@ public class BoardViewTest {
                     "---------------",
             });
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-            verify(console,atLeast(0)).writeln(argumentCaptor.capture());
-            verify(console,atLeast(0)).write(argumentCaptor.capture());
+            verify(console, atLeast(0)).writeln(argumentCaptor.capture());
+            verify(console, atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
             this.viewTestUtils.reorder(argumentCaptorValues);
-            assertThat(string,is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
+            assertThat(string, is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
         }
     }
 
