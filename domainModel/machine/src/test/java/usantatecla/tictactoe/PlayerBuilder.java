@@ -50,13 +50,13 @@ public class PlayerBuilder {
         return this.player;
     }
 
-    private void putTokens(){
+    private void putTokens() {
         Board board = new BoardBuilder().rows(this.rows).build();
         List<Coordinate> coordinates = board.getCoordinates(this.color);
         while (coordinates.size() > 0) {
-                Coordinate coordinate = coordinates.remove(0);
-                doReturn(coordinate).when(this.player).getCoordinate(any());
-                this.player.play();
+            Coordinate coordinate = coordinates.remove(0);
+            doReturn(coordinate).when(this.player).getCoordinate(any());
+            this.player.play();
         }
     }
 

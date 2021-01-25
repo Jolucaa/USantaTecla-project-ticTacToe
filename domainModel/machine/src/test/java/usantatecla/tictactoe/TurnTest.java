@@ -22,17 +22,13 @@ public class TurnTest {
 
     Turn turn;
 
-    @BeforeEach
-    public void beforeEach() {
+    @Test
+    public void testGivenNewTurnWhenNullBoardThenAssertionError() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(0);
             this.turn = new Turn(new Board());
         }
-    }
-
-    @Test
-    public void testGivenNewTurnWhenNullBoardThenAssertionError() {
         Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
@@ -40,19 +36,43 @@ public class TurnTest {
     public void testGivenNewTurnWhenWriteWinnerThenCorrectMessage() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readInt(anyString())).thenReturn(0);
+            this.turn = new Turn(new Board());
             this.turn.writeWinner();
             verify(this.console).writeln("X player: You win!!! :-)");
         }
     }
 
     @Test
-    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured() {
-        assertThat(this.turn.getActiveColor(), is(Color.X));
+    public void testGivenNewTurnWhenGetActiveColorOfMachineThenCorrectColorIsCaptured() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readInt(anyString())).thenReturn(0);
+            this.turn = new Turn(new Board());
+            assertThat(this.turn.getActiveColor(), is(Color.X));
+        }
+    }
+
+    @Test
+    public void testGivenNewTurnWhenGetActiveColorOfUserPlayerThenCorrectColorIsCaptured() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readInt(anyString())).thenReturn(1);
+            this.turn = new Turn(new Board());
+            assertThat(this.turn.getActiveColor(), is(Color.X));
+        }
     }
 
     @Test
     public void testGivenTurnWhenPlayAndGetActiveColorThenCorrectColorIsCaptured() {
-        this.turn.play();
-        assertThat(this.turn.getActiveColor(), is(Color.O));
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readInt(anyString())).thenReturn(0);
+            this.turn = new Turn(new Board());
+            this.turn.play();
+            assertThat(this.turn.getActiveColor(), is(Color.O));
+        }
     }
+
+
 }

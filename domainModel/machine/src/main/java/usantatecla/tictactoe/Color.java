@@ -4,25 +4,25 @@ import usantatecla.utils.Console;
 
 enum Color {
 
-	X,
-	O,
-	NULL;
+    X,
+    O,
+    NULL;
 
-	static Color get(int ordinal){
-		assert ordinal >= 0 && ordinal < Color.NULL.ordinal();
+    static Color get(int ordinal) {
+        assert ordinal >= 0 && ordinal < Color.NULL.ordinal();
 
-		return Color.values()[ordinal];
-	}
+        return Color.values()[ordinal];
+    }
 
-	void write() {
-		String string = this.name();
-		if (this.isNull()) {
-			string = " ";
-		}
-		Console.getInstance().write(string);
-	}
+    void write() {
+        String string = this.name();
+        if (this.isNull()) {
+            string = " ";
+        }
+        Console.getInstance().write(string);
+    }
 
-	boolean isNull() {
-		return this == Color.NULL;
-	}
+    boolean isNull() {
+        return this == Color.NULL;
+    }
 }

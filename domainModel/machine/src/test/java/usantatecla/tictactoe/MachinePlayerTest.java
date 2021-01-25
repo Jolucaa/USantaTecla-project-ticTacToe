@@ -16,7 +16,7 @@ public class MachinePlayerTest extends PlayerTest {
 
     @Test
     public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        Coordinate coordinate = new Coordinate(1,1);
+        Coordinate coordinate = new Coordinate(1, 1);
         Player player = this.getPlayerBuilder().build();
         when(player.getCoordinate(any(Message.class))).thenReturn(coordinate);
         assertThat(player.getCoordinate(Message.ENTER_COORDINATE_TO_PUT).equals(coordinate), is(true));

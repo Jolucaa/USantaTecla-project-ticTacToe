@@ -170,7 +170,7 @@ public class BoardTest {
             staticConsole.when(Console::getInstance).thenReturn(console);
             Board board = this.boardBuilder.build();
             board.write();
-            String string = this.arrayToString(new String[] {
+            String string = this.arrayToString(new String[]{
                     "---------------",
                     " |   |   |   | ",
                     " |   |   |   | ",
@@ -178,11 +178,11 @@ public class BoardTest {
                     "---------------",
             });
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-            verify(console,atLeast(0)).writeln(argumentCaptor.capture());
-            verify(console,atLeast(0)).write(argumentCaptor.capture());
+            verify(console, atLeast(0)).writeln(argumentCaptor.capture());
+            verify(console, atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
             this.reorder(argumentCaptorValues);
-            assertThat(string,is(arrayToString(argumentCaptorValues.toArray())));
+            assertThat(string, is(arrayToString(argumentCaptorValues.toArray())));
         }
     }
 
@@ -196,7 +196,7 @@ public class BoardTest {
                     "XO ",
                     "O O").build();
             board.write();
-            String string = this.arrayToString(new String[] {
+            String string = this.arrayToString(new String[]{
                     "---------------",
                     " | X |   | X | ",
                     " | X | O |   | ",
@@ -204,24 +204,24 @@ public class BoardTest {
                     "---------------"
             });
             ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-            verify(console,atLeast(0)).writeln(argumentCaptor.capture());
-            verify(console,atLeast(0)).write(argumentCaptor.capture());
+            verify(console, atLeast(0)).writeln(argumentCaptor.capture());
+            verify(console, atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
             this.reorder(argumentCaptorValues);
-            assertThat(string,is(this.arrayToString(argumentCaptorValues.toArray())));
+            assertThat(string, is(this.arrayToString(argumentCaptorValues.toArray())));
         }
     }
 
-    private String arrayToString(Object [] stringArray){
+    private String arrayToString(Object[] stringArray) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < stringArray.length; i++) {
+        for (int i = 0; i < stringArray.length; i++) {
             stringBuilder.append(stringArray[i]);
         }
         return stringBuilder.toString();
     }
 
-    private void reorder(List<String> list){
-        list.add(list.size()-1, list.remove(1));
+    private void reorder(List<String> list) {
+        list.add(list.size() - 1, list.remove(1));
     }
 
 }
