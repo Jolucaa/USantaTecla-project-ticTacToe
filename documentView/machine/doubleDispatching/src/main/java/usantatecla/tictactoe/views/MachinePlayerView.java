@@ -9,4 +9,5 @@ class MachinePlayerView extends PlayerView {
     protected Coordinate getCoordinate(Message message) {
         return ((MachinePlayer) this.player).getRandomCoordinate();
     }
+    
 }

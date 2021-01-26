@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.is;
 
 public class ErrorTest {
 
+    //TODO Test de writeln
+
     @Test
     public void testGivenNullErrorWhenIsNullThenTrue() {
         assertThat(Error.NULL.isNull(), is(true));
