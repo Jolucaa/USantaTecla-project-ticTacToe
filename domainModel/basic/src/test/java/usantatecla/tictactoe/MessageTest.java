@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 
 public class MessageTest {
 
+    //TODO documentView diferente
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     Console console;
