@@ -1,10 +1,9 @@
-# TicTacToe. Solución 1.1. *domainModel*
+# TicTacToe. Solución 1.2. *domainModel Machine*
 Santa Tecla  
 [parqueNaturalSantaTecla@gmail.com](mailto:parqueNaturalSantaTecla@gmail.com)  
-version 0.0.1
 
 **Índice**
-1. [Requisitos 1. Básica](#requisitos-1-básica)
+1. [Requisitos 1. Básica](#requisitos-1-Básica)
 2. [Vista de Lógica/Diseño](#vista-de-lógicadiseño)  
     2.1. [Arquitectura](#arquitectura)     
     2.2. [Paquete tictactoe](#paquete-tictactoe)  

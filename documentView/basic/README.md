@@ -1,4 +1,4 @@
-## TicTacToe. Solucion 2.1. documentView
+## TicTacToe. Solucion 2.1. documentView Basic
 Universo Santa Tecla  
 [uSantaTecla@gmail.com](mailto:uSantaTecla@gmail.com)  
   
