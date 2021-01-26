@@ -29,4 +29,5 @@ class PlayView extends WithGameView implements PlayerVisitor {
     public void visit(MachinePlayer machinePlayer) {
         new MachinePlayerView().interact(machinePlayer);
     }
+    
 }

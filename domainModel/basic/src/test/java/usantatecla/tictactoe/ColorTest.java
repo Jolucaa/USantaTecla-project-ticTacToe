@@ -19,18 +19,16 @@ public class ColorTest {
     @Mock
     Console console;
 
-    private static final int MIN_VALUE = 0;
-
     @Test
     public void testGivenNewColorWhenGetThenReturn() {
-        assertThat(Color.get(ColorTest.MIN_VALUE), is(Color.X));
-        assertThat(Color.get(ColorTest.MIN_VALUE + 1), is(Color.O));
+        assertThat(Color.get(0), is(Color.X));
+        assertThat(Color.get(1), is(Color.O));
     }
 
     @Test
     public void testGivenNewColorWhenGetThenAssertionError() {
         Assertions.assertThrows(AssertionError.class, () -> Color.get(Color.NULL.ordinal()));
-        Assertions.assertThrows(AssertionError.class, () -> Color.get(ColorTest.MIN_VALUE - 1));
+        Assertions.assertThrows(AssertionError.class, () -> Color.get(-1));
     }
 
     @Test

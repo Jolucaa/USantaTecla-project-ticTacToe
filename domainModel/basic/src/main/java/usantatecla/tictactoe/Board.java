@@ -25,6 +25,7 @@ class Board {
 
 	void putToken(Coordinate coordinate, Color color) {
 		assert !coordinate.isNull();
+
 		this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
 	}
 
@@ -33,7 +34,7 @@ class Board {
 		assert !target.isNull() && this.isEmpty(target);
 		assert !origin.equals(target);
 
-		final Color color = this.getColor(origin);
+		Color color = this.getColor(origin);
 		this.putToken(origin, Color.NULL);
 		this.putToken(target, color);
 	}

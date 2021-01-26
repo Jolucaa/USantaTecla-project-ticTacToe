@@ -19,5 +19,4 @@ public class MachinePlayerTest extends PlayerTest {
         assertThat(player.getRandomCoordinate().isValid(), is(true));
     }
 
-
 }

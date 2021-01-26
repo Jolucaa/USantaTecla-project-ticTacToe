@@ -13,6 +13,10 @@ public class Turn {
         assert board != null;
         this.board = board;
         this.players = new Player[Turn.NUMBER_PLAYERS];
+        this.reset();
+    }
+
+    void reset() {
         this.activePlayer = 0;
     }
 
