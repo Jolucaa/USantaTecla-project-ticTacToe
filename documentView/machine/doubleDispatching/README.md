@@ -1,4 +1,4 @@
-## TicTacToe. Solucion 2.1. documentView
+## TicTacToe. Solucion 2.3 machine DoubleDispatching
 Universo Santa Tecla  
 [uSantaTecla@gmail.com](mailto:uSantaTecla@gmail.com)  
   
@@ -24,7 +24,7 @@ Universo Santa Tecla
 | :------- | :------: |
 
 # Vista de Lógica/Diseño
-  - Arquitectura Documento/Vista mediante **Patrón de Vista Separada**
+  - Arquitectura Documento/Vista mediante **Patrón de Vista Separada** y **Patrón de Doble Despacho**
 
 ## Arquitectura
 
