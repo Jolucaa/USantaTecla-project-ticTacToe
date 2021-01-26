@@ -15,7 +15,6 @@ public class NullCoordinateTest {
         this.concreteCoordinate = new ConcreteCoordinate(1, 1);
     }
 
-
     @Test
     public void testGivenNullCoordinateWhenIsNullThenIsTrue() {
         assertThat(Coordinate.NULL.isNull(), is(true));
@@ -51,4 +50,5 @@ public class NullCoordinateTest {
     public void testGivenNullCoordinateWhenToStringThenValue() {
         assertThat(Coordinate.NULL.toString(), is("Coordinate (NULL)"));
     }
+    
 }

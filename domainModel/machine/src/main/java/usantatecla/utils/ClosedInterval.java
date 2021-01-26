@@ -2,8 +2,8 @@ package usantatecla.utils;
 
 public class ClosedInterval {
 
-    private final int min;
-    private final int max;
+    private int min;
+    private int max;
 
     public ClosedInterval(int min, int max) {
         assert min <= max;
@@ -32,7 +32,9 @@ public class ClosedInterval {
         ClosedInterval other = (ClosedInterval) obj;
         if (min != other.min)
             return false;
-        return max == other.max;
+        if (max != other.max)
+            return false;
+        return true;
     }
 
 }

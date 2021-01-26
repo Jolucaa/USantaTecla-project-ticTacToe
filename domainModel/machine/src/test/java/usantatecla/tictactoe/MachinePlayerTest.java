@@ -1,11 +1,9 @@
 package usantatecla.tictactoe;
 
-import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
 
 public class MachinePlayerTest extends PlayerTest {
 
@@ -15,10 +13,9 @@ public class MachinePlayerTest extends PlayerTest {
     }
 
     @Test
-    public void testGivenNewMachinePlayerWhenCreateCoordinate() {
-        Coordinate coordinate = new Coordinate(1, 1);
-        Player player = this.getPlayerBuilder().build();
-        when(player.getCoordinate(any(Message.class))).thenReturn(coordinate);
-        assertThat(player.getCoordinate(Message.ENTER_COORDINATE_TO_PUT).equals(coordinate), is(true));
+    public void testGivenMachinePlayerWhenGetRandomCoordinateThenReturnValidCoordinate() {
+        MachinePlayer player = (MachinePlayer) this.getPlayerBuilder().build();
+        assertThat(player.getCoordinate(Message.COORDINATE_TO_PUT).isValid(), is(true));
     }
+
 }

@@ -25,10 +25,9 @@ public class UserPlayerTest extends PlayerTest {
     public void testGivenNewUserPlayerWhenGetCoordinateThenReturnCorrectValue() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            Player player = this.getPlayerBuilder().build();
             when(this.console.readInt(anyString())).thenReturn(2, 1);
-            Coordinate coordinate = player.getCoordinate(Message.COORDINATE_TO_PUT);
-            assertThat(coordinate, is(new Coordinate(1, 0)));
+            Player player = this.getPlayerBuilder().build();
+            assertThat(player.getCoordinate(Message.COORDINATE_TO_PUT), is(new Coordinate(1, 0)));
         }
     }
 
@@ -55,4 +54,5 @@ public class UserPlayerTest extends PlayerTest {
         Player player = this.getPlayerBuilder().build();
         Assertions.assertThrows(AssertionError.class, () -> player.getTargetMoveTokenError(new Coordinate(), new Coordinate()));
     }
+
 }

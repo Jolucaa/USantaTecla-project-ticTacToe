@@ -1,7 +1,6 @@
 package usantatecla.tictactoe;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,17 +17,12 @@ import static org.mockito.Mockito.*;
 public class TurnTest {
 
     @Mock
-    Console console;
+    private Console console;
 
-    Turn turn;
+    private Turn turn;
 
     @Test
     public void testGivenNewTurnWhenNullBoardThenAssertionError() {
-        try (MockedStatic<Console> console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            when(this.console.readInt(anyString())).thenReturn(0);
-            this.turn = new Turn(new Board());
-        }
         Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
@@ -73,6 +67,5 @@ public class TurnTest {
             assertThat(this.turn.getActiveColor(), is(Color.O));
         }
     }
-
 
 }

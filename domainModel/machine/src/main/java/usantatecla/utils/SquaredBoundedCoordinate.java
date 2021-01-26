@@ -20,7 +20,7 @@ public abstract class SquaredBoundedCoordinate {
         assert this.isValid();
     }
 
-    private boolean isValid() {
+    public boolean isValid() {
         assert !this.adaptee.isNull();
 
         ConcreteCoordinate concreteCoordinate = (ConcreteCoordinate) this.adaptee;
@@ -48,7 +48,6 @@ public abstract class SquaredBoundedCoordinate {
         ConcreteCoordinate coordinate = (ConcreteCoordinate) this.adaptee;
         return coordinate.getRow() + coordinate.getColumn() == this.getDimension() - 1;
     }
-
 
     public void read(String message) {
         assert message != null;
