@@ -35,7 +35,7 @@ class Board {
         assert !target.isNull() && this.isEmpty(target);
         assert !origin.equals(target);
 
-        final Color color = this.getColor(origin);
+        Color color = this.getColor(origin);
         this.putToken(origin, Color.NULL);
         this.putToken(target, color);
     }

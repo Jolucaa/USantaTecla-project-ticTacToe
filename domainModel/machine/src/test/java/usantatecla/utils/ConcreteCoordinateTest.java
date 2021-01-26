@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class ConcreteCoordinateTest {
 
     @Mock
-    Console console;
+    private Console console;
 
     private Coordinate coordinate;
 

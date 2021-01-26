@@ -18,9 +18,9 @@ import static org.mockito.Mockito.*;
 public class TurnTest {
 
     @Mock
-    Console console;
+    private Console console;
 
-    Turn turn;
+    private Turn turn;
 
     @BeforeEach
     public void beforeEach() {
@@ -56,4 +56,5 @@ public class TurnTest {
         }
 
     }
+
 }

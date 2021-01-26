@@ -80,12 +80,11 @@ class Player {
 	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		assert !origin.isNull() && !target.isNull();
 		Error error = Error.NULL;
-
-		if (!this.board.isEmpty(target)) {
-			error = Error.NOT_EMPTY;
-		}
 		if (origin.equals(target)) {
 			error = Error.SAME_COORDINATES;
+		}
+		else if (!this.board.isEmpty(target)) {
+			error = Error.NOT_EMPTY;
 		}
 		error.writeln();
 		return error;
