@@ -6,7 +6,7 @@ state Solucion {
 [*] --> domainModel
 
 state domainModel
-note right: Clases del Modelo del Dominio\npero acopladas a tecnologías de\ninterfazahora y todas con la Ley\ndel Cambio Continuo y de granos\ngrueso con el advenimiento\nde nueva funcionalidad.
+
 state documentView
 state modelViewPresenter
  note left of modelViewController #15D2F3
@@ -17,15 +17,40 @@ note right: Baile de la Triada.
  note left of domainModel #15D2F3
   Básica
 end note
+
+state domainModel{
+[*] --> dm.basic
+  state dm.basic
+note right: Clases del Modelo del Dominio\npero acopladas a tecnologías de\ninterfazahora y todas con la Ley\ndel Cambio Continuo y de granos\ngrueso con el advenimiento\nde nueva funcionalidad.
+  state dm.machine
+note right: Nota a decidir por Luis
+
+dm.basic --> dm.machine:Mantenimiento perfectivo
+}
 domainModel --> documentView:Mantenimiento correctivo
 
 state documentView {
-[*] --> console
- note left of console #15D2F3
+[*] --> dv.basic
+ note left of dv.basic #15D2F3
   Básica
 end note
-  state console
+  state dv.basic
   note right: Clases Vistas de Texto separadas\nde los Modelos del Dominio pero con\nModelos de grano grueso con el\nadvenimiento de nueva funcionalidad.
+
+state dv.machine{
+[*] --> dv.withPrototype
+  state dv.withPrototype
+note right: Nota a decidir por Luis
+  state dv.withDoubleDispatching
+note right: Nota a decidir por Luis
+
+dv.withPrototype --> dv.withDoubleDispatching
+dv.withDoubleDispatching-->[*]
+}
+
+note left of dv.machine #15D2F3
+  Básica
+end note
 
    note left of withoutFactoryMethod #15D2F3
   Gráficos
@@ -39,7 +64,8 @@ end note
   state withFactoryMethod
   note right: Clase Vista abstracta para Open/Close de sus\ntecnologías pero con Modelos de grano grueso\ncon el advenimiento de nueva funcionalidad.
 
-  console --> withoutFactoryMethod:Mantenimiento perfectivo
+  dv.basic --> dv.machine:Mantenimiento perfectivo
+  dv.basic --> withoutFactoryMethod:Mantenimiento perfectivo
   withoutFactoryMethod --> withFactoryMethod:Mantenimiento correctivo
   withFactoryMethod-->[*]
 }
