@@ -4,9 +4,9 @@ import usantatecla.tictactoe.models.Game;
 
 public class View extends WithGameView {
 
-    private final StartView startView;
-    private final PlayView playView;
-    private final ResumeView resumeView;
+    private StartView startView;
+    private PlayView playView;
+    private ResumeView resumeView;
 
     public View(Game game) {
         super(game);

@@ -14,7 +14,7 @@ public enum Message {
     PLAYER_WIN("#player player: You win!!! :-)"),
     RESUME("Do you want to continue");
 
-    private final String message;
+    private String message;
 
     Message(String message) {
         this.message = message;

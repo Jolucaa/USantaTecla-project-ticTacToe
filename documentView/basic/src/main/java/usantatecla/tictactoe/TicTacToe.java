@@ -5,8 +5,8 @@ import usantatecla.tictactoe.views.View;
 
 class TicTacToe {
 
-    private final Game game;
-    private final View view;
+    private Game game;
+    private View view;
 
     TicTacToe() {
         this.game = new Game();

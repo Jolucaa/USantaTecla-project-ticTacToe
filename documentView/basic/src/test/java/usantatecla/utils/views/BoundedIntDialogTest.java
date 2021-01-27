@@ -20,13 +20,13 @@ public class BoundedIntDialogTest {
     private final int MAX = 1;
     private BoundedIntDialog boundedIntDialog;
     private ClosedInterval limits;
-    private final String title = "TITLE";
+    private String title = "TITLE";
 
     @Mock
-    Console console;
+    private Console console;
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         this.boundedIntDialog = new BoundedIntDialog(MIN, MAX);
         this.limits = new ClosedInterval(MIN, MAX);
     }
@@ -36,10 +36,10 @@ public class BoundedIntDialogTest {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
 
-            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MIN - 1, MIN - 1, MIN);
+            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MIN-1,MIN-1,MIN);
             assertThat(this.boundedIntDialog.read(title), is(MIN));
 
-            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MAX + 1, MAX + 1, MAX);
+            when(this.console.readInt(title + "? " + this.limits + ": ")).thenReturn(MAX+1,MAX+1,MAX);
             assertThat(this.boundedIntDialog.read(title), is(MAX));
 
         }

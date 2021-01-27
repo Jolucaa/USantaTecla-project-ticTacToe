@@ -10,11 +10,11 @@ class PlayView extends WithGameView {
 
     void interact() {
         do {
-            PlayerView playerView = new PlayerView(this.game);
-            playerView.interact(this.game);
+            new PlayerView(this.game).interact();
             this.game.next();
             new BoardView().write(this.game);
         } while (!this.game.isTicTacToe());
         Message.PLAYER_WIN.writeln(this.game.getActiveColor().name());
     }
+
 }

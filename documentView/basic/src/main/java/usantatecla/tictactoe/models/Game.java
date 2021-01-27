@@ -10,20 +10,17 @@ public class Game {
     private Turn turn;
 
     public Game() {
-        this.reset();
-    }
-
-    public void reset() {
         this.board = new Board();
         this.turn = new Turn(this.board);
     }
 
-    public void next() {
-        this.turn.next();
+    public void reset() {
+        this.board.reset();
+        this.turn.reset();
     }
 
-    public void setUsers() {
-        this.turn.setUsers();
+    public void next() {
+        this.turn.next();
     }
 
     public Color getActiveColor() {

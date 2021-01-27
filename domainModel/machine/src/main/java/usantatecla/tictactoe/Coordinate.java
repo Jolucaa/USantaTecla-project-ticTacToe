@@ -1,8 +1,8 @@
 package usantatecla.tictactoe;
 
-import usantatecla.utils.SquaredBoundedCoordinate;
+import usantatecla.utils.SquareBoundedCoordinate;
 
-class Coordinate extends SquaredBoundedCoordinate {
+class Coordinate extends SquareBoundedCoordinate {
 
     public static final int DIMENSION = 3;
 

@@ -50,4 +50,5 @@ public class MessageTest {
             verify(this.console).writeln(player + " player: You win!!! :-)");
         }
     }
+    
 }

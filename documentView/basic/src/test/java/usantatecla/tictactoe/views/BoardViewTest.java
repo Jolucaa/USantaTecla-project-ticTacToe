@@ -8,7 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.BoardBuilder;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
@@ -30,20 +29,17 @@ public class BoardViewTest {
     private Game game;
 
     private BoardView boardView;
-    private ViewTestUtils viewTestUtils;
-    private BoardBuilder boardBuilder;
-
+    private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
         this.boardView = new BoardView();
-        this.viewTestUtils = new ViewTestUtils();
-        this.boardBuilder = new BoardBuilder();
+        this.conversor = new Conversor();
     }
 
     @Test
     public void testGivenBoardViewWhenWriteThenPrint() {
-        try (MockedStatic console = mockStatic(Console.class)) {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             doReturn(
                     Color.X, Color.NULL, Color.NULL,
@@ -51,7 +47,7 @@ public class BoardViewTest {
                     Color.O, Color.NULL, Color.X
             ).when(this.game).getColor(any());
             this.boardView.write(this.game);
-            String string = this.viewTestUtils.arrayToString(new String[]{
+            String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",
                     " |   | O |   | ",
@@ -62,61 +58,8 @@ public class BoardViewTest {
             verify(this.console, atLeast(0)).writeln(argumentCaptor.capture());
             verify(this.console, atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.viewTestUtils.reorder(argumentCaptorValues);
-            assertThat(string, is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
-        }
-    }
-
-    @Test
-    public void testGivenEmptyBoardWhenWriteThenPrint() {
-        Console console = mock(Console.class);
-        try (MockedStatic<Console> staticConsole = mockStatic(Console.class)) {
-            staticConsole.when(Console::getInstance).thenReturn(console);
-            doReturn(
-                    Color.NULL, Color.NULL, Color.NULL,
-                    Color.NULL, Color.NULL, Color.NULL,
-                    Color.NULL, Color.NULL, Color.NULL
-            ).when(this.game).getColor(any());
-            this.boardView.write(this.game);
-            String string = this.viewTestUtils.arrayToString(new String[]{
-                    "---------------",
-                    " |   |   |   | ",
-                    " |   |   |   | ",
-                    " |   |   |   | ",
-                    "---------------",
-            });
-            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-            verify(console, atLeast(0)).writeln(argumentCaptor.capture());
-            verify(console, atLeast(0)).write(argumentCaptor.capture());
-            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.viewTestUtils.reorder(argumentCaptorValues);
-            assertThat(string, is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
-        }
-    }
-
-    @Test
-    public void testGivenCompleteBoardWhenWriteThenPrint() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            console.when(Console::getInstance).thenReturn(this.console);
-            doReturn(
-                    Color.X, Color.NULL, Color.NULL,
-                    Color.NULL, Color.O, Color.NULL,
-                    Color.O, Color.NULL, Color.X
-            ).when(this.game).getColor(any());
-            this.boardView.write(this.game);
-            String string = this.viewTestUtils.arrayToString(new String[]{
-                    "---------------",
-                    " | X |   |   | ",
-                    " |   | O |   | ",
-                    " | O |   | X | ",
-                    "---------------"
-            });
-            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-            verify(this.console, atLeast(0)).writeln(argumentCaptor.capture());
-            verify(this.console, atLeast(0)).write(argumentCaptor.capture());
-            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.viewTestUtils.reorder(argumentCaptorValues);
-            assertThat(string, is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
+            this.conversor.reorder(argumentCaptorValues);
+            assertThat(string, is(this.conversor.arrayToString(argumentCaptorValues.toArray())));
         }
     }
 

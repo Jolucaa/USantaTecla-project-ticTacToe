@@ -32,13 +32,12 @@ public class PlayerViewTest {
     @BeforeEach
     public void beforeEach() {
         this.playerView = spy(new PlayerView(this.game));
-        this.game.setUsers();
     }
 
     @Test
     public void testGivenPlayerViewWhenInteractThenPutToken() {
         doReturn(PlayerViewTest.ORIGIN).when(playerView).getCoordinate(any());
-        this.playerView.interact(this.game);
+        this.playerView.interact();
         verify(this.game).putToken(PlayerViewTest.ORIGIN);
     }
 
@@ -47,7 +46,7 @@ public class PlayerViewTest {
         doReturn(true).when(this.game).areAllTokensOnBoard();
         doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(playerView).getCoordinate(any());
         this.game.putToken(PlayerViewTest.ORIGIN);
-        this.playerView.interact(this.game);
+        this.playerView.interact();
         verify(this.game).moveToken(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET);
     }
 

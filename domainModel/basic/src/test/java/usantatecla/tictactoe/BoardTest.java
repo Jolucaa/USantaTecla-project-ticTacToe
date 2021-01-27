@@ -212,12 +212,12 @@ public class BoardTest {
         }
     }
 
-    private String arrayToString(Object [] stringArray){
-        StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < stringArray.length; i++) {
-            stringBuilder.append(stringArray[i]);
+    private String arrayToString(Object[] objects) {
+        String string = "";
+        for (Object object : objects) {
+            string += object;
         }
-        return stringBuilder.toString();
+        return string;
     }
 
     private void reorder(List<String> list){
