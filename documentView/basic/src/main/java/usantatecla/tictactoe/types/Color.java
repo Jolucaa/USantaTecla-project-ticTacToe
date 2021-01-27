@@ -15,4 +15,5 @@ public enum Color {
     public boolean isNull() {
         return this == Color.NULL;
     }
+    
 }

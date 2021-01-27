@@ -26,4 +26,5 @@ public class ColorTest {
         assertThat(Color.O.isNull(), is(false));
         assertThat(Color.NULL.isNull(), is(true));
     }
+    
 }

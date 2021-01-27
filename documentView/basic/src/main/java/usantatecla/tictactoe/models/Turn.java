@@ -6,9 +6,9 @@ import usantatecla.tictactoe.types.Error;
 
 public class Turn {
 
-    private final Board board;
+    private Board board;
     public static final int NUMBER_PLAYERS = 2;
-    private final Player[] players;
+    private Player[] players;
     private int activePlayer;
 
     Turn(Board board) {

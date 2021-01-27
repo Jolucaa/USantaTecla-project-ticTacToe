@@ -61,4 +61,5 @@ class Player {
     Color getColor() {
         return this.color;
     }
+    
 }

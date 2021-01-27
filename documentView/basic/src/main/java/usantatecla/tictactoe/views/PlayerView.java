@@ -74,4 +74,5 @@ class PlayerView {
         new ErrorView().writeln(error);
         return error;
     }
+    
 }

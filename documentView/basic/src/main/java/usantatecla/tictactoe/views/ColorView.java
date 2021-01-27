@@ -12,4 +12,5 @@ class ColorView {
         }
         Console.getInstance().write(string);
     }
+    
 }
