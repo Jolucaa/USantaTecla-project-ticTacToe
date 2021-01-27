@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 public class Console {
 
 	private static Console instance = new Console();
-
+	
 	public static Console getInstance() {
 		return instance;
 	}
-
+	
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public String readString(String title) {

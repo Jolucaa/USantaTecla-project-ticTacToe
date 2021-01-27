@@ -36,7 +36,8 @@ public class Coordinate extends SquareBoundedCoordinate {
         if (!other.isNull()) {
             if (this.getRow() != other.getRow())
                 return false;
-            return this.getColumn() == other.getColumn();
+            if (this.getColumn() != other.getColumn())
+                return false;
         }
         return true;
     }

@@ -82,7 +82,6 @@ public class PlayerTest {
                 "O  ").build();
         Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
         Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
-        player = spy(player);
         doReturn(origin, target).when(player).getCoordinate(any());
         player.play();
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));

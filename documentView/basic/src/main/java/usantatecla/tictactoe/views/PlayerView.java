@@ -6,14 +6,13 @@ import usantatecla.tictactoe.types.Error;
 
 class PlayerView {
 
-    protected Game game;
+    private Game game;
 
-    public PlayerView(Game game) {
+    PlayerView(Game game) {
         this.game = game;
     }
 
-    void interact(Game game) {
-        this.game = game;
+    void interact() {
         if (!this.game.areAllTokensOnBoard()) {
             this.putToken();
         } else {
@@ -31,13 +30,13 @@ class PlayerView {
         this.game.putToken(coordinate);
     }
 
-    protected Coordinate getCoordinate(Message message) {
+    Coordinate getCoordinate(Message message) {
         assert message != null;
 
         return (Coordinate) new CoordinateView().read(message.toString());
     }
 
-    protected Error getPutTokenError(Coordinate coordinate) {
+    private Error getPutTokenError(Coordinate coordinate) {
         assert coordinate != null;
 
         Error error = this.game.getPutTokenError(coordinate);
@@ -60,7 +59,7 @@ class PlayerView {
         this.game.moveToken(origin, target);
     }
 
-    protected Error getOriginMoveTokenError(Coordinate origin) {
+    private Error getOriginMoveTokenError(Coordinate origin) {
         assert !origin.isNull();
 
         Error error = this.game.getOriginMoveTokenError(origin);
@@ -68,7 +67,7 @@ class PlayerView {
         return error;
     }
 
-    protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+    private Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
         assert !origin.isNull() && !target.isNull();
 
         Error error = this.game.getTargetMoveTokenError(origin, target);

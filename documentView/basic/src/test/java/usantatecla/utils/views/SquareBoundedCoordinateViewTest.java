@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class SquareBoundedCoordinateViewTest {
 
     @Mock
-    Console console;
+    private Console console;
 
     private static final int DIMENSION = 7;
     private static final String ERROR = "error";
@@ -54,8 +54,8 @@ public class SquareBoundedCoordinateViewTest {
             when(this.console.readInt(anyString())).thenReturn(this.getDimension());
             SquareBoundedCoordinate coordinate = this.getCoordinateView().read("");
 
-            assertThat(coordinate.getRow(), is(this.getDimension() - 1));
-            assertThat(coordinate.getColumn(), is(this.getDimension() - 1));
+            assertThat(coordinate.getRow(), is(this.getDimension()-1));
+            assertThat(coordinate.getColumn(), is(this.getDimension()-1));
         }
     }
 

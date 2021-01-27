@@ -12,7 +12,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,20 +25,19 @@ public class StartViewTest {
 
     @InjectMocks
     private StartView startView;
-    private ViewTestUtils viewTestUtils;
+    private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
-        this.viewTestUtils = new ViewTestUtils();
+        this.conversor = new Conversor();
     }
 
     @Test
     public void testGivenStartViewWhenInteractThenInteract() {
-        try (MockedStatic console = mockStatic(Console.class)) {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             this.startView.interact();
-            verify(this.game).setUsers();
-            String string = this.viewTestUtils.arrayToString(new String[]{
+            String string = this.conversor.arrayToString(new String[]{
                     "--- TIC TAC TOE ---",
                     "---------------",
                     " |   |   |   | ",
@@ -51,8 +49,8 @@ public class StartViewTest {
             verify(this.console, atLeast(0)).writeln(argumentCaptor.capture());
             verify(this.console, atLeast(0)).write(argumentCaptor.capture());
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
-            this.viewTestUtils.reorder(argumentCaptorValues);
-            assertThat(string, is(this.viewTestUtils.arrayToString(argumentCaptorValues.toArray())));
+            this.conversor.reorder(argumentCaptorValues);
+            assertThat(string, is(this.conversor.arrayToString(argumentCaptorValues.toArray())));
         }
     }
 

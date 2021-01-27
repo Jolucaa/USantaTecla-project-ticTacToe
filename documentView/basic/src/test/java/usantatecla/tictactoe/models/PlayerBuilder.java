@@ -1,17 +1,14 @@
 package usantatecla.tictactoe.models;
 
-import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.types.Coordinate;
-
 import java.util.List;
 
-import static org.mockito.Mockito.spy;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 public class PlayerBuilder {
 
     private Color color;
     private String[] rows;
-    private boolean isUser;
     private Player player;
 
     public PlayerBuilder() {
@@ -34,7 +31,6 @@ public class PlayerBuilder {
     public Player build() {
         Board board = new BoardBuilder().build();
         this.player = new Player(this.color, board);
-        this.player = spy(this.player);
         this.putTokens();
         return this.player;
     }

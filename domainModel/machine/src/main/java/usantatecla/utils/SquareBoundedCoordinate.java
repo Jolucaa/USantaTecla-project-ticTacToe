@@ -2,11 +2,11 @@ package usantatecla.utils;
 
 import java.util.Random;
 
-public abstract class SquaredBoundedCoordinate {
+public abstract class SquareBoundedCoordinate {
 
     private Coordinate adaptee;
 
-    public SquaredBoundedCoordinate() {
+    public SquareBoundedCoordinate() {
         this.adaptee = NullCoordinate.getInstance();
     }
 
@@ -14,7 +14,7 @@ public abstract class SquaredBoundedCoordinate {
         return this.adaptee.isNull();
     }
 
-    public SquaredBoundedCoordinate(int row, int column) {
+    public SquareBoundedCoordinate(int row, int column) {
         this.adaptee = new ConcreteCoordinate(row, column);
 
         assert this.isValid();
@@ -34,7 +34,7 @@ public abstract class SquaredBoundedCoordinate {
 
     protected abstract int getDimension();
 
-    public Direction getDirection(SquaredBoundedCoordinate coordinate) {
+    public Direction getDirection(SquareBoundedCoordinate coordinate) {
         if (this.equals(coordinate) || this.isNull() || coordinate.isNull()) {
             return Direction.NULL;
         }

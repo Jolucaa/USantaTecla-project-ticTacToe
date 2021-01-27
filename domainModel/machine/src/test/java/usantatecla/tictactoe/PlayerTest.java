@@ -1,17 +1,21 @@
 package usantatecla.tictactoe;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import usantatecla.utils.Console;
-
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public abstract class PlayerTest {
@@ -53,7 +57,6 @@ public abstract class PlayerTest {
                 "O  ").build();
         Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
         Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
-        player = spy(player);
         doReturn(origin, target).when(player).getCoordinate(any());
         player.play();
         assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));

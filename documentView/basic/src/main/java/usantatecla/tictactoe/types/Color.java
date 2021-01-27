@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.types;
 
-
 public enum Color {
 
     X,

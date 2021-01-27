@@ -9,27 +9,26 @@ import java.util.regex.Pattern;
 
 public class BoardBuilder {
 
-    private final List<String> strings;
+    private List<String> rows;
 
     public BoardBuilder() {
-        this.strings = new ArrayList<>();
+        this.rows = new ArrayList<>();
     }
 
     public BoardBuilder rows(String... rows) {
         assert rows.length == 3;
         for (String row : rows) {
             assert Pattern.matches("[XO ]{3}", row);
-            this.strings.add(row);
+            this.rows.add(row);
         }
         return this;
     }
 
     public Board build() {
         Board board = new Board();
-        board.reset();
-        if (!this.strings.isEmpty()) {
-            for (int i = 0; i < this.strings.size(); i++) {
-                String string = this.strings.get(i);
+        if (!this.rows.isEmpty()) {
+            for (int i = 0; i < this.rows.size(); i++) {
+                String string = this.rows.get(i);
                 for (int j = 0; j < string.length(); j++) {
                     board.putToken(new Coordinate(i, j), this.getColor(string.charAt(j)));
                 }

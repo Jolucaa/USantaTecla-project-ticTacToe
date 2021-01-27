@@ -81,6 +81,21 @@ public class BoardTest {
     }
 
     @Test
+    public void testGivenBoardWhenGetColorThenReturn() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "   ",
+                "   ").build();
+        assertThat(board.getColor(new Coordinate(0, 0)), is(Color.X));
+    }
+
+    @Test
+    public void testGivenBoardWhenGetColorFromNullCoordinateThenReturn() {
+        Board board = this.boardBuilder.build();
+        Assertions.assertThrows(AssertionError.class, () -> board.getColor(new Coordinate()));
+    }
+
+    @Test
     public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
         Board board = this.boardBuilder.build();
         assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));

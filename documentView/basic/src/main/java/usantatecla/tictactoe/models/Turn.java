@@ -15,13 +15,14 @@ public class Turn {
         assert board != null;
         this.board = board;
         this.players = new Player[Turn.NUMBER_PLAYERS];
-        this.activePlayer = 0;
+        this.reset();
     }
 
-    void setUsers() {
+    void reset() {
         for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
             this.players[i] = new Player(Color.get(i), this.board);
         }
+        this.activePlayer = 0;
     }
 
     void next() {
