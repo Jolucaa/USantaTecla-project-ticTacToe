@@ -8,8 +8,11 @@ abstract class PlayerView {
 
     protected Player player;
 
-    void interact(Player player) {
+    protected PlayerView(Player player) {
         this.player = player;
+    }
+
+    void interact() {
         if (!this.player.areAllTokensOnBoard()) {
             this.putToken();
         } else {

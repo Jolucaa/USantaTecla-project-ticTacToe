@@ -1,9 +1,14 @@
 package usantatecla.tictactoe.views;
 
+import usantatecla.tictactoe.models.UserPlayer;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 class UserPlayerView extends PlayerView {
+
+    UserPlayerView(UserPlayer userPlayer) {
+        super(userPlayer);
+    }
 
     @Override
     protected Coordinate getCoordinate(Message message) {

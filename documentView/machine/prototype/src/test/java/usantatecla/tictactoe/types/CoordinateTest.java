@@ -20,5 +20,4 @@ public class CoordinateTest extends SquareBoundedCoordinateTest {
         return new Coordinate(row, column);
     }
 
-
 }

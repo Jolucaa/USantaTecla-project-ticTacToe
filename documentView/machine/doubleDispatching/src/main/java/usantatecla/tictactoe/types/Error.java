@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.types;
 
-
 public enum Error {
 
 	NOT_EMPTY,

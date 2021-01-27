@@ -16,7 +16,7 @@ import static org.mockito.Mockito.*;
 public class ColorCodeTest {
 
     @Mock
-    Console console;
+    private Console console;
 
     private ColorCode colorCode;
 
@@ -78,4 +78,5 @@ public class ColorCodeTest {
             verifyNoInteractions(this.console);
         }
     }
+    
 }

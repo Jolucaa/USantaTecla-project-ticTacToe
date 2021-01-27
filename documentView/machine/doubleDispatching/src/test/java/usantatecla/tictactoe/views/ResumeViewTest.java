@@ -45,4 +45,5 @@ public class ResumeViewTest {
             assertThat(this.resumeView.interact(), is(true));
         }
     }
+
 }

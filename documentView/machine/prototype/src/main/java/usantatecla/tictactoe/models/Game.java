@@ -11,12 +11,13 @@ public class Game {
     private Turn turn;
 
     public Game() {
-        this.reset();
+        this.board = new Board();
+        this.turn = new Turn(this.board);
     }
 
     public void reset() {
-        this.board = new Board();
-        this.turn = new Turn(this.board);
+        this.board.reset();
+        this.turn.reset();
     }
 
     public void next() {

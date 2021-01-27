@@ -12,10 +12,8 @@ import usantatecla.utils.views.Console;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 
-
 @ExtendWith(MockitoExtension.class)
 public class ColorViewTest {
-
 
     @Mock
     private Console console;
@@ -39,6 +37,5 @@ public class ColorViewTest {
             verify(this.console).write(" ");
         }
     }
-
 
 }

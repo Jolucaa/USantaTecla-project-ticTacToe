@@ -20,7 +20,7 @@ public abstract class PlayerViewTest {
     @Test
     public void testGivenPlayerViewWhenInteractThenPutToken() {
         doReturn(PlayerViewTest.ORIGIN).when(playerView).getCoordinate(any());
-        this.playerView.interact(this.player);
+        this.playerView.interact();
         verify(this.player).putToken(PlayerViewTest.ORIGIN);
     }
 
@@ -29,7 +29,7 @@ public abstract class PlayerViewTest {
         doReturn(true).when(this.player).areAllTokensOnBoard();
         doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(playerView).getCoordinate(any());
         this.player.putToken(PlayerViewTest.ORIGIN);
-        this.playerView.interact(this.player);
+        this.playerView.interact();
         verify(this.player).moveToken(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET);
     }
 

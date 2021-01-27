@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.spy;
 
 public abstract class PlayerTest {
 
@@ -73,7 +72,6 @@ public abstract class PlayerTest {
                 "O  ").build();
         Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
         Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
-        player = spy(player);
         player.moveToken(origin, target);
         assertThat(player.board.isEmpty(origin), is(true));
         assertThat(player.board.isOccupied(target, Color.O), is(true));

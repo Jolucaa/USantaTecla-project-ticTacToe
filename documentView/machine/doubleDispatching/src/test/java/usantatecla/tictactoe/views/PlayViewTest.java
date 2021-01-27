@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.views;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,16 +24,25 @@ public class PlayViewTest {
     @InjectMocks
     private PlayView playView;
 
-    @BeforeEach
-    public void beforeEach() {
-        this.game.setUsers(0);
+    @Test
+    public void testGivenPlayViewWhenInteractWithMachineThenIsWinner() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.game.setUsers(0);
+            doReturn(true).when(this.game).isTicTacToe();
+            this.playView.interact();
+            verify(this.game).next();
+            verify(this.console).writeln("O player: You win!!! :-)");
+        }
     }
 
     @Test
-    public void testGivenPlayViewWhenInteractThenIsWinner() {
+    public void testGivenPlayViewWhenInteractWithUserThenIsWinner() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             doReturn(true).when(this.game).isTicTacToe();
+            doReturn(1).when(this.console).readInt(any());
+            this.game.setUsers(1);
             this.playView.interact();
             verify(this.game).next();
             verify(this.console).writeln("O player: You win!!! :-)");

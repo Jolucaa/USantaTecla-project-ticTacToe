@@ -5,8 +5,6 @@ import usantatecla.tictactoe.types.Coordinate;
 
 import java.util.List;
 
-import static org.mockito.Mockito.spy;
-
 public class PlayerBuilder {
 
     private Color color;
@@ -48,7 +46,6 @@ public class PlayerBuilder {
         } else {
             this.player = new MachinePlayer(this.color, board);
         }
-        this.player = spy(this.player);
         this.putTokens();
         return this.player;
     }
@@ -61,4 +58,5 @@ public class PlayerBuilder {
                 this.player.putToken(coordinate);
         }
     }
+    
 }

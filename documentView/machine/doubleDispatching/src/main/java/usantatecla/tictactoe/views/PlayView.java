@@ -22,12 +22,12 @@ class PlayView extends WithGameView implements PlayerVisitor {
 
     @Override
     public void visit(UserPlayer userPlayer) {
-        new UserPlayerView().interact(userPlayer);
+        new UserPlayerView(userPlayer).interact();
     }
 
     @Override
     public void visit(MachinePlayer machinePlayer) {
-        new MachinePlayerView().interact(machinePlayer);
+        new MachinePlayerView(machinePlayer).interact();
     }
     
 }

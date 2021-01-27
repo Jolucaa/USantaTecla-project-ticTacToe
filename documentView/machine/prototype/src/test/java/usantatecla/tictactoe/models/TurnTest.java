@@ -15,7 +15,7 @@ public class TurnTest {
     @BeforeEach
     public void beforeEach() {
         this.turn = new Turn(new Board());
-        this.turn.setUsers(0);
+        this.turn.setUsers(1);
     }
 
     @Test
@@ -23,6 +23,13 @@ public class TurnTest {
         Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
+    @Test
+    public void testGivenTurnWhenResetThenActivePlayerIs0() {
+        this.turn.next();
+        this.turn.reset();
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
+    }
+    
     @Test
     public void testGivenNewTurnWhenGetActivePlayerThenReturn(){
         assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
@@ -40,4 +47,5 @@ public class TurnTest {
         this.turn.next();
         assertThat(this.turn.getActiveColor(), is(Color.X));
     }
+
 }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class BoardBuilder {
 
-    private final List<String> rows;
+    private List<String> rows;
 
     public BoardBuilder() {
         this.rows = new ArrayList<>();
