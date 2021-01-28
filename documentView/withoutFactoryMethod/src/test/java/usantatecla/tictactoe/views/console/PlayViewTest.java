@@ -8,7 +8,6 @@ import org.mockito.MockedStatic;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.console.PlayView;
 import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.*;

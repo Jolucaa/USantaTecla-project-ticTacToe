@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.console.ResumeView;
 import usantatecla.utils.views.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;

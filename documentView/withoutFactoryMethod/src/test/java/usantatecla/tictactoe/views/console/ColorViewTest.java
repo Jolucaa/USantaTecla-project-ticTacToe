@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.views.console.ColorView;
 import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.mockStatic;

@@ -3,7 +3,6 @@ package usantatecla.tictactoe.views.console;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.tictactoe.views.console.CoordinateView;
 import usantatecla.utils.views.SquareBoundedCoordinateView;
 import usantatecla.utils.views.SquareBoundedCoordinateViewTest;
 
