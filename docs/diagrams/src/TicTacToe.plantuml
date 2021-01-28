@@ -23,6 +23,8 @@ state domainModel{
 dm.basic --> dm.machine : Mantenimiento perfectivo
 
 state dv.machine{
+[*] --> dv.withPrototype
+[*] --> dv.withDoubleDispatching
     state dv.withPrototype
     note right: Desacoplar modelos y vistas\nde las clases empleando\nel patrón Prototype
     note left of dv.withPrototype #15D2F3
@@ -78,11 +80,13 @@ state modelViewPresenter{
 
 
     state presentationModel{
-    note left of basic #15D2F3
+    [*] --> pm.basic
+
+    state pm.basic
+    note right:Clases Controladoras entre Vistas y Modelos por\ncada Caso de Uso pero con la clase Principal y las\nVistas acopladas a cada controlador actual y futuro.
+    note left of pm.basic #15D2F3
       Gráficos
     end note
-    state basic
-    note right:Clases Controladoras entre Vistas y Modelos por\ncada Caso de Uso pero con la clase Principal y las\nVistas acopladas a cada controlador actual y futuro.
 
     note left of withFacade #15D2F3
       Gráficos
@@ -145,7 +149,7 @@ state modelViewPresenter{
     note right:Open/Close para arranque con configuración de persistencia
 
 
-    basic --> withFacade
+    pm.basic --> withFacade
     withFacade --> withoutDoubleDispatching
     withoutDoubleDispatching --> withDoubleDispatching
     withDoubleDispatching --> withComposite
