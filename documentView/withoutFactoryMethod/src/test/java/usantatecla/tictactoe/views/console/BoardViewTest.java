@@ -3,54 +3,63 @@ package usantatecla.tictactoe.views.console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.Message;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.utils.views.Console;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class BoardViewTest {
 
     @Mock
-    private Game game;
-
-    @InjectMocks
-    private BoardView gameView;
-
-    @Mock
     private Console console;
 
-    @Captor
-    private ArgumentCaptor<String> captor;
+    @Spy
+    private Game game;
+
+    private BoardView boardView;
+    private Conversor conversor;
 
     @BeforeEach
-    void before() {
-        openMocks(this);
+    public void beforeEach() {
+        this.boardView = new BoardView();
+        this.conversor = new Conversor();
     }
 
     @Test
-    void testGivenNewGameViewWhenWriteThenPrintBoard() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.game.getToken(any(Coordinate.class))).thenReturn(Token.X);
+    public void testGivenBoardViewWhenWriteThenPrint() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            this.gameView.write();
-            verify(this.console, times(2)).writeln(Message.SEPARATOR.getMessage());
-            verify(this.console, times(3)).write(Message.VERTICAL_LINE_LEFT.getMessage());
-            verify(this.console, times(9)).write(Message.VERTICAL_LINE_CENTERED.getMessage());
-            verify(this.console, times(3)).writeln(Message.VERTICAL_LINE_RIGHT.getMessage());
-            verify(this.console, times(21)).write(captor.capture());
-            assertThat(captor.getAllValues().toString(), is("[| , X,  | , X,  | , X,  | , " +
-                                                                   "| , X,  | , X,  | , X,  | , " +
-                                                                   "| , X,  | , X,  | , X,  | ]"));
+            doReturn(
+                    Color.X, Color.NULL, Color.NULL,
+                    Color.NULL, Color.O, Color.NULL,
+                    Color.O, Color.NULL, Color.X
+            ).when(this.game).getColor(any());
+            this.boardView.write(this.game);
+            String string = this.conversor.arrayToString(new String[]{
+                    "---------------",
+                    " | X |   |   | ",
+                    " |   | O |   | ",
+                    " | O |   | X | ",
+                    "---------------"
+            });
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+            verify(this.console, atLeast(0)).writeln(argumentCaptor.capture());
+            verify(this.console, atLeast(0)).write(argumentCaptor.capture());
+            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
+            this.conversor.reorder(argumentCaptorValues);
+            assertThat(string, is(this.conversor.arrayToString(argumentCaptorValues.toArray())));
         }
     }
 

@@ -27,7 +27,7 @@ public class ConsoleView extends View {
     }
 
     @Override
-    protected boolean isNewGame() {
+    protected boolean resume() {
         return this.resumeView.interact();
     }
 

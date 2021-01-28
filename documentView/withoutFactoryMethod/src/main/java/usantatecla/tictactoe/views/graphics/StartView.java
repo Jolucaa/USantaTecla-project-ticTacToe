@@ -12,7 +12,7 @@ public class StartView extends JFrame {
     private Game game;
 
     StartView(Game game) {
-        super(Message.NUMBER_PLAYERS.getMessage());
+        super(Message.TITLE.toString());
         assert game != null;
         this.game = game;
         this.getContentPane().setLayout(new GridBagLayout());
@@ -23,17 +23,6 @@ public class StartView extends JFrame {
     }
 
     void interact() {
-        ChoosePlayersView choosePlayersView = new ChoosePlayersView(this.getRootPane());
-        this.getContentPane().add(choosePlayersView, new Constraints(0, 0, 3, 1));
-        this.setVisible(true);
-        do {
-            System.out.println("");
-            if (choosePlayersView.getPlayersNumber() != null) {
-                int numberPlayers = Integer.parseInt(choosePlayersView.getPlayersNumber());
-                this.game.setUsers(numberPlayers);
-                choosePlayersView.setVisible(false);
-            }
-        } while (choosePlayersView.getPlayersNumber() == null);
         GameView gameView;
         gameView = new GameView(this.game);
         gameView.write();

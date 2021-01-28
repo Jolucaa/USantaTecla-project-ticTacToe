@@ -1,8 +1,8 @@
 package usantatecla.tictactoe.views.graphics;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.views.Message;
 
 import javax.swing.*;
@@ -16,22 +16,22 @@ public class GameView extends JPanel {
     GameView(Game game) {
         this.game = game;
         this.setLayout(new GridBagLayout());
-        this.add(new JLabel(Message.SEPARATOR.getMessage()), new Constraints(0, 0, 1, 1));
+        this.add(new JLabel(Message.HORIZONTAL_LINE.toString()), new Constraints(0, 0, 1, 1));
     }
 
     void write() {
         this.removeAll();
         this.setLayout(new GridBagLayout());
-        this.add(new JLabel(Message.SEPARATOR.getMessage()), new Constraints(0, 0, 1, 1));
+        this.add(new JLabel(Message.HORIZONTAL_LINE.toString()), new Constraints(0, 0, 1, 1));
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             this.printRowBoard(i);
         }
-        this.add(new JLabel(Message.SEPARATOR.getMessage()), new Constraints(0, 4, 1, 1));
+        this.add(new JLabel(Message.HORIZONTAL_LINE.toString()), new Constraints(0, 4, 1, 1));
     }
 
     private void printRowBoard(int row) {
         String boardRowToPresent = "";
-        boardRowToPresent += Message.VERTICAL_LINE_LEFT.getMessage();
+        boardRowToPresent += Message.VERTICAL_LINE.toString();
         for (int j = 0; j < Coordinate.DIMENSION; j++) {
             boardRowToPresent += this.getSquareBoardText(row, j);
         }
@@ -42,13 +42,13 @@ public class GameView extends JPanel {
 
     private String getSquareBoardText(int row, int column) {
         String squareBoardToPresent = "";
-        Token token = this.game.getToken(new Coordinate(row, column));
-        if (token.isNull()) {
+        Color color = this.game.getColor(new Coordinate(row, column));
+        if (color.isNull()) {
             squareBoardToPresent += "-";
         } else {
-            squareBoardToPresent += token.toString();
+            squareBoardToPresent += color.toString();
         }
-        squareBoardToPresent += Message.VERTICAL_LINE_CENTERED.getMessage();
+        squareBoardToPresent += Message.VERTICAL_LINE.toString();
         return squareBoardToPresent;
     }
 

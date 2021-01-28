@@ -3,12 +3,12 @@ package usantatecla.tictactoe;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.graphics.GraphicsView;
 
-public class GraphicsTicTacToe {
+class GraphicsTicTacToe {
 
 	private Game game;
 	private GraphicsView graphicsView;
 
-	private GraphicsTicTacToe() {
+	GraphicsTicTacToe() {
 		this.game = new Game();
 		this.graphicsView = new GraphicsView(this.game);
 	}
