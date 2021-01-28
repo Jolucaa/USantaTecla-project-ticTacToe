@@ -8,7 +8,7 @@ class ConsoleTicTacToe {
 	private Game game;
 	private ConsoleView consoleView;
 
-	ConsoleTicTacToe() {
+	private ConsoleTicTacToe() {
 		this.game = new Game();
 		this.consoleView = new ConsoleView(this.game);
 	}

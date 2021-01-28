@@ -4,7 +4,6 @@ import usantatecla.utils.views.Console;
 
 public enum Message {
     TITLE("--- TIC TAC TOE ---"),
-    NUMBER_PLAYERS("Number of user"),
     HORIZONTAL_LINE("---------------"),
     VERTICAL_LINE(" | "),
     ENTER_COORDINATE_TO_PUT("Enter a coordinate to put a token:"),

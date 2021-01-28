@@ -8,7 +8,7 @@ class GraphicsTicTacToe {
 	private Game game;
 	private GraphicsView graphicsView;
 
-	GraphicsTicTacToe() {
+	private GraphicsTicTacToe() {
 		this.game = new Game();
 		this.graphicsView = new GraphicsView(this.game);
 	}

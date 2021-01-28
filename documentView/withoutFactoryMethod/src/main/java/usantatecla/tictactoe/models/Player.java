@@ -6,8 +6,8 @@ import usantatecla.tictactoe.types.Error;
 
 class Player {
 
-    protected Color color;
-    protected Board board;
+    Color color;
+    Board board;
     private int putTokens;
 
     Player(Color color, Board board) {

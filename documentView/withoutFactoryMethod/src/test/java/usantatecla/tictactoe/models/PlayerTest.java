@@ -79,7 +79,7 @@ public class PlayerTest {
         Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
         Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
         player.moveToken(origin, target);
-        assertThat(player.board.isEmpty(origin), is(true));
+        assertThat(player.board.isEmpty(origin), is(true)); // TODO A causa de este test no podemos poner 'private' en Player
         assertThat(player.board.isOccupied(target, Color.O), is(true));
     }
 
