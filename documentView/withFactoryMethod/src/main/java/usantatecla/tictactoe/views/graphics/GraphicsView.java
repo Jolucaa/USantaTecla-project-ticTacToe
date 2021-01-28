@@ -25,8 +25,9 @@ public class GraphicsView extends usantatecla.tictactoe.views.View {
 	}
 
 	@Override
-	protected boolean isNewGame() {
+	protected boolean resume() {
 		if (new ResumeView().isResumedGame()) {
+			this.game.reset();
 			return true;
 		}
 		this.playView.setVisible(false);

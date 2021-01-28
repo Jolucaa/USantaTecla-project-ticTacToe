@@ -13,4 +13,5 @@ public class GraphicsTicTacToe extends TicTacToe {
 	public static void main(String[] args) {
 		new GraphicsTicTacToe().play();
 	}
+
 }

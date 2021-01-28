@@ -3,52 +3,47 @@ package usantatecla.tictactoe.views.console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class ResumeViewTest {
 
     @Mock
-    private Game game;
-
-    @Mock
     private Console console;
 
-    @InjectMocks
     private ResumeView resumeView;
 
     @BeforeEach
-    void before() {
-        openMocks(this);
+    public void beforeEach() {
+        this.resumeView = new ResumeView(new Game());
     }
 
     @Test
-    void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.console.readChar(anyString())).thenReturn('n');
+    public void testGivenNewGameIsFalseWhenInteractThenIsFalse() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readString(anyString())).thenReturn("n");
             assertThat(this.resumeView.interact(), is(false));
         }
     }
 
     @Test
-    void testGivenNewGameIsTrueWhenInteractThenIsTrue() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.console.readChar(anyString())).thenReturn('y');
+    public void testGivenNewGameIsTrueWhenInteractThenIsTrue() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
+            when(this.console.readString(anyString())).thenReturn("y");
             assertThat(this.resumeView.interact(), is(true));
         }
     }
+
 }

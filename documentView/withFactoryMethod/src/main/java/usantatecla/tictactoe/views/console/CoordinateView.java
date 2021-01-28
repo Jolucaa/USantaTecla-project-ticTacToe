@@ -1,30 +1,22 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.utils.ClosedInterval;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.views.ErrorView;
+import usantatecla.utils.models.ConcreteCoordinate;
+import usantatecla.utils.models.SquareBoundedCoordinate;
+import usantatecla.utils.views.SquareBoundedCoordinateView;
 
-public class CoordinateView {
+class CoordinateView extends SquareBoundedCoordinateView {
 
-    public Coordinate read(String title) {
-        Console console = Console.getInstance();
-        Coordinate coordinate;
-        Error error;
-        do {
-            console.writeln(title);
-            int row = console.readInt("Row: ") - 1;
-            int column = console.readInt("Column: ") - 1;
-            coordinate = new Coordinate(row, column);
-            ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
-            if (!limits.isIncluded(coordinate.getRow()) || !limits.isIncluded(coordinate.getColumn())) {
-                error = Error.NOT_VALID;
-            } else {
-                error = Error.NULL;
-            }
-            new ErrorView(error).writeln();
-        } while (!error.isNull());
-        return coordinate;
+    @Override
+    public SquareBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
+        return new Coordinate(concreteCoordinate);
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return ErrorView.MESSAGES[Error.WRONG_COORDINATES.ordinal()];
     }
 
 }
