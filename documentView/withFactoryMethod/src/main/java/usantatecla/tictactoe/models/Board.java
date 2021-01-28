@@ -1,117 +1,99 @@
 package usantatecla.tictactoe.models;
 
-import usantatecla.tictactoe.types.Token;
-import usantatecla.utils.Direction;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.utils.models.Direction;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class Board {
 
-	private Token[][] tokens;
+    private Color[][] colors;
 
-	Board() {
-		this.tokens = new Token[Coordinate.DIMENSION][Coordinate.DIMENSION];
-		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				this.tokens[i][j] = Token.NULL;
-			}
-		}
-	}
+    Board() {
+        this.colors = new Color[Coordinate.DIMENSION][Coordinate.DIMENSION];
+        this.reset();
+    }
 
-	private Board(Board board) {
-		this();
-		assert board != null;
-		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				this.tokens[i][j] = board.tokens[i][j];
-			}
-		}
-	}
+    void reset() {
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                this.colors[i][j] = Color.NULL;
+            }
+        }
+    }
 
-	Board copy() {
-		return new Board(this);
-	}
+    void putToken(Coordinate coordinate, Color color) {
+        assert !coordinate.isNull();
 
-	Token getToken(Coordinate coordinate) {
-		assert coordinate != null && !coordinate.isNull();
-		return this.tokens[coordinate.getRow()][coordinate.getColumn()];
-	}
+        this.colors[coordinate.getRow()][coordinate.getColumn()] = color;
+    }
 
-	void put(Coordinate coordinate, Token token) {
-		this.tokens[coordinate.getRow()][coordinate.getColumn()] = token;
-	}
+    void moveToken(Coordinate origin, Coordinate target) {
+        assert !origin.isNull() && !this.isEmpty(origin);
+        assert !target.isNull() && this.isEmpty(target);
+        assert !origin.equals(target);
 
-	void move(Coordinate origin, Coordinate target) {
-		Token token = this.getToken(origin);
-		this.tokens[origin.getRow()][origin.getColumn()] = Token.NULL;
-		this.put(target, token);
-	}
+        Color color = this.getColor(origin);
+        this.putToken(origin, Color.NULL);
+        this.putToken(target, color);
+    }
 
-	boolean isCompleted() {
-		int tokensCount = 0;
-		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				if (!this.tokens[i][j].isNull()) {
-					tokensCount++;
-				}
-			}
-		}
-		return tokensCount == Coordinate.DIMENSION * 2;
-	}
+    Color getColor(Coordinate coordinate) {
+        assert !coordinate.isNull();
 
-	boolean isOccupied(Coordinate coordinate, Token token) {
-		assert coordinate != null && !coordinate.isNull();
-		return this.getToken(coordinate) == token;
-	}
+        return this.colors[coordinate.getRow()][coordinate.getColumn()];
+    }
 
-	boolean isEmpty(Coordinate coordinate) {
-		assert coordinate != null && !coordinate.isNull();
-		return this.isOccupied(coordinate, Token.NULL);
-	}
+    boolean isOccupied(Coordinate coordinate, Color color) {
+        return this.getColor(coordinate) == color;
+    }
 
-	boolean isTicTacToe(Token token) {
-		assert token != null && !token.isNull();
-		List<Coordinate> coordinates = this.getCoordinates(token);
-		if (coordinates.size() < Coordinate.DIMENSION) {
-			return false;
-		}
-		Direction[] directions = new Direction[Coordinate.DIMENSION - 1];
-		for (int i = 0; i < Coordinate.DIMENSION - 1; i++) {
-			directions[i] = coordinates.get(i).getDirection(coordinates.get(i + 1));
-			if (directions[i] == Direction.NULL || i > 0 && directions[i - 1] != directions[i]) {
-				return false;
-			}
-		}
-		return true;
-	}
+    boolean isEmpty(Coordinate coordinate) {
+        return this.isOccupied(coordinate, Color.NULL);
+    }
 
-	private List<Coordinate> getCoordinates(Token token) {
-		assert token != null && !token.isNull();
-		List<Coordinate> coordinates = new ArrayList<Coordinate>();
-		for (int i = 0; i < Coordinate.DIMENSION; i++) {
-			for (int j = 0; j < Coordinate.DIMENSION; j++) {
-				if (this.tokens[i][j] == token) {
-					coordinates.add(new Coordinate(i, j));
-				}
-			}
-		}
-		return coordinates;
-	}
+    boolean isTicTacToe(Color color) {
+        assert !color.isNull();
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Board other = (Board) obj;
-		if (!Arrays.deepEquals(tokens, other.tokens))
-			return false;
-		return true;
-	}	
+        List<Direction> directions = this.getDirections(color);
+        if (directions.size() < Coordinate.DIMENSION - 1) {
+            return false;
+        }
+        for (int i = 0; i < directions.size() - 1; i++) {
+            if (directions.get(i) != directions.get(i + 1)) {
+                return false;
+            }
+        }
+        return !directions.get(0).isNull();
+    }
+
+    private List<Direction> getDirections(Color color) {
+        assert !color.isNull();
+
+        List<Direction> directions = new ArrayList<>();
+        List<Coordinate> coordinates = this.getCoordinates(color);
+        if (!coordinates.isEmpty()) {
+            for (int i = 0; i < coordinates.size() - 1; i++) {
+                directions.add(coordinates.get(i).getDirection(coordinates.get(i + 1)));
+            }
+        }
+        return directions;
+    }
+
+    List<Coordinate> getCoordinates(Color color) {
+        assert !color.isNull();
+
+        List<Coordinate> coordinates = new ArrayList<>();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                if (this.getColor(new Coordinate(i, j)) == color) {
+                    coordinates.add(new Coordinate(i, j));
+                }
+            }
+        }
+        return coordinates;
+    }
 
 }

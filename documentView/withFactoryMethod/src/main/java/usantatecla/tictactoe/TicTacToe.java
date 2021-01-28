@@ -18,4 +18,5 @@ public abstract class TicTacToe {
     protected void play() {
         this.view.interact();
     }
+
 }

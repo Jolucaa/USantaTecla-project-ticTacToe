@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.views.graphics;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.ErrorView;
-import usantatecla.utils.ClosedInterval;
+import usantatecla.utils.models.ClosedInterval;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ public class CoordinatePutView extends CoordinateView {
     }
 
     void resetCoordinate() {
-        this.coordinate = null;
+        this.coordinate = new Coordinate();
     }
 
     Coordinate getCoordinate() {
@@ -40,12 +40,12 @@ public class CoordinatePutView extends CoordinateView {
         Error error;
         ClosedInterval limits = new ClosedInterval(0, Coordinate.DIMENSION - 1);
         if (!limits.isIncluded(coordinateInserted.getRow()) || !limits.isIncluded(coordinateInserted.getColumn())) {
-            error = Error.NOT_VALID;
+            error = Error.WRONG_COORDINATES;
         } else {
             error = Error.NULL;
         }
         if (error.isNull()) {
-            this.coordinate = new Coordinate(coordinateInserted.getColumn(), coordinateInserted.getRow());
+            this.coordinate = new Coordinate(coordinateInserted.getRow(), coordinateInserted.getColumn());
         } else {
             JOptionPane.showMessageDialog(null, ErrorView.MESSAGES[error.ordinal()], "ERROR",
                     JOptionPane.WARNING_MESSAGE);

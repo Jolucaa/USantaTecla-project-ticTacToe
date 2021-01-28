@@ -12,13 +12,13 @@ public abstract class View extends WithGameView {
         do {
             this.start();
             this.play();
-        } while (this.isNewGame());
+        } while (this.resume());
     }
 
     protected abstract void start();
 
     protected abstract void play();
 
-    protected abstract boolean isNewGame();
+    protected abstract boolean resume();
 
 }
