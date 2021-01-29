@@ -1,31 +1,29 @@
 @startuml arquitectura
-package tictactoe #DDDDDD { }
-tictactoe .down.> tictactoe.views.graphics
-tictactoe .down.> tictactoe.models
-tictactoe .down.> tictactoe.views.console
-tictactoe .down.> tictactoe.controllers
-tictactoe .down.> tictactoe.views
-
-package tictactoe.controllers #DDDDDD { }
-tictactoe.controllers .down.> tictactoe.models
-
-package tictactoe.models #DDDDDD { }
+package usantatecla.tictactoe #DDDDDD { }
+package usantatecla.tictactoe.models #DDDDDD { }
+package usantatecla.tictactoe.views #DDDDDD { }
+package usantatecla.tictactoe.views.console #DDDDDD { }
+package usantatecla.tictactoe.views.graphics #DDDDDD { }
+package usantatecla.utils #DDDDDD { }
 package java.util{ }
-tictactoe.models .down.> java.util
+package java.awt{ }
+package java.awt.event{ }
+package java.swing{ }
+usantatecla.tictactoe .down.> usantatecla.tictactoe.models
+usantatecla.tictactoe .down.> usantatecla.tictactoe.views.console
+usantatecla.tictactoe .down.> usantatecla.tictactoe.views.graphics
+usantatecla.tictactoe.views.console .down.> usantatecla.tictactoe.views
+usantatecla.tictactoe.views.graphics .down.> usantatecla.tictactoe.views
+usantatecla.tictactoe.views.graphics .down.> java.awt
+usantatecla.tictactoe.views.graphics .down.> java.awt.event
+usantatecla.tictactoe.views.graphics .down.> java.swing
+usantatecla.tictactoe.models .down.> java.util
+usantatecla.tictactoe.models .down.> usantatecla.utils
+usantatecla.tictactoe.views.console .down.> usantatecla.utils
+usantatecla.tictactoe.views .down.> usantatecla.tictactoe.models
+usantatecla.tictactoe.views.console .down.> usantatecla.tictactoe.models
+usantatecla.tictactoe.views.graphics .down.> usantatecla.tictactoe.models
 
-package utils #DDDDDD { }
 package java.io{ }
-utils .down.> java.io
-
-package tictactoe.views #DDDDDD { }
-tictactoe.views .down.> tictactoe.controllers
-
-package tictactoe.views.console #DDDDDD { }
-tictactoe.views.console .down.> tictactoe.views
-tictactoe.views.console .down.> tictactoe.controllers
-tictactoe.views.console .down.> utils
-
-package tictactoe.views.graphics #DDDDDD { }
-tictactoe.views.graphics .down.> tictactoe.views
-
+usantatecla.utils .down.> java.io
 @enduml

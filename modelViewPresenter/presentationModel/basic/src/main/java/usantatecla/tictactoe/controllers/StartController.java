@@ -8,12 +8,4 @@ public class StartController extends Controller {
         super(game);
     }
 
-    public void setUsers(int users) {
-        this.game.setUsers(users);
-    }
-
-    public int getMaxPlayers() {
-        return this.game.getMaxPlayers();
-    }
-
 }

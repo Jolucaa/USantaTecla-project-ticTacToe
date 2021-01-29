@@ -1,37 +1,43 @@
-@startuml desarrolloImplementacion
-package "  "  as tictactoe {
+@startuml desarrollo_implementacion
+package "  "  as usantatecla.tictactoe {
 }
-package "  "  as tictactoe.models {
+package "  "  as usantatecla.tictactoe.models {
 }
-package "  "  as tictactoe.controllers {
+package "  "  as usantatecla.tictactoe.views {
 }
-package "  "  as tictactoe.views {
+package "  "  as usantatecla.tictactoe.views.console {
 }
-package "  "  as tictactoe.views.console {
+package "  "  as usantatecla.tictactoe.views.graphics {
 }
-package "  "  as tictactoe.views.graphics {
-}
-package "  "  as utils {
+package "  "  as usantatecla.utils {
 }
 package "  "  as java.io {
 }
 package "  "  as java.util {
 }
+package "  "  as java.awt{
+}
+package "  "  as java.awt.event{
+}
+package "  "  as javax.swing{
+}
 
 [tictactoe.jar] as jar
 
-jar *--> tictactoe
-jar *--> tictactoe.models
-jar *--> tictactoe.controllers
-jar *--> tictactoe.views
-jar *--> tictactoe.views.console
-jar *--> tictactoe.views.graphics
-jar *--> utils
+jar *--> usantatecla.tictactoe
+jar *--> usantatecla.tictactoe.models
+jar *--> usantatecla.tictactoe.views
+jar *--> usantatecla.tictactoe.views.console
+jar *--> usantatecla.tictactoe.views.graphics
+jar *--> usantatecla.utils
 jar *--> java.io
 jar *--> java.util
+jar *--> java.awt
+jar *--> java.awt.event
+jar *--> javax.swing
 @enduml
 
-@startuml despliegueFisica
+@startuml despliegue_fisica
 node node #DDDDDD [
 <b>Personal Computer</b>
 ----

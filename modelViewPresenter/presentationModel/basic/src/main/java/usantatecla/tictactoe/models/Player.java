@@ -1,44 +1,65 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 class Player {
 
-    private final Token token;
-    private final Board board;
+    Color color;
+    Board board;
+    private int putTokens;
 
-    Player(Token token, Board board) {
-        assert token != null && !token.isNull();
+    Player(Color color, Board board) {
+        assert !color.isNull();
         assert board != null;
 
-        this.token = token;
+        this.color = color;
         this.board = board;
+        this.putTokens = 0;
     }
 
-    Error put(Coordinate coordinate) {
+    boolean areAllTokensOnBoard() {
+        return this.putTokens == Coordinate.DIMENSION;
+    }
+
+    void putToken(Coordinate coordinate) {
+        assert this.putTokens < Coordinate.DIMENSION;
+
+        this.board.putToken(coordinate, this.color);
+        this.putTokens++;
+    }
+
+    Error getPutTokenError(Coordinate coordinate) {
         if (!this.board.isEmpty(coordinate)) {
             return Error.NOT_EMPTY;
         }
-        this.board.put(coordinate, this.token);
         return Error.NULL;
     }
 
-    Error move(Coordinate origin, Coordinate target) {
-        if (!this.board.isOccupied(origin, this.token)) {
+    void moveToken(Coordinate origin, Coordinate target) {
+        this.board.moveToken(origin, target);
+    }
+
+    Error getOriginMoveTokenError(Coordinate origin) {
+        if (!this.board.isOccupied(origin, this.color)) {
             return Error.NOT_OWNER;
         }
-        if (origin.equals(target)) {
-            return Error.SAME_COORDINATES;
-        } else if (!this.board.isEmpty(target)) {
-            return Error.NOT_EMPTY;
-        }
-        this.board.move(origin, target);
         return Error.NULL;
     }
 
-    Token getToken() {
-        return this.token;
+    Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        if (origin.equals(target)) {
+            return Error.SAME_COORDINATES;
+        }
+        if (!this.board.isEmpty(target)) {
+            return Error.NOT_EMPTY;
+        }
+        return Error.NULL;
     }
 
+    Color getColor() {
+        return this.color;
+    }
+    
 }
