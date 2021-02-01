@@ -12,13 +12,13 @@ public abstract class View extends WithLogicView {
         do {
             this.start();
             this.play();
-        } while (this.isResumed());
+        } while (this.resume());
     }
 
     protected abstract void start();
 
     protected abstract void play();
 
-    protected abstract boolean isResumed();
+    protected abstract boolean resume();
 
 }

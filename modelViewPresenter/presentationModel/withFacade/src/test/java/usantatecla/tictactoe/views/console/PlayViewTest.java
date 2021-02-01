@@ -1,111 +1,49 @@
 package usantatecla.tictactoe.views.console;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.Message;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.views.ErrorView;
+import usantatecla.utils.views.Console;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayViewTest {
 
     @Mock
-    private Logic logic;
+    private Console console;
+
+    @Mock
+    private ErrorView errorView;
+
+    @Mock
+    private PlayController playController;
 
     @InjectMocks
     private PlayView playView;
 
-    @Mock
-    private Console console;
-
-    @BeforeEach
-    void before() {
-        openMocks(this);
-        this.playView = spy(this.playView);
-    }
-
     @Test
-    void testGivenNewPlayViewWhenUserPlayerPutCoordinateThenGamePutCoordinate() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.logic.isBoardComplete()).thenReturn(false);
-            when(this.logic.isUser()).thenReturn(true);
+    public void testGivenPlayViewWhenInteractThenIsWinner() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.put(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
-            when(this.logic.isTicTacToe()).thenReturn(true);
-            when(this.logic.getToken()).thenReturn(Token.X);
-            console.when(Console::getInstance).thenReturn(this.console);
+            when(this.playController.getColor(any(Coordinate.class))).thenReturn(Color.O);
+            when(this.playController.getActiveColor()).thenReturn(Color.O);
+            doReturn(true).when(this.playController).isTicTacToe();
+            when(this.playController.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
             this.playView.interact();
-            verify(this.logic).put(new Coordinate(0, 0));
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
-        }
-    }
-
-    @Test
-    void testGivenNewPlayViewWhenMachinePlayerPutCoordinateThenGamePutCoordinate() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            Coordinate coordinate = new Coordinate(0, 0);
-            when(this.logic.isBoardComplete()).thenReturn(false);
-            when(this.logic.isUser()).thenReturn(false);
-            when(this.playView.createRandomCoordinate()).thenReturn(coordinate);
-            when(this.logic.put(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
-            when(this.logic.isTicTacToe()).thenReturn(true);
-            when(this.logic.getToken()).thenReturn(Token.X);
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.playView.interact();
-            verify(this.logic).put(coordinate);
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
-        }
-    }
-
-    @Test
-    void testGivenNewPlayViewWhenUserPlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.logic.isBoardComplete()).thenReturn(true);
-            when(this.logic.isUser()).thenReturn(true);
-            when(this.console.readInt(anyString())).thenReturn(1, 1, 2, 2);
-            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
-            when(this.logic.isTicTacToe()).thenReturn(true);
-            when(this.logic.getToken()).thenReturn(Token.X);
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.playView.interact();
-            verify(this.logic).move(new Coordinate(0, 0), new Coordinate(1, 1));
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
-        }
-    }
-
-    @Test
-    void testGivenNewPlayViewWhenMachinePlayerMoveOriginToTargetThenGameMoveOriginToTarget() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            Coordinate origin = new Coordinate(0, 0);
-            Coordinate target = new Coordinate(1, 1);
-            when(this.logic.isBoardComplete()).thenReturn(true);
-            when(this.logic.isUser()).thenReturn(false);
-            when(this.playView.createRandomCoordinate()).thenReturn(origin, target);
-            when(this.logic.move(any(Coordinate.class), any(Coordinate.class))).thenReturn(Error.NULL);
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
-            when(this.logic.isTicTacToe()).thenReturn(true);
-            when(this.logic.getToken()).thenReturn(Token.X);
-            console.when(Console::getInstance).thenReturn(this.console);
-            this.playView.interact();
-            verify(this.logic).move(origin, target);
-            verify(this.console).writeln(Message.PLAYER_WIN.getMessage());
+            verify(this.playController).next();
+            verify(this.console).writeln("O player: You win!!! :-)");
         }
     }
 

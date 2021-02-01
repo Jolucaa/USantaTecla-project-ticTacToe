@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.models;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Color;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -11,49 +11,40 @@ import static org.hamcrest.Matchers.is;
 public class TurnTest {
 
     private Turn turn;
-    private Board board;
 
     @BeforeEach
-    void before() {
-        this.board = new Board();
-        this.turn = new Turn(this.board);
-        this.turn.setUsers(0);
+    public void beforeEach() {
+        this.turn = new Turn(new Board());
     }
 
     @Test
-    void testGivenNewTurnWhenCopyTurnThenIsSameTurn() {
-        assertThat(this.turn.copy(this.board), is(this.turn));
+    public void testGivenNewTurnWhenNullBoardThenAssertionError() {
+        Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
     @Test
-    void testGivenTwoUsersTurnWhenIsUserThenIsTrue() {
-        this.turn.setUsers(2);
-        assertThat(this.turn.isUser(), is(true));
+    public void testGivenTurnWhenResetThenActivePlayerIs0() {
+        this.turn.next();
+        this.turn.reset();
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
     }
 
     @Test
-    void testGivenNewTurnWhenPutCoordinateThenIsErrorNull() {
-        assertThat(this.turn.put(new Coordinate(0, 0)), is(Error.NULL));
+    public void testGivenNewTurnWhenGetActivePlayerThenReturn() {
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
     }
 
     @Test
-    void testGivenNewTurnWhenGetPlayerThenPlayerTokenIsX() {
-        assertThat(this.turn.getPlayer().getToken(), is(Token.X));
+    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured() {
+        assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
     @Test
-    void testGivenNewTurnWhenMoveOriginToTargetThenIsErrorNotOwner() {
-        assertThat(this.turn.move(new Coordinate(0, 0), new Coordinate(0, 1)), is(Error.NOT_OWNER));
-    }
-
-    @Test
-    void testGivenNewTurnWhenGetTokenThenIsXToken() {
-        assertThat(this.turn.getToken(), is(Token.X));
-    }
-
-    @Test
-    void testGivenNewTurnAndCopyTurnWhenEqualsThenIsTrue() {
-        assertThat(this.turn.equals(this.turn.copy(this.board)), is(true));
+    public void testGivenTurnWhenNextThenNextTurn() {
+        this.turn.next();
+        assertThat(this.turn.getActiveColor(), is(Color.O));
+        this.turn.next();
+        assertThat(this.turn.getActiveColor(), is(Color.X));
     }
 
 }

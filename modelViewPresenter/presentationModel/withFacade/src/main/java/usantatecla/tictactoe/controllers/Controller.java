@@ -1,8 +1,8 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Token;
 
 public abstract class Controller {
 
@@ -10,10 +10,6 @@ public abstract class Controller {
 
     Controller(Game game) {
         this.game = game;
-    }
-
-    public Token getToken(Coordinate coordinate) {
-        return this.game.getToken(coordinate);
     }
 
 }

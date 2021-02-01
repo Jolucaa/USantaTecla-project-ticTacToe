@@ -1,28 +1,27 @@
 package usantatecla.tictactoe.views.console;
 
+
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithLogicView;
-import usantatecla.utils.Console;
+import usantatecla.utils.views.Console;
 
-class BoardView extends WithLogicView {
+class BoardView {
 
-    BoardView(Logic logic) {
-        super(logic);
+    public BoardView() {
     }
 
-    void write() {
-        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+    void write(Logic logic) {
+        Message.HORIZONTAL_LINE.writeln();
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            Console.getInstance().write(Message.VERTICAL_LINE_LEFT.getMessage());
+            Message.VERTICAL_LINE.write();
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                new TokenView(this.logic.getToken(new Coordinate(i, j))).write();
-                Console.getInstance().write(Message.VERTICAL_LINE_CENTERED.getMessage());
+                new ColorView().write(logic.getColor(new Coordinate(i, j)));
+                Message.VERTICAL_LINE.write();
             }
-            Console.getInstance().writeln(Message.VERTICAL_LINE_RIGHT.getMessage());
+            Console.getInstance().writeln();
         }
-        Console.getInstance().writeln(Message.SEPARATOR.getMessage());
+        Message.HORIZONTAL_LINE.writeln();
     }
 
 }

@@ -1,19 +1,23 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
+import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.controllers.ResumeController;
+import usantatecla.tictactoe.controllers.StartController;
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.View;
 
 public class ConsoleView extends View {
 
-    private final StartView startView;
-    private final PlayView playView;
-    private final ResumeView resumeView;
+    private StartView startView;
+    private PlayView playView;
+    private ResumeView resumeView;
 
     public ConsoleView(Logic logic) {
         super(logic);
-        this.startView = new StartView(this.logic);
-        this.playView = new PlayView(this.logic);
-        this.resumeView = new ResumeView(this.logic);
+        this.startView = new StartView(logic);
+        this.playView = new PlayView(logic);
+        this.resumeView = new ResumeView(logic);
     }
 
     @Override
@@ -27,7 +31,7 @@ public class ConsoleView extends View {
     }
 
     @Override
-    protected boolean isResumed() {
+    protected boolean resume() {
         return this.resumeView.interact();
     }
 

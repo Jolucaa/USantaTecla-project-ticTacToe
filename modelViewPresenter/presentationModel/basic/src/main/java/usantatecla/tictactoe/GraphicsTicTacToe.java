@@ -5,7 +5,7 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 
-class GraphicsMastermind extends TicTacToe{
+class GraphicsTicTacToe extends TicTacToe{
 
     @Override
     protected GraphicsView createView(StartController startController, PlayController playController, ResumeController resumeController) {
@@ -13,7 +13,7 @@ class GraphicsMastermind extends TicTacToe{
     }
 
     public static void main(String[] args) {
-        new GraphicsMastermind().play();
+        new GraphicsTicTacToe().play();
     }
     
 }

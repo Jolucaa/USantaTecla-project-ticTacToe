@@ -1,63 +1,22 @@
 package usantatecla.tictactoe.views.console;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.types.Error;
-import usantatecla.utils.Console;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.utils.views.SquareBoundedCoordinateView;
+import usantatecla.utils.views.SquareBoundedCoordinateViewTest;
 
 @ExtendWith(MockitoExtension.class)
-public class CoordinateViewTest {
+public class CoordinateViewTest extends SquareBoundedCoordinateViewTest {
 
-    @Mock
-    private Console console;
-
-    @Mock
-    private Logic logic;
-
-    @InjectMocks
-    private CoordinateView coordinateView;
-
-    @BeforeEach
-    void before() {
-        openMocks(this);
+    @Override
+    public int getDimension() {
+        return Coordinate.DIMENSION;
     }
 
-    @Test
-    void testGivenNewCoordinateViewWhenReadCoordinateThenReturnCoordinate() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NULL);
-            console.when(Console::getInstance).thenReturn(this.console);
-            Coordinate coordinate = this.coordinateView.read("");
-            verify(this.console).writeln("");
-            assertThat(coordinate, is(new Coordinate(0, 0)));
-        }
-    }
-
-    @Test
-    void testGivenNewCoordinateViewWhenReadInvalidCoordinateThenReadValidCoordinateAndReturnValidCoordinate() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.console.readInt(anyString())).thenReturn(4, 1);
-            when(this.logic.isValidCoordinate(any(Coordinate.class))).thenReturn(Error.NOT_VALID, Error.NULL);
-            console.when(Console::getInstance).thenReturn(this.console);
-            Coordinate coordinate = this.coordinateView.read("");
-            verify(this.console, times(2)).writeln("");
-            verify(this.console, times(4)).readInt(anyString());
-            assertThat(coordinate, is(new Coordinate(0, 0)));
-        }
+    @Override
+    public SquareBoundedCoordinateView getCoordinateView() {
+        return new CoordinateView();
     }
 
 }

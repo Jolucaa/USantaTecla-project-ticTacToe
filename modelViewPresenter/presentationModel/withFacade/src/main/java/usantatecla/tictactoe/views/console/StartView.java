@@ -2,22 +2,18 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithLogicView;
-import usantatecla.utils.Console;
-import usantatecla.utils.LimitedIntDialog;
 
-class StartView extends WithLogicView {
+class StartView{
+
+    Logic logic;
 
     StartView(Logic logic) {
-        super(logic);
+        this.logic = logic;
     }
 
     void interact() {
-        Console.getInstance().writeln(Message.TITLE.getMessage());
-        int users = new LimitedIntDialog(0,
-                this.logic.getMaxPlayers()).read(Message.NUMBER_PLAYERS.getMessage());
-        this.logic.setUsers(users);
-        new BoardView(this.logic).write();
+        Message.TITLE.writeln();
+        new BoardView().write(this.logic);
     }
 
 }

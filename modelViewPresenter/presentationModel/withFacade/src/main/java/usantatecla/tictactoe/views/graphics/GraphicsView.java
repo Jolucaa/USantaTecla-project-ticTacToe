@@ -1,25 +1,25 @@
 package usantatecla.tictactoe.views.graphics;
 
 import usantatecla.tictactoe.controllers.Logic;
+import usantatecla.tictactoe.views.View;
 
-public class GraphicsView extends usantatecla.tictactoe.views.View {
+public class GraphicsView extends View {
 
-	public GraphicsView(Logic logic) {
-		super(logic);
-		// TODO
-	}
+    public GraphicsView(Logic logic) {
+        super(logic);
+    }
 
-	@Override
-	protected void start() {
-	}
+    @Override
+    protected void start() {
+    }
 
-	@Override
-	protected void play() {
-	}
+    @Override
+    protected void play() {
+    }
 
-	@Override
-	protected boolean isResumed() {
-		return false;
-	}
+    @Override
+    protected boolean resume() {
+        return true;
+    }
 
 }

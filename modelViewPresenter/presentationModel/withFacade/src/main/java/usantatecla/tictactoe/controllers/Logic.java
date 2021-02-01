@@ -1,65 +1,69 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Coordinate;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 public class Logic {
 
+    private Game game;
     private final StartController startController;
     private final PlayController playController;
     private final ResumeController resumeController;
 
     public Logic() {
-        Game game = new Game();
-        this.startController = new StartController(game);
-        this.playController = new PlayController(game);
-        this.resumeController = new ResumeController(game);
+        this.game = new Game();
+        this.startController = new StartController(this.game);
+        this.playController = new PlayController(this.game);
+        this.resumeController = new ResumeController(this.game);
     }
 
-    public int getMaxPlayers() {
-        return this.startController.getMaxPlayers();
+    public Color getColor(Coordinate coordinate) {
+        return this.startController.getColor(coordinate);
     }
 
-    public void setUsers(int users) {
-        this.startController.setUsers(users);
-    }
-
-    public Token getToken() {
-        return this.playController.getToken();
-    }
-
-    public boolean isBoardComplete() {
-        return this.playController.isBoardComplete();
+    public boolean areAllTokensOnBoard() {
+        return this.playController.areAllTokensOnBoard();
     }
 
     public boolean isTicTacToe() {
         return this.playController.isTicTacToe();
     }
 
-    public boolean isUser() {
-        return this.playController.isUser();
+    public void next() {
+        this.playController.next();
     }
 
-    public Error isValidCoordinate(Coordinate coordinate) {
-        return this.playController.isValidCoordinate(coordinate);
+    public Color getActiveColor() {
+        return this.playController.getActiveColor();
     }
 
-    public Error put(Coordinate coordinate) {
-        return this.playController.put(coordinate);
+    public void putToken(Coordinate coordinate) {
+        this.playController.putToken(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
     }
 
-    public Error move(Coordinate origin, Coordinate target) {
-        return this.playController.move(origin, target);
+    public Error getPutTokenError(Coordinate coordinate) {
+        return this.playController.getPutTokenError(coordinate);
     }
 
-    public Token getToken(Coordinate coordinate) {
-        return this.playController.getToken(coordinate);
+    public void moveToken(Coordinate origin, Coordinate target) {
+        this.playController.moveToken(
+                new Coordinate(origin.getRow(), origin.getColumn()),
+                new Coordinate(target.getRow(), target.getColumn())
+        );
     }
 
-    public void reset() {
-        this.resumeController.reset();
+    public Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.playController.getOriginMoveTokenError(coordinate);
+    }
+
+    public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.playController.getTargetMoveTokenError(origin, target);
+    }
+
+    public void resume() {
+        this.resumeController.resume();
     }
 
 }

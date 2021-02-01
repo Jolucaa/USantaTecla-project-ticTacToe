@@ -1,49 +1,60 @@
 package usantatecla.tictactoe.views.console;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.models.Coordinate;
-import usantatecla.tictactoe.types.Token;
-import usantatecla.tictactoe.views.Message;
-import usantatecla.utils.Console;
+import usantatecla.tictactoe.controllers.StartController;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.utils.views.Console;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 @ExtendWith(MockitoExtension.class)
 public class StartViewTest {
 
     @Mock
-    private Logic logic;
+    private Console console;
+
+    protected StartController startController;
 
     @InjectMocks
     private StartView startView;
-
-    @Mock
-    private Console console;
+    private Conversor conversor;
 
     @BeforeEach
-    void before() {
-        openMocks(this);
+    public void beforeEach() {
+        this.startController = new StartController(new Game());
+        this.conversor = new Conversor();
+        this.startView = new StartView(this.startController);
     }
 
     @Test
-    void testGivenNewStartViewWhenReadNumberOfUsersThenGameSetNumberOfUsers() {
-        try (MockedStatic console = mockStatic(Console.class)) {
-            when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.logic.getMaxPlayers()).thenReturn(2);
-            when(this.logic.getToken(any(Coordinate.class))).thenReturn(Token.X);
+    public void testGivenStartViewWhenInteractThenInteract() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             this.startView.interact();
-            verify(this.console).writeln(Message.TITLE.getMessage());
-            verify(this.logic).setUsers(1);
+            String string = this.conversor.arrayToString(new String[]{
+                    "--- TIC TAC TOE ---",
+                    "---------------",
+                    " |   |   |   | ",
+                    " |   |   |   | ",
+                    " |   |   |   | ",
+                    "---------------"
+            });
+            ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+            verify(this.console, atLeast(0)).writeln(argumentCaptor.capture());
+            verify(this.console, atLeast(0)).write(argumentCaptor.capture());
+            List<String> argumentCaptorValues = argumentCaptor.getAllValues();
+            this.conversor.reorder(argumentCaptorValues);
+            assertThat(string, is(this.conversor.arrayToString(argumentCaptorValues.toArray())));
         }
     }
+
 }
