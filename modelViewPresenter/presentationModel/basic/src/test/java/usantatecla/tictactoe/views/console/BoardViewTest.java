@@ -43,7 +43,7 @@ public class BoardViewTest {
                     Color.NULL, Color.O, Color.NULL,
                     Color.O, Color.NULL, Color.X
             ).when(this.controller).getColor(any());
-            this.boardView.write();
+            this.boardView.write(this.controller);
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",

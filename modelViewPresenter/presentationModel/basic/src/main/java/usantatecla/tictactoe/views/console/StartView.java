@@ -13,7 +13,7 @@ class StartView{
 
     void interact() {
         Message.TITLE.writeln();
-        new BoardView(this.startController).write();
+        new BoardView().write(this.startController);
     }
 
 }
