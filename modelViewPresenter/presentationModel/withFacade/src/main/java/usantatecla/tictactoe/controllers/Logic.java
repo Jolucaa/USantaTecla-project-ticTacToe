@@ -12,8 +12,8 @@ public class Logic {
     private final PlayController playController;
     private final ResumeController resumeController;
 
-    public Logic() {
-        this.game = new Game();
+    public Logic(Game game) {
+        this.game = game;
         this.startController = new StartController(this.game);
         this.playController = new PlayController(this.game);
         this.resumeController = new ResumeController(this.game);

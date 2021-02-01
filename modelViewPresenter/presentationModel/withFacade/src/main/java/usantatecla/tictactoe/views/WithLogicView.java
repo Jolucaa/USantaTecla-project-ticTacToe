@@ -6,7 +6,7 @@ public abstract class WithLogicView {
 
     protected Logic logic;
 
-    protected WithLogicView(Logic logic) {
+    public WithLogicView(Logic logic) {
         this.logic = logic;
     }
     
