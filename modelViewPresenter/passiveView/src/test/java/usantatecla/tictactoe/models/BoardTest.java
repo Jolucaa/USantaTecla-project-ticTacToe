@@ -1,130 +1,177 @@
 package usantatecla.tictactoe.models;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
-import org.junit.Test;
-
-import usantatecla.tictactoe.types.Token;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class BoardTest {
 
-    private Board board;
+    private BoardBuilder boardBuilder;
 
-    public BoardTest() {
-        this.board = new Board();
+    @BeforeEach
+    public void beforeEach() {
+        this.boardBuilder = new BoardBuilder();
     }
 
     @Test
-    public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsTrue() {
-        Token token = Token.values()[0];
+    public void testGivenEmptyBoardWhenStartThenIsEmpty() {
+        Board board = this.boardBuilder.build();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
+            }
+        }
+    }
+
+    @Test
+    public void testGivenNewBoardWhenPutNewTokenThenIsOccupiedIsTrue() {
+        Board board = this.boardBuilder.build();
+        Color color = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
-        this.board.put(coordinate, token);
-        assertTrue(this.board.isOccupied(coordinate, token));
+        board.putToken(coordinate, color);
+        assertThat(board.isOccupied(coordinate, color), is(true));
     }
 
     @Test
-    public void testGivenNewBoardWhenPutNewTokenIsOccupiedThenIsFalse() {
-        Token token = Token.values()[0];
-        Coordinate coordinate = new Coordinate(0, 0);
-        assertFalse(this.board.isOccupied(coordinate, token));
+    public void testGivenBoardWhenMoveXTokenOriginIsEmptyAndTargetIsOccupiedThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "   ",
+                "   ").build();
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate target = new Coordinate(0, 1);
+        board.moveToken(origin, target);
+        assertThat(board.isEmpty(origin), is(true));
+        assertThat(board.isOccupied(target, Color.X), is(true));
     }
 
     @Test
-    public void testGivenNewBoardWhenMoveNewTokenIsOccupiedAndOriginIsEmptyThenIsTrue() {
-        Token token = Token.values()[0];
-        Coordinate originCoordinate = new Coordinate(0, 0);
-        Coordinate coordinateToMove = new Coordinate(0, 1);
-        this.board.put(originCoordinate, token);
-        this.board.move(originCoordinate, coordinateToMove);
-        assertTrue(this.board.isEmpty(originCoordinate));
-        assertTrue(this.board.isOccupied(coordinateToMove, token));
+    public void testGivenBoardWhenMoveXTokenAndTargetIsOccupiedThenIsAssertion() {
+        Board board = this.boardBuilder.rows(
+                "XO ",
+                "   ",
+                "   ").build();
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate target = new Coordinate(0, 1);
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
-    public void testGivenNewBoardWhenMoveNewTokenIsOccupiedAndOriginIsEmptyThenIsFalse() {
-        Token token = Token.values()[0];
-        Coordinate originCoordinate = new Coordinate(0, 0);
-        Coordinate coordinateToMove = new Coordinate(0, 1);
-        this.board.put(originCoordinate, token);
-        this.board.move(originCoordinate, coordinateToMove);
-        assertFalse(this.board.isEmpty(coordinateToMove));
-        assertFalse(this.board.isOccupied(originCoordinate, token));
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testGivenNewBoardWhenMoveNewTokenTheOriginIsEmptyThenAssertionException() {
-        Coordinate originCoordinate = new Coordinate(0, 0);
-        Coordinate coordinateToMove = new Coordinate(0, 1);
-        this.board.move(originCoordinate, coordinateToMove);
+    public void testGivenBoardWhenMoveTokenAndOriginIsEmptyThenIsAssertion() {
+        Board board = this.boardBuilder.build();
+        Coordinate origin = new Coordinate(1, 0);
+        Coordinate target = new Coordinate(2, 2);
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
-    public void testGivenNewBoardWhenPutThreeTokenAndIsTicTacToeThenIsTrue() {
-        Token token = Token.values()[0];
-        Coordinate coordinate11 = new Coordinate(0, 0);
-        Coordinate coordinate12 = new Coordinate(0, 1);
-        Coordinate coordinate13 = new Coordinate(0, 2);
-        this.board.put(coordinate11, token);
-        this.board.put(coordinate12, token);
-        this.board.put(coordinate13, token);
-        assertTrue(this.board.isTicTacToe(token));
+    public void testGivenBoardWhenMoveTokenAndOriginIsEqualsTargetThenIsAssertion() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "   ",
+                "   ").build();
+        Coordinate origin = new Coordinate(0, 0);
+        Coordinate target = new Coordinate(0, 0);
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
-    public void testGivenNewBoardWhenPutTwoTokenAndIsTicTacToeThenIsFalse() {
-        Token token = Token.values()[0];
-        Coordinate coordinate11 = new Coordinate(0, 0);
-        Coordinate coordinate12 = new Coordinate(0, 1);
-        this.board.put(coordinate11, token);
-        this.board.put(coordinate12, token);
-        assertFalse(this.board.isTicTacToe(token));
+    public void testGivenBoardWhenGetColorThenReturn() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "   ",
+                "   ").build();
+        assertThat(board.getColor(new Coordinate(0, 0)), is(Color.X));
     }
 
     @Test
-    public void testGivenNewBoardWhenNotPutTokensAndIsTicTacToeThenIsFalse() {
-        Token token = Token.values()[0];
-        assertFalse(this.board.isTicTacToe(token));
+    public void testGivenBoardWhenGetColorFromNullCoordinateThenReturn() {
+        Board board = this.boardBuilder.build();
+        Assertions.assertThrows(AssertionError.class, () -> board.getColor(new Coordinate()));
     }
 
     @Test
-    public void testGivenNewBoardWhenPutSixTokensAndIsCompletedThenIsTrue() {
-        Token tokenX = Token.values()[0];
-        Token tokenO = Token.values()[1];
-        Coordinate coordinate11 = new Coordinate(0, 0);
-        Coordinate coordinate21 = new Coordinate(1, 0);
-        Coordinate coordinate12 = new Coordinate(0, 1);
-        Coordinate coordinate22 = new Coordinate(1, 1);
-        Coordinate coordinate23 = new Coordinate(1, 2);
-        Coordinate coordinate33 = new Coordinate(2, 2);
-        this.board.put(coordinate11, tokenX);
-        this.board.put(coordinate21, tokenO);
-        this.board.put(coordinate12, tokenX);
-        this.board.put(coordinate22, tokenO);
-        this.board.put(coordinate23, tokenX);
-        this.board.put(coordinate33, tokenO);
-        assertTrue(this.board.isCompleted());
+    public void testGivenEmptyBoardWhenCheckIsOccupiedThenIsFalse() {
+        Board board = this.boardBuilder.build();
+        assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(false));
     }
 
     @Test
-    public void testGivenNewBoardWhenPutFiveTokensAndIsCompletedThenIsFalse() {
-        Token tokenX = Token.values()[0];
-        Token tokenO = Token.values()[1];
-        Coordinate coordinate11 = new Coordinate(0, 0);
-        Coordinate coordinate21 = new Coordinate(1, 0);
-        Coordinate coordinate12 = new Coordinate(0, 1);
-        Coordinate coordinate22 = new Coordinate(1, 1);
-        Coordinate coordinate23 = new Coordinate(1, 2);
-        this.board.put(coordinate11, tokenX);
-        this.board.put(coordinate21, tokenO);
-        this.board.put(coordinate12, tokenX);
-        this.board.put(coordinate22, tokenO);
-        this.board.put(coordinate23, tokenX);
-        assertFalse(this.board.isCompleted());
+    public void testGivenBoardWhenCheckIsOccupiedThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "   ",
+                "   ").build();
+        assertThat(board.isOccupied(new Coordinate(0, 0), Color.X), is(true));
     }
 
     @Test
-    public void testGivenNewBoardWhenNotPutTokensAndIsCompletedThenIsFalse() {
-        assertFalse(this.board.isCompleted());
+    public void testGivenBoardWhenCheckNullCoordinateIsOccupiedThenAssertionError() {
+        Board board = this.boardBuilder.build();
+        Assertions.assertThrows(AssertionError.class, () -> board.isOccupied(new Coordinate(), Color.O));
     }
+
+    @Test
+    public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
+        Board board = this.boardBuilder.build();
+        assertThat(board.isTicTacToe(Color.O), is(false));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsTicTacToeNullColorThenAssertionError() {
+        Board board = this.boardBuilder.build();
+        Assertions.assertThrows(AssertionError.class, () -> board.isTicTacToe(Color.NULL));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsVerticalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                " X ",
+                "OXO",
+                " X ").build();
+        assertThat(board.isTicTacToe(Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsHorizontalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                " O ",
+                "XXX",
+                " O ").build();
+        assertThat(board.isTicTacToe(Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsDiagonalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "X  ",
+                "OXO",
+                "  X").build();
+        assertThat(board.isTicTacToe(Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsInverseDiagonalTicTacToeThenIsTrue() {
+        Board board = this.boardBuilder.rows(
+                "  X",
+                "OXO",
+                "X  ").build();
+        assertThat(board.isTicTacToe(Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenCompleteBoardAndIsTicTacToeThenIsFalse() {
+        Board board = this.boardBuilder.rows(
+                "XO ",
+                "XO ",
+                "OX ").build();
+        assertThat(board.isTicTacToe(Color.X), is(false));
+        assertThat(board.isTicTacToe(Color.O), is(false));
+    }
+
 }

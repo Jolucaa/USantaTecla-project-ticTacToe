@@ -1,54 +1,85 @@
 package usantatecla.tictactoe.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.views.MovementCommand;
-import usantatecla.tictactoe.views.RedoCommand;
-import usantatecla.tictactoe.views.UndoCommand;
-import usantatecla.utils.Command;
-import usantatecla.utils.Menu;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.types.Error;
+import usantatecla.tictactoe.views.ErrorView;
+import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.views.console.CoordinateView;
+import usantatecla.tictactoe.views.console.PlayView;
 
 public class PlayController extends Controller {
 
-	private Map<Command, Controller> controllers;
+    public PlayController(Game game) {
+        super(game);
+    }
 
-	private MovementCommand movementCommand;
+    public void control() {
+        do {
+            if (!this.game.areAllTokensOnBoard()) {
+                this.putToken();
+            } else {
+                this.moveToken();
+            }
+            this.game.next();
+            this.writeBoard();
+        } while (!this.game.isTicTacToe());
+        new PlayView().writeWinner(this.game.getActiveColor());
+    }
 
-	private MovementController movementController;
+    private void putToken() {
+        Coordinate coordinate;
+        Error error;
+        do {
+            coordinate = this.getCoordinate(Message.ENTER_COORDINATE_TO_PUT);
+            error = this.getPutTokenError(coordinate);
+        } while (!error.isNull());
+        this.game.putToken(coordinate);
+    }
 
-	private UndoCommand undoCommand;
+    private Coordinate getCoordinate(Message message) {
+        assert message != null;
 
-	private UndoController undoController;
+        return (Coordinate) new CoordinateView().read(message.toString());
+    }
 
-	private RedoCommand redoCommand;
+    private Error getPutTokenError(Coordinate coordinate) {
+        assert coordinate != null;
 
-	private RedoController redoController;
+        Error error = this.game.getPutTokenError(coordinate);
+        new ErrorView().writeln(error);
+        return error;
+    }
 
-	private Menu menu;
-    
-    public PlayController(Session session) {
-		super(session);
-		this.controllers = new HashMap<Command, Controller>();
-		this.movementController = new MovementController(this.session);
-		this.movementCommand = new MovementCommand();
-		this.controllers.put(this.movementCommand, this.movementController);
-		this.undoCommand = new UndoCommand();
-		this.undoController = new UndoController(this.session);
-		this.controllers.put(this.undoCommand, this.undoController);
-		this.redoCommand = new RedoCommand();
-		this.redoController = new RedoController(this.session);
-		this.controllers.put(this.redoCommand, this.redoController);
-		this.menu = new Menu(this.controllers.keySet());
-	}
+    private void moveToken() {
+        Coordinate origin;
+        Error error;
+        do {
+            origin = this.getCoordinate(Message.COORDINATE_TO_REMOVE);
+            error = this.getOriginMoveTokenError(origin);
+        } while (error != Error.NULL);
+        Coordinate target;
+        do {
+            target = this.getCoordinate(Message.COORDINATE_TO_MOVE);
+            error = this.getTargetMoveTokenError(origin, target);
+        } while (error != Error.NULL);
+        this.game.moveToken(origin, target);
+    }
 
-	@Override
-	public void control() {
-		this.movementCommand.setActive(true);
-		this.undoCommand.setActive(this.undoController.undoable());
-		this.redoCommand.setActive(this.redoController.redoable());
-		this.controllers.get(this.menu.execute()).control();
-	}
-	
+    private Error getOriginMoveTokenError(Coordinate origin) {
+        assert !origin.isNull();
+
+        Error error = this.game.getOriginMoveTokenError(origin);
+        new ErrorView().writeln(error);
+        return error;
+    }
+
+    private Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        assert !origin.isNull() && !target.isNull();
+
+        Error error = this.game.getTargetMoveTokenError(origin, target);
+        new ErrorView().writeln(error);
+        return error;
+    }
+
 }
