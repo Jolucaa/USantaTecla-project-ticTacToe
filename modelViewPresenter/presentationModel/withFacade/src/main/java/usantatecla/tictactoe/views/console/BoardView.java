@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.views.console;
 
-
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
