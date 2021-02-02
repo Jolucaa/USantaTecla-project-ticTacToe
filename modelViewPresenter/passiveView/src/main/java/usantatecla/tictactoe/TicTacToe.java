@@ -4,29 +4,31 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.views.ViewFactory;
 
-public class TicTacToe {
+abstract class TicTacToe {
 
     private Game game;
+    private ViewFactory viewFactory;
     private StartController startController;
     private PlayController playController;
     private ResumeController resumeController;
 
     protected TicTacToe() {
         this.game = new Game();
-        this.startController = new StartController(this.game);
-        this.playController = new PlayController(this.game);
-        this.resumeController = new ResumeController(this.game);
+        this.viewFactory = this.createViewFactory();
+        this.startController = new StartController(this.game, this.viewFactory);
+        this.playController = new PlayController(this.game, this.viewFactory);
+        this.resumeController = new ResumeController(this.game, this.viewFactory);
     }
 
-    void play() {
+    protected abstract ViewFactory createViewFactory();
+
+    protected void play() {
         do {
             this.startController.control();
             this.playController.control();
         } while (this.resumeController.control());
     }
 
-    public static void main(String[] args) {
-        new TicTacToe().play();
-    }
 }

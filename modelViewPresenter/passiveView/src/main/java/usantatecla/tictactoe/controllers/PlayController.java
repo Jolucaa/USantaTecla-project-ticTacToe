@@ -3,15 +3,13 @@ package usantatecla.tictactoe.controllers;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.ErrorView;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.console.CoordinateView;
-import usantatecla.tictactoe.views.console.PlayView;
+import usantatecla.tictactoe.views.ViewFactory;
 
 public class PlayController extends Controller {
 
-    public PlayController(Game game) {
-        super(game);
+    public PlayController(Game game, ViewFactory viewFactory) {
+        super(game, viewFactory);
     }
 
     public void control() {
@@ -24,7 +22,7 @@ public class PlayController extends Controller {
             this.game.next();
             this.writeBoard();
         } while (!this.game.isTicTacToe());
-        new PlayView().writeWinner(this.game.getActiveColor());
+        this.viewFactory.createPlayerView().writeWinner(this.game.getActiveColor());
     }
 
     private void putToken() {
@@ -40,14 +38,14 @@ public class PlayController extends Controller {
     private Coordinate getCoordinate(Message message) {
         assert message != null;
 
-        return (Coordinate) new CoordinateView().read(message.toString());
+        return (Coordinate) this.viewFactory.createCoordinateView().read(message.toString());
     }
 
     private Error getPutTokenError(Coordinate coordinate) {
         assert coordinate != null;
 
         Error error = this.game.getPutTokenError(coordinate);
-        new ErrorView().writeln(error);
+        this.viewFactory.createErrorView().writeln(error);
         return error;
     }
 
@@ -70,7 +68,7 @@ public class PlayController extends Controller {
         assert !origin.isNull();
 
         Error error = this.game.getOriginMoveTokenError(origin);
-        new ErrorView().writeln(error);
+        this.viewFactory.createErrorView().writeln(error);
         return error;
     }
 
@@ -78,7 +76,7 @@ public class PlayController extends Controller {
         assert !origin.isNull() && !target.isNull();
 
         Error error = this.game.getTargetMoveTokenError(origin, target);
-        new ErrorView().writeln(error);
+        this.viewFactory.createErrorView().writeln(error);
         return error;
     }
 

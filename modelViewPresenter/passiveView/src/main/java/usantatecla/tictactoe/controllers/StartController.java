@@ -1,16 +1,16 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.views.console.StartView;
+import usantatecla.tictactoe.views.ViewFactory;
 
 public class StartController extends Controller {
 
-    public StartController(Game game) {
-        super(game);
+    public StartController(Game game, ViewFactory viewFactory) {
+        super(game, viewFactory);
     }
 
     public void control() {
-        new StartView().write();
+        this.viewFactory.createStartView().write();
         this.writeBoard();
     }
 

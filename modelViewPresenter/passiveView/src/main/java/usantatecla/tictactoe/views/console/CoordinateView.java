@@ -7,7 +7,7 @@ import usantatecla.utils.models.ConcreteCoordinate;
 import usantatecla.utils.models.SquareBoundedCoordinate;
 import usantatecla.utils.views.SquareBoundedCoordinateView;
 
-public class CoordinateView extends SquareBoundedCoordinateView {
+public class CoordinateView extends SquareBoundedCoordinateView implements usantatecla.tictactoe.views.CoordinateView {
 
     @Override
     public SquareBoundedCoordinate createCoordinate(ConcreteCoordinate concreteCoordinate) {
