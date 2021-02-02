@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.views.Console;
@@ -22,14 +24,16 @@ public class ResumeViewTest {
     @Mock
     private Console console;
 
-    @Mock
-    protected ResumeController resumeController;
+    @Spy
+    private Game game;
 
+    private Logic logic;
     private ResumeView resumeView;
 
     @BeforeEach
-    public void beforeEach() {
-        this.resumeView = new ResumeView(this.resumeController);
+    public void beforeEach(){
+        this.logic = new Logic(this.game);
+        this.resumeView = new ResumeView(this.logic);
     }
 
     @Test

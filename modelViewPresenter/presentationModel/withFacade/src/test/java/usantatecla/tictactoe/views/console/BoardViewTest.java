@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Controller;
+import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
 
@@ -23,7 +24,7 @@ public class BoardViewTest {
     private Console console;
 
     @Mock
-    private Controller controller;
+    private Logic logic;
 
     @InjectMocks
     private BoardView boardView;
@@ -42,8 +43,8 @@ public class BoardViewTest {
                     Color.X, Color.NULL, Color.NULL,
                     Color.NULL, Color.O, Color.NULL,
                     Color.O, Color.NULL, Color.X
-            ).when(this.controller).getColor(any());
-            this.boardView.write(this.controller);
+            ).when(this.logic).getColor(any());
+            this.boardView.write(this.logic);
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",
