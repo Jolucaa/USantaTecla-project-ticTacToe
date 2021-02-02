@@ -6,34 +6,39 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
 
-import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerViewTest {
+    // TODO Hacer
+    //final static Coordinate ORIGIN = new Coordinate(0, 0);
+    //final static Coordinate TARGET = new Coordinate(0, 1);
 
-    final static Coordinate ORIGIN = new Coordinate(0, 0);
-    final static Coordinate TARGET = new Coordinate(0, 1);
-
-    protected PlayerView playerView;
-
-    @Mock
-    private PlayController playController;
+    private PlayerView playerView;
 
     @Mock
     private Console console;
 
     @BeforeEach
     public void beforeEach() {
-        this.playerView = spy(new PlayerView(this.playController));
+        this.playerView = new PlayerView();
     }
 
+    @Test
+    public void testGivenPlayerViewWhenWriteWinnerThenPrint() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            this.playerView.writeWinner(Color.X);
+            this.playerView.writeWinner(Color.O);
+            verify(this.console).writeln("X player: You win!!! :-)");
+            verify(this.console).writeln("O player: You win!!! :-)");
+        }
+    }
+
+    /*
     @Test
     public void testGivenPlayerViewWhenInteractThenPutToken() {
         doReturn(PlayerViewTest.ORIGIN).when(playerView).getCoordinate(any());
@@ -65,5 +70,6 @@ public class PlayerViewTest {
             assertThat(this.playerView.getCoordinate(Message.COORDINATE_TO_PUT), is(PlayerViewTest.ORIGIN));
         }
     }
+    */
 
 }
