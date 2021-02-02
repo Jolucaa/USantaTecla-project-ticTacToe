@@ -6,7 +6,7 @@ import usantatecla.utils.views.YesNoDialog;
 
 class ResumeView {
 
-    Logic logic;
+    private Logic logic;
 
     ResumeView(Logic logic) {
         this.logic = logic;

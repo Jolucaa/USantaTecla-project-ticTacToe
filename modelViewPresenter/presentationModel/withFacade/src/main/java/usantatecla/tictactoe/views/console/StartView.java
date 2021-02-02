@@ -5,7 +5,7 @@ import usantatecla.tictactoe.views.Message;
 
 class StartView{
 
-    Logic logic;
+    private Logic logic;
 
     StartView(Logic logic) {
         this.logic = logic;

@@ -7,9 +7,6 @@ import usantatecla.utils.views.Console;
 
 class BoardView {
 
-    public BoardView() {
-    }
-
     void write(Logic logic) {
         Message.HORIZONTAL_LINE.writeln();
         for (int i = 0; i < Coordinate.DIMENSION; i++) {

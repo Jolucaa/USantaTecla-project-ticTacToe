@@ -28,6 +28,7 @@ public class BoardViewTest {
 
     @InjectMocks
     private BoardView boardView;
+
     private Conversor conversor;
 
     @BeforeEach
