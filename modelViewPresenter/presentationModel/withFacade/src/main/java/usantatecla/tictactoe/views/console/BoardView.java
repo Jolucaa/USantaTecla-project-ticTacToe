@@ -1,15 +1,11 @@
 package usantatecla.tictactoe.views.console;
 
-
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.views.Console;
 
 class BoardView {
-
-    public BoardView() {
-    }
 
     void write(Logic logic) {
         Message.HORIZONTAL_LINE.writeln();

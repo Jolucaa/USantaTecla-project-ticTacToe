@@ -19,16 +19,6 @@ public class BoardTest {
     }
 
     @Test
-    public void testGivenEmptyBoardWhenStartThenIsEmpty() {
-        Board board = this.boardBuilder.build();
-        for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
-            }
-        }
-    }
-
-    @Test
     public void testGivenNewBoardWhenPutNewTokenThenIsOccupiedIsTrue() {
         Board board = this.boardBuilder.build();
         Color color = Color.O;
@@ -114,6 +104,16 @@ public class BoardTest {
     public void testGivenBoardWhenCheckNullCoordinateIsOccupiedThenAssertionError() {
         Board board = this.boardBuilder.build();
         Assertions.assertThrows(AssertionError.class, () -> board.isOccupied(new Coordinate(), Color.O));
+    }
+
+    @Test
+    public void testGivenEmptyBoardWhenStartThenIsEmpty() {
+        Board board = this.boardBuilder.build();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
+            }
+        }
     }
 
     @Test

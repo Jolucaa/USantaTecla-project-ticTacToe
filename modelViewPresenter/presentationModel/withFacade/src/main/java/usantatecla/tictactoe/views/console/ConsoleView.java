@@ -1,10 +1,6 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.controllers.ResumeController;
-import usantatecla.tictactoe.controllers.StartController;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.View;
 
 public class ConsoleView extends View {

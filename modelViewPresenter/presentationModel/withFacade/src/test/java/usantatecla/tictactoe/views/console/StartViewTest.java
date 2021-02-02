@@ -23,17 +23,13 @@ public class StartViewTest {
     @Mock
     private Console console;
 
-    @Spy
-    private Game game;
-
     private Logic logic;
-
     private StartView startView;
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
-        this.logic = new Logic(this.game);
+        this.logic = new Logic(new Game());
         this.startView = new StartView(this.logic);
         this.conversor = new Conversor();
     }

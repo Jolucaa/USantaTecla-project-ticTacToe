@@ -1,9 +1,7 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.ResumeController;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithGameView;
 import usantatecla.utils.views.YesNoDialog;
 
 class ResumeView {
