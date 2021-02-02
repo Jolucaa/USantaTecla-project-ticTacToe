@@ -35,6 +35,7 @@ public class BoardViewTest {
         this.conversor = new Conversor();
     }
 
+    //TODO Tendría que ser un spy el logic en lugar de un mock??
     @Test
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
