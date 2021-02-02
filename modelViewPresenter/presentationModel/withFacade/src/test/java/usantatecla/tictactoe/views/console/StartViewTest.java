@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.views.Console;
@@ -22,17 +23,19 @@ public class StartViewTest {
     @Mock
     private Console console;
 
-    protected StartController startController;
+    @Spy
+    private Game game;
 
-    @InjectMocks
+    private Logic logic;
+
     private StartView startView;
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
-        this.startController = new StartController(new Game());
+        this.logic = new Logic(this.game);
+        this.startView = new StartView(this.logic);
         this.conversor = new Conversor();
-        this.startView = new StartView(this.startController);
     }
 
     @Test
