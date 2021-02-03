@@ -1,25 +1,16 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Error;
-import usantatecla.utils.WithConsoleView;
 
-public class ErrorView extends WithConsoleView {
+public abstract class ErrorView {//TODO Revisar
 
-	public  static final String[] MESSAGES = {
-		"The square is not empty",
-		"There is not a token of yours", 
-		"The origin and target squares are the same",
-		"Wrong number of users",
-		"The coordinates are wrong" };
+    public static final String[] MESSAGES = {
+            "The square is not empty",
+            "There is not a token of yours",
+            "The origin and target squares are the same",
+            "The coordinates are wrong"
+    };
 
-	protected Error error;
-
-	public ErrorView(Error error) {
-		this.error = error;
-	}
-
-	public void writeln() {
-		this.console.writeln(ErrorView.MESSAGES[this.error.ordinal()]);
-	}
+    public abstract void writeln(Error error);
 
 }
