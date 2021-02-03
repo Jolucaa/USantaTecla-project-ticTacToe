@@ -5,7 +5,7 @@ import usantatecla.tictactoe.views.Message;
 public class StartView implements usantatecla.tictactoe.views.StartView {
 
     public void write() {
-        Message.TITLE.writeln();
+        new MessageView().writeln(Message.TITLE);
     }
 
 }

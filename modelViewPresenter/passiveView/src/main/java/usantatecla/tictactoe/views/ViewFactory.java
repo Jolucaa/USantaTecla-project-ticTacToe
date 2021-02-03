@@ -7,9 +7,6 @@ public abstract class ViewFactory {
     public abstract PlayerView createPlayerView();
     public abstract ResumeView createResumeView();
     public abstract StartView createStartView();
-
-    public ErrorView createErrorView() { // TODO Revisar
-        return new ErrorView();
-    }
+    public abstract ErrorView createErrorView();
 
 }

@@ -6,7 +6,7 @@ import usantatecla.tictactoe.views.Message;
 public class PlayerView implements usantatecla.tictactoe.views.PlayerView {
 
     public void writeWinner(Color color) {
-        Message.PLAYER_WIN.writeln(color.name());
+        new MessageView().writeln(Message.PLAYER_WIN, color.name());
     }
 
 }

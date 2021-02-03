@@ -29,4 +29,9 @@ public class GraphicsViewFactory extends ViewFactory {
         return null;
     }
 
+    @Override
+    public ErrorView createErrorView() {
+        return null;
+    }
+
 }

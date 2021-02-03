@@ -29,4 +29,9 @@ public class ConsoleViewFactory extends ViewFactory {
         return new StartView();
     }
 
+    @Override
+    public ErrorView createErrorView() {
+        return new ErrorView();
+    }
+
 }

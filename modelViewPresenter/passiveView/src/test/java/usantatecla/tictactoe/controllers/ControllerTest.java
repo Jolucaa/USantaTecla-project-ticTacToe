@@ -1,35 +1,35 @@
 package usantatecla.tictactoe.controllers;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.views.ViewFactory;
-import usantatecla.tictactoe.views.console.BoardView;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-// TODO Revisar entero con Luis
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.GameBuilder;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.views.ViewFactory;
+import usantatecla.tictactoe.views.console.BoardView;
+
 @ExtendWith(MockitoExtension.class)
 public abstract class ControllerTest {
 
     @Mock
     protected BoardView boardView;
 
-    @Spy
+    @Mock
     protected ViewFactory viewFactory;
 
-    @Spy
     protected Game game;
 
     protected Controller controller;
@@ -37,18 +37,17 @@ public abstract class ControllerTest {
     @Test
     public void testGivenControllerWhenWriteBoardThenCorrectColorsCaptured() {
         when(this.viewFactory.createBoardView()).thenReturn(this.boardView);
-        doReturn(
-                Color.X, Color.NULL, Color.NULL,
-                Color.NULL, Color.O, Color.NULL,
-                Color.O, Color.NULL, Color.X
-        ).when(this.game).getColor(any());
+        this.controller.game = new GameBuilder().rows(
+                "X  ",
+                " O ",
+                "O X").build();
+        this.controller.writeBoard();
+        ArgumentCaptor<Color> argumentCaptor = ArgumentCaptor.forClass(Color.class);
+        verify(this.boardView, atLeastOnce()).set(argumentCaptor.capture());
         String board =
                 "X  " +
                 " O " +
                 "O X";
-        this.controller.writeBoard();
-        ArgumentCaptor<Color> argumentCaptor = ArgumentCaptor.forClass(Color.class);
-        verify(this.boardView, atLeastOnce()).set(argumentCaptor.capture());
         assertThat(argumentCaptor.getAllValues(), is(this.stringToColors(board)));
         verify(this.boardView).write();
     }

@@ -1,9 +1,8 @@
 package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Error;
-import usantatecla.utils.views.Console;
 
-public class ErrorView {
+public abstract class ErrorView {//TODO Revisar
 
     public static final String[] MESSAGES = {
             "The square is not empty",
@@ -12,10 +11,6 @@ public class ErrorView {
             "The coordinates are wrong"
     };
 
-    public void writeln(Error error) {
-        if (!error.isNull()) {
-            Console.getInstance().writeln(ErrorView.MESSAGES[error.ordinal()]);
-        }
-    }
+    public abstract void writeln(Error error);
 
 }
