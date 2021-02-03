@@ -15,12 +15,13 @@ import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.ErrorView;
-import usantatecla.tictactoe.views.console.CoordinateView;
-import usantatecla.tictactoe.views.console.PlayerView;
+import usantatecla.tictactoe.views.*;
 
 @ExtendWith(MockitoExtension.class)
-public class PlayControllerTest extends ControllerTest {
+public class PlayControllerTest {
+
+    @Mock
+    private BoardView boardView;
 
     @Mock
     private PlayerView playerView;
@@ -31,29 +32,28 @@ public class PlayControllerTest extends ControllerTest {
     @Mock
     private ErrorView errorView;
 
-    @Override
-    protected Controller getController(String... rows) {
-        return new PlayController(new GameBuilder().rows(rows).build(), this.viewFactory);
-    }
+    @Mock
+    private ViewFactory viewFactory;
 
-    //TODO Revisar
+    private PlayController playController;
+
     @Test
     public void testGivenPlayControllerWinnerGameWhenControlThenIsWinnerAndPutToken() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "   ",
-                "O X");
+                "O X").build(), this.viewFactory);
         Coordinate coordinate = new Coordinate(1,1);
         when(this.coordinateView.read(any())).thenReturn(coordinate);
-        ((PlayController) this.controller).control();
-        assertThat(this.controller.game.getColor(coordinate), is(Color.O));
-        verify(this.playerView).writeWinner(Color.O);
+        this.playController.control();
+        assertThat(this.playController.game.getColor(coordinate), is(Color.O));
+        verify(this.playerView).writeWinner();
     }
 
     private void setUpMocks() {
-        when(this.viewFactory.createBoardView()).thenReturn(this.boardView);
-        when(this.viewFactory.createPlayerView()).thenReturn(this.playerView);
+        when(this.viewFactory.createBoardView(any())).thenReturn(this.boardView);
+        when(this.viewFactory.createPlayerView(any())).thenReturn(this.playerView);
         when(this.viewFactory.createCoordinateView()).thenReturn(this.coordinateView);
         when(this.viewFactory.createErrorView()).thenReturn(this.errorView);
     }
@@ -61,64 +61,66 @@ public class PlayControllerTest extends ControllerTest {
     @Test
     public void testGivenPlayControllerWhenControlThenMoveToken() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "X O",
-                "OX ");
+                "OX ").build(), this.viewFactory);
         Coordinate origin = new Coordinate(2, 0);
         Coordinate target = new Coordinate(2, 2);
         when(this.coordinateView.read(any())).thenReturn(origin, target);
-        ((PlayController) this.controller).control();
-        assertThat(this.controller.game.getColor(origin), is(Color.NULL));
-        assertThat(this.controller.game.getColor(target), is(Color.O));
+        this.playController.control();
+        assertThat(this.playController.game.getColor(origin), is(Color.NULL));
+        assertThat(this.playController.game.getColor(target), is(Color.O));
     }
 
     @Test
     public void testGivenPlayControllerWhenControlThenPutTokenError() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "X O",
-                "   ");
+                "   ").build(), this.viewFactory);
         when(this.coordinateView.read(any())).thenReturn(new Coordinate(0, 0), new Coordinate(2, 2));
-        ((PlayController) this.controller).control();
+        this.playController.control();
         verify(this.errorView).writeln(Error.NOT_EMPTY);
     }
 
     @Test
     public void testGivenPlayControllerWhenControlThenMoveTokenNotOwnerError() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "X O",
-                "OX ");
-        when(this.coordinateView.read(any())).thenReturn(new Coordinate(2, 1), new Coordinate(2, 0), new Coordinate(2, 2));
-        ((PlayController) this.controller).control();
+                "OX ").build(), this.viewFactory);
+        when(this.coordinateView.read(any())).thenReturn(new Coordinate(2, 1), new Coordinate(2, 0),
+                                                         new Coordinate(2, 2));
+        this.playController.control();
         verify(this.errorView).writeln(Error.NOT_OWNER);
     }
 
     @Test
     public void testGivenPlayControllerWhenControlThenMoveTokenNotEmptyError() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "X O",
-                "OX ");
+                "OX ").build(), this.viewFactory);
         when(this.coordinateView.read(any())).thenReturn(new Coordinate(2, 0), new Coordinate(2, 1),
                                                          new Coordinate(2, 0), new Coordinate(2, 2));
-        ((PlayController) this.controller).control();
+        this.playController.control();
         verify(this.errorView).writeln(Error.NOT_EMPTY);
     }
 
     @Test
     public void testGivenPlayControllerWhenControlThenMoveTokenSameCoordinatesError() {
         this.setUpMocks();
-        this.controller = this.getController(
+        this.playController = new PlayController(new GameBuilder().rows(
                 "X O",
                 "X O",
-                "OX ");
-        when(this.coordinateView.read(any())).thenReturn(new Coordinate(2, 0), new Coordinate(2, 0), new Coordinate(2, 2));
-        ((PlayController) this.controller).control();
+                "OX ").build(), this.viewFactory);
+        when(this.coordinateView.read(any())).thenReturn(new Coordinate(2, 0), new Coordinate(2, 0),
+                                                         new Coordinate(2, 2));
+        this.playController.control();
         verify(this.errorView).writeln(Error.SAME_COORDINATES);
     }
 

@@ -4,40 +4,44 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.models.GameBuilder;
+import usantatecla.tictactoe.views.ViewFactory;
 import usantatecla.tictactoe.views.console.ResumeView;
 
 @ExtendWith(MockitoExtension.class)
-public class ResumeControllerTest extends ControllerTest {
+public class ResumeControllerTest {
 
     @Mock
     private ResumeView resumeView;
+
+    @Mock
+    private ViewFactory viewFactory;
+
+    private ResumeController resumeController;
     
-    @Override
-    protected Controller getController(String... rows) {
-        return new ResumeController(new GameBuilder().rows(rows).build(), this.viewFactory);
+    @BeforeEach
+    public void beforeEach() {
+        this.resumeController = new ResumeController(new Game(), this.viewFactory);
     }
 
     @Test
     public void testGivenResumeControllerWhenControlThenReturnFalse() {
         when(this.viewFactory.createResumeView()).thenReturn(this.resumeView);
         when(this.resumeView.read()).thenReturn(false);
-        this.controller = new ResumeController(new Game(), this.viewFactory);
-        assertThat(((ResumeController) this.controller).control(), is(false));
+        assertThat(this.resumeController.control(), is(false));
     }
 
     @Test
     public void testGivenResumeControllerWhenControlThenReturnTrue() {
         when(this.viewFactory.createResumeView()).thenReturn(this.resumeView);
         when(this.resumeView.read()).thenReturn(true);
-        this.controller = new ResumeController(new Game(), this.viewFactory);
-        assertThat(((ResumeController) this.controller).control(), is(true));
+        assertThat(this.resumeController.control(), is(true));
     }
 
 

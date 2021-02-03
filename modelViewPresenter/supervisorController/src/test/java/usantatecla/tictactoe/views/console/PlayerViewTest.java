@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.*;
@@ -21,17 +21,15 @@ public class PlayerViewTest {
 
     @BeforeEach
     public void beforeEach() {
-        this.playerView = new PlayerView();
+        this.playerView = new PlayerView(new Game());
     }
 
     @Test
     public void testGivenPlayerViewWhenWriteWinnerThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            this.playerView.writeWinner(Color.X);
-            this.playerView.writeWinner(Color.O);
+            this.playerView.writeWinner();
             verify(this.console).writeln("X player: You win!!! :-)");
-            verify(this.console).writeln("O player: You win!!! :-)");
         }
     }
 

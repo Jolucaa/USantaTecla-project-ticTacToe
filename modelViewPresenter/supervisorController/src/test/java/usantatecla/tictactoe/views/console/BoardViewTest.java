@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.views.console;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,11 +7,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.utils.views.Console;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,33 +22,22 @@ public class BoardViewTest {
     @Mock
     private Console console;
 
-    private BoardView boardView;
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
-        this.boardView = new BoardView();
         this.conversor = new Conversor();
-    }
-
-    @Test
-    public void testGivenBoardViewWhenSetTooManyTimesThenAssertionError() {
-        for(int i = 0; i < Coordinate.DIMENSION * Coordinate.DIMENSION; i++) {
-            this.boardView.set(Color.NULL);
-        }
-        Assertions.assertThrows(AssertionError.class, () -> this.boardView.set(Color.NULL));
     }
 
     @Test
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            this.addColors(Arrays.asList(
-                    Color.X, Color.NULL, Color.NULL,
-                    Color.NULL, Color.O, Color.NULL,
-                    Color.O, Color.NULL, Color.X
-            ));
-            this.boardView.write();
+            new BoardView(new GameBuilder().rows(
+                    "X  ",
+                    " O ",
+                    "O X"
+            ).build()).write();
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",
@@ -65,12 +51,6 @@ public class BoardViewTest {
             List<String> argumentCaptorValues = argumentCaptor.getAllValues();
             this.conversor.reorder(argumentCaptorValues);
             assertThat(string, is(this.conversor.arrayToString(argumentCaptorValues.toArray())));
-        }
-    }
-
-    private void addColors(List<Color> colors) {
-        for (Color color : colors) {
-            this.boardView.set(color);
         }
     }
 

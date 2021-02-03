@@ -15,7 +15,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.views.ViewFactory;
 import usantatecla.tictactoe.views.console.BoardView;
@@ -28,8 +27,6 @@ public abstract class ControllerTest {
 
     @Mock
     protected ViewFactory viewFactory;
-
-    protected Game game;
 
     protected Controller controller;
 
