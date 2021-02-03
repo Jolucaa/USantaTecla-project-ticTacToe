@@ -2,17 +2,13 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.utils.Console;
-import usantatecla.utils.LimitedIntDialog;
 
-class StartView {
+class StartView{
 
     void interact(StartController startController) {
-        Console.getInstance().writeln(Message.TITTLE.getMessage());
-        int users = new LimitedIntDialog(0,
-                startController.getMaxPlayers()).read(Message.NUMBER_PLAYERS.getMessage());
-        startController.setUsers(users);
-        new BoardView(startController).write();
+        Message.TITLE.writeln();
+        new BoardView().write(startController);
+        startController.nextState();
     }
 
 }

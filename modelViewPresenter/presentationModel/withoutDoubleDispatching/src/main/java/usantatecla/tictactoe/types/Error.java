@@ -5,7 +5,7 @@ public enum Error {
     NOT_EMPTY,
     NOT_OWNER,
     SAME_COORDINATES,
-    NOT_VALID,
+    WRONG_COORDINATES,
     NULL;
 
     public boolean isNull() {

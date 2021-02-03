@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 public abstract class Controller {
 
@@ -15,12 +15,11 @@ public abstract class Controller {
         this.state = state;
     }
 
-    public Token getToken(Coordinate coordinate) {
-        return this.game.getToken(coordinate);
-    }
-
-    public void next() {
+    public void nextState() {
         this.state.next();
     }
 
+    public Color getColor(Coordinate coordinate) {
+        return this.game.getColor(coordinate);
+    }
 }

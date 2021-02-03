@@ -1,14 +1,17 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
-public class NullCoordinate implements Coordinate {
+class NullCoordinate implements Coordinate {
 
-    public static NullCoordinate instance;
+    private static NullCoordinate instance;
 
-    public static Coordinate instance() {
+    static Coordinate getInstance() {
         if (NullCoordinate.instance == null) {
             NullCoordinate.instance = new NullCoordinate();
         }
         return NullCoordinate.instance;
+    }
+
+    private NullCoordinate() {
     }
 
     @Override
@@ -18,22 +21,16 @@ public class NullCoordinate implements Coordinate {
 
     @Override
     public Direction getDirection(Coordinate coordinate) {
-        assert coordinate != null;
-
         return Direction.NULL;
     }
 
     @Override
     public boolean inHorizontal(Coordinate coordinate) {
-        assert coordinate != null;
-
         return false;
     }
 
     @Override
     public boolean inVertical(Coordinate coordinate) {
-        assert coordinate != null;
-
         return false;
     }
 
@@ -43,22 +40,18 @@ public class NullCoordinate implements Coordinate {
     }
 
     @Override
+    public String toString() {
+        return "Coordinate (NULL)";
+    }
+
+    @Override
     public int hashCode() {
-        return 0;
+        return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        return getClass() == obj.getClass();
+        return super.equals(obj);
     }
-
-    @Override
-    public String toString() {
-        return "NullCoordinate []";
-    }
-
+    
 }

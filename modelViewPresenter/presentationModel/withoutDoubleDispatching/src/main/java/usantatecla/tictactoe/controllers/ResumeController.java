@@ -5,11 +5,11 @@ import usantatecla.tictactoe.models.State;
 
 public class ResumeController extends Controller {
 
-    ResumeController(Game game, State state) {
+    public ResumeController(Game game, State state) {
         super(game, state);
     }
 
-    public void reset() {
+    public void resume() {
         this.game.reset();
         this.state.reset();
     }
