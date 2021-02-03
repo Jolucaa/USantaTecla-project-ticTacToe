@@ -1,70 +1,165 @@
 package usantatecla.tictactoe.models;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.PlayerType;
-import usantatecla.tictactoe.types.Token;
+
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class PlayerTest {
-    
-    private Board board;
 
-    private Player player;
+    private final Color COLOR = Color.O;
+    private PlayerBuilder playerBuilder;
 
-    private Coordinate coordinate00;
-    private Coordinate coordinate01;
-
-    public PlayerTest() {
-        this.board = new Board();
-        this.player = new Player(Token.TOKEN_O, this.board, PlayerType.USER_PLAYER);
-        this.coordinate00 = new Coordinate(0, 0);
-        this.coordinate01 = new Coordinate(0, 1);
+    @BeforeEach
+    public void BeforeEach() {
+        this.playerBuilder = new PlayerBuilder().color(this.COLOR);
     }
 
     @Test
-    public void testGivenNewPlayerWhenPutNewTokenThenReturnErrorNotOwner() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertEquals(Error.NOT_OWNER, this.player.getPutCoordinateError(this.coordinate00));
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenTrue() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "   ",
+                " O "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
-    public void testGivenNewPlayerWhenPutNewTokenThenNotReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertTrue(this.player.getPutCoordinateError(this.coordinate01) == null);
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenFalse() {
+        Player player = this.playerBuilder.build();
+        assertThat(player.areAllTokensOnBoard(), is(false));
     }
 
     @Test
-    public void testGivenNewPlayerWhenRemoveTokenThenReturnErrorNotOwner() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertEquals(Error.NOT_OWNER, this.player.getMoveOriginCoordinateError(this.coordinate01));
+    public void testGivenNewPlayerWhenAreAllTokensOnBoardThenReturnTrue() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
-    public void testGivenNewPlayerWhenRemoveTokenThenNotReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertTrue(this.player.getMoveOriginCoordinateError(this.coordinate00) == null);
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        Player player = this.playerBuilder.build();
+        assertThat(player.getPutTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenReturnErrorSameCoordinates() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertEquals(Error.SAME_COORDINATES, this.player.getMoveTargetCoordinateError(this.coordinate00, this.coordinate00));
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNotEmpty() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getPutTokenError(new Coordinate(1, 1)), is(Error.NOT_EMPTY));
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenReturnErrorNotEmpty() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        this.board.put(this.coordinate01, Token.TOKEN_O);
-        assertEquals(Error.NOT_EMPTY, this.player.getMoveTargetCoordinateError(this.coordinate00, this.coordinate01));
+    public void testGivenPlayerWhenMoveThenIsTrue() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        Board targetBoard = new BoardBuilder().rows(
+                "OO ",
+                "   ",
+                "O  ").build();
+        Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
+        Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
+        player.moveToken(origin, target);
+        assertThat(player.board.isEmpty(origin), is(true)); // TODO A causa de este test no podemos poner 'private' en Player
+        assertThat(player.board.isOccupied(target, Color.O), is(true));
+    }
+
+    private Coordinate getOriginCoordinate(Board originBoard, Board targetBoard) {
+        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
+        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
+        Coordinate origin = new Coordinate();
+        for (int i = 0; i < originBoardCoordinates.size(); i++) {
+            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
+                origin = originBoardCoordinates.get(i);
+            }
+        }
+        return origin;
+    }
+
+    private Coordinate getTargetCoordinate(Board originBoard, Board targetBoard) {
+        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
+        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
+        Coordinate target = new Coordinate();
+        for (int i = 0; i < originBoardCoordinates.size(); i++) {
+            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
+                target = targetBoardCoordinates.get(i);
+            }
+        }
+        return target;
     }
 
     @Test
-    public void testGivenNewPlayerWhenMoveTokenThenNotReturnErrorNull() {
-        this.board.put(this.coordinate00, Token.TOKEN_O);
-        assertTrue(this.player.getMoveTargetCoordinateError(this.coordinate00, this.coordinate01) == null);
+    public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " X ",
+                "   "
+        ).build();
+        assertThat(player.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
     }
+
+    @Test
+    public void testGivenNewPlayerWhenGetOriginMoveTokenErrorThenReturnErrorNull() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.getOriginMoveTokenError(new Coordinate(0, 1)), is(Error.NULL));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenNoError() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(0, 0)), is(Error.NULL));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " OO",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 2)), is(Error.NOT_EMPTY));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 1)), is(Error.SAME_COORDINATES));
+    }
+
+    @Test
+    public void testGivenNewPlayerWhenGetColorThenReturnTheColor() {
+        Player player = this.playerBuilder.build();
+        assertThat(player.getColor(), is(Color.O));
+    }
+
 }

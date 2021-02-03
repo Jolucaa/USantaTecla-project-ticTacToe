@@ -1,45 +1,66 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.types.Error;
+
 public class Turn {
 
-	public static final int NUM_PLAYERS = 2;
+    private Board board;
+    public static final int NUMBER_PLAYERS = 2;
+    private Player[] players;
+    private int activePlayer;
 
-	private int value;
+    Turn(Board board) {
+        assert board != null;
+        this.board = board;
+        this.players = new Player[Turn.NUMBER_PLAYERS];
+        this.reset();
+    }
 
-	private Player[] players;
+    void reset() {
+        for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
+            this.players[i] = new Player(Color.get(i), this.board);
+        }
+        this.activePlayer = 0;
+    }
 
-	public Turn(Player[] players) {
-		this.value = 0;
-		this.players = players;
-	}
+    void next() {
+        if (!this.board.isTicTacToe(this.getActiveColor())) {
+            this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
+        }
+    }
 
-	public Turn(Player[] players, int value) {
-		this.value = value;
-		this.players = players;
-	}
+    Player getActivePlayer() {
+        return this.players[this.activePlayer];
+    }
 
-	void change() {
-		this.value = this.getOtherValue();
-	}
+    Color getActiveColor() {
+        return this.getActivePlayer().getColor();
+    }
 
-	Player getPlayer() {
-		return this.players[this.value];
-	}
+    boolean areAllTokensOnBoard() {
+        return this.getActivePlayer().areAllTokensOnBoard();
+    }
 
-	int getValue() {
-		return this.value;
-	}
+    void putToken(Coordinate coordinate) {
+        this.getActivePlayer().putToken(coordinate);
+    }
 
-	private int getOtherValue() {
-		return (this.value + 1) % Turn.NUM_PLAYERS;
-	}
+    Error getPutTokenError(Coordinate coordinate) {
+        return this.getActivePlayer().getPutTokenError(coordinate);
+    }
 
-	Player getOtherPlayer() {
-		return this.players[this.getOtherValue()];
-	}
+    void moveToken(Coordinate origin, Coordinate target) {
+        this.getActivePlayer().moveToken(origin, target);
+    }
 
-	Turn copy(Player[] players) {
-		return new Turn(players, this.value);
-	}
+    Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.getActivePlayer().getOriginMoveTokenError(coordinate);
+    }
+
+    Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.getActivePlayer().getTargetMoveTokenError(origin, target);
+    }
 
 }

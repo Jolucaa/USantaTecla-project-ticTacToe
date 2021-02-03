@@ -1,25 +1,20 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.views.ResumeView;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.views.ViewFactory;
 
 public class ResumeController extends Controller {
 
-	public ResumeController(Session session) {
-		super(session);
-	}
+    public ResumeController(Game game, ViewFactory viewFactory) {
+        super(game, viewFactory);
+    }
 
-	private void resume(boolean newGame) {
-		if (newGame) {
-			this.session.newGame();
-		} else {
-			this.session.next();
-		}
-	}
-
-	@Override
-	public void control() {
-		this.resume(new ResumeView().read());
-	}
+    public boolean control() {
+        boolean isResumed = this.viewFactory.createResumeView().read();
+        if (isResumed) {
+            this.game.reset();
+        }
+        return isResumed;
+    }
 
 }

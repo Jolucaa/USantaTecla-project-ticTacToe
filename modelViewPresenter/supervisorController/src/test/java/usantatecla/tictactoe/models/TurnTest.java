@@ -1,43 +1,50 @@
 package usantatecla.tictactoe.models;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Color;
 
-import org.junit.Test;
-
-import usantatecla.tictactoe.types.PlayerType;
-import usantatecla.tictactoe.types.Token;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class TurnTest {
 
     private Turn turn;
-    private Player[] players;
 
-    public TurnTest() {
-        Board board = new Board();
-        this.players = new Player[2];
-        this.players[0] = new Player(Token.values()[0], board, PlayerType.USER_PLAYER);
-        this.players[1] = new Player(Token.values()[1], board, PlayerType.MACHINE_PLAYER);
-        this.turn = new Turn(this.players);
+    @BeforeEach
+    public void beforeEach() {
+        this.turn = new Turn(new Board());
     }
 
     @Test
-    public void testGivenNewTurnWhenChangeTurnThenIsOtherTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.change();
-        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
+    public void testGivenNewTurnWhenNullBoardThenAssertionError() {
+        Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
     }
 
     @Test
-    public void testGivenNewTurnWhenChangeTurnTwoTimesThenIsTheSameTurn() {
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.change();
-        assertEquals(this.players[1].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[0].getToken(), this.turn.getOtherPlayer().getToken());
-        this.turn.change();
-        assertEquals(this.players[0].getToken(), this.turn.getPlayer().getToken());
-        assertEquals(this.players[1].getToken(), this.turn.getOtherPlayer().getToken());
+    public void testGivenTurnWhenResetThenActivePlayerIs0() {
+        this.turn.next();
+        this.turn.reset();
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
     }
+
+    @Test
+    public void testGivenNewTurnWhenGetActivePlayerThenReturn() {
+        assertThat(this.turn.getActivePlayer().getColor(), is(Color.X));
+    }
+
+    @Test
+    public void testGivenNewTurnWhenGetActiveColorThenCorrectColorIsCaptured() {
+        assertThat(this.turn.getActiveColor(), is(Color.X));
+    }
+
+    @Test
+    public void testGivenTurnWhenNextThenNextTurn() {
+        this.turn.next();
+        assertThat(this.turn.getActiveColor(), is(Color.O));
+        this.turn.next();
+        assertThat(this.turn.getActiveColor(), is(Color.X));
+    }
+
 }

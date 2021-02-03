@@ -1,15 +1,7 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.WithConsoleView;
+public interface BoardView {
 
-class BoardView extends WithConsoleView {
+    void write();
 
-    void write(char token) {
-        this.console.write(token);
-    }
-
-    void writeln() {
-        this.console.writeln();
-    }
-    
 }

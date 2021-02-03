@@ -1,10 +1,7 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.WithConsoleView;
+public interface StartView {
 
-public class StartView extends WithConsoleView {
+    void write();
 
-    public void write() {
-		this.console.writeln(MessageView.START_GAME.getMessage());
-	}
 }

@@ -1,14 +1,18 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Session;
+import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.types.Coordinate;
+import usantatecla.tictactoe.views.ViewFactory;
+import usantatecla.tictactoe.views.BoardView;
 
 public abstract class Controller {
-    
-	protected Session session;
 
-	Controller(Session session) {
-		this.session = session;
-	}
+    protected Game game;
+    protected ViewFactory viewFactory;
 
-	public abstract void control();
+    Controller(Game game, ViewFactory viewFactory) {
+        this.game = game;
+        this.viewFactory = viewFactory;
+    }
+
 }
