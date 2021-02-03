@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.views.ViewFactory;
 import usantatecla.tictactoe.views.console.BoardView;
@@ -37,10 +36,10 @@ public abstract class ControllerTest {
     @Test
     public void testGivenControllerWhenWriteBoardThenCorrectColorsCaptured() {
         when(this.viewFactory.createBoardView()).thenReturn(this.boardView);
-        this.controller.game = new GameBuilder().rows(
+        this.controller = this.getController(
                 "X  ",
                 " O ",
-                "O X").build();
+                "O X");
         this.controller.writeBoard();
         ArgumentCaptor<Color> argumentCaptor = ArgumentCaptor.forClass(Color.class);
         verify(this.boardView, atLeastOnce()).set(argumentCaptor.capture());
@@ -52,6 +51,8 @@ public abstract class ControllerTest {
         verify(this.boardView).write();
     }
 
+    protected abstract Controller getController(String... rows);
+
     protected List<Color> stringToColors(String board) {
         List<Color> colors = new ArrayList<>();
         for (char character : board.toCharArray()) {
@@ -60,7 +61,7 @@ public abstract class ControllerTest {
         return colors;
     }
 
-    protected Color charToColor(char character) {
+    private Color charToColor(char character) {
         switch (character) {
             case 'X':
                 return Color.X;
