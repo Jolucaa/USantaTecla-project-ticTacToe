@@ -1,4 +1,4 @@
-package usantatecla.utils;
+package usantatecla.utils.models;
 
 public class ClosedInterval {
 
@@ -19,6 +19,22 @@ public class ClosedInterval {
 	@Override
 	public String toString() {
 		return "[" + this.min + ", " + this.max + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClosedInterval other = (ClosedInterval) obj;
+		if (min != other.min)
+			return false;
+		if (max != other.max)
+			return false;
+		return true;
 	}
 
 }

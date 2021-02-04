@@ -1,97 +1,66 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
-
-import java.util.Arrays;
 
 public class Turn {
 
+    private Board board;
     public static final int NUMBER_PLAYERS = 2;
     private Player[] players;
-    private Board board;
-    private int active;
-    private int users;
+    private int activePlayer;
 
     Turn(Board board) {
         assert board != null;
-
         this.board = board;
-    }
-
-    public Turn(Turn turn, Board board) {
         this.players = new Player[Turn.NUMBER_PLAYERS];
+        this.reset();
+    }
+
+    void reset() {
         for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
-            this.players[i] = turn.players[i].copy(board);
+            this.players[i] = new Player(Color.get(i), this.board);
         }
-        this.board = board;
-        this.active = turn.active;
-        this.users = turn.users;
-    }
-
-    public Turn copy(Board board) {
-        return new Turn(this, board);
-    }
-
-    void setUsers(int users) {
-        this.users = users;
-        this.players = new Player[Turn.NUMBER_PLAYERS];
-        for (int i = 0; i < Turn.NUMBER_PLAYERS; i++) {
-            this.players[i] = new Player(Token.get(i), board);
-        }
-        this.active = 0;
-    }
-
-    void set(int active) {
-        this.active = active;
+        this.activePlayer = 0;
     }
 
     void next() {
-        this.active = (this.active + 1) % Turn.NUMBER_PLAYERS;
+        if (!this.board.isTicTacToe(this.getActiveColor())) {
+            this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
+        }
     }
 
-    boolean isUser() {
-        return this.users == 2 || this.users == 1 && this.active == 0;
+    Player getActivePlayer() {
+        return this.players[this.activePlayer];
     }
 
-    Error put(Coordinate coordinate) {
-        return this.getPlayer().put(coordinate);
+    Color getActiveColor() {
+        return this.getActivePlayer().getColor();
     }
 
-    Player getPlayer() {
-        return this.players[this.active];
+    boolean areAllTokensOnBoard() {
+        return this.getActivePlayer().areAllTokensOnBoard();
     }
 
-    Error move(Coordinate origin, Coordinate target) {
-        return this.getPlayer().move(origin, target);
+    void putToken(Coordinate coordinate) {
+        this.getActivePlayer().putToken(coordinate);
     }
 
-    Token getToken() {
-        return this.getPlayer().getToken();
+    Error getPutTokenError(Coordinate coordinate) {
+        return this.getActivePlayer().getPutTokenError(coordinate);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Turn other = (Turn) obj;
-        if (active != other.active)
-            return false;
-        if (board == null) {
-            if (other.board != null)
-                return false;
-        } else if (!board.equals(other.board))
-            return false;
-        if (!Arrays.equals(players, other.players))
-            return false;
-        if (users != other.users)
-            return false;
-        return true;
+    void moveToken(Coordinate origin, Coordinate target) {
+        this.getActivePlayer().moveToken(origin, target);
     }
 
+    Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.getActivePlayer().getOriginMoveTokenError(coordinate);
+    }
+
+    Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.getActivePlayer().getTargetMoveTokenError(origin, target);
+    }
 
 }

@@ -2,10 +2,10 @@ package usantatecla.tictactoe.controllers;
 
 public interface ControllersVisitor {
 
-    void visit(StartController startController);
+    void visitStartController(StartController startController);
 	
-	void visit(PlayController playController);
+	void visitPlayController(PlayController playController);
 	
-	void visit(ResumeController resumeController);
+	boolean visitResumeController(ResumeController resumeController);
     
 }

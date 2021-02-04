@@ -7,12 +7,14 @@ import usantatecla.tictactoe.views.View;
 
 public class GraphicsView extends View {
 
-    public void visit(StartController startController) {
+    public void visitStartController(StartController startController) {
     }
 
-    public void visit(PlayController playController) {
+    public void visitPlayController(PlayController playController) {
     }
 
-    public void visit(ResumeController resumeController) {
+    public boolean visitResumeController(ResumeController resumeController) {
+        return true;
     }
+
 }

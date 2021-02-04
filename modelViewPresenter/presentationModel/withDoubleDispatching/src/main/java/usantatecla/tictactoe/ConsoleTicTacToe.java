@@ -6,7 +6,7 @@ import usantatecla.tictactoe.views.console.ConsoleView;
 class ConsoleTicTacToe extends TicTacToe {
 
 	@Override
-	protected View createView() {
+	protected View createView(){
 		return new ConsoleView();
 	}
 
