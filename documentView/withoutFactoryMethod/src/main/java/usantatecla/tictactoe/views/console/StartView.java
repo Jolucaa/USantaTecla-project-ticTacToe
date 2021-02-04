@@ -11,7 +11,7 @@ class StartView extends WithGameView {
     }
 
     void interact() {
-        Message.TITLE.writeln();
+        new MessageView().writeln(Message.TITLE);
         new BoardView().write(this.game);
     }
 

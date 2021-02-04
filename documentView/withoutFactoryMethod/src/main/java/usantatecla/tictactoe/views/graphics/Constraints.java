@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.views.graphics;
 
-import java.awt.GridBagConstraints;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 class Constraints extends GridBagConstraints {

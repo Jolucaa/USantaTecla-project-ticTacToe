@@ -1,10 +1,10 @@
 package usantatecla.tictactoe.views.graphics;
 
-import java.awt.GridBagLayout;
-import javax.swing.JFrame;
-
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.Message;
+
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
 public class StartView extends JFrame {
