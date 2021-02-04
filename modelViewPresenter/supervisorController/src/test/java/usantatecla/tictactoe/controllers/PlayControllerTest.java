@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
@@ -61,16 +62,17 @@ public class PlayControllerTest {
     @Test
     public void testGivenPlayControllerWhenControlThenMoveToken() {
         this.setUpMocks();
-        this.playController = new PlayController(new GameBuilder().rows(
-                "X O",
-                "X O",
-                "OX ").build(), this.viewFactory);
+        Game game = new GameBuilder().rows(
+            "X O",
+            "X O",
+            "OX ").build();
+        this.playController = new PlayController(game, this.viewFactory);
         Coordinate origin = new Coordinate(2, 0);
         Coordinate target = new Coordinate(2, 2);
         when(this.coordinateView.read(any())).thenReturn(origin, target);
         this.playController.control();
-        assertThat(this.playController.game.getColor(origin), is(Color.NULL));
-        assertThat(this.playController.game.getColor(target), is(Color.O));
+        assertThat(game.getColor(origin), is(Color.NULL));
+        assertThat(game.getColor(target), is(Color.O));
     }
 
     @Test

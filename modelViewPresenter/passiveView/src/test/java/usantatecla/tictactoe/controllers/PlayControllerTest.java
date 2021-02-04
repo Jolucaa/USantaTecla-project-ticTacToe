@@ -33,10 +33,10 @@ public class PlayControllerTest extends ControllerTest {
 
     @Override
     protected Controller getController(String... rows) {
+        // TODO Game
         return new PlayController(new GameBuilder().rows(rows).build(), this.viewFactory);
     }
 
-    //TODO Revisar
     @Test
     public void testGivenPlayControllerWinnerGameWhenControlThenIsWinnerAndPutToken() {
         this.setUpMocks();
