@@ -26,13 +26,13 @@ public class PlayViewTest {
     private Console console;
 
     @Mock
-    private Logic logic;
+    private PlayController playController;
 
     private PlayView playView;
 
     @BeforeEach
     public void beforeEach(){
-        this.playView = new PlayView(this.logic);
+        this.playView = new PlayView();
     }
 
     @Test
@@ -40,12 +40,12 @@ public class PlayViewTest {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readInt(anyString())).thenReturn(1);
-            when(this.logic.getColor(any(Coordinate.class))).thenReturn(Color.O);
-            when(this.logic.getActiveColor()).thenReturn(Color.O);
-            doReturn(true).when(this.logic).isTicTacToe();
-            when(this.logic.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
-            this.playView.interact();
-            verify(this.logic).next();
+            when(this.playController.getColor(any(Coordinate.class))).thenReturn(Color.O);
+            when(this.playController.getActiveColor()).thenReturn(Color.O);
+            doReturn(true).when(this.playController).isTicTacToe();
+            when(this.playController.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+            this.playView.interact(this.playController);
+            verify(this.playController).next();
             verify(this.console).writeln("O player: You win!!! :-)");
         }
     }

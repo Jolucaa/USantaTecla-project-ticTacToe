@@ -28,34 +28,34 @@ public class PlayerViewTest {
     protected PlayerView playerView;
 
     @Mock
-    private Logic logic;
+    private PlayController playController;
 
     @Mock
     private Console console;
 
     @BeforeEach
     public void beforeEach() {
-        this.playerView = spy(new PlayerView(this.logic));
+        this.playerView = spy(new PlayerView(this.playController));
     }
 
     @Test
     public void testGivenPlayerViewWhenInteractThenPutToken() {
         doReturn(PlayerViewTest.ORIGIN).when(playerView).getCoordinate(any());
-        when(this.logic.areAllTokensOnBoard()).thenReturn(false);
-        when(this.logic.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+        when(this.playController.areAllTokensOnBoard()).thenReturn(false);
+        when(this.playController.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
         this.playerView.interact();
-        verify(this.logic).putToken(PlayerViewTest.ORIGIN);
+        verify(this.playController).putToken(PlayerViewTest.ORIGIN);
     }
 
     @Test
     public void testGivenPlayerViewWhenInteractThenMoveToken() {
-        doReturn(true).when(this.logic).areAllTokensOnBoard();
+        doReturn(true).when(this.playController).areAllTokensOnBoard();
         doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(playerView).getCoordinate(any());
-        when(this.logic.getOriginMoveTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
-        when(this.logic.getTargetMoveTokenError(any(Coordinate.class),any(Coordinate.class))).thenReturn(Error.NULL);
-        this.logic.putToken(PlayerViewTest.ORIGIN);
+        when(this.playController.getOriginMoveTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+        when(this.playController.getTargetMoveTokenError(any(Coordinate.class),any(Coordinate.class))).thenReturn(Error.NULL);
+        this.playController.putToken(PlayerViewTest.ORIGIN);
         this.playerView.interact();
-        verify(this.logic).moveToken(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET);
+        verify(this.playController).moveToken(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET);
     }
 
     @Test

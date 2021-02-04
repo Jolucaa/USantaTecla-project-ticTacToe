@@ -7,6 +7,7 @@ import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Controller;
 import usantatecla.tictactoe.controllers.Logic;
+import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
 
@@ -24,7 +25,7 @@ public class BoardViewTest {
     private Console console;
 
     @Mock
-    private Logic logic;
+    private StartController startController;
 
     @InjectMocks
     private BoardView boardView;
@@ -36,17 +37,16 @@ public class BoardViewTest {
         this.conversor = new Conversor();
     }
 
-    //TODO Tendría que ser un spy el logic en lugar de un mock??
     @Test
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            doReturn(
+            when(this.startController.getColor(any())).thenReturn(
                     Color.X, Color.NULL, Color.NULL,
                     Color.NULL, Color.O, Color.NULL,
                     Color.O, Color.NULL, Color.X
-            ).when(this.logic).getColor(any());
-            this.boardView.write(this.logic);
+            );
+            this.boardView.write(this.startController);
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",

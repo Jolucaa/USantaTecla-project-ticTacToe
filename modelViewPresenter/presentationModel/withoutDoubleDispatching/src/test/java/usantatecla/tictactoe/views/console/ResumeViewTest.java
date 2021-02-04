@@ -24,13 +24,14 @@ public class ResumeViewTest {
     @Mock
     private Console console;
 
-    private Logic logic;
+    @Mock
+    private ResumeController resumeController;
+
     private ResumeView resumeView;
 
     @BeforeEach
     public void beforeEach(){
-        this.logic = new Logic(new Game());
-        this.resumeView = new ResumeView(this.logic);
+        this.resumeView = new ResumeView();
     }
 
     @Test
@@ -38,7 +39,7 @@ public class ResumeViewTest {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readString(anyString())).thenReturn("n");
-            assertThat(this.resumeView.interact(), is(false));
+            assertThat(this.resumeView.interact(this.resumeController), is(false));
         }
     }
 
@@ -47,7 +48,7 @@ public class ResumeViewTest {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             when(this.console.readString(anyString())).thenReturn("y");
-            assertThat(this.resumeView.interact(), is(true));
+            assertThat(this.resumeView.interact(this.resumeController), is(true));
         }
     }
 
