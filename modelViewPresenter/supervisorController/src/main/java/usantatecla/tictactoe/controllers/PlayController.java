@@ -20,9 +20,9 @@ public class PlayController extends Controller {
                 this.moveToken();
             }
             this.game.next();
-            this.viewFactory.createBoardView(this.game).write();
+            this.viewFactory.createBoardView(this.game.getBoard()).write();
         } while (!this.game.isTicTacToe());
-        this.viewFactory.createPlayerView(this.game).writeWinner();
+        this.viewFactory.createPlayerView(this.game.getActivePlayer()).writeWinner();
     }
 
     private void putToken() {

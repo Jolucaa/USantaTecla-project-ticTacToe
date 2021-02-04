@@ -1,13 +1,15 @@
 package usantatecla.tictactoe.views.console;
 
+import usantatecla.tictactoe.models.Board;
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Player;
 import usantatecla.tictactoe.views.ViewFactory;
 
 public class ConsoleViewFactory extends ViewFactory {
 
     @Override
-    public BoardView createBoardView(Game game) {
-        return new BoardView(game);
+    public BoardView createBoardView(Board board) {
+        return new BoardView(board);
     }
 
     @Override
@@ -16,8 +18,8 @@ public class ConsoleViewFactory extends ViewFactory {
     }
 
     @Override
-    public PlayerView createPlayerView(Game game) {
-        return new PlayerView(game);
+    public PlayerView createPlayerView(Player player) {
+        return new PlayerView(player);
     }
 
     @Override

@@ -1,15 +1,16 @@
 package usantatecla.tictactoe.views.console;
 
-import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Board;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
-import usantatecla.tictactoe.views.WithGameView;
 import usantatecla.utils.views.Console;
 
-public class BoardView extends WithGameView implements usantatecla.tictactoe.views.BoardView {
+public class BoardView implements usantatecla.tictactoe.views.BoardView {
 
-    BoardView(Game game) {
-        super(game);
+    private Board board;
+
+    BoardView(Board board) {
+        this.board = board;
     }
 
     @Override
@@ -18,7 +19,7 @@ public class BoardView extends WithGameView implements usantatecla.tictactoe.vie
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             new MessageView().write(Message.VERTICAL_LINE);
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                new ColorView().write(this.game.getColor(new Coordinate(i, j)));
+                new ColorView().write(this.board.getColor(new Coordinate(i, j)));
                 new MessageView().write(Message.VERTICAL_LINE);
             }
             Console.getInstance().writeln();

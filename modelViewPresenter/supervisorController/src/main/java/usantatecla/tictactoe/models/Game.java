@@ -1,6 +1,5 @@
 package usantatecla.tictactoe.models;
 
-import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
@@ -23,16 +22,16 @@ public class Game {
         this.turn.next();
     }
 
-    public Color getActiveColor() {
-        return this.turn.getActiveColor();
+    public Player getActivePlayer() {
+        return this.turn.getActivePlayer();
+    }
+
+    public Board getBoard() {
+        return this.board;
     }
 
     public boolean isTicTacToe() {
         return this.board.isTicTacToe(this.turn.getActiveColor());
-    }
-
-    public Color getColor(Coordinate coordinate) {
-        return this.board.getColor(coordinate);
     }
 
     public boolean areAllTokensOnBoard() {

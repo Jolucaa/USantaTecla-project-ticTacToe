@@ -1,12 +1,13 @@
 package usantatecla.tictactoe.views.graphics;
 
-import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Board;
+import usantatecla.tictactoe.models.Player;
 import usantatecla.tictactoe.views.*;
 
 public class GraphicsViewFactory extends ViewFactory {
 
     @Override
-    public BoardView createBoardView(Game game) {
+    public BoardView createBoardView(Board board) {
         return null;
     }
 
@@ -16,7 +17,7 @@ public class GraphicsViewFactory extends ViewFactory {
     }
 
     @Override
-    public PlayerView createPlayerView(Game game) {
+    public PlayerView createPlayerView(Player player) {
         return null;
     }
 

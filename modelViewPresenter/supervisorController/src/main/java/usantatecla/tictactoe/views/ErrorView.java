@@ -2,7 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.types.Error;
 
-public abstract class ErrorView {//TODO Revisar
+public abstract class ErrorView {
 
     public static final String[] MESSAGES = {
             "The square is not empty",

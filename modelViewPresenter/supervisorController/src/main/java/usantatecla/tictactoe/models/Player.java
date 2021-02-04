@@ -4,10 +4,10 @@ import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
-class Player {
+public class Player {
 
-    Color color;
-    Board board;
+    private Color color;
+    private Board board;
     private int putTokens;
 
     Player(Color color, Board board) {
@@ -58,7 +58,7 @@ class Player {
         return Error.NULL;
     }
 
-    Color getColor() {
+    public Color getColor() {
         return this.color;
     }
     

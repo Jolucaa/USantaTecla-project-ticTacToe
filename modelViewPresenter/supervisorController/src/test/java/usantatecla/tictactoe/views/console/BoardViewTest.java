@@ -7,7 +7,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.GameBuilder;
+import usantatecla.tictactoe.models.BoardBuilder;
 import usantatecla.utils.views.Console;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class BoardViewTest {
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            new BoardView(new GameBuilder().rows(
+            new BoardView(new BoardBuilder().rows(
                     "X  ",
                     " O ",
                     "O X"

@@ -6,22 +6,24 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.PlayerBuilder;
+import usantatecla.tictactoe.types.Color;
 import usantatecla.utils.views.Console;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class PlayerViewTest {
 
-    private PlayerView playerView;
-
     @Mock
     private Console console;
 
+    private PlayerView playerView;
+
     @BeforeEach
     public void beforeEach() {
-        this.playerView = new PlayerView(new Game());
+        this.playerView = new PlayerView(new PlayerBuilder().color(Color.X).build());
     }
 
     @Test

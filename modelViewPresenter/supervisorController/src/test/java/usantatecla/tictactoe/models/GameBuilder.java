@@ -1,13 +1,14 @@
 package usantatecla.tictactoe.models;
 
-import java.util.List;
-
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
+
+import java.util.List;
 
 public class GameBuilder {
 
     private String[] rows;
+    private Color color;
     private Game game;
 
     public GameBuilder() {
@@ -22,10 +23,18 @@ public class GameBuilder {
         return this;
     }
 
+    public GameBuilder turn(Color color) {
+        this.color = color;
+        return this;
+    }
+
     public Game build() {
         this.game = new Game();
         this.buildBoard();
-        return game;
+        if (this.game.getActivePlayer().getColor() != this.color) {
+            this.game.next();
+        }
+        return this.game;
     }
 
     private void buildBoard() {

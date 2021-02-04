@@ -7,7 +7,7 @@ import usantatecla.utils.models.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-class Board {
+public class Board {
 
     private Color[][] colors;
 
@@ -40,7 +40,7 @@ class Board {
         this.putToken(target, color);
     }
 
-    Color getColor(Coordinate coordinate) {
+    public Color getColor(Coordinate coordinate) {
         assert !coordinate.isNull();
 
         return this.colors[coordinate.getRow()][coordinate.getColumn()];

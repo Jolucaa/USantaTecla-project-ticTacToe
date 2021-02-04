@@ -1,19 +1,18 @@
 package usantatecla.tictactoe.controllers;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.BoardView;
 import usantatecla.tictactoe.views.StartView;
 import usantatecla.tictactoe.views.ViewFactory;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class StartControllerTest {
