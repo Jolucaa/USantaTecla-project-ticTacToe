@@ -5,11 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
@@ -67,6 +64,57 @@ public class PlayerViewTest {
                     PlayerViewTest.ORIGIN.getColumn() + 1
             );
             assertThat(this.playerView.getCoordinate(Message.COORDINATE_TO_PUT), is(PlayerViewTest.ORIGIN));
+        }
+    }
+
+    @Test
+    public void testGivenPlayerViewWhenInteractThenPutTokenError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            doReturn(PlayerViewTest.ORIGIN).when(this.playerView).getCoordinate(any());
+            when(this.logic.areAllTokensOnBoard()).thenReturn(false);
+            when(this.logic.getPutTokenError(any(Coordinate.class))).thenReturn(Error.NOT_EMPTY, Error.NULL);
+            this.playerView.interact();
+            verify(this.console).writeln("The square is not empty");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerViewWhenInteractThenMoveTokenNotOwnerError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            doReturn(true).when(this.logic).areAllTokensOnBoard();
+            doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(this.playerView).getCoordinate(any());
+            when(this.logic.getOriginMoveTokenError(any(Coordinate.class))).thenReturn(Error.NOT_OWNER, Error.NULL);
+            when(this.logic.getTargetMoveTokenError(any(Coordinate.class),any(Coordinate.class))).thenReturn(Error.NULL);
+            this.playerView.interact();
+            verify(this.console).writeln("There is not a token of yours");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerViewWhenInteractThenMoveTokenNotEmptyError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            doReturn(true).when(this.logic).areAllTokensOnBoard();
+            doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(this.playerView).getCoordinate(any());
+            when(this.logic.getOriginMoveTokenError(any(Coordinate.class))).thenReturn(Error.NOT_EMPTY, Error.NULL);
+            when(this.logic.getTargetMoveTokenError(any(Coordinate.class),any(Coordinate.class))).thenReturn(Error.NULL);
+            this.playerView.interact();
+            verify(this.console).writeln("The square is not empty");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerViewWhenInteractThenMoveTokenSameCoordinatesError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            doReturn(true).when(this.logic).areAllTokensOnBoard();
+            doReturn(PlayerViewTest.ORIGIN, PlayerViewTest.TARGET).when(this.playerView).getCoordinate(any());
+            when(this.logic.getOriginMoveTokenError(any(Coordinate.class))).thenReturn(Error.NULL);
+            when(this.logic.getTargetMoveTokenError(any(Coordinate.class),any(Coordinate.class))).thenReturn(Error.SAME_COORDINATES, Error.NULL);
+            this.playerView.interact();
+            verify(this.console).writeln("The origin and target squares are the same");
         }
     }
 

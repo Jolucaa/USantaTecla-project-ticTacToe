@@ -1,16 +1,14 @@
 package usantatecla.tictactoe.controllers;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
@@ -31,10 +29,12 @@ public class PlayControllerTest extends ControllerTest {
     @Mock
     private ErrorView errorView;
 
+    private Game game;
+
     @Override
     protected Controller getController(String... rows) {
-        // TODO Game
-        return new PlayController(new GameBuilder().rows(rows).build(), this.viewFactory);
+        this.game = spy(new GameBuilder().rows(rows).turn(Color.O).build());
+        return new PlayController(this.game, this.viewFactory);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class PlayControllerTest extends ControllerTest {
         Coordinate coordinate = new Coordinate(1,1);
         when(this.coordinateView.read(any())).thenReturn(coordinate);
         ((PlayController) this.controller).control();
-        assertThat(this.controller.game.getColor(coordinate), is(Color.O));
+        verify(this.game).putToken(coordinate);
         verify(this.playerView).writeWinner(Color.O);
     }
 
@@ -69,8 +69,7 @@ public class PlayControllerTest extends ControllerTest {
         Coordinate target = new Coordinate(2, 2);
         when(this.coordinateView.read(any())).thenReturn(origin, target);
         ((PlayController) this.controller).control();
-        assertThat(this.controller.game.getColor(origin), is(Color.NULL));
-        assertThat(this.controller.game.getColor(target), is(Color.O));
+        verify(this.game).moveToken(origin, target);
     }
 
     @Test

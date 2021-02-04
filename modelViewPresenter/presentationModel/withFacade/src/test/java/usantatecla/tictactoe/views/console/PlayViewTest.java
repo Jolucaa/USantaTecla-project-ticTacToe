@@ -1,20 +1,15 @@
 package usantatecla.tictactoe.views.console;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.ErrorView;
 import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.*;
@@ -28,12 +23,8 @@ public class PlayViewTest {
     @Mock
     private Logic logic;
 
+    @InjectMocks
     private PlayView playView;
-
-    @BeforeEach
-    public void beforeEach(){
-        this.playView = new PlayView(this.logic);
-    }
 
     @Test
     public void testGivenPlayViewWhenInteractThenIsWinner() {

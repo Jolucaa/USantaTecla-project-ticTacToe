@@ -17,7 +17,7 @@ class PlayView {
             this.logic.next();
             new BoardView().write(this.logic);
         } while (!this.logic.isTicTacToe());
-        Message.PLAYER_WIN.writeln(this.logic.getActiveColor().name());
+        new MessageView().writeln(Message.PLAYER_WIN, this.logic.getActiveColor().name());
     }
 
 }

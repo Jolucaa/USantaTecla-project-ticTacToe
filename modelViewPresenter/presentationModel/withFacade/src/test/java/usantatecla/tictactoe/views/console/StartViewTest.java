@@ -1,13 +1,13 @@
 package usantatecla.tictactoe.views.console;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.utils.views.Console;
 

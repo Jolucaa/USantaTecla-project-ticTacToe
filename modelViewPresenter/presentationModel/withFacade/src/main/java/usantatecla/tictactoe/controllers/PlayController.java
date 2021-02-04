@@ -1,8 +1,8 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 public class PlayController extends Controller {

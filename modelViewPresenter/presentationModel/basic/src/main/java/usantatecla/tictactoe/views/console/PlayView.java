@@ -5,7 +5,7 @@ import usantatecla.tictactoe.views.Message;
 
 class PlayView {
 
-    PlayController playController;
+    private PlayController playController;
 
     PlayView(PlayController playController) {
         this.playController = playController;
@@ -17,7 +17,7 @@ class PlayView {
             this.playController.next();
             new BoardView().write(this.playController);
         } while (!this.playController.isTicTacToe());
-        Message.PLAYER_WIN.writeln(this.playController.getActiveColor().name());
+        new MessageView().writeln(Message.PLAYER_WIN, this.playController.getActiveColor().name());
     }
 
 }

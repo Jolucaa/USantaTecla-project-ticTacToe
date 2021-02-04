@@ -3,12 +3,11 @@ package usantatecla.tictactoe.views.console;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.ErrorView;
 import usantatecla.tictactoe.views.Message;
 
 class PlayerView {
 
-    PlayController playController;
+    private PlayController playController;
 
     PlayerView(PlayController playController) {
         this.playController = playController;

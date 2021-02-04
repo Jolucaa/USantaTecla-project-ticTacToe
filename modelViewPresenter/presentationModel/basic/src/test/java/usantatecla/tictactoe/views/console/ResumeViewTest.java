@@ -22,13 +22,12 @@ public class ResumeViewTest {
     @Mock
     private Console console;
 
-    @Mock
-    protected ResumeController resumeController;
-
+    private ResumeController resumeController;
     private ResumeView resumeView;
 
     @BeforeEach
     public void beforeEach() {
+        this.resumeController = new ResumeController(new Game());
         this.resumeView = new ResumeView(this.resumeController);
     }
 

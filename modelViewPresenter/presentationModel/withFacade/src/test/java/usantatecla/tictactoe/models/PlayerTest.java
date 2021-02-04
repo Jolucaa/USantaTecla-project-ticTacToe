@@ -1,16 +1,13 @@
 package usantatecla.tictactoe.models;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class PlayerTest {
 
@@ -63,48 +60,6 @@ public class PlayerTest {
                 "   "
         ).build();
         assertThat(player.getPutTokenError(new Coordinate(1, 1)), is(Error.NOT_EMPTY));
-    }
-
-    @Test
-    public void testGivenPlayerWhenMoveThenIsTrue() {
-        Player player = this.playerBuilder.rows(
-                "OO ",
-                "O  ",
-                "   "
-        ).build();
-        Board targetBoard = new BoardBuilder().rows(
-                "OO ",
-                "   ",
-                "O  ").build();
-        Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
-        Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
-        player.moveToken(origin, target);
-        assertThat(player.board.isEmpty(origin), is(true)); // TODO A causa de este test no podemos poner 'private' en Player
-        assertThat(player.board.isOccupied(target, Color.O), is(true));
-    }
-
-    private Coordinate getOriginCoordinate(Board originBoard, Board targetBoard) {
-        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
-        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate origin = new Coordinate();
-        for (int i = 0; i < originBoardCoordinates.size(); i++) {
-            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
-                origin = originBoardCoordinates.get(i);
-            }
-        }
-        return origin;
-    }
-
-    private Coordinate getTargetCoordinate(Board originBoard, Board targetBoard) {
-        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
-        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate target = new Coordinate();
-        for (int i = 0; i < originBoardCoordinates.size(); i++) {
-            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
-                target = targetBoardCoordinates.get(i);
-            }
-        }
-        return target;
     }
 
     @Test

@@ -6,7 +6,7 @@ import usantatecla.utils.views.YesNoDialog;
 
 class ResumeView {
 
-    ResumeController resumeController;
+    private ResumeController resumeController;
 
     ResumeView(ResumeController resumeController) {
         this.resumeController = resumeController;

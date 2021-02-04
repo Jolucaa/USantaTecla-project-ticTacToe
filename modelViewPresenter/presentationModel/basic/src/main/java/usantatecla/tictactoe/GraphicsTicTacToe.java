@@ -1,9 +1,9 @@
 package usantatecla.tictactoe;
 
-import usantatecla.tictactoe.views.graphics.GraphicsView;
 import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
+import usantatecla.tictactoe.views.graphics.GraphicsView;
 
 class GraphicsTicTacToe extends TicTacToe{
 

@@ -31,7 +31,7 @@ public class GameBuilder {
     public Game build() {
         this.game = new Game();
         this.buildBoard();
-        if (this.game.getActivePlayer().getColor() != this.color) {
+        if (this.color != null && this.game.getActivePlayer().getColor() != this.color) {
             this.game.next();
         }
         return this.game;
