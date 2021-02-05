@@ -52,13 +52,7 @@ public class PlayerTest {
             Player player = this.playerBuilder.build();
             doReturn(new Coordinate(0, 0)).when(player).getCoordinate(any());
             player.play();
-            this.verifyNoErrors();
-        }
-    }
-
-    private void verifyNoErrors() {
-        for (Error error : Error.values()) {
-            verify(this.console, never()).writeln(error.toString());
+            verify(this.console, never()).writeln(any());
         }
     }
 
@@ -88,7 +82,7 @@ public class PlayerTest {
             doReturn(new Coordinate(2, 0), new Coordinate(2, 2))
                     .when(player).getCoordinate(any());
             player.play();
-            this.verifyNoErrors();
+            verify(this.console, never()).writeln(any());
         }
     }
 
