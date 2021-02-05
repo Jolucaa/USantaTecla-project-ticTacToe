@@ -9,8 +9,6 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.utils.Console;
 
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
@@ -46,99 +44,98 @@ public class PlayerTest {
         Assertions.assertThrows(AssertionError.class, () -> player.getCoordinate(null));
     }
 
-    // TODO Traer los test de otra version
-    /*
-    @Test
-    public void testGivenNewPlayerWhenGetPutTokenErrorWithNullMessageThenAssertionError() {
-        Player player = this.playerBuilder.build();
-        Assertions.assertThrows(AssertionError.class, () -> player.getPutTokenError(null));
-    }
 
     @Test
-    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
-        Coordinate coordinate = new Coordinate(1, 1);
-        Player player = this.playerBuilder.build();
-        assertThat(player.getPutTokenError(coordinate), is(Error.NULL));
-    }
-
-    @Test
-    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNotEmpty() {
-        Player player = this.playerBuilder.rows(
-                "   ",
-                " O ",
-                "   "
-        ).build();
-        assertThat(player.getPutTokenError(new Coordinate(1, 1)), is(Error.NOT_EMPTY));
-    }
-
-
-    @Test
-    public void testGivenNewPlayerWhenGetOriginMoveTokenErrorWithNullMessageThenAssertionError() {
-        Player player = this.playerBuilder.build();
-        Assertions.assertThrows(AssertionError.class, () -> player.getOriginMoveTokenError(new Coordinate()));
-    }
-
-    @Test
-    public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
-        Player player = this.playerBuilder.rows(
-                "   ",
-                " X ",
-                "   "
-        ).build();
-        assertThat(player.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
-    }
-
-    @Test
-    public void testGivenNewPlayerWhenGetTargetMoveTokenErrorWithNullMessageThenAssertionError() {
-        Player player = this.playerBuilder.build();
-        Assertions.assertThrows(AssertionError.class, () -> player.getTargetMoveTokenError(new Coordinate(), new Coordinate()));
-    }
-
-    @Test
-    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenNoError() {
-        Player player = this.playerBuilder.rows(
-                "   ",
-                " O ",
-                "   "
-        ).build();
-        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(0, 0)), is(Error.NULL));
-    }
-
-    @Test
-    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
-        Player player = this.playerBuilder.rows(
-                "   ",
-                " OO",
-                "   "
-        ).build();
-        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 2)), is(Error.NOT_EMPTY));
-    }
-
-    @Test
-    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
-        Player player = this.playerBuilder.rows(
-                "   ",
-                " O ",
-                "   "
-        ).build();
-        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 1)), is(Error.SAME_COORDINATES));
-    }
-     */
-
-    @Test
-    public void testGivenPlayerWhenWriteWinnerThenPrint() {
+    public void testGivenPlayerWhenPlayThenPutToken() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
             Player player = this.playerBuilder.build();
-            player.writeWinner();
-            verify(this.console).writeln(Color.O.toString() + " player: You win!!! :-)");
+            doReturn(new Coordinate(0, 0)).when(player).getCoordinate(any());
+            player.play();
+            this.verifyNoErrors();
+        }
+    }
+
+    private void verifyNoErrors() {
+        for (Error error : Error.values()) {
+            verify(this.console, never()).writeln(error.toString());
         }
     }
 
     @Test
-    public void testGivenNewPlayerWhenGetColorThenReturnColor() {
-        Player player = this.playerBuilder.build();
-        assertThat(player.getColor(), is(Color.O));
+    public void testGivenPlayerWhenPlayThenPutTokenError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.rows(
+                    "X O",
+                    "X O",
+                    "   ").build();
+            doReturn(new Coordinate(0, 2), new Coordinate(2, 2))
+                    .when(player).getCoordinate(any());
+            player.play();
+            verify(this.console).writeln("The square is not empty");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerWhenPlayThenMoveToken() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.rows(
+                "X O",
+                "X O",
+                "OX ").build();
+            doReturn(new Coordinate(2, 0), new Coordinate(2, 2))
+                    .when(player).getCoordinate(any());
+            player.play();
+            this.verifyNoErrors();
+        }
+    }
+
+    @Test
+    public void testGivenPlayerWhenPlayThenMoveTokenNotOwnerError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.rows(
+                "X O",
+                "X O",
+                "OX ").build();
+            doReturn(new Coordinate(2, 1), new Coordinate(2, 0), new Coordinate(2, 2))
+                    .when(player).getCoordinate(any());
+            player.play();
+            verify(this.console).writeln("There is not a token of yours");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerWhenPlayThenMoveTokenNotEmptyError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.rows(
+                "X O",
+                "X O",
+                "OX ").build();
+            doReturn(new Coordinate(2, 0), new Coordinate(1, 2),
+                    new Coordinate(2, 0), new Coordinate(2, 2))
+                    .when(player).getCoordinate(any());
+            player.play();
+            verify(this.console).writeln("The square is not empty");
+        }
+    }
+
+    @Test
+    public void testGivenPlayerWhenPlayThenMoveTokenSameCoordinatesError() {
+        try (MockedStatic<Console> console = mockStatic(Console.class)) {
+            console.when(Console::getInstance).thenReturn(this.console);
+            Player player = this.playerBuilder.rows(
+                "X O",
+                "X O",
+                "OX ").build();
+            doReturn(new Coordinate(2, 0), new Coordinate(2, 0), new Coordinate(2, 2))
+                    .when(player).getCoordinate(any());
+            player.play();
+            verify(this.console).writeln("The origin and target squares are the same");
+        }
     }
 
 }

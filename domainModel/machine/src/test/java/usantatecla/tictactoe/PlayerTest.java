@@ -2,12 +2,8 @@ package usantatecla.tictactoe;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,49 +38,6 @@ public abstract class PlayerTest {
                 "   "
         ).build();
         assertThat(player.getPutTokenError(new Coordinate(1, 1)), is(Error.NOT_EMPTY));
-    }
-
-    @Test
-    public void testGivenPlayerWhenMoveThenIsTrue() {
-        Player player = this.getPlayerBuilder().rows(
-                "OO ",
-                "O  ",
-                "   "
-        ).build();
-        Board targetBoard = new BoardBuilder().rows(
-                "OO ",
-                "   ",
-                "O  ").build();
-        Coordinate origin = this.getOriginCoordinate(player.board, targetBoard);
-        Coordinate target = this.getTargetCoordinate(player.board, targetBoard);
-        doReturn(origin, target).when(player).getCoordinate(any());
-        player.play();
-        assertThat(player.board.isEmpty(new Coordinate(1, 0)), is(true));
-        assertThat(player.board.isOccupied(new Coordinate(2, 0), Color.O), is(true));
-    }
-
-    private Coordinate getOriginCoordinate(Board originBoard, Board targetBoard) {
-        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
-        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate origin = new Coordinate();
-        for (int i = 0; i < originBoardCoordinates.size(); i++) {
-            if (!targetBoardCoordinates.contains(originBoardCoordinates.get(i))) {
-                origin = originBoardCoordinates.get(i);
-            }
-        }
-        return origin;
-    }
-
-    private Coordinate getTargetCoordinate(Board originBoard, Board targetBoard) {
-        List<Coordinate> originBoardCoordinates = originBoard.getCoordinates(Color.O);
-        List<Coordinate> targetBoardCoordinates = targetBoard.getCoordinates(Color.O);
-        Coordinate target = new Coordinate();
-        for (int i = 0; i < originBoardCoordinates.size(); i++) {
-            if (!originBoardCoordinates.contains(targetBoardCoordinates.get(i))) {
-                target = targetBoardCoordinates.get(i);
-            }
-        }
-        return target;
     }
 
     @Test

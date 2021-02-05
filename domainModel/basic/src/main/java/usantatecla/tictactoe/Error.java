@@ -20,7 +20,7 @@ enum Error {
 	}
 
 	void writeln() {
-		if (!this.isNull()){
+		if (!this.isNull()) {
 			Console.getInstance().writeln(this.message);
 		}
 	}

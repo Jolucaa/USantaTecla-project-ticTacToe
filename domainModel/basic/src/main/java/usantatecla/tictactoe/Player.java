@@ -44,6 +44,7 @@ class Player {
 
 	private Error getPutTokenError(Coordinate coordinate) {
 		assert coordinate != null;
+
 		Error error = Error.NULL;
 		if (!this.board.isEmpty(coordinate)) {
 			error = Error.NOT_EMPTY;
@@ -69,6 +70,7 @@ class Player {
 
 	private Error getOriginMoveTokenError(Coordinate origin) {
 		assert !origin.isNull();
+
 		Error error = Error.NULL;
 		if (!this.board.isOccupied(origin, this.color)) {
 			error = Error.NOT_OWNER;
@@ -79,6 +81,7 @@ class Player {
 
 	private Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		assert !origin.isNull() && !target.isNull();
+		
 		Error error = Error.NULL;
 		if (origin.equals(target)) {
 			error = Error.SAME_COORDINATES;
