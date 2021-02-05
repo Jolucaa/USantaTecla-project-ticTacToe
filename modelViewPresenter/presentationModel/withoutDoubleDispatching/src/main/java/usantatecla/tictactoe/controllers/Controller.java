@@ -22,4 +22,5 @@ public abstract class Controller {
     public Color getColor(Coordinate coordinate) {
         return this.game.getColor(coordinate);
     }
+
 }

@@ -11,7 +11,7 @@ class PlayView {
             playController.next();
             new BoardView().write(playController);
         } while (!playController.isTicTacToe());
-        Message.PLAYER_WIN.writeln(playController.getActiveColor().name());
+        new MessageView().writeln(Message.PLAYER_WIN, playController.getActiveColor().name());
         playController.nextState();
     }
 

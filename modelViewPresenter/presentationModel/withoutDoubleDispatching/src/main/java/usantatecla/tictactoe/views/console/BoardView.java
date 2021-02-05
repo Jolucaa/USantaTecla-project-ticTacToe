@@ -1,7 +1,6 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Controller;
-import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.views.Console;
@@ -9,16 +8,16 @@ import usantatecla.utils.views.Console;
 class BoardView {
 
     void write(Controller controller) {
-        Message.HORIZONTAL_LINE.writeln();
+        new MessageView().writeln(Message.HORIZONTAL_LINE);
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            Message.VERTICAL_LINE.write();
+            new MessageView().write(Message.VERTICAL_LINE);
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
                 new ColorView().write(controller.getColor(new Coordinate(i, j)));
-                Message.VERTICAL_LINE.write();
+                new MessageView().write(Message.VERTICAL_LINE);
             }
             Console.getInstance().writeln();
         }
-        Message.HORIZONTAL_LINE.writeln();
+        new MessageView().writeln(Message.HORIZONTAL_LINE);
     }
 
 }

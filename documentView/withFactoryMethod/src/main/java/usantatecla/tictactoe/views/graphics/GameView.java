@@ -1,8 +1,8 @@
 package usantatecla.tictactoe.views.graphics;
 
-import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
 
 import javax.swing.*;

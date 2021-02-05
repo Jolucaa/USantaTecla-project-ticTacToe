@@ -9,7 +9,6 @@ public class GameBuilder {
 
     private String[] rows;
     private Color color;
-    private int numberUsers;
     private Game game;
 
     public GameBuilder() {
@@ -17,7 +16,6 @@ public class GameBuilder {
             "   ",
             "   ",
             "   "};
-        this.numberUsers = 0;
     }
 
     public GameBuilder rows(String... rows) {
@@ -30,14 +28,8 @@ public class GameBuilder {
         return this;
     }
 
-    public GameBuilder users(int numberUsers) {
-        this.numberUsers = numberUsers;
-        return this;
-    }
-
     public Game build() {
         this.game = new Game();
-        this.game.setUsers(this.numberUsers);
         this.buildBoard();
         if (this.color != null && this.game.getActiveColor() != this.color) {
             this.game.next();

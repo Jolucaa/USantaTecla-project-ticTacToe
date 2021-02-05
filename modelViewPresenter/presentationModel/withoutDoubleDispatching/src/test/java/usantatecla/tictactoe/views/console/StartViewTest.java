@@ -1,15 +1,15 @@
 package usantatecla.tictactoe.views.console;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.models.State;
 import usantatecla.utils.views.Console;
 
 import java.util.List;
@@ -24,14 +24,13 @@ public class StartViewTest {
     @Mock
     private Console console;
 
-    @Mock
     private StartController startController;
-
     private StartView startView;
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
+        this.startController = new StartController(new Game(), new State());
         this.startView = new StartView();
         this.conversor = new Conversor();
     }
@@ -40,11 +39,6 @@ public class StartViewTest {
     public void testGivenStartViewWhenInteractThenInteract() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.startController.getColor(any())).thenReturn(
-                    Color.NULL, Color.NULL, Color.NULL,
-                    Color.NULL, Color.NULL, Color.NULL,
-                    Color.NULL, Color.NULL, Color.NULL
-            );
             this.startView.interact(this.startController);
             String string = this.conversor.arrayToString(new String[]{
                     "--- TIC TAC TOE ---",

@@ -7,11 +7,6 @@ import usantatecla.tictactoe.controllers.StartController;
 
 public abstract class View {
 
-
-    public View() {
-
-    }
-
     //TODO necesario instance of??
     public void interact(Logic logic) {
         do {

@@ -13,8 +13,8 @@ import java.util.Map;
 public class Logic {
 
     private Game game;
-    private final State state;
-    private final Map<StateValue, Controller> controllers;
+    private State state;
+    private Map<StateValue, Controller> controllers;
 
     public Logic() {
         this.state = new State();

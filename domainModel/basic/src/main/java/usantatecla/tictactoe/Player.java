@@ -2,8 +2,8 @@ package usantatecla.tictactoe;
 
 class Player {
 
-	protected Color color;
-	protected Board board;
+	private Color color;
+	private Board board;
 	private int putTokens;
 
 	Player(Color color, Board board) {
@@ -34,7 +34,7 @@ class Player {
 		this.putTokens++;
 	}
 
-	protected Coordinate getCoordinate(Message message){
+	Coordinate getCoordinate(Message message){
 		assert message != null;
 
 		Coordinate coordinate = new Coordinate();
@@ -42,7 +42,7 @@ class Player {
 		return coordinate;
 	}
 
-	protected Error getPutTokenError(Coordinate coordinate) {
+	private Error getPutTokenError(Coordinate coordinate) {
 		assert coordinate != null;
 		Error error = Error.NULL;
 		if (!this.board.isEmpty(coordinate)) {
@@ -67,7 +67,7 @@ class Player {
 		this.board.moveToken(origin, target);
 	}
 
-	protected Error getOriginMoveTokenError(Coordinate origin) {
+	private Error getOriginMoveTokenError(Coordinate origin) {
 		assert !origin.isNull();
 		Error error = Error.NULL;
 		if (!this.board.isOccupied(origin, this.color)) {
@@ -77,7 +77,7 @@ class Player {
 		return error;
 	}
 
-	protected Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+	private Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
 		assert !origin.isNull() && !target.isNull();
 		Error error = Error.NULL;
 		if (origin.equals(target)) {

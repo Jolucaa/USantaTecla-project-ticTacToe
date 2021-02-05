@@ -1,7 +1,6 @@
 package usantatecla.tictactoe.views;
 
 import org.junit.jupiter.api.BeforeEach;
-
 import usantatecla.tictactoe.models.MachinePlayer;
 import usantatecla.tictactoe.models.PlayerBuilder;
 import usantatecla.tictactoe.types.Color;

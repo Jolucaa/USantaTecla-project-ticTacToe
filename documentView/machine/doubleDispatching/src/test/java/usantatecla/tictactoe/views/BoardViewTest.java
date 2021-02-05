@@ -6,17 +6,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.models.GameBuilder;
 import usantatecla.utils.views.Console;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,9 +23,7 @@ public class BoardViewTest {
     @Mock
     private Console console;
 
-    @Spy
     private Game game;
-
     private BoardView boardView;
     private Conversor conversor;
 
@@ -41,11 +37,10 @@ public class BoardViewTest {
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            doReturn(
-                    Color.X, Color.NULL, Color.NULL,
-                    Color.NULL, Color.O, Color.NULL,
-                    Color.O, Color.NULL, Color.X
-            ).when(this.game).getColor(any());
+            this.game = new GameBuilder().rows(
+                    "X  ",
+                    " O ",
+                    "O X").build();
             this.boardView.write(this.game);
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",

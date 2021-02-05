@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.models;
 
-import java.util.List;
-
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
+
+import java.util.List;
 
 public class PlayerBuilder {
 

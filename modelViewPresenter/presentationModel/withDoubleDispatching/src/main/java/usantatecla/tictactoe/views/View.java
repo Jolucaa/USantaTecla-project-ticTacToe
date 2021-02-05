@@ -2,6 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.*;
 
+// TODO ¿Por qué cambia tanto respecto a la versión anterior?
 public abstract class View implements ControllersVisitor {
 
     public void interact(Logic logic) {

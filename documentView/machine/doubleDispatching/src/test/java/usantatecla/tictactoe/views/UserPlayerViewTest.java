@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-
 import usantatecla.tictactoe.models.PlayerBuilder;
 import usantatecla.tictactoe.models.UserPlayer;
 import usantatecla.tictactoe.types.Color;

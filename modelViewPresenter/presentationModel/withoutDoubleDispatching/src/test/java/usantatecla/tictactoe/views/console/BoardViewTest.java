@@ -3,19 +3,19 @@ package usantatecla.tictactoe.views.console;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
-import usantatecla.tictactoe.controllers.Controller;
-import usantatecla.tictactoe.controllers.Logic;
-import usantatecla.tictactoe.controllers.StartController;
-import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.controllers.PlayController;
+import usantatecla.tictactoe.models.GameBuilder;
+import usantatecla.tictactoe.models.State;
 import usantatecla.utils.views.Console;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,16 +24,13 @@ public class BoardViewTest {
     @Mock
     private Console console;
 
-    @Mock
-    private StartController startController;
-
-    @InjectMocks
+    private PlayController playController;
     private BoardView boardView;
-
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
+        this.boardView = new BoardView();
         this.conversor = new Conversor();
     }
 
@@ -41,12 +38,11 @@ public class BoardViewTest {
     public void testGivenBoardViewWhenWriteThenPrint() {
         try (MockedStatic<Console> console = mockStatic(Console.class)) {
             console.when(Console::getInstance).thenReturn(this.console);
-            when(this.startController.getColor(any())).thenReturn(
-                    Color.X, Color.NULL, Color.NULL,
-                    Color.NULL, Color.O, Color.NULL,
-                    Color.O, Color.NULL, Color.X
-            );
-            this.boardView.write(this.startController);
+            this.playController = new PlayController(new GameBuilder().rows(
+                    "X  ",
+                    " O ",
+                    "O X").build(), new State());
+            this.boardView.write(this.playController);
             String string = this.conversor.arrayToString(new String[]{
                     "---------------",
                     " | X |   |   | ",

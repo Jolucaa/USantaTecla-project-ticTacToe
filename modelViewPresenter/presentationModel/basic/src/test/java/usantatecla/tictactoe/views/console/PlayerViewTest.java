@@ -22,13 +22,13 @@ public class PlayerViewTest {
     final static Coordinate ORIGIN = new Coordinate(0, 0);
     final static Coordinate TARGET = new Coordinate(0, 1);
 
-    protected PlayerView playerView;
+    @Mock
+    private Console console;
 
     @Mock
     private PlayController playController;
 
-    @Mock
-    private Console console;
+    protected PlayerView playerView;
 
     @BeforeEach
     public void beforeEach() {

@@ -20,15 +20,12 @@ public class StartViewTest {
     @Mock
     private Console console;
 
-    @Spy
-    private Game game;
-
-    @InjectMocks
     private StartView startView;
     private Conversor conversor;
 
     @BeforeEach
     public void beforeEach() {
+        this.startView = new StartView(new Game());
         this.conversor = new Conversor();
     }
 

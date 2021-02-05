@@ -11,7 +11,7 @@ class ResumeView {
         isResumed.read(Message.RESUME.toString());
         if (isResumed.isAffirmative()) {
             resumeController.resume();
-        }else {
+        } else {
             resumeController.nextState();
         }
         return isResumed.isAffirmative();

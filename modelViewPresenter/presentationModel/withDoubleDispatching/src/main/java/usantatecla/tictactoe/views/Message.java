@@ -1,7 +1,5 @@
 package usantatecla.tictactoe.views;
 
-import usantatecla.utils.views.Console;
-
 public enum Message {
     TITLE("--- TIC TAC TOE ---"),
     HORIZONTAL_LINE("---------------"),
@@ -17,20 +15,6 @@ public enum Message {
 
     Message(String message) {
         this.message = message;
-    }
-
-    public void write() {
-        Console.getInstance().write(this.message);
-    }
-
-    public void writeln() {
-        Console.getInstance().writeln(this.message);
-    }
-
-    public void writeln(String player) {
-        assert this == Message.PLAYER_WIN;
-
-        Console.getInstance().writeln(this.message.replaceAll("#player", "" + player));
     }
 
     @Override

@@ -1,11 +1,8 @@
 package usantatecla.tictactoe.controllers;
 
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
 import usantatecla.tictactoe.models.StateValue;
-import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.types.Error;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +10,8 @@ import java.util.Map;
 public class Logic {
 
     private Game game;
-    private final State state;
-    private final Map<StateValue, Controller> controllers;
+    private State state;
+    private Map<StateValue, Controller> controllers;
 
     public Logic() {
         this.state = new State();
