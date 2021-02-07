@@ -1,9 +1,9 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.State;
-import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.State;
 import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 public class PlayController extends Controller {
@@ -53,7 +53,7 @@ public class PlayController extends Controller {
 
     @Override
     public void accept(ControllersVisitor controllersVisitor) {
-        controllersVisitor.visitPlayController(this);
+        controllersVisitor.visit(this);
     }
 
 }

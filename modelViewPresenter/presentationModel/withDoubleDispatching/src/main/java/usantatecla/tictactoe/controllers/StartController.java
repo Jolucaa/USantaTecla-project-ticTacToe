@@ -17,7 +17,7 @@ public class StartController extends Controller {
 
     @Override
     public void accept(ControllersVisitor controllersVisitor) {
-        controllersVisitor.visitStartController(this);
+        controllersVisitor.visit(this);
     }
 
 }

@@ -16,7 +16,7 @@ public class ResumeController extends Controller {
 
     @Override
     public void accept(ControllersVisitor controllersVisitor) {
-        controllersVisitor.visitResumeController(this);
+        controllersVisitor.visit(this);
     }
 
 }

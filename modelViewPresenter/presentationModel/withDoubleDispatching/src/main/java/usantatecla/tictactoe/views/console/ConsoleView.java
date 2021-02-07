@@ -17,15 +17,15 @@ public class ConsoleView extends View {
         this.resumeView = new ResumeView();
     }
 
-    public void visitStartController(StartController startController) {
+    public void visit(StartController startController) {
         this.startView.interact(startController);
     }
 
-    public void visitPlayController(PlayController playController) {
+    public void visit(PlayController playController) {
         this.playView.interact(playController);
     }
 
-    public boolean visitResumeController(ResumeController resumeController) {
+    public boolean visit(ResumeController resumeController) {
         return this.resumeView.interact(resumeController);
     }
 

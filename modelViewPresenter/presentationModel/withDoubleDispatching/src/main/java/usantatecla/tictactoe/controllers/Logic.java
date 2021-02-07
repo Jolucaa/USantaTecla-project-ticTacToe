@@ -1,11 +1,8 @@
 package usantatecla.tictactoe.controllers;
 
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.State;
 import usantatecla.tictactoe.models.StateValue;
-import usantatecla.tictactoe.types.Coordinate;
-import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.types.Color;
-import usantatecla.tictactoe.types.Error;
 
 import java.util.HashMap;
 import java.util.Map;

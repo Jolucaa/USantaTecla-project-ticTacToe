@@ -29,7 +29,6 @@ public class Turn {
         this.users = turn.users;
     }
 
-    //TODO revisar copy - pasar a clone
     public Turn copy(Board board) {
         return new Turn(this, board);
     }
