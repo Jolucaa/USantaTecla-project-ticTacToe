@@ -2,7 +2,7 @@ package usantatecla.tictactoe;
 
 import usantatecla.tictactoe.views.console.ConsoleViewFactory;
 
-public class ConsoleTicTacToe extends TicTacToe {
+class ConsoleTicTacToe extends TicTacToe {
 
     @Override
     protected ConsoleViewFactory createViewFactory() {
