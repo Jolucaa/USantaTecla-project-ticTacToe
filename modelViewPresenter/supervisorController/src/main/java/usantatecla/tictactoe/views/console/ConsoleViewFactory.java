@@ -1,7 +1,6 @@
 package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.models.Board;
-import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.Player;
 import usantatecla.tictactoe.views.ViewFactory;
 

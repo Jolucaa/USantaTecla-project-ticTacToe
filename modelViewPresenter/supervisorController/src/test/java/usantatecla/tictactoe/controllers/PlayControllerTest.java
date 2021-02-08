@@ -3,7 +3,6 @@ package usantatecla.tictactoe.controllers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.models.GameBuilder;
