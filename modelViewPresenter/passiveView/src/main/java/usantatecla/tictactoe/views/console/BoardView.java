@@ -4,7 +4,6 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.views.Message;
 import usantatecla.utils.views.Console;
 
-
 public class BoardView extends usantatecla.tictactoe.views.BoardView {
 
     @Override

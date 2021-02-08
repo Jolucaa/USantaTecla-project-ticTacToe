@@ -2,7 +2,7 @@ package usantatecla.tictactoe;
 
 import usantatecla.tictactoe.views.graphics.GraphicsViewFactory;
 
-public class GraphicsTicTacToe extends TicTacToe {
+class GraphicsTicTacToe extends TicTacToe {
 
     @Override
     protected GraphicsViewFactory createViewFactory() {

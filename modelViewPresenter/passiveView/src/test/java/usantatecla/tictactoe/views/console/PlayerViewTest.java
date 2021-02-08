@@ -14,10 +14,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class PlayerViewTest {
 
-    private PlayerView playerView;
-
     @Mock
     private Console console;
+
+    private PlayerView playerView;
 
     @BeforeEach
     public void beforeEach() {
