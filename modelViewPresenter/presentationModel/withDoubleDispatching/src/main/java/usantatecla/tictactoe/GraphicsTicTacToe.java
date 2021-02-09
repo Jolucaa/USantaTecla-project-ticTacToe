@@ -1,12 +1,11 @@
 package usantatecla.tictactoe;
 
-import usantatecla.tictactoe.views.View;
 import usantatecla.tictactoe.views.graphics.GraphicsView;
 
 class GraphicsTicTacToe extends TicTacToe{
 
     @Override
-    protected View createView(){
+    protected GraphicsView createView(){
         return new GraphicsView();
     }
 

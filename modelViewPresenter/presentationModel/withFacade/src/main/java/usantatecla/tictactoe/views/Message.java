@@ -1,6 +1,7 @@
 package usantatecla.tictactoe.views;
 
 public enum Message {
+    
     TITLE("--- TIC TAC TOE ---"),
     HORIZONTAL_LINE("---------------"),
     VERTICAL_LINE(" | "),

@@ -10,7 +10,6 @@ import usantatecla.tictactoe.controllers.PlayController;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.views.ErrorView;
 import usantatecla.utils.views.Console;
 
 import static org.mockito.Mockito.*;

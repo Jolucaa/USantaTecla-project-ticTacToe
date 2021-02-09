@@ -4,12 +4,14 @@ import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.View;
 
-public abstract class TicTacToe {
+abstract class TicTacToe {
 
-    private final View view;
+    private View view;
+    private Logic logic;
 
     protected TicTacToe() {
-        this.view = this.createView(new Logic(new Game()));
+        this.logic = new Logic(new Game());
+        this.view = this.createView(this.logic);
     }
 
     protected abstract View createView(Logic logic);

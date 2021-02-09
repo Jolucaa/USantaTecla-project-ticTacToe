@@ -8,9 +8,9 @@ import usantatecla.tictactoe.types.Error;
 public class Logic {
 
     private Game game;
-    private final StartController startController;
-    private final PlayController playController;
-    private final ResumeController resumeController;
+    private StartController startController;
+    private PlayController playController;
+    private ResumeController resumeController;
 
     public Logic(Game game) {
         this.game = game;
@@ -62,8 +62,8 @@ public class Logic {
         return this.playController.getTargetMoveTokenError(origin, target);
     }
 
-    public void resume() {
-        this.resumeController.resume();
+    public void reset() {
+        this.resumeController.reset();
     }
 
 }

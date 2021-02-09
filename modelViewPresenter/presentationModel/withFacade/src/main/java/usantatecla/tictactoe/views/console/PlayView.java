@@ -2,13 +2,12 @@ package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.views.WithLogicView;
 
-class PlayView {
-
-    private Logic logic;
+class PlayView extends WithLogicView {
 
     PlayView(Logic logic) {
-        this.logic = logic;
+        super(logic);
     }
 
     void interact() {

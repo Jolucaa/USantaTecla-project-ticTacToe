@@ -1,15 +1,16 @@
 package usantatecla.tictactoe;
 
 import usantatecla.tictactoe.controllers.Logic;
+import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.View;
 
-public abstract class TicTacToe {
+abstract class TicTacToe {
 
     private View view;
     private Logic logic;
 
     protected TicTacToe() {
-        this.logic = new Logic();
+        this.logic = new Logic(new Game());
         this.view = this.createView();
     }
 

@@ -6,14 +6,20 @@ import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.models.Game;
 import usantatecla.tictactoe.views.View;
 
-public abstract class TicTacToe {
+abstract class TicTacToe {
 
     private Game game;
     private View view;
+    private StartController startController;
+    private PlayController playController;
+    private ResumeController resumeController;
 
     protected TicTacToe() {
         this.game = new Game();
-        this.view = this.createView(new StartController(this.game),new PlayController(this.game),new ResumeController(this.game));
+        this.startController = new StartController(this.game);
+        this.playController = new PlayController(this.game);
+        this.resumeController = new ResumeController(this.game);
+        this.view = this.createView(this.startController, this.playController, this.resumeController);
     }
 
     protected abstract View createView(StartController startController, PlayController playController, ResumeController resumeController);

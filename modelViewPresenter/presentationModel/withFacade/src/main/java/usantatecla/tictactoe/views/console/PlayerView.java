@@ -4,13 +4,12 @@ import usantatecla.tictactoe.controllers.Logic;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 import usantatecla.tictactoe.views.Message;
+import usantatecla.tictactoe.views.WithLogicView;
 
-class PlayerView {
-
-    Logic logic;
+class PlayerView extends WithLogicView {
 
     PlayerView(Logic logic) {
-        this.logic = logic;
+        super(logic);
     }
 
     void interact() {
