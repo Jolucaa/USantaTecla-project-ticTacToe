@@ -1,17 +1,17 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Game;
+import usantatecla.tictactoe.models.Session;
 import usantatecla.tictactoe.models.State;
 
-public class ResumeController extends Controller {
+public class ResumeController extends Controller implements AcceptorController {
 
-    public ResumeController(Game game, State state) {
-        super(game, state);
+    public ResumeController(Session session) {
+        super(session);
     }
 
     public void resume() {
-        this.game.reset();
-        this.state.reset();
+        this.session.reset();
     }
 
     @Override

@@ -7,9 +7,10 @@ class PlayView {
 
     void interact(PlayController playController) {
         do {
-            new PlayerView(playController).interact();
-            playController.next();
-            new BoardView().write(playController);
+            new PlayMenu(playController).execute();
+            //new PlayerView(playController).interact();
+            //playController.next();
+            //new BoardView().write(playController);
         } while (!playController.isTicTacToe());
         new MessageView().writeln(Message.PLAYER_WIN, playController.getActiveColor().name());
         playController.nextState();

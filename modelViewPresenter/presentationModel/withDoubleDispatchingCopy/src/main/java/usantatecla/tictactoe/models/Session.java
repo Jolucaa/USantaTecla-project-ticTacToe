@@ -13,6 +13,7 @@ public class Session {
     public Session() {
         this.state = new State();
         this.game = new Game();
+        this.registry = new Registry(game);
     }
 
     public StateValue getValueState() {
@@ -23,12 +24,8 @@ public class Session {
         return this.game.getColor(coordinate);
     }
 
-    public void next() {
+    public void nextState() {
         this.state.next();
-    }
-
-    public void setUsers() {
-        this.registry = new Registry(this.game);
     }
 
     public void reset() {
@@ -49,19 +46,28 @@ public class Session {
     }
 
     public Error getPutTokenError(Coordinate coordinate) {
-        Error error = this.game.getPutTokenError(coordinate);
-        if (error.isNull()) {
-            this.registry.register();
-        }
-        return error;
+        return this.game.getPutTokenError(coordinate);
+
+    }
+
+    public void putToken(Coordinate coordinate) {
+        this.game.putToken(coordinate);
+        this.game.next();
+        this.registry.register();
     }
 
     public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
-        Error error = this.game.getTargetMoveTokenError(origin, target);
-        if (error.isNull()) {
-            this.registry.register();
-        }
-        return error;
+        return this.game.getTargetMoveTokenError(origin, target);
+    }
+
+    public Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.game.getOriginMoveTokenError(coordinate);
+    }
+
+    public void move(Coordinate origin, Coordinate target) {
+        this.game.moveToken(origin,target);
+        this.game.next();
+        this.registry.register();
     }
 
     public void undo() {
@@ -80,4 +86,8 @@ public class Session {
         return this.registry.isRedoable();
     }
 
+
+    public void next() {
+        this.game.next();
+    }
 }

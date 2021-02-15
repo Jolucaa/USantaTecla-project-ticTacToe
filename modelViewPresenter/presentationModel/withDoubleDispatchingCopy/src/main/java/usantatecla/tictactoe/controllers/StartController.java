@@ -1,23 +1,21 @@
 package usantatecla.tictactoe.controllers;
 
-import usantatecla.tictactoe.models.Game;
-import usantatecla.tictactoe.models.State;
+import usantatecla.tictactoe.models.Session;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 
-public class StartController extends Controller {
+public class StartController extends Controller implements AcceptorController {
 
-    public StartController(Game game, State state) {
-        super(game, state);
+    public StartController(Session session) {
+        super(session);
     }
 
     public Color getColor(Coordinate coordinate) {
-        return this.game.getColor(coordinate);
+        return this.session.getColor(coordinate);
     }
 
     @Override
-    public void accept(ControllersVisitor controllersVisitor) {
-        controllersVisitor.visit(this);
+    public void accept(ControllersVisitor controllerVisitor) {
+        controllerVisitor.visit(this);
     }
-
 }
