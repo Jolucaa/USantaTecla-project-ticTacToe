@@ -1,6 +1,8 @@
 package usantatecla.tictactoe.controllers;
 
 import usantatecla.tictactoe.models.Session;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 public class StartController extends Controller implements AcceptorController {
 
@@ -8,18 +10,12 @@ public class StartController extends Controller implements AcceptorController {
         super(session);
     }
 
-    public void setUsers(int users) {
-        this.session.setUsers(users);
-        this.session.next();
-    }
-
-    public int getMaxPlayers() {
-        return this.session.getMaxPlayers();
+    public Color getColor(Coordinate coordinate) {
+        return this.session.getColor(coordinate);
     }
 
     @Override
-    public void accept(ControllerVisitor controllerVisitor) {
+    public void accept(ControllersVisitor controllerVisitor) {
         controllerVisitor.visit(this);
     }
-
 }

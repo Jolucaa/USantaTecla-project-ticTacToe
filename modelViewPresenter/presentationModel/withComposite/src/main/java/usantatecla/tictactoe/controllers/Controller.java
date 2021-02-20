@@ -1,23 +1,22 @@
 package usantatecla.tictactoe.controllers;
-
-import usantatecla.tictactoe.models.Coordinate;
 import usantatecla.tictactoe.models.Session;
-import usantatecla.tictactoe.types.Token;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 
 public abstract class Controller {
 
     protected Session session;
 
     Controller(Session session) {
-        this.session = session;
+        this.session= session;
     }
 
-    public Token getToken(Coordinate coordinate) {
-        return this.session.getToken(coordinate);
+    public void nextState() {
+        this.session.nextState();
     }
 
-    public void next() {
-        this.session.next();
+    public Color getColor(Coordinate coordinate) {
+        return this.session.getColor(coordinate);
     }
 
 }

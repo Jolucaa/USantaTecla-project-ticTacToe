@@ -8,13 +8,13 @@ public class ResumeController extends Controller implements AcceptorController {
         super(session);
     }
 
-    public void reset() {
+    public void resume() {
         this.session.reset();
     }
 
     @Override
-    public void accept(ControllerVisitor controllerVisitor) {
-        controllerVisitor.visit(this);
+    public void accept(ControllersVisitor controllersVisitor) {
+        controllersVisitor.visit(this);
     }
 
 }

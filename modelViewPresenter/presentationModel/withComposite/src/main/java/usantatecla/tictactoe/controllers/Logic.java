@@ -13,7 +13,7 @@ public class Logic {
 
     public Logic() {
         this.session = new Session();
-        this.controllers = new HashMap<>();
+        this.controllers = new HashMap<StateValue, AcceptorController>();
         this.controllers.put(StateValue.INITIAL, new StartController(this.session));
         this.controllers.put(StateValue.IN_GAME, new PlayController(this.session));
         this.controllers.put(StateValue.RESUME, new ResumeController(this.session));

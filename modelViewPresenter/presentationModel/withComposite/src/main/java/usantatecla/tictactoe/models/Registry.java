@@ -11,8 +11,12 @@ class Registry {
 
     Registry(Game game) {
         this.game = game;
-        this.mementos = new ArrayList<>();
+        this.reset();
+    }
+
+     void reset() {
         this.firstPrevious = 0;
+        this.mementos = new ArrayList<>();
         this.mementos.add(this.firstPrevious, this.game.createMemento());
     }
 
@@ -34,11 +38,11 @@ class Registry {
         this.game.setMemento(this.mementos.get(this.firstPrevious));
     }
 
-    boolean isUndoable() {
+    boolean undoable() {
         return this.firstPrevious < this.mementos.size() - 1;
     }
 
-    boolean isRedoable() {
+    boolean redoable() {
         return this.firstPrevious >= 1;
     }
 

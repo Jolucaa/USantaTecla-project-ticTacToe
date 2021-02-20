@@ -1,7 +1,8 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 public class Session {
 
@@ -12,27 +13,19 @@ public class Session {
     public Session() {
         this.state = new State();
         this.game = new Game();
+        this.registry = new Registry(game);
     }
 
     public StateValue getValueState() {
         return this.state.getValueState();
     }
 
-    public Token getToken(Coordinate coordinate) {
-        return this.game.getToken(coordinate);
+    public Color getColor(Coordinate coordinate) {
+        return this.game.getColor(coordinate);
     }
 
-    public void next() {
+    public void nextState() {
         this.state.next();
-    }
-
-    public void setUsers(int users) {
-        this.game.setUsers(users);
-        this.registry = new Registry(this.game);
-    }
-
-    public int getMaxPlayers() {
-        return this.game.getMaxPlayers();
     }
 
     public void reset() {
@@ -40,58 +33,60 @@ public class Session {
         this.state.reset();
     }
 
-    public boolean isBoardComplete() {
-        return this.game.isBoardComplete();
+    public boolean areAllTokensOnBoard() {
+        return this.game.areAllTokensOnBoard();
     }
 
     public boolean isTicTacToe() {
         return this.game.isTicTacToe();
     }
 
-    public Token getToken() {
-        return this.game.getToken();
+    public Color getActiveColor() {
+        return this.game.getActiveColor();
     }
 
-    public boolean isUser() {
-        return this.game.isUser();
+    public Error getPutTokenError(Coordinate coordinate) {
+        return this.game.getPutTokenError(coordinate);
     }
 
-    public Error put(Coordinate coordinate) {
-        Error error = this.game.put(coordinate);
-        if (error.isNull()) {
-            this.registry.register();
-        }
-        return error;
+    public void putToken(Coordinate coordinate) {
+        this.game.putToken(coordinate);
+        this.game.next();
+        this.registry.register();
     }
 
-    public Error move(Coordinate origin, Coordinate target) {
-        Error error = this.game.move(origin, target);
-        if (error.isNull()) {
-            this.registry.register();
-        }
-        return error;
+    public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.game.getTargetMoveTokenError(origin, target);
+    }
+
+    public Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.game.getOriginMoveTokenError(coordinate);
+    }
+
+    public void move(Coordinate origin, Coordinate target) {
+        this.game.moveToken(origin,target);
+        this.game.next();
+        this.registry.register();
     }
 
     public void undo() {
         this.registry.undo();
-        if (!this.game.isUser()) {
-            this.registry.undo();
-        }
     }
 
     public boolean undoable() {
-        return this.registry.isUndoable();
+        return this.registry.undoable();
     }
 
     public void redo() {
         this.registry.redo();
-        if (!this.game.isUser()) {
-            this.registry.redo();
-        }
     }
 
     public boolean redoable() {
-        return this.registry.isRedoable();
+        return this.registry.redoable();
     }
 
+
+    public void next() {
+        this.game.next();
+    }
 }

@@ -8,8 +8,13 @@ import static org.hamcrest.Matchers.is;
 public class ErrorTest {
 
     @Test
-    void testGivenErrorNotValidWhenIsNullThenIsFalse() {
-        assertThat(Error.NOT_VALID.isNull(), is(false));
+    public void testGivenNullErrorWhenIsNullThenTrue() {
+        assertThat(Error.NULL.isNull(), is(true));
+    }
+
+    @Test
+    public void testGivenNotNullErrorWhenIsNullThenFalse() {
+        assertThat(Error.NOT_OWNER.isNull(), is(false));
     }
 
 }

@@ -1,7 +1,8 @@
 package usantatecla.tictactoe.models;
 
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 public class Game {
 
@@ -9,82 +10,65 @@ public class Game {
     private Turn turn;
 
     public Game() {
-        this.reset();
-    }
-
-    public void reset() {
         this.board = new Board();
         this.turn = new Turn(this.board);
     }
 
-    public void setUsers(int users) {
-        this.turn.setUsers(users);
+    public void reset() {
+        this.board.reset();
+        this.turn.reset();
     }
 
-    public boolean isBoardComplete() {
-        return this.board.isCompleted();
+    public void next() {
+        this.turn.next();
     }
 
-    public boolean isUser() {
-        return this.turn.isUser();
-    }
-
-    public Error put(Coordinate coordinate) {
-        Error error = this.turn.put(coordinate);
-        next(error);
-        return error;
-    }
-
-    public Error move(Coordinate origin, Coordinate target) {
-        Error error = this.turn.move(origin, target);
-        next(error);
-        return error;
-    }
-
-    private void next(Error error) {
-        if (error.isNull() && !this.board.isTicTacToe(this.turn.getToken())) {
-            this.turn.next();
-        }
-    }
-
-    int getActive() {
-        return this.turn.getActivePlayer();
-    }
-
-    int getUsers() {
-        return this.turn.getUsers();
+    public Color getActiveColor() {
+        return this.turn.getActiveColor();
     }
 
     public boolean isTicTacToe() {
-        return this.board.isTicTacToe(this.turn.getToken());
+        return this.board.isTicTacToe(this.turn.getActiveColor());
     }
 
-    public Token getToken(Coordinate coordinate) {
-        return this.board.getToken(coordinate);
+    public Color getColor(Coordinate coordinate) {
+        return this.board.getColor(coordinate);
     }
 
-    public Token getToken() {
-        return this.turn.getToken();
+    public boolean areAllTokensOnBoard() {
+        return this.turn.areAllTokensOnBoard();
     }
 
-    char[] getBoardCharacterArray() {
-        return this.board.toCharacterArray();
+    public void putToken(Coordinate coordinate) {
+        this.turn.putToken(coordinate);
     }
 
-    public int getMaxPlayers() {
-        return Turn.NUMBER_PLAYERS;
+    public Error getPutTokenError(Coordinate coordinate) {
+        return this.turn.getPutTokenError(coordinate);
+    }
+
+    public void moveToken(Coordinate origin, Coordinate target) {
+        this.turn.moveToken(origin, target);
+    }
+
+    public Error getOriginMoveTokenError(Coordinate coordinate) {
+        return this.turn.getOriginMoveTokenError(coordinate);
+    }
+
+    public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+        return this.turn.getTargetMoveTokenError(origin, target);
     }
 
     public Memento createMemento() {
-        return new Memento(this);
+        return new Memento(this.board.toCharacterArray(),this.turn.getActiveColor());
     }
 
     public void setMemento(Memento memento) {
-        this.turn.set(memento.getTurn().getToken().ordinal());
+        this.turn.setActivePlayer(memento.getActiveColor().ordinal());
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
-                this.board.put(coordinate, memento.getBoard().getToken(coordinate));
+                this.board.putToken(coordinate, memento.getBoard().getColor(coordinate));
             }
         }
     }
@@ -104,11 +88,8 @@ public class Game {
         } else if (!board.equals(other.board))
             return false;
         if (turn == null) {
-            if (other.turn != null)
-                return false;
-        } else if (!turn.equals(other.turn))
-            return false;
-        return true;
+            return other.turn == null;
+        } else return turn.equals(other.turn);
     }
 
 }

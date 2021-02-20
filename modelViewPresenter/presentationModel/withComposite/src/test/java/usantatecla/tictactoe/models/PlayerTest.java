@@ -2,66 +2,120 @@ package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
-import usantatecla.tictactoe.types.Token;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class PlayerTest {
 
-    private Player player;
-    private Board board;
+    private final Color COLOR = Color.O;
+    private PlayerBuilder playerBuilder;
 
     @BeforeEach
-    void before() {
-        this.board = new Board();
-        this.player = new Player(Token.X, this.board);
+    public void BeforeEach() {
+        this.playerBuilder = new PlayerBuilder().color(this.COLOR);
     }
 
     @Test
-    void testGivenNewPlayerAndNewBoardWhenPutCoordinateThenIsErrorNull() {
-        assertThat(this.player.put(new Coordinate(0, 0)), is(Error.NULL));
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenTrue() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "   ",
+                " O "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
-    void testGivenNewPlayerAndBoardWithXTokenInCoordinateWhenPutCoordinateThenIsErrorNotEmpty() {
-        Coordinate coordinate = new Coordinate(0, 0);
-        this.board.put(coordinate, Token.X);
-        assertThat(this.player.put(coordinate), is(Error.NOT_EMPTY));
+    public void testGivenPlayerWhenAreAllTokensOnBoardThenFalse() {
+        Player player = this.playerBuilder.build();
+        assertThat(player.areAllTokensOnBoard(), is(false));
     }
 
     @Test
-    void testGivenNewPlayerAndNewBoardWhenMoveOriginToTargetThenIsErrorNotOwner() {
-        assertThat(this.player.move(new Coordinate(0, 0), new Coordinate(0, 1)), is(Error.NOT_OWNER));
+    public void testGivenNewPlayerWhenAreAllTokensOnBoardThenReturnTrue() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
-    void testGivenNewPlayerAndBoardWithXOriginWhenMoveOriginToOriginThenIsErrorSameCoordinates() {
-        Coordinate origin = new Coordinate(0, 0);
-        this.board.put(origin, Token.X);
-        assertThat(this.player.move(origin, origin), is(Error.SAME_COORDINATES));
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNULL() {
+        Coordinate coordinate = new Coordinate(1, 1);
+        Player player = this.playerBuilder.build();
+        assertThat(player.getPutTokenError(coordinate), is(Error.NULL));
     }
 
     @Test
-    void testGivenNewPlayerAndBoardWithXOriginXTargetWhenMoveOriginToTargetThenIsErrorNotEmpty() {
-        Coordinate origin = new Coordinate(0, 0);
-        Coordinate target = new Coordinate(0, 1);
-        this.board.put(origin, Token.X);
-        this.board.put(target, Token.X);
-        assertThat(this.player.move(origin, target), is(Error.NOT_EMPTY));
+    public void testGivenPlayerWhenGetPutTokenErrorThenErrorNotEmpty() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getPutTokenError(new Coordinate(1, 1)), is(Error.NOT_EMPTY));
     }
 
     @Test
-    void testGivenNewPlayerAndBoardWithXOriginWhenMoveOriginToTargetThenIsErrorNull() {
-        Coordinate origin = new Coordinate(0, 0);
-        this.board.put(origin, Token.X);
-        assertThat(this.player.move(origin, new Coordinate(0, 1)), is(Error.NULL));
+    public void testGivenPlayerWhenGetOriginMoveTokenErrorThenErrorNotOwner() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " X ",
+                "   "
+        ).build();
+        assertThat(player.getOriginMoveTokenError(new Coordinate(1, 1)), is(Error.NOT_OWNER));
     }
 
     @Test
-    void testGivenXTokenPlayerWhenGetTokenThenIsXToken() {
-        assertThat(this.player.getToken(), is(Token.X));
+    public void testGivenNewPlayerWhenGetOriginMoveTokenErrorThenReturnErrorNull() {
+        Player player = this.playerBuilder.rows(
+                "OO ",
+                "O  ",
+                "   "
+        ).build();
+        assertThat(player.getOriginMoveTokenError(new Coordinate(0, 1)), is(Error.NULL));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenNoError() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(0, 0)), is(Error.NULL));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorNotEmpty() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " OO",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 2)), is(Error.NOT_EMPTY));
+    }
+
+    @Test
+    public void testGivenPlayerWhenGetTargetMoveTokenErrorThenErrorSameCoordinates() {
+        Player player = this.playerBuilder.rows(
+                "   ",
+                " O ",
+                "   "
+        ).build();
+        assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 1)), is(Error.SAME_COORDINATES));
+    }
+
+    @Test
+    public void testGivenNewPlayerWhenGetColorThenReturnTheColor() {
+        Player player = this.playerBuilder.build();
+        assertThat(player.getColor(), is(Color.O));
     }
 
 }

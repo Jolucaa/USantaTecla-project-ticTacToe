@@ -2,7 +2,7 @@ package usantatecla.tictactoe.views;
 
 import usantatecla.tictactoe.controllers.PlayController;
 
-abstract class Command extends usantatecla.utils.Command {
+public abstract class Command extends usantatecla.utils.models.Command {
 
     protected PlayController playController;
 

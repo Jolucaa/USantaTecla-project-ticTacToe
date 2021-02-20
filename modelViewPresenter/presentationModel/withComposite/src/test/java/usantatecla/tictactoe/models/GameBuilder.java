@@ -1,75 +1,55 @@
 package usantatecla.tictactoe.models;
 
-import java.util.ArrayList;
+import usantatecla.tictactoe.types.Color;
+import usantatecla.tictactoe.types.Coordinate;
+
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class GameBuilder {
 
-    private int users;
-    private final List<String> strings;
-    private final List<Coordinate> xCoordinates;
-    private final List<Coordinate> oCoordinates;
+    private String[] rows;
+    private Color color;
+    private Game game;
 
     public GameBuilder() {
-        this.users = 0;
-        this.strings = new ArrayList<>();
-        this.xCoordinates = new ArrayList<>();
-        this.oCoordinates = new ArrayList<>();
-    }
-
-    public GameBuilder users(int users) {
-        assert users <= Turn.NUMBER_PLAYERS && users >= 0;
-        this.users = users;
-        return this;
+        this.rows = new String[]{
+            "   ",
+            "   ",
+            "   "};
     }
 
     public GameBuilder rows(String... rows) {
-        assert rows.length == 3;
-        for (String row : rows) {
-            assert Pattern.matches("[XO ]{3}", row);
-            this.strings.add(row);
-        }
+        this.rows = rows;
         return this;
     }
 
-    Game build() {
-        Game game = new Game();
-        game.setUsers(this.users);
-        if (this.strings.size() != 0) {
-            readRows();
-            putCoordinates(game);
-        }
-        return game;
+    public GameBuilder turn(Color color) {
+        this.color = color;
+        return this;
     }
 
-    private void readRows() {
-        for (int i = 0; i < strings.size(); i++) {
-            for (int j = 0; j < strings.get(i).length(); j++) {
-                setCoordinate(strings.get(i).charAt(j), i, j);
-            }
+    public Game build() {
+        this.game = new Game();
+        this.buildBoard();
+        if (this.color != null && this.game.getActiveColor() != this.color) {
+            this.game.next();
         }
+        return this.game;
     }
 
-    private void setCoordinate(char token, int row, int column) {
-
-        if (token == 'X') {
-            this.xCoordinates.add(new Coordinate(row, column));
-        } else if (token == 'O') {
-            this.oCoordinates.add(new Coordinate(row, column));
-        }
+    private void buildBoard() {
+        Board board = new BoardBuilder().rows(this.rows).build();
+        this.putTokens(board, Color.X);
+        this.game.next();
+        this.putTokens(board, Color.O);
     }
 
-    private void putCoordinates(Game game) {
-        assert this.xCoordinates.size() <= this.oCoordinates.size() + 1 &&
-                this.oCoordinates.size() <= this.xCoordinates.size();
-
-        for (int i = 0; i < xCoordinates.size(); i++) {
-            game.put(xCoordinates.get(i));
-            if (i < oCoordinates.size()) {
-                game.put(oCoordinates.get(i));
-            }
+    private void putTokens(Board board, Color color) {
+        List<Coordinate> coordinates = board.getCoordinates(color);
+        while (coordinates.size() > 0) {
+            Coordinate coordinate = coordinates.remove(0);
+            this.game.putToken(coordinate);
         }
     }
-
+    
 }
