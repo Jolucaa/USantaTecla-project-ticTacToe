@@ -9,9 +9,7 @@ import java.util.regex.Pattern;
 
 public class SessionBuilder {
     private Session session;
-    private StateValue stateValue;
     private List<String> rows;
-
 
     public SessionBuilder() {
         this.rows = new ArrayList<>();

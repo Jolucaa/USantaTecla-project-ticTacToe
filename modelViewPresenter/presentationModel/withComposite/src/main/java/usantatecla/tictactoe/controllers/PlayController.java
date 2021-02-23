@@ -41,12 +41,8 @@ public class PlayController extends Controller implements AcceptorController {
         return this.actionController.isTicTacToe();
     }
 
-    public void put(Coordinate coordinate) {
-        this.actionController.put(coordinate);
-    }
-
-    public void move(Coordinate origin, Coordinate target) {
-        this.actionController.move(origin,target);
+    public void next() {
+        this.actionController.next();
     }
 
     public Error getOriginMoveTokenError(Coordinate coordinate) {
@@ -58,7 +54,7 @@ public class PlayController extends Controller implements AcceptorController {
     }
 
     public void moveToken(Coordinate origin, Coordinate target) {
-        this.actionController.move(origin,target);
+        this.actionController.moveToken(origin,target);
 
     }
 

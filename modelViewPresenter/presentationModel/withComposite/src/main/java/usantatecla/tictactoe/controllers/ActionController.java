@@ -19,21 +19,27 @@ class ActionController extends Controller  {
         return this.session.isTicTacToe();
     }
 
-    public Error put(Coordinate coordinate) {
-        Error error = this.session.getPutTokenError(coordinate);
-        if (error.isNull() && !this.session.isTicTacToe()) {
-            this.session.putToken(coordinate);
-        }
-        return error;
+    public void next() {
+        this.session.next();
     }
 
-    public Error move(Coordinate origin, Coordinate target) {
-        Error error = this.session.getTargetMoveTokenError(origin, target);
-        if (error.isNull() && !this.session.isTicTacToe()) {
-            this.session.moveToken(origin,target);
-            this.session.nextState();
-        }
-        return error;
+    public Color getActiveColor() {
+        return this.session.getActiveColor();
+    }
+
+    public void putToken(Coordinate coordinate) {
+        this.session.putToken(new Coordinate(coordinate.getRow(), coordinate.getColumn()));
+    }
+
+    public Error getPutTokenError(Coordinate coordinate) {
+        return this.session.getPutTokenError(coordinate);
+    }
+
+    public void moveToken(Coordinate origin, Coordinate target) {
+        this.session.moveToken(
+                new Coordinate(origin.getRow(), origin.getColumn()),
+                new Coordinate(target.getRow(), target.getColumn())
+        );
     }
 
     public Error getOriginMoveTokenError(Coordinate coordinate) {
@@ -41,18 +47,7 @@ class ActionController extends Controller  {
     }
 
     public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
-        return this.session.getTargetMoveTokenError(origin,target);
+        return this.session.getTargetMoveTokenError(origin, target);
     }
-
-    public Error getPutTokenError(Coordinate coordinate) {
-        return this.session.getPutTokenError(coordinate);
-    }
-
-    public void putToken(Coordinate coordinate) {
-        this.session.putToken(coordinate);
-    }
-
-    public Color getActiveColor() {
-        return this.session.getActiveColor();
-    }
+    
 }
