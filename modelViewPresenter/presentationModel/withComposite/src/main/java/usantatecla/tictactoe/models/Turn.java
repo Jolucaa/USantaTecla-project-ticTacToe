@@ -35,8 +35,6 @@ public class Turn {
         return this.players[this.activePlayer];
     }
 
-    void setActivePlayer(int activePlayer){ this.activePlayer = activePlayer; }
-
     Color getActiveColor() {
         return this.getActivePlayer().getColor();
     }

@@ -4,50 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Registry {
+	
+	private List<Memento> mementos;
+	private Game game;
+	private int firstPrevious;
+	
+	Registry(Game game) {
+		this.game = game;
+		this.reset();
+	}
 
-    private List<Memento> mementos;
-    private Game game;
-    private int firstPrevious;
+	void reset() {
+		this.firstPrevious = 0;
+		this.mementos = new ArrayList<>();
+		this.mementos.add(this.firstPrevious, this.game.createMemento());
+	}
 
-    Registry(Game game) {
-        this.game = game;
-        this.reset();
-    }
+	void register() {
+		for (int i = 0; i < this.firstPrevious; i++) {
+			this.mementos.remove(0);
+		}
+		this.firstPrevious = 0;
+		this.mementos.add(this.firstPrevious, this.game.createMemento());
+	}
 
-     void reset() {
-        this.firstPrevious = 0;
-        this.mementos = new ArrayList<>();
-        this.mementos.add(this.firstPrevious, this.game.createMemento());
-    }
+	void undo() {
+		assert this.undoable();
 
-    void register() {
-        for (int i = 0; i < this.firstPrevious; i++) {
-            this.mementos.remove(0);
-            this.firstPrevious--; // TODO Diferente a Mastermind (?)
-        }
-        this.mementos.add(this.firstPrevious, this.game.createMemento());
-    }
+		this.firstPrevious++;
+		this.game.setMemento(this.mementos.get(this.firstPrevious));
+	}
 
-    void undo() {
-        assert this.undoable();
+	void redo() {
+		assert this.redoable();
 
-        this.firstPrevious++;
-        this.game.setMemento(this.mementos.get(this.firstPrevious));
-    }
+		this.firstPrevious--;
+		this.game.setMemento(this.mementos.get(this.firstPrevious));
+	}
 
-    void redo() {
-        assert this.redoable();
+	boolean undoable() {
+		return this.firstPrevious < this.mementos.size() - 1;
+	}
 
-        this.firstPrevious--;
-        this.game.setMemento(this.mementos.get(this.firstPrevious));
-    }
-
-    boolean undoable() {
-        return this.firstPrevious < this.mementos.size() - 1;
-    }
-
-    boolean redoable() {
-        return this.firstPrevious >= 1;
-    }
+	boolean redoable() {
+		return this.firstPrevious >= 1;
+	}
 
 }

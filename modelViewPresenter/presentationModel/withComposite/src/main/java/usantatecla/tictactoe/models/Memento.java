@@ -8,10 +8,9 @@ class Memento {
     private Color activeColor;
     private char[] boardColors;
 
-    // TODO Pasar Board por parámetro y hacer la transformación aquí
-    public Memento(char[] boardColors, Color activeColor ) {
-        this.boardColors = boardColors;
-        this.activeColor = activeColor;
+    Memento(Board board, Turn turn) {
+        this.boardColors = board.toCharacterArray();
+        this.activeColor = turn.getActiveColor();
     }
 
     Board getBoard() {
@@ -19,16 +18,32 @@ class Memento {
         int colorsCount = 0;
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                board.putToken(new Coordinate(i, j), Color.parse(boardColors[colorsCount++]));
+                board.putToken(new Coordinate(i, j), Color.get(this.boardColors[colorsCount++]));
             }
         }
         return board;
     }
 
-    Color getActiveColor() {
-        return this.activeColor;
+    Turn getTurn(Board board) {
+        Turn turn = new Turn(board);
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                Color color = board.getColor(coordinate);
+                if (!color.isNull()) {
+                    this.setTurn(turn, color);
+                    turn.putToken(coordinate);
+                }
+            }
+        }
+        this.setTurn(turn, this.activeColor);
+        return turn;
     }
 
-    // TODO Método getPlayerPutTokens(Color)
+    private void setTurn(Turn turn, Color color) {
+        if (turn.getActiveColor() != color) {
+            turn.next();
+        }
+    }
 
 }

@@ -19,6 +19,7 @@ public class Session {
     public void reset() {
         this.game.reset();
         this.state.reset();
+        this.registry.reset();
     }
 
     public void nextState() {

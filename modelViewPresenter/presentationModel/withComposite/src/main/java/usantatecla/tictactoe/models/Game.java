@@ -4,70 +4,68 @@ import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
-public class Game {
+class Game {
 
     private Board board;
     private Turn turn;
 
-    public Game() {
+    Game() {
         this.board = new Board();
         this.turn = new Turn(this.board);
     }
 
-    public void reset() {
+    void reset() {
         this.board.reset();
         this.turn.reset();
     }
 
-    public void next() {
+    Memento createMemento() {
+        return new Memento(this.board, this.turn);
+    }
+
+    void setMemento(Memento memento) {
+        this.board = memento.getBoard();
+        this.turn = memento.getTurn(this.board);
+    }
+
+    void next() {
         this.turn.next();
     }
 
-    public Color getActiveColor() {
+    Color getActiveColor() {
         return this.turn.getActiveColor();
     }
 
-    public boolean isTicTacToe() {
+    boolean isTicTacToe() {
         return this.board.isTicTacToe(this.turn.getActiveColor());
     }
 
-    public Color getColor(Coordinate coordinate) {
+    Color getColor(Coordinate coordinate) {
         return this.board.getColor(coordinate);
     }
 
-    public boolean areAllTokensOnBoard() {
+    boolean areAllTokensOnBoard() {
         return this.turn.areAllTokensOnBoard();
     }
 
-    public void putToken(Coordinate coordinate) {
+    void putToken(Coordinate coordinate) {
         this.turn.putToken(coordinate);
     }
 
-    public Error getPutTokenError(Coordinate coordinate) {
+    Error getPutTokenError(Coordinate coordinate) {
         return this.turn.getPutTokenError(coordinate);
     }
 
-    public void moveToken(Coordinate origin, Coordinate target) {
+    void moveToken(Coordinate origin, Coordinate target) {
         this.turn.moveToken(origin, target);
     }
 
-    public Error getOriginMoveTokenError(Coordinate coordinate) {
+    Error getOriginMoveTokenError(Coordinate coordinate) {
         return this.turn.getOriginMoveTokenError(coordinate);
     }
 
-    public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
+    Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
         return this.turn.getTargetMoveTokenError(origin, target);
-    }
-
-    public Memento createMemento() {
-        return new Memento(this.board.toCharacterArray(),this.turn.getActiveColor());
-    }
-
-    public void setMemento(Memento memento) {
-        this.turn.setActivePlayer(memento.getActiveColor().ordinal());
-        this.board = memento.getBoard();
-        // TODO Problema gordo (putTokens de Player no aumentaría)
-
     }
 
     @Override

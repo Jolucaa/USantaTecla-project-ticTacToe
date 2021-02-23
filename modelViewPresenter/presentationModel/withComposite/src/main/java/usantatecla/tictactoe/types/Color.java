@@ -12,11 +12,7 @@ public enum Color {
         return Color.values()[ordinal];
     }
 
-    public boolean isNull() {
-        return this == Color.NULL;
-    }
-
-    public static Color parse(char character) {
+    public static Color get(char character) {
         switch (character) {
             case 'X':
                 return Color.X;
@@ -26,5 +22,9 @@ public enum Color {
                 return Color.NULL;
         }
     }
-    
+
+    public boolean isNull() {
+        return this == Color.NULL;
+    }
+
 }
