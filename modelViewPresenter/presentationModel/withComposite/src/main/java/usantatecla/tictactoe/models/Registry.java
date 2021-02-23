@@ -23,17 +23,21 @@ class Registry {
     void register() {
         for (int i = 0; i < this.firstPrevious; i++) {
             this.mementos.remove(0);
-            this.firstPrevious--;
+            this.firstPrevious--; // TODO Diferente a Mastermind (?)
         }
         this.mementos.add(this.firstPrevious, this.game.createMemento());
     }
 
     void undo() {
+        assert this.undoable();
+
         this.firstPrevious++;
         this.game.setMemento(this.mementos.get(this.firstPrevious));
     }
 
     void redo() {
+        assert this.redoable();
+
         this.firstPrevious--;
         this.game.setMemento(this.mementos.get(this.firstPrevious));
     }

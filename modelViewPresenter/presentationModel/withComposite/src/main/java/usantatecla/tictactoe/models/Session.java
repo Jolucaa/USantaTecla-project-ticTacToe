@@ -6,9 +6,9 @@ import usantatecla.tictactoe.types.Error;
 
 public class Session {
 
+    private State state;
     private Game game;
     private Registry registry;
-    private State state;
 
     public Session() {
         this.state = new State();
@@ -16,21 +16,42 @@ public class Session {
         this.registry = new Registry(game);
     }
 
-    public StateValue getValueState() {
-        return this.state.getValueState();
-    }
-
-    public Color getColor(Coordinate coordinate) {
-        return this.game.getColor(coordinate);
+    public void reset() {
+        this.game.reset();
+        this.state.reset();
     }
 
     public void nextState() {
         this.state.next();
     }
 
-    public void reset() {
-        this.game.reset();
-        this.state.reset();
+    public StateValue getValueState() {
+        return this.state.getValueState();
+    }
+
+    public boolean undoable() {
+        return this.registry.undoable();
+    }
+
+    public boolean redoable() {
+        return this.registry.redoable();
+    }
+
+    public void undo() {
+        this.registry.undo();
+    }
+
+    public void redo() {
+        this.registry.redo();
+    }
+
+    public void next() {
+        this.game.next();
+        this.registry.register();
+    }
+
+    public Color getColor(Coordinate coordinate) {
+        return this.game.getColor(coordinate);
     }
 
     public boolean areAllTokensOnBoard() {
@@ -51,8 +72,10 @@ public class Session {
 
     public void putToken(Coordinate coordinate) {
         this.game.putToken(coordinate);
-        this.game.next();
-        this.registry.register();
+    }
+
+    public void moveToken(Coordinate origin, Coordinate target) {
+        this.game.moveToken(origin,target);
     }
 
     public Error getTargetMoveTokenError(Coordinate origin, Coordinate target) {
@@ -63,30 +86,4 @@ public class Session {
         return this.game.getOriginMoveTokenError(coordinate);
     }
 
-    public void move(Coordinate origin, Coordinate target) {
-        this.game.moveToken(origin,target);
-        this.game.next();
-        this.registry.register();
-    }
-
-    public void undo() {
-        this.registry.undo();
-    }
-
-    public boolean undoable() {
-        return this.registry.undoable();
-    }
-
-    public void redo() {
-        this.registry.redo();
-    }
-
-    public boolean redoable() {
-        return this.registry.redoable();
-    }
-
-
-    public void next() {
-        this.game.next();
-    }
 }

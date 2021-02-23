@@ -65,12 +65,9 @@ public class Game {
 
     public void setMemento(Memento memento) {
         this.turn.setActivePlayer(memento.getActiveColor().ordinal());
-        for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                Coordinate coordinate = new Coordinate(i, j);
-                this.board.putToken(coordinate, memento.getBoard().getColor(coordinate));
-            }
-        }
+        this.board = memento.getBoard();
+        // TODO Problema gordo (putTokens de Player no aumentaría)
+
     }
 
     @Override

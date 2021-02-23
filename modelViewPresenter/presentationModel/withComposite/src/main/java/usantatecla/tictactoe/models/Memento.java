@@ -8,6 +8,7 @@ class Memento {
     private Color activeColor;
     private char[] boardColors;
 
+    // TODO Pasar Board por parámetro y hacer la transformación aquí
     public Memento(char[] boardColors, Color activeColor ) {
         this.boardColors = boardColors;
         this.activeColor = activeColor;
@@ -27,5 +28,7 @@ class Memento {
     Color getActiveColor() {
         return this.activeColor;
     }
+
+    // TODO Método getPlayerPutTokens(Color)
 
 }

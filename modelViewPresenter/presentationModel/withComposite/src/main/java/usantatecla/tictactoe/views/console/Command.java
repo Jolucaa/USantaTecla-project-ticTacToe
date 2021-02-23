@@ -1,4 +1,4 @@
-package usantatecla.tictactoe.views;
+package usantatecla.tictactoe.views.console;
 
 import usantatecla.tictactoe.controllers.PlayController;
 

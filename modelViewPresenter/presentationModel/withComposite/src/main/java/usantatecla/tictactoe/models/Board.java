@@ -97,7 +97,7 @@ class Board {
     }
 
     char[] toCharacterArray() {
-        char[] characters = new char[9];
+        char[] characters = new char[Coordinate.DIMENSION * Coordinate.DIMENSION];
         int charactersCount = 0;
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {

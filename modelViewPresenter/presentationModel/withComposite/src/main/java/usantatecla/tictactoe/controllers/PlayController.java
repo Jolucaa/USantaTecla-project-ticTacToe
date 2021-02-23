@@ -17,6 +17,22 @@ public class PlayController extends Controller implements AcceptorController {
         this.redoController = new RedoController(session);
     }
 
+    public void undo(){
+        this.undoController.undo();
+    }
+
+    public boolean undoable(){
+        return this.undoController.undoable();
+    }
+
+    public void redo(){
+        this.redoController.redo();
+    }
+
+    public boolean redoable(){
+        return this.redoController.redoable();
+    }
+
     public boolean areAllTokensOnBoard() {
         return this.actionController.areAllTokensOnBoard();
     }
@@ -41,11 +57,6 @@ public class PlayController extends Controller implements AcceptorController {
         return this.actionController.getTargetMoveTokenError(origin, target);
     }
 
-    @Override
-    public void accept(ControllersVisitor controllersVisitor) {
-        controllersVisitor.visit(this);
-    }
-
     public void moveToken(Coordinate origin, Coordinate target) {
         this.actionController.move(origin,target);
 
@@ -63,20 +74,8 @@ public class PlayController extends Controller implements AcceptorController {
         return this.actionController.getActiveColor();
     }
 
-    public void undo(){
-        this.undoController.undo();
-    }
-
-    public boolean undoable(){
-        return this.undoController.undoable();
-    }
-
-    public void redo(){
-        this.redoController.redo();
-    }
-
-    public boolean redoable(){
-        return this.redoController.redoable();
+    public void accept(ControllersVisitor controllersVisitor) {
+        controllersVisitor.visit(this);
     }
 
 }

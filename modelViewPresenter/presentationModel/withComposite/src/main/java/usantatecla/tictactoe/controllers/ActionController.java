@@ -5,7 +5,7 @@ import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
-public class ActionController extends Controller  {
+class ActionController extends Controller  {
 
     public ActionController(Session session) {
         super(session);
@@ -30,7 +30,7 @@ public class ActionController extends Controller  {
     public Error move(Coordinate origin, Coordinate target) {
         Error error = this.session.getTargetMoveTokenError(origin, target);
         if (error.isNull() && !this.session.isTicTacToe()) {
-            this.session.move(origin,target);
+            this.session.moveToken(origin,target);
             this.session.nextState();
         }
         return error;

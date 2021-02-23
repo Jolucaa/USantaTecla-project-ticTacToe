@@ -22,7 +22,7 @@ public enum Message {
 
     @Override
     public String toString() {
-        return message;
+        return this.message;
     }
     
 }

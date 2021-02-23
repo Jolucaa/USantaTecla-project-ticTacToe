@@ -1,6 +1,6 @@
 package usantatecla.utils.views;
 
-import usantatecla.tictactoe.views.Command;
+import usantatecla.tictactoe.views.console.Command;
 import usantatecla.utils.models.ClosedInterval;
 
 import java.util.ArrayList;
