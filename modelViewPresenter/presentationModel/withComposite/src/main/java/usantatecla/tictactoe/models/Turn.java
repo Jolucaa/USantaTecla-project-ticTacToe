@@ -31,6 +31,14 @@ public class Turn {
         }
     }
 
+    void setActivePlayer(int activePlayer) {
+        this.activePlayer = activePlayer;
+	}
+
+	void setPlayerPutTokens(Color color, int playerPutTokens) {
+        this.players[color.ordinal()].set(playerPutTokens);
+	}
+
     Player getActivePlayer() {
         return this.players[this.activePlayer];
     }

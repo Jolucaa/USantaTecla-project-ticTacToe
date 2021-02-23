@@ -25,7 +25,11 @@ class Game {
 
     void setMemento(Memento memento) {
         this.board = memento.getBoard();
-        this.turn = memento.getTurn(this.board);
+        this.turn = new Turn(this.board);
+        this.turn.setActivePlayer(memento.getActivePlayer());
+        for (Color color : Color.getAll()) {
+            this.turn.setPlayerPutTokens(color, memento.getPlayerPutTokens(color));
+        }
     }
 
     void next() {

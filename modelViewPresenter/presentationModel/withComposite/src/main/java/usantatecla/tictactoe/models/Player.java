@@ -9,7 +9,6 @@ class Player {
     private Color color;
     private Board board;
     private int putTokens;
-    // TODO Necesario set de putTokens para el memento
 
     Player(Color color, Board board) {
         assert !color.isNull();
@@ -62,5 +61,9 @@ class Player {
     Color getColor() {
         return this.color;
     }
+
+	void set(int putTokens) {
+        this.putTokens = putTokens;
+	}
     
 }

@@ -5,12 +5,12 @@ import usantatecla.tictactoe.types.Coordinate;
 
 class Memento {
 
-    private Color activeColor;
+    private int activePlayer;
     private char[] boardColors;
 
     Memento(Board board, Turn turn) {
         this.boardColors = board.toCharacterArray();
-        this.activeColor = turn.getActiveColor();
+        this.activePlayer = turn.getActiveColor().ordinal();
     }
 
     Board getBoard() {
@@ -24,26 +24,18 @@ class Memento {
         return board;
     }
 
-    Turn getTurn(Board board) {
-        Turn turn = new Turn(board);
-        for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                Coordinate coordinate = new Coordinate(i, j);
-                Color color = board.getColor(coordinate);
-                if (!color.isNull()) {
-                    this.setTurn(turn, color);
-                    turn.putToken(coordinate);
-                }
-            }
-        }
-        this.setTurn(turn, this.activeColor);
-        return turn;
+    int getActivePlayer() {
+        return this.activePlayer;
     }
 
-    private void setTurn(Turn turn, Color color) {
-        if (turn.getActiveColor() != color) {
-            turn.next();
+    int getPlayerPutTokens(Color color) {
+        int playerPutTokens = 0;
+        for (int i = 0; i < this.boardColors.length; i++) {
+            if (Color.get(this.boardColors[i]) == color) {
+                playerPutTokens++;
+            }
         }
+        return playerPutTokens;
     }
 
 }
