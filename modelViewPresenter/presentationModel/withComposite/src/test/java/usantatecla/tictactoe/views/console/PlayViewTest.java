@@ -41,7 +41,7 @@ public class PlayViewTest {
             when(this.playController.getActiveColor()).thenReturn(Color.O);
             when(this.session.isTicTacToe()).thenReturn(true);
             this.playView.interact(this.playController);
-            verify(this.console,times(2)).writeln("O player: You win!!! :-)");
+            verify(this.console).writeln("O player: You win!!! :-)");
         }
     }
 

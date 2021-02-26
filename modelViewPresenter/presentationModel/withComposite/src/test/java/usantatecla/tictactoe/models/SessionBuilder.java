@@ -3,56 +3,64 @@ package usantatecla.tictactoe.models;
 import usantatecla.tictactoe.types.Color;
 import usantatecla.tictactoe.types.Coordinate;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class SessionBuilder {
+    
+    private String[] rows;
+    private Color color;
     private Session session;
-    private List<String> rows;
+    private StateValue stateValue;
 
     public SessionBuilder() {
-        this.rows = new ArrayList<>();
+        this.rows = new String[]{
+            "   ",
+            "   ",
+            "   "};
     }
 
     public SessionBuilder rows(String... rows) {
-        assert rows.length == 3;
-        for (String row : rows) {
-            assert Pattern.matches("[XO ]{3}", row);
-            this.rows.add(row);
-        }
+        this.rows = rows;
+        return this;
+    }
+
+    public SessionBuilder turn(Color color) {
+        this.color = color;
+        return this;
+    }
+
+    public SessionBuilder state(StateValue stateValue) {
+        this.stateValue = stateValue;
         return this;
     }
 
     public Session build() {
         this.session = new Session();
-        if (!this.rows.isEmpty()) {
-            for (int i = 0; i < this.rows.size(); i++) {
-                String string = this.rows.get(i);
-                for (int j = 0; j < string.length(); j++) {
-                    Color color = this.getColor(string.charAt(j));
-                    if(this.getColor(string.charAt(j))!=Color.NULL){
-                        if(!this.session.getActiveColor().equals(color)){
-                            this.session.next();
-                        }
-                        this.session.putToken(new Coordinate(i, j));
-                    }
-                }
+        this.buildBoard();
+        if(this.stateValue != null) {
+            while (this.stateValue != this.session.getValueState()) {
+                this.session.nextState();
             }
         }
-
+        if (this.color != null && this.session.getActiveColor() != this.color) {
+            this.session.next();
+        }
         return this.session;
     }
 
-    private Color getColor(char character) {
-        Color result = Color.NULL;
-        for (int i = 0; i < Color.values().length - 1; i++) {
-            Color color = Color.values()[i];
-            if (color.name().equals("" + character)) {
-                result = color;
-            }
+    private void buildBoard() {
+        Board board = new BoardBuilder().rows(this.rows).build();
+        this.putTokens(board, Color.X);
+        this.session.next();
+        this.putTokens(board, Color.O);
+    }
+
+    private void putTokens(Board board, Color color) {
+        List<Coordinate> coordinates = board.getCoordinates(color);
+        while (coordinates.size() > 0) {
+            Coordinate coordinate = coordinates.remove(0);
+            this.session.putToken(coordinate);
         }
-        return result;
     }
 
 }
