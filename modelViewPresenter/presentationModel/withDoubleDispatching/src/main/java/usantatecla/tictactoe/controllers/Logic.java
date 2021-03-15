@@ -13,10 +13,10 @@ public class Logic {
     private State state;
     private Map<StateValue, Controller> controllers;
 
-    public Logic(Game game) {
+    public Logic() {
         this.state = new State();
-        this.game = game;
-        this.controllers = new HashMap<StateValue, Controller>();
+        this.game = new Game();
+        this.controllers = new HashMap<>();
         this.controllers.put(StateValue.INITIAL, new StartController(this.game, this.state));
         this.controllers.put(StateValue.IN_GAME, new PlayController(this.game, this.state));
         this.controllers.put(StateValue.RESUME, new ResumeController(this.game, this.state));

@@ -5,7 +5,7 @@ import usantatecla.tictactoe.controllers.ResumeController;
 import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.views.View;
 
-public class GraphicsView extends View {
+public class GraphicsView implements View {
 
     public void visit(StartController startController) {
     }

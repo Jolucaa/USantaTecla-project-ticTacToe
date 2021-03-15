@@ -14,18 +14,18 @@ public class GraphicsView extends usantatecla.tictactoe.views.View {
 	}
 
 	@Override
-	protected void start() {
+	public void start() {
 		this.startView.interact();
 	}
 
 	@Override
-	protected void play() {
+	public void play() {
 		this.startView.setVisible(false);
 		this.playView.interact();
 	}
 
 	@Override
-	protected boolean resume() {
+	public boolean resume() {
 		if (new ResumeView().isResumedGame()) {
 			this.game.reset();
 			return true;

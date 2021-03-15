@@ -10,22 +10,25 @@ abstract class TicTacToe {
 
     private Game game;
     private View view;
-    private StartController startController;
-    private PlayController playController;
-    private ResumeController resumeController;
+    protected StartController startController;
+    protected PlayController playController;
+    protected ResumeController resumeController;
 
     protected TicTacToe() {
         this.game = new Game();
         this.startController = new StartController(this.game);
         this.playController = new PlayController(this.game);
         this.resumeController = new ResumeController(this.game);
-        this.view = this.createView(this.startController, this.playController, this.resumeController);
+        this.view = this.createView();
     }
 
-    protected abstract View createView(StartController startController, PlayController playController, ResumeController resumeController);
+    protected abstract View createView();
 
     protected void play() {
-        this.view.interact();
+        do {
+            this.view.start();
+            this.view.play();
+        } while (this.view.resume());
     }
 
 }

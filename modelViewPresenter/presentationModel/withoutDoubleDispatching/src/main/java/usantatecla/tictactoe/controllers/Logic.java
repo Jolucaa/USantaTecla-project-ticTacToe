@@ -13,9 +13,9 @@ public class Logic {
     private State state;
     private Map<StateValue, Controller> controllers;
 
-    public Logic(Game game) {
+    public Logic() {
         this.state = new State();
-        this.game = game;
+        this.game = new Game();
         this.controllers = new HashMap<StateValue, Controller>();
         this.controllers.put(StateValue.INITIAL, new StartController(this.game, this.state));
         this.controllers.put(StateValue.IN_GAME, new PlayController(this.game, this.state));

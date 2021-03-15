@@ -1,19 +1,16 @@
 package usantatecla.tictactoe;
 
-import usantatecla.tictactoe.controllers.PlayController;
-import usantatecla.tictactoe.controllers.ResumeController;
-import usantatecla.tictactoe.controllers.StartController;
 import usantatecla.tictactoe.views.console.ConsoleView;
 
 class ConsoleTicTacToe extends TicTacToe {
 
-	@Override
-	protected ConsoleView createView(StartController startController, PlayController playController, ResumeController resumeController) {
-		return new ConsoleView(startController, playController, resumeController);
-	}
+    @Override
+    protected ConsoleView createView() {
+        return new ConsoleView(this.startController, this.playController, this.resumeController);
+    }
 
-	public static void main(String[] args) {
-		new ConsoleTicTacToe().play();
-	}
+    public static void main(String[] args) {
+        new ConsoleTicTacToe().play();
+    }
 
 }

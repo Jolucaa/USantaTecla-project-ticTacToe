@@ -16,7 +16,10 @@ public abstract class TicTacToe {
     protected abstract View createView(Game game);
 
     protected void play() {
-        this.view.interact();
+        do {
+            this.view.start();
+            this.view.play();
+        } while (this.view.resume());
     }
 
 }

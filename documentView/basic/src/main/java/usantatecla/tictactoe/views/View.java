@@ -15,11 +15,16 @@ public class View extends WithGameView {
         this.resumeView = new ResumeView(this.game);
     }
 
-    public void interact() {
-        do {
-            this.startView.interact();
-            this.playView.interact();
-        } while (this.resumeView.interact());
+    public void start() {
+        this.startView.interact();
     }
-    
+
+    public void play() {
+        this.playView.interact();
+    }
+
+    public boolean resume() {
+        return this.resumeView.interact();
+    }
+
 }
