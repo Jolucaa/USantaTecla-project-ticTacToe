@@ -1,5 +1,6 @@
 package usantatecla.utils.models;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,10 +19,6 @@ public class SquareBoundedCoordinateTest {
         };
     }
 
-    public int getDimension() {
-        return SquareBoundedCoordinateTest.DIMENSION;
-    }
-
     public SquareBoundedCoordinate getCoordinate(int row, int column) {
         return new SquareBoundedCoordinate(row, column) {
             @Override
@@ -31,9 +28,14 @@ public class SquareBoundedCoordinateTest {
         };
     }
 
+    public int getDimension() {
+        return SquareBoundedCoordinateTest.DIMENSION;
+    }
+
     @Test
     public void testGivenSquaredBoundedCoordinateWhenNewThenNull() {
         assertThat(this.getNullCoordinate().isNull(), is(true));
+        assertThat(this.getCoordinate(1,1).isNull(), is(false));
     }
 
     @Test
@@ -43,6 +45,13 @@ public class SquareBoundedCoordinateTest {
         SquareBoundedCoordinate coordinate = this.getCoordinate(row, column);
         assertThat(coordinate.getRow(), is(row));
         assertThat(coordinate.getColumn(), is(column));
+    }
+
+    @Test
+    public void testGivenSquaredBoundedCoordinateWhenWithIncorrectValuesThenNotValid() {
+        int row = -1;
+        int column = this.getDimension() + 1;
+        Assertions.assertThrows(AssertionError.class, () -> this.getCoordinate(row, column));
     }
 
     @Test
@@ -59,10 +68,10 @@ public class SquareBoundedCoordinateTest {
 
     @Test
     public void testGivenSquaredBoundedCoordinateWhenGetLimitsThenCorrect() {
-        int row = 0;
-        int column = this.getDimension() - 1;
-        SquareBoundedCoordinate coordinate = this.getCoordinate(row + 1, column - 1);
-        assertThat(coordinate.getLimits(), is(new ClosedInterval(row, column)));
+        int min = 0;
+        int max = this.getDimension() - 1;
+        SquareBoundedCoordinate coordinate = this.getCoordinate(0, 0);
+        assertThat(coordinate.getLimits(), is(new ClosedInterval(min, max)));
     }
 
 }

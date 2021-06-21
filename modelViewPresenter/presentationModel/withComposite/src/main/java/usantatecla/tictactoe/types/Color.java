@@ -11,7 +11,7 @@ public enum Color {
     NULL;
 
     public static Color get(int ordinal) {
-        assert ordinal >= 0 && ordinal < Color.NULL.ordinal();
+        assert 0 <= ordinal  && ordinal < Color.NULL.ordinal();
 
         return Color.values()[ordinal];
     }

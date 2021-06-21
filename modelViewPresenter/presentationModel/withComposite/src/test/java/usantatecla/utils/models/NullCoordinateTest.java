@@ -29,11 +29,13 @@ public class NullCoordinateTest {
     @Test
     public void testGivenNullCoordinateWhenInHorizontalThenFalse() {
         assertThat(Coordinate.NULL.inHorizontal(this.concreteCoordinate), is(false));
+        assertThat(Coordinate.NULL.inHorizontal(Coordinate.NULL), is(false));
     }
 
     @Test
     public void testGivenNullCoordinateWhenInVerticalThenFalse() {
         assertThat(Coordinate.NULL.inVertical(this.concreteCoordinate), is(false));
+        assertThat(Coordinate.NULL.inVertical(Coordinate.NULL), is(false));
     }
 
     @Test
@@ -44,6 +46,11 @@ public class NullCoordinateTest {
     @Test
     public void testGivenNullCoordinateWhenIsEqualsToAnotherCoordinateThenFalse() {
         assertThat(Coordinate.NULL.equals(this.concreteCoordinate), is(false));
+    }
+
+    @Test
+    public void testGivenNullCoordinateWhenIsEqualsToAnotherCoordinateThenTrue() {
+        assertThat(Coordinate.NULL.equals(Coordinate.NULL), is(true));
     }
 
     @Test

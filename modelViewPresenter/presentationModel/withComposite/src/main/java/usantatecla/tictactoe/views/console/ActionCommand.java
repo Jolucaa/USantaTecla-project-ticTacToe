@@ -11,8 +11,8 @@ class ActionCommand extends Command {
 
 	@Override
 	public void execute() {
-		new PlayerView(this.playController).interact();;
-        this.playController.next();
+		new PlayerView(this.playController).interact();
+    this.playController.next();
 		super.execute();
 	}
 

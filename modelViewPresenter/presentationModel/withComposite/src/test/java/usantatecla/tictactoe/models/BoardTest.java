@@ -19,12 +19,43 @@ public class BoardTest {
     }
 
     @Test
+    public void testGivenEmptyBoardWhenStartThenIsEmpty() {
+        Board board = this.boardBuilder.build();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
+            }
+        }
+    }
+
+    @Test
+    public void testGivenEmptyBoardWhenResetThenIsEmpty() {
+        Board board = this.boardBuilder.rows(
+                "XO ",
+                " O ",
+                "   ").build();
+        board.reset();
+        for (int i = 0; i < Coordinate.DIMENSION; i++) {
+            for (int j = 0; j < Coordinate.DIMENSION; j++) {
+                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
+            }
+        }
+    }
+
+    @Test
     public void testGivenNewBoardWhenPutNewTokenThenIsOccupiedIsTrue() {
         Board board = this.boardBuilder.build();
         Color color = Color.O;
         Coordinate coordinate = new Coordinate(0, 0);
         board.putToken(coordinate, color);
         assertThat(board.isOccupied(coordinate, color), is(true));
+    }
+
+    @Test
+    public void testGivenNewBoardWhenPutNewTokenWithNullCoordinateThenAssertionError() {
+        Board board = this.boardBuilder.build();
+        Color color = Color.O;
+        Assertions.assertThrows(AssertionError.class, () -> board.putToken(new Coordinate(), color));
     }
 
     @Test
@@ -38,6 +69,17 @@ public class BoardTest {
         board.moveToken(origin, target);
         assertThat(board.isEmpty(origin), is(true));
         assertThat(board.isOccupied(target, Color.X), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenMoveWithNullCoordinateThenAssertionError() {
+        Board board = this.boardBuilder.rows(
+                "XO ",
+                "   ",
+                "   ").build();
+        Coordinate origin = new Coordinate();
+        Coordinate target = new Coordinate();
+        Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 
     @Test
@@ -104,16 +146,6 @@ public class BoardTest {
     public void testGivenBoardWhenCheckNullCoordinateIsOccupiedThenAssertionError() {
         Board board = this.boardBuilder.build();
         Assertions.assertThrows(AssertionError.class, () -> board.isOccupied(new Coordinate(), Color.O));
-    }
-
-    @Test
-    public void testGivenEmptyBoardWhenStartThenIsEmpty() {
-        Board board = this.boardBuilder.build();
-        for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
-            }
-        }
     }
 
     @Test

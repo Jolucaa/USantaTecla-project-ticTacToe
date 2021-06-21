@@ -1,6 +1,6 @@
 package usantatecla.tictactoe.types;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,14 +16,18 @@ public class ColorTest {
 
     @Test
     public void testGivenNewColorWhenGetThenAssertionError() {
-        Assertions.assertThrows(AssertionError.class, () -> Color.get(2));
-        Assertions.assertThrows(AssertionError.class, () -> Color.get(-1));
+        assertThrows(AssertionError.class, () -> Color.get(2));
+        assertThrows(AssertionError.class, () -> Color.get(-1));
     }
 
     @Test
-    public void testGivenColorWhenIsNullThenReturn() {
+    public void testGivenColorWhenIsNullThenFalse() {
         assertThat(Color.X.isNull(), is(false));
         assertThat(Color.O.isNull(), is(false));
+    }
+
+    @Test
+    public void testGivenColorWhenIsNullThenTrue() {
         assertThat(Color.NULL.isNull(), is(true));
     }
     

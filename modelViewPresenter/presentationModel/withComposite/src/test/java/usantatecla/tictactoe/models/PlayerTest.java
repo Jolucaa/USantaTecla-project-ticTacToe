@@ -20,6 +20,12 @@ public class PlayerTest {
     }
 
     @Test
+    public void testGivenNewPlayerWhenGetColorThenReturnTheColor() {
+        Player player = this.playerBuilder.build();
+        assertThat(player.getColor(), is(Color.O));
+    }
+
+    @Test
     public void testGivenPlayerWhenAreAllTokensOnBoardThenTrue() {
         Player player = this.playerBuilder.rows(
                 "OO ",
@@ -33,16 +39,6 @@ public class PlayerTest {
     public void testGivenPlayerWhenAreAllTokensOnBoardThenFalse() {
         Player player = this.playerBuilder.build();
         assertThat(player.areAllTokensOnBoard(), is(false));
-    }
-
-    @Test
-    public void testGivenNewPlayerWhenAreAllTokensOnBoardThenReturnTrue() {
-        Player player = this.playerBuilder.rows(
-                "OO ",
-                "O  ",
-                "   "
-        ).build();
-        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
@@ -110,12 +106,6 @@ public class PlayerTest {
                 "   "
         ).build();
         assertThat(player.getTargetMoveTokenError(new Coordinate(1, 1), new Coordinate(1, 1)), is(Error.SAME_COORDINATES));
-    }
-
-    @Test
-    public void testGivenNewPlayerWhenGetColorThenReturnTheColor() {
-        Player player = this.playerBuilder.build();
-        assertThat(player.getColor(), is(Color.O));
     }
 
 }

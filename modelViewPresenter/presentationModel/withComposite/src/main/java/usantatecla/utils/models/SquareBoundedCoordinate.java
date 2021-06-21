@@ -7,7 +7,7 @@ public abstract class SquareBoundedCoordinate {
     private Coordinate adaptee;
 
     public SquareBoundedCoordinate() {
-        this(NullCoordinate.getInstance());
+        this(Coordinate.NULL);
     }
 
     public SquareBoundedCoordinate(Coordinate coordinate) {
@@ -32,7 +32,7 @@ public abstract class SquareBoundedCoordinate {
                 && this.getLimits().isIncluded(concreteCoordinate.getColumn());
     }
 
-    public ClosedInterval getLimits() {
+    protected ClosedInterval getLimits() {
         return new ClosedInterval(0, this.getDimension() - 1);
     }
 
