@@ -1,6 +1,8 @@
 package usantatecla.tictactoe.models;
 
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import usantatecla.tictactoe.types.Color;
@@ -8,6 +10,7 @@ import usantatecla.tictactoe.types.Coordinate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+
 
 public class BoardTest {
 
@@ -21,6 +24,10 @@ public class BoardTest {
     @Test
     public void testGivenEmptyBoardWhenStartThenIsEmpty() {
         Board board = this.boardBuilder.build();
+        assertEmpty(board);
+    }
+
+    private static void assertEmpty(Board board) {
         for (int i = 0; i < Coordinate.DIMENSION; i++) {
             for (int j = 0; j < Coordinate.DIMENSION; j++) {
                 assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
@@ -35,11 +42,7 @@ public class BoardTest {
                 " O ",
                 "   ").build();
         board.reset();
-        for (int i = 0; i < Coordinate.DIMENSION; i++) {
-            for (int j = 0; j < Coordinate.DIMENSION; j++) {
-                assertThat(board.isEmpty(new Coordinate(i, j)), is(true));
-            }
-        }
+        assertEmpty(board);
     }
 
     @Test
@@ -49,6 +52,17 @@ public class BoardTest {
         Coordinate coordinate = new Coordinate(0, 0);
         board.putToken(coordinate, color);
         assertThat(board.isOccupied(coordinate, color), is(true));
+    }
+
+    @Test
+    public void testGivenBoardWhenPutTokenNotEmptyCoordinateThenNotError() {
+        Board board = this.boardBuilder.rows(
+                "XO ",
+                " O ",
+                "   ").build();
+        Coordinate target = new Coordinate(1,1);
+        board.putToken(target, Color.X);
+        assertThat(board.isOccupied(target, Color.X), is(true));
     }
 
     @Test
@@ -108,7 +122,7 @@ public class BoardTest {
                 "   ",
                 "   ").build();
         Coordinate origin = new Coordinate(0, 0);
-        Coordinate target = new Coordinate(0, 0);
+        Coordinate target = origin;
         Assertions.assertThrows(AssertionError.class, () -> board.moveToken(origin, target));
     }
 

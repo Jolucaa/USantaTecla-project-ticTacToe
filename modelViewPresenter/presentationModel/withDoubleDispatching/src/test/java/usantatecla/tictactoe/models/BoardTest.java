@@ -117,15 +117,16 @@ public class BoardTest {
     }
 
     @Test
-    public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
-        Board board = this.boardBuilder.build();
-        assertThat(board.isTicTacToe(Color.O), is(false));
-    }
-
-    @Test
     public void testGivenBoardWhenIsTicTacToeNullColorThenAssertionError() {
         Board board = this.boardBuilder.build();
         Assertions.assertThrows(AssertionError.class, () -> board.isTicTacToe(Color.NULL));
+    }
+
+    @Test
+    public void testGivenBoardWhenIsTicTacToeThenIsFalse() {
+        Board board = this.boardBuilder.build();
+        assertThat(board.isTicTacToe(Color.X), is(false));
+        assertThat(board.isTicTacToe(Color.O), is(false));
     }
 
     @Test

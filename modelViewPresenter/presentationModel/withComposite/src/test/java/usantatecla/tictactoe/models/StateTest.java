@@ -29,11 +29,24 @@ public class StateTest {
     }
 
     @Test
+    public void testGivenNewStateWhenFourNextThenAssertionError2() {
+           this.state.next();
+            assertThat(this.state.getValueState(), is(StateValue.IN_GAME));
+    }
+
+    @Test
+    public void testGivenNewStateWhenFourNextThenAssertionError4() {
+           this.state.next();
+           this.state.next();
+           this.state.next();
+            assertThat(this.state.getValueState(), is(StateValue.EXIT));
+    }
+
+    @Test
     public void testGivenNewStateWhenFourNextThenAssertionError() {
-        for(StateValue stateValue : new StateValue[]{StateValue.IN_GAME, StateValue.RESUME, StateValue.EXIT}){
-            this.state.next();
-            assertThat(this.state.getValueState(), is(stateValue));
-        }
+        this.state.next();
+        this.state.next();
+        this.state.next();
         assertThrows(AssertionError.class, () -> this.state.next());
     }
 

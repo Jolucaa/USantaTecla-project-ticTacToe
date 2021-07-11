@@ -7,6 +7,7 @@ import usantatecla.tictactoe.types.Coordinate;
 import usantatecla.tictactoe.types.Error;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.is;
 
 public class PlayerTest {
@@ -33,16 +34,6 @@ public class PlayerTest {
     public void testGivenPlayerWhenAreAllTokensOnBoardThenFalse() {
         Player player = this.playerBuilder.build();
         assertThat(player.areAllTokensOnBoard(), is(false));
-    }
-
-    @Test
-    public void testGivenNewPlayerWhenAreAllTokensOnBoardThenReturnTrue() {
-        Player player = this.playerBuilder.rows(
-                "OO ",
-                "O  ",
-                "   "
-        ).build();
-        assertThat(player.areAllTokensOnBoard(), is(true));
     }
 
     @Test
@@ -75,8 +66,8 @@ public class PlayerTest {
     @Test
     public void testGivenNewPlayerWhenGetOriginMoveTokenErrorThenReturnErrorNull() {
         Player player = this.playerBuilder.rows(
-                "OO ",
                 "O  ",
+                "   ",
                 "   "
         ).build();
         assertThat(player.getOriginMoveTokenError(new Coordinate(0, 1)), is(Error.NULL));
@@ -115,6 +106,7 @@ public class PlayerTest {
     @Test
     public void testGivenNewPlayerWhenGetColorThenReturnTheColor() {
         Player player = this.playerBuilder.build();
+        assertThat(player.getColor(), is(not(Color.X)));
         assertThat(player.getColor(), is(Color.O));
     }
 

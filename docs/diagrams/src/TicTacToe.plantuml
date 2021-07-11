@@ -12,8 +12,6 @@ dm.basic --> dm.machine
     state dm.machine #ECEA58: Clases del modelo del dominio\nacopladas con interfaz de consola\nañadiendo un jugador máquina
 }
 
-
-
 state documentView {
 [*] --> dv.withPrototype 
 [*] --> dv.withDoubleDispatching 
@@ -112,4 +110,5 @@ legend
 |<#8958EC> Cliente Servidor|
 |<#D80732> UndoRedo |
 endlegend
+
 @enduml

@@ -19,7 +19,7 @@ public class TurnTest {
 
     @Test
     public void testGivenNewTurnWhenNullBoardThenAssertionError() {
-        Assertions.assertThrows(AssertionError.class, () -> this.turn = new Turn(null));
+        Assertions.assertThrows(AssertionError.class, () -> new Turn(null));
     }
 
     @Test
