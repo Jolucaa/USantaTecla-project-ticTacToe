@@ -91,14 +91,14 @@ state supervisorController #AF9EAF: Baile de la Triada.
 
 passiveView-->supervisorController
 supervisorController-->[*]
-}
+
 modelViewPresenter --> modelViewController
 
-state modelViewPresenter
 state modelViewController #AF9EAF: Baile de la Triada.
 
 
 modelViewController-->[*]
+}
 }
 legend
 |=  Colores de los requisitos |
