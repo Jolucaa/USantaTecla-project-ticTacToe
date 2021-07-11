@@ -4,7 +4,7 @@ title Secuencia versiones TicTacToe
 
 state TicTacToe {
 
-state domainModel{
+state domainModel {
 [*] --> dm.basic
 dm.basic --> dm.machine
     state dm.basic #AF9EAF: Clases del modelo del dominio\nacopladas con interfaz de consola 
@@ -41,13 +41,13 @@ dm.basic --> documentView:Mantenimiento correctivo
 documentView --> modelViewPresenter
 
 
-state modelViewPresenter{
+state modelViewPresenter {
     [*] --> presentationModel
     [*] --> passiveView
     presentationModel-->[*]
 
 
-    state presentationModel{
+    state presentationModel {
     [*] --> pm.basic
 
     state pm.basic #58ECEB:Clases Controladoras entre Vistas y Modelos por\ncada Caso de Uso pero con la clase Principal y las\nVistas acopladas a cada controlador actual y futuro.
@@ -99,7 +99,6 @@ state modelViewController #AF9EAF: Baile de la Triada.
 
 
 modelViewController-->[*]
-}
 }
 legend
 |=  Colores de los requisitos |
