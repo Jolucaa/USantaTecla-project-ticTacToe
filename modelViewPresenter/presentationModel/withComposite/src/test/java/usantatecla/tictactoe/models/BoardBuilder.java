@@ -17,6 +17,7 @@ public class BoardBuilder {
 
     public BoardBuilder rows(String... rows) {
         assert rows.length == 3;
+        
         for (String row : rows) {
             assert Pattern.matches("[XO ]{3}", row);
             this.rows.add(row);

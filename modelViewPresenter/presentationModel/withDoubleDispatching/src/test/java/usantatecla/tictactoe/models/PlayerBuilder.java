@@ -9,6 +9,7 @@ public class PlayerBuilder {
 
     private Color color;
     private String[] rows;
+    
     private Player player;
 
     public PlayerBuilder() {
